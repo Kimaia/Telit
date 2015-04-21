@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ItemType>PackagingProject</ItemType>
+    <ProjectGuid>{1164963F-E03D-4314-8FEF-4C914754F41E}</ProjectGuid>
+    <Packages>
+      <Packages xmlns="">
+        <Package name="MSBuild (Visual Studio 2012) Sources">
+          <Builder targetFile="m2mAIRMobile.tar.gz" format="MonoDevelop.Projects.FileFormat" ctype="SourcesZipPackageBuilder">
+            <ChildEntries>
+              <SolutionItemReference path="Shared\Shared.shproj" />
+              <SolutionItemReference path="m2mAIRMobile\Android.csproj" />
+            </ChildEntries>
+            <RootEntry path="m2mAIRMobile.sln" id=":root:" />
+          </Builder>
+        </Package>
+      </Packages>
+    </Packages>
+  </PropertyGroup>
+</Project>

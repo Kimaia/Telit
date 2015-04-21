@@ -1,0 +1,38 @@
+﻿<Properties StartupItem="m2mAIRMobile/Android.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.192.168.56.101:5555" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Shared/Network/M2MServer.cs">
+    <Files>
+      <File FileName="m2mAIRMobile/Source/Screens/LauncherActivity.cs" Line="10" Column="33" />
+      <File FileName="m2mAIRMobile/Source/Screens/RegisterAndLoginActivity.cs" Line="11" Column="33" />
+      <File FileName="Shared/ViewModel/LauncherViewModel.cs" Line="8" Column="18" />
+      <File FileName="Shared/Network/M2MServer.cs" Line="38" Column="44" />
+      <File FileName="Shared/ViewModel/RegisterAndLoginViewModel.cs" Line="46" Column="23" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Android" expanded="True" selected="True">
+            <Node name="Resources" expanded="True" />
+            <Node name="Source" expanded="True">
+              <Node name="Screens" expanded="True" />
+            </Node>
+          </Node>
+          <Node name="Shared" expanded="True">
+            <Node name="Network" expanded="True" />
+            <Node name="SAL" expanded="True" />
+            <Node name="Utils" expanded="True" />
+            <Node name="ViewModel" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Android AndroidDesignerPreferredDevice="Nexus 4" />
+</Properties>

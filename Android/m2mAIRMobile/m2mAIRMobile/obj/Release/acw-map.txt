@@ -1,0 +1,3 @@
+m2mAIRMobile.LoginActivity;m2mairmobile.LoginActivity
+m2mAIRMobile.MainActivity;m2mairmobile.MainActivity
+m2mAIRMobile.BaseActivity;m2mairmobile.BaseActivity
