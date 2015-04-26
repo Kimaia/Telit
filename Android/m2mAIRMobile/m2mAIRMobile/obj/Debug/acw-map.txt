@@ -1,4 +1,0 @@
-Android.Source.Screens.BaseActivity;android.source.screens.BaseActivity
-Android.Source.Screens.ThingsActivity;android.source.screens.ThingsActivity
-Android.Source.Screens.LauncherActivity;android.source.screens.LauncherActivity
-Android.Source.Screens.RegisterAndLoginActivity;android.source.screens.RegisterAndLoginActivity

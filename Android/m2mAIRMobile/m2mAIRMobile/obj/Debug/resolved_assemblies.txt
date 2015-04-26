@@ -1,2 +1,0 @@
-/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/m2mAIRMobile/bin/Debug/m2mAIRMobile.dll
-/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/restsharp-105.0.1.0/lib/android/RestSharp.MonoDroid.dll
