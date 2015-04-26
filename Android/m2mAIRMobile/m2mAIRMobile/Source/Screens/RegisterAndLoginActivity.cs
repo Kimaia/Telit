@@ -67,7 +67,7 @@ namespace Android.Source.Screens
 
 		public void ShowDialog(string title, string message, int errorCode, string dismiss)
 		{
-			Logger.Debug ("OnEror() Dialog: " + message);
+			Logger.Debug ("OnEror() Dialog: " + message + ", error dode: " + errorCode);
 		}
 	}
 }

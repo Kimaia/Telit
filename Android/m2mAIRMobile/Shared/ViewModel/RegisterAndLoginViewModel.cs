@@ -7,7 +7,7 @@ using Shared.Model;
 
 namespace Shared.ViewModel
 {
-	public class RegisterAndLoginViewModel : BaseViewModel
+	public class RegisterAndLoginViewModel
 	{
 
 		// events
@@ -24,6 +24,8 @@ namespace Shared.ViewModel
 		public delegate void OnError(string title, string message, int code, string dismissCaption);
 
 
+
+
 		public void StartLogin (string username, string password, OnError onError)
 		{
 			Task.Run (async () => {
@@ -31,25 +33,35 @@ namespace Shared.ViewModel
 			});
 		}
 
-		async Task StartLoginAsync (string username, string password, OnError onError)
+
+		private async Task StartLoginAsync (string username, string password, OnError onError)
 		{
 			Logger.Debug ("StartRegistration(),  User: " + username + ", password: " + password);
-			if (!VerifyEmail (username)) {
+			if (!TextUtils.ValidateEmail(username)) {
 				onError ("Invalid UserName", "The username you entered is not a valid email", 0x222D2A, "Ok");
 				return;
 			}
-			else {
-				try {
-					await authenticator.AuthenticateAsync (username, password, AuthenticationFailed, AuthenticationSuccess);
+			else 
+			{
+				try 
+				{
+					var response = await authenticator.AuthenticateAsync (username, password);
+					if (response.IsOkCode())
+						AuthenticationSuccess(username, password, response.Content);
+					else
+						onError (response.StatusMessage, response.Content, (int)response.HttpStatusCode, "dismiss");
+
 				}
 				catch (Exception e) {
 					Logger.Error ("Failed to Login", e);
+					onError ("StartLoginAsync failed", e.Message, 0, "dismiss");
 				}
 			}
 		}
 
-		private void AuthenticationSuccess(UserDetails details)
+		private void AuthenticationSuccess(string username, string password, string sessionId)
 		{
+			Logger.Info ("SessionId: " + sessionId);
 			if (!Settings.Instance.IsRegistered ()) {
 				// first Registration
 				// Set The Register status flag to true
@@ -57,27 +69,17 @@ namespace Shared.ViewModel
 				// store the established Session Id
 				Logger.Debug ("RegistrationSuccess()");
 				Settings.Instance.SetRegistered (true);
-				Settings.Instance.SetUserName (details.username);
-				Settings.Instance.SetPassword (details.password);
-				Settings.Instance.SetSessionId (details.sessionId);
+				Settings.Instance.SetUserName (username);
+				Settings.Instance.SetPassword (password);
+				Settings.Instance.SetSessionId (sessionId);
 				this.RegisterationSuccess (this, new EventArgs ());
 			} else {
 				// Login autentication - just store the session Id
 				Logger.Debug ("AuthenticationSuccess()");
-				Settings.Instance.SetSessionId (details.sessionId);
+				Settings.Instance.SetSessionId (sessionId);
 				this.LoginSuccess (this, new EventArgs ());
 			}
 
-		}
-
-		private void AuthenticationFailed(string title, string message, int errorCode, string dismiss)
-		{
-			Logger.Debug ("AuthenticationFailed()");
-		}
-
-		private bool VerifyEmail(string email)
-		{
-			return TextUtils.ValidateEmail(email);
 		}
 
 	}

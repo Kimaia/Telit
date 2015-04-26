@@ -30,14 +30,6 @@ namespace Android.Source.Screens
 			viewModel.UserLoggedOut += new EventHandler (LoggedOut);
 			viewModel.UserLoggedIn += new EventHandler (LoggedIn);
 
-
-			#if DEBUG
-			Settings.Instance.SetRegistered (false);
-			Settings.Instance.SetUserName (null);
-			Settings.Instance.SetPassword ("1");
-			Settings.Instance.SetSessionId (null);
-			#endif
-
 			viewModel.GetLoginStatus ();
 
 		}

@@ -4,15 +4,13 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Shared.Utils;
-using Shared.Model;
 using Shared.Network;
+using Shared.Network.DataTransfer;
 
 namespace Shared.SAL
 {
 	public class Authenticator
 	{
-		public delegate void OnAuthenticationError(string title, string message, int code, string dismissCaption);
-
 		private readonly string M2MHost = "https://api.devicewise.com";
 		private readonly string AuthPath = "/rest/auth";
 
@@ -40,23 +38,16 @@ namespace Shared.SAL
 
 	
 		// Authenticate with server
-		public async Task AuthenticateAsync (string username, string password, OnAuthenticationError OnError, Action<UserDetails> onSuccess)
+		public async Task<RemoteResponse> AuthenticateAsync (string username, string password)
 		{
 			var token = tokenSource.Token;
-//			var bodyParams = new Dictionary<string, object> { { "username", "demo@devicewise.com" }, { "password", "demo123" }	};
-			var bodyParams = new Dictionary<string, object> { { "username", username }, { "password", password }	};
+			var bodyParams = new Dictionary<string, object> { { "username", "demo@devicewise.com" }, { "password", "demo123" }	};
+//			var bodyParams = new Dictionary<string, object> { { "username", username }, { "password", password }	};
 
-			var response = await server.PostAsync<string>(AuthPath, null ,bodyParams, token);
+			var response = await server.PostAsync(AuthPath, null ,bodyParams, token);
 
 			Logger.Debug ("AuthenticateAsync(), ResponseCode: " + response.StatusCode + ", StatusMessage: " + response.StatusMessage);
-			if (response.IsOkResponse())
-			{
-				onSuccess(new UserDetails (username, password, response.StatusMessage));
-			}
-			else
-			{
-				OnError("AuthenticationFailed", response.StatusMessage, 0x222D2A, "Ok");
-			}
+			return response;
 		}
 	}
 }
