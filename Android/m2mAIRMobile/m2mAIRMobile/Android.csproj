@@ -46,14 +46,19 @@
       <HintPath>..\Components\restsharp-105.0.1.0\lib\android\RestSharp.MonoDroid.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="SQLite">
+      <HintPath>..\Components\sqlite-net-1.0.8.3\lib\android\SQLite.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Screens\BaseActivity.cs" />
-    <Compile Include="Source\Screens\ThingsActivity.cs" />
     <Compile Include="Source\Screens\LauncherActivity.cs" />
     <Compile Include="Source\Screens\RegisterAndLoginActivity.cs" />
+    <Compile Include="Source\Screens\ThingsListAdapter.cs" />
+    <Compile Include="Source\Screens\ThingsListActivity.cs" />
+    <Compile Include="Source\Screens\ThingActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -68,12 +73,18 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\layout\listcell_thing.xml" />
+    <AndroidResource Include="Resources\layout\activity_things_list.xml" />
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
     <XamarinComponentReference Include="restsharp">
       <Version>105.0.1.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="sqlite-net">
+      <Version>1.0.8.3</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>

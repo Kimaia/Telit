@@ -32,10 +32,6 @@ namespace Shared.SAL
 			tokenSource = new CancellationTokenSource();
 		}
 
-		public M2MServer Server { get { return server; } }
-
-
-
 	
 		// Authenticate with server
 		public async Task<RemoteResponse> AuthenticateAsync (string username, string password)

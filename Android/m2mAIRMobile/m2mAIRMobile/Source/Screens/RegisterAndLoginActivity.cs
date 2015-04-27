@@ -14,23 +14,19 @@ namespace Android.Source.Screens
 	public class RegisterAndLoginActivity : BaseActivity
 	{
 
-		private readonly RegisterAndLoginViewModel viewModel;
+		private RegisterAndLoginViewModel viewModel;
 
 		private EditText username;
 		private EditText password;
-
-		public RegisterAndLoginActivity()
-		{
-			viewModel = new RegisterAndLoginViewModel ();
-
-			viewModel.RegisterationSuccess += new EventHandler (RegisterationSuccess);
-			viewModel.LoginSuccess += new EventHandler (LoginSuccess);
-		}
 
 		#region lifecycle
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
+
+			viewModel = new RegisterAndLoginViewModel ();
+			viewModel.RegisterationSuccess += new EventHandler (RegisterationSuccess);
+			viewModel.LoginSuccess += new EventHandler (LoginSuccess);
 
 			// Set our view from the "main" layout resource
 			SetContentView (m2m.Android.Resource.Layout.Main);
@@ -52,7 +48,7 @@ namespace Android.Source.Screens
 		public void RegisterationSuccess(object sender, EventArgs e)
 		{
 			Logger.Debug ("RegistrationSuccess()");
-			var intent = new Intent(this, typeof(ThingsActivity));
+			var intent = new Intent(this, typeof(ThingsListActivity));
 			StartActivity(intent);
 			Finish ();
 		}
@@ -60,7 +56,7 @@ namespace Android.Source.Screens
 		public void LoginSuccess(object sender, EventArgs e)
 		{
 			Logger.Debug ("LoginSuccess()");
-			var intent = new Intent(this, typeof(ThingsActivity));
+			var intent = new Intent(this, typeof(ThingsListActivity));
 			StartActivity(intent);
 			Finish ();
 		}

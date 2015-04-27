@@ -13,18 +13,13 @@ namespace Android.Source.Screens
 	public class LauncherActivity : BaseActivity
 	{
 
-		private readonly LauncherViewModel viewModel;
-
-		public LauncherActivity()
-		{
-			viewModel = new LauncherViewModel ();
-		}
-
+		private LauncherViewModel viewModel;
 
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
+			viewModel = new LauncherViewModel ();
 
 			viewModel.UserNotRegistered += new EventHandler (PreRegister);
 			viewModel.UserLoggedOut += new EventHandler (LoggedOut);
@@ -56,7 +51,7 @@ namespace Android.Source.Screens
 		private void LoggedIn(object sender, EventArgs e) 
 		{
 			Logger.Debug ("LoggedIn");
-			var intent = new Intent(this, typeof(ThingsActivity));
+			var intent = new Intent(this, typeof(ThingsListActivity));
 			StartActivity(intent);
 			Finish ();
 		}
