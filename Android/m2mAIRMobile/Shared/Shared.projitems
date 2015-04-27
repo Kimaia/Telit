@@ -9,7 +9,6 @@
     <Import_RootNamespace>Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)DB\DBManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\IsolatedStorageSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\TextUtils.cs" />
@@ -23,6 +22,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Thing.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ThingsListAdapterViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\M2MServer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DB\Dao.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DB\EntityWithAssociations.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DB\Kimchi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DB\SQLiteAsyncConnectionExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DB\SQLiteConnectionWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DB\" />

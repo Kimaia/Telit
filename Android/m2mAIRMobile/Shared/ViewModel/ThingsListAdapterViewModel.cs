@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using Shared.DB;
 using Shared.Utils;
 using Shared.Model;
 using Shared.SAL;
@@ -21,14 +22,32 @@ namespace Shared.ViewModel
 		}
 
 
-		public async Task PopulateThingsList ()
+		public async Task PopulateThingsListAsync ()
 		{
-			var list = await stub.getThingsList();
-			foreach (var thing in list)
+			// first load from DB
+			var dao = new Dao();
+			var list = await dao.LoadAll<Thing>();
+			if (list.Count == 0) 
 			{
-				this.thingsList.Add(thing);
+				// if DB empty - load from Server
+				list = await LoadFromServerAsync ();
+
+				// and insert into DB
+				await InsertIntoDBAsync(list);
 			}
-			Logger.Debug ("PopulateThingsList(), Tings count:" + thingsList.Count);
+			thingsList = list;
+			Logger.Debug ("PopulateThingsList(), Things count:" + thingsList.Count);
+		}
+
+		private async Task<List<Thing>> LoadFromServerAsync ()
+		{
+			return await stub.getThingsList();
+		}
+
+		private async Task InsertIntoDBAsync (List<Thing> list)
+		{
+			var dao = new Dao();
+			await dao.InsertAll<Thing> (list);
 		}
 	}
 }

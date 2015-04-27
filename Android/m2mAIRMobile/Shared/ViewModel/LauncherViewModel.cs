@@ -3,6 +3,10 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
+using SQLite;
+
+using Shared.DB;
+using Shared.Model;
 using Shared.Utils;
 
 namespace Shared.ViewModel
@@ -15,24 +19,35 @@ namespace Shared.ViewModel
 		public event EventHandler UserLoggedOut;
 		public event EventHandler UserLoggedIn;
 
-		#if DEBUG
-		private static bool firstLaunch = true;
-		#endif
-
 		public LauncherViewModel()
 		{
-			#if DEBUG
-			if (firstLaunch)
-			{
-				Settings.Instance.SetRegistered (false);
-				Settings.Instance.SetUserName (null);
-				Settings.Instance.SetPassword ("1");
-				Settings.Instance.SetSessionId (null);
-				firstLaunch = false;
-			}
-			#endif
+
+			InitDB ();
 		}
 
+
+		private void InitDB()
+		{
+			var db = Kimchi.Connection;
+			try
+			{
+				db.CreateTableAsync<Thing>();
+
+				#if DEBUG
+				var dao = new Dao();
+				dao.DeleteAll<Thing>();
+				#endif
+			}
+			catch(Exception e)
+			{
+				Logger.Error("Failed to initialize db: " + e);
+				throw;
+			}
+			finally
+			{
+				// do nothing
+			}
+		}
 
 		public void GetLoginStatus ()
 		{

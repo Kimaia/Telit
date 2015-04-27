@@ -20,6 +20,9 @@ namespace Shared.Model
 		public string type			{ get; set; }
 		public string data			{ get; set; }
 
+		public Thing ()
+		{
+		}
 
 		public Thing (string id, string key, string name)
 		{

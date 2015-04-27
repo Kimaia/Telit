@@ -34,7 +34,7 @@ namespace Android.Source.Screens
 		public async void PopulateThingsListAsync()
         {
 			Logger.Debug ("PopulateThingsListAsync()");
-			await viewModel.PopulateThingsList();
+			await viewModel.PopulateThingsListAsync();
 
 			// raise event for completion
 			this.OnListPopulated (this, new EventArgs ());
