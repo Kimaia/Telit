@@ -29,7 +29,8 @@ namespace Shared.Utils
 
 		public string GetRegistered()
 		{
-			settings.TryGetValue(Registered, out string result);
+			string result = null;
+			settings.TryGetValue(Registered, out result);
 			return result;
 		}
 
@@ -58,7 +59,8 @@ namespace Shared.Utils
 
 		public string GetPassword()
 		{
-			settings.TryGetValue (Password, out string result);
+			string result = null;
+			settings.TryGetValue (Password, out result);
 			return result;
 		}
 
@@ -70,7 +72,8 @@ namespace Shared.Utils
 
 		public string GetUserName()
 		{
-			settings.TryGetValue(UserName, out string result);
+			string result = null;
+			settings.TryGetValue(UserName, out result);
 			return result;
 		}
 
@@ -82,7 +85,8 @@ namespace Shared.Utils
 
 		public string GetSessionId()
 		{
-			settings.TryGetValue (SessionId, out string result);
+			string result = null;
+			settings.TryGetValue (SessionId, out result);
 			return result;
 		}
 

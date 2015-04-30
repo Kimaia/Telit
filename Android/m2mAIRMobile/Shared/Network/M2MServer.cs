@@ -28,7 +28,6 @@ namespace Shared.Network
 
 
 
-
 		public async Task<RemoteResponse> PostAsync(string path, Dictionary<string, object> urlParams, Dictionary<string, object> bodyParams, CancellationToken token = default(CancellationToken))
 		{
 			try
@@ -54,6 +53,30 @@ namespace Shared.Network
 		}
 
 
+		public async Task<RemoteResponse> PostAsync(string path, object body, CancellationToken token = default(CancellationToken))
+		{
+			try
+			{
+				var request = CreateRequest(path, Method.POST, body);
+				var response = await client.ExecuteTaskAsync(request, token);
+
+				if (response.ErrorException != null)
+				{
+					throw response.ErrorException;
+				}
+
+				return new RemoteResponse (response.Content, 
+					response.StatusCode, 
+					response.StatusCode.ToString(), 
+					response.StatusDescription);
+			}
+			catch (Exception e) 
+			{
+				Logger.Error (e.Message);
+				return default (RemoteResponse);
+			}
+		}
+
 		private RestRequest CreateRequest(string path, Dictionary<string, object> urlParams, Method httpMethod, Dictionary<string, object> bodyParams)
 		{
 			var request = new RestRequest(path, httpMethod);
@@ -71,8 +94,21 @@ namespace Shared.Network
 					request.AddParameter(p.Key, p.Value);
 				}
 			}
+			
 			return request;
 		}
 
+		private RestRequest CreateRequest(string path, Method httpMethod, object body)
+		{
+			var request = new RestRequest(path, httpMethod);
+			if (body != null) 
+			{
+				request.RequestFormat = DataFormat.Json;
+				request.JsonSerializer = new RestSharpJsonNetSerializer();
+				request.AddBody (body);
+			}
+
+			return request;
+		}
 	}
 }

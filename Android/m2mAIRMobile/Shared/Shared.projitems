@@ -14,7 +14,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\TextUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Logger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\RemoteResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SAL\Authenticator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\LauncherViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\RegisterAndLoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\UserDetails.cs" />
@@ -27,6 +26,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)DB\Kimchi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DB\SQLiteAsyncConnectionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DB\SQLiteConnectionWrapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50Serializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SAL\M2MAuthenticator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SAL\M2MApiRequestor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\RestSharpJsonNetSerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50Command.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DB\" />

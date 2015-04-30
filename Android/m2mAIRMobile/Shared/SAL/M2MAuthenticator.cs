@@ -9,7 +9,7 @@ using Shared.Network.DataTransfer;
 
 namespace Shared.SAL
 {
-	public class Authenticator
+	public class M2MAuthenticator
 	{
 		private readonly string M2MHost = "https://api.devicewise.com";
 		private readonly string AuthPath = "/rest/auth";
@@ -17,16 +17,16 @@ namespace Shared.SAL
 		private readonly M2MServer server;
 		private readonly CancellationTokenSource tokenSource;
 
-		private static Authenticator instance;
-		public static Authenticator Instance 
+		private static M2MAuthenticator instance;
+		public static M2MAuthenticator Instance 
 		{
 			get {
 				if (instance == null)
-					instance = new Authenticator ();
+					instance = new M2MAuthenticator ();
 				return instance; 
 			}
 		}
-		private Authenticator()
+		private M2MAuthenticator()
 		{
 			server = new M2MServer (M2MHost);
 			tokenSource = new CancellationTokenSource();

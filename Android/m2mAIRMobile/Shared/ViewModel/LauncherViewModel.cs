@@ -21,6 +21,9 @@ namespace Shared.ViewModel
 
 		public LauncherViewModel()
 		{
+			#if DEBUG
+			Settings.Instance.SetSessionId(null);
+			#endif
 
 			InitDB ();
 		}

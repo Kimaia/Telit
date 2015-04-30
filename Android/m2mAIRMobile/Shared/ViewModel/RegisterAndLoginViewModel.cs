@@ -14,11 +14,11 @@ namespace Shared.ViewModel
 		public event EventHandler RegisterationSuccess;
 		public event EventHandler LoginSuccess;
 
-		private Authenticator authenticator;
+		private M2MAuthenticator authenticator;
 
 		public RegisterAndLoginViewModel ()
 		{
-			authenticator = Authenticator.Instance;
+			authenticator = M2MAuthenticator.Instance;
 		}
 
 		public delegate void OnError(string title, string message, int code, string dismissCaption);

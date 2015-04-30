@@ -12,13 +12,13 @@ namespace Shared.ViewModel
 	public class ThingsListAdapterViewModel
 	{
 
-		private QueryStub stub;
+		private M2MApiRequestor m2mRequestor;
 		public List<Thing> thingsList { get; private set; }
 
 		public ThingsListAdapterViewModel ()
 		{
 			thingsList = new List<Thing> ();
-			stub  = new QueryStub();
+			m2mRequestor = M2MApiRequestor.Instance;
 		}
 
 
@@ -41,7 +41,7 @@ namespace Shared.ViewModel
 
 		private async Task<List<Thing>> LoadFromServerAsync ()
 		{
-			return await stub.getThingsList();
+			return await m2mRequestor.RequestAsync ("things");
 		}
 
 		private async Task InsertIntoDBAsync (List<Thing> list)
