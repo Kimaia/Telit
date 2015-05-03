@@ -7,7 +7,6 @@ using Shared.Utils;
 using Shared.Model;
 using Shared.Network;
 using Shared.Network.DataTransfer;
-using Newtonsoft.Json;
 
 namespace Shared.SAL
 {
@@ -18,53 +17,50 @@ namespace Shared.SAL
 
 		private readonly M2MServer server;
 		private readonly CancellationTokenSource tokenSource;
+		private readonly TR50Serializer serializer;
 
-		private static M2MApiRequestor instance;
-		public static M2MApiRequestor Instance 
-		{
-			get {
-				if (instance == null)
-					instance = new M2MApiRequestor ();
-				return instance; 
-			}
-		}
+		private List<TR50Command> commands;
+
 		public M2MApiRequestor()
 		{
+			serializer = new TR50Serializer();
 			server = new M2MServer (M2MHost);
 			tokenSource = new CancellationTokenSource();
+			commands = null;
 		}
 
 
 		// preform request to server
-		public async Task<List<Thing>> RequestAsync (string command)
+		public async Task<List<Thing>> RequestAsync (List<TR50Command> commands)
+		{
+			this.commands = commands;
+
+			var request = Serialize();
+
+			var response = await PostAsync (request);
+
+			var thingsList = DeSerialize (response);
+
+			return thingsList;
+		}
+
+		private TR50Request Serialize()
+		{
+			return serializer.Serialize (this.commands);
+		}
+
+		private async Task<RemoteResponse> PostAsync(TR50Request request)
 		{
 			var token = tokenSource.Token;
-
-			TR50Request request = BuildRequestBody ();
-			Logger.Debug (JsonConvert.SerializeObject(request.body, Formatting.Indented));
-
 			var response = await server.PostAsync(ApiPath, request.body, token);
-
 			Logger.Debug ("RequestAsync(), ResponseCode: " + response.StatusCode + ", StatusMessage: " + response.StatusMessage);
-			return null;
+			return response;
 		}
 
-		private TR50Request BuildRequestBody()
+		private List<Thing> DeSerialize(RemoteResponse response)
 		{
-			return TR50Serializer.Serialize (prepareCommands ());
-		}
-
-		public List<TR50Command> prepareCommands()
-		{
-			List<TR50Command> list = new List<TR50Command> ();
-//			list.Add(new TR50Command ("things.list"));
-
-			TR50Params prms = new TR50Params ();
-			prms.Params = new Dictionary<string,object>();
-			prms.Params.Add("offset", 0);
-			prms.Params.Add("limit", 10);
-			list.Add(new TR50Command ("thing.list", prms));
-			return list;
+			var result = serializer.DeSerialize (this.commands, response.Content);
+			return result;
 		}
 	}
 }

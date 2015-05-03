@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+
 using Shared.Utils;
+using Shared.Model;
+using Newtonsoft.Json.Linq;
 
 namespace Shared.Network.DataTransfer
 {
+	#region TR50 Mid Classes
 	public class TR50Block
 	{
 		public Dictionary<string,object> block;
@@ -19,16 +23,19 @@ namespace Shared.Network.DataTransfer
 	{
 		public Dictionary<string, Dictionary<string,object>> body;
 	}
+	#endregion
 
 	public class TR50Serializer
 	{
-		public static TR50Request Serialize(List<TR50Command> commands)
+		#region Serialize
+		public TR50Request Serialize(List<TR50Command> commands)
 		{
-			return PrepareForSerialise (commands);
-//			return Convert2Json (req);
+			var request = PrepareForSerialise (commands);
+			Logger.Debug (JsonConvert.SerializeObject(request.body, Formatting.Indented));
+			return request;
 		}
 			
-		private static TR50Request PrepareForSerialise(List<TR50Command> commands)
+		private TR50Request PrepareForSerialise(List<TR50Command> commands)
 		{
 			TR50Request request = new TR50Request ();
 			request.body = new Dictionary<string, Dictionary<string, object>> ();
@@ -46,14 +53,14 @@ namespace Shared.Network.DataTransfer
 			return request;
 		}
 
-		private static TR50Block prepareAuthBlock ()
+		private TR50Block prepareAuthBlock ()
 		{
 			Dictionary<string, object> dict = new Dictionary<string, object> ();
 			dict.Add ("sessionId", Settings.Instance.GetSessionId());
 			return new TR50Block(dict);
 		}
 
-		private static TR50Block prepareCommandBlock (TR50Command command)
+		private TR50Block prepareCommandBlock (TR50Command command)
 		{
 			Dictionary<string, object> dict = new Dictionary<string, object> ();
 			dict.Add ("command", command.Command);
@@ -65,7 +72,7 @@ namespace Shared.Network.DataTransfer
 			return new TR50Block(dict);
 		}
 
-		private static TR50Block prepareParamsBlock (TR50Params prms)
+		private TR50Block prepareParamsBlock (TR50Params prms)
 		{
 			if (prms == null || prms.Params == null || prms.Params.Count == 0) {
 				Logger.Debug ("prepareParamsBlock() no params.");
@@ -73,11 +80,27 @@ namespace Shared.Network.DataTransfer
 			}
 			return new TR50Block(prms.Params);
 		}
+		#endregion
 
-		private static string Convert2Json(TR50Request req)
+		#region DeSerialize
+		public List<Thing> DeSerialize(List<TR50Command> commands, string response)
 		{
-			return JsonConvert.SerializeObject(req.body, Formatting.Indented);
+			List<Thing> result = null;
+			try 
+			{
+//				var jResponse = JObject.Parse(response);
+//
+//				result = JsonConvert.DeserializeObject<List<Thing>>(response);
+				Logger.Debug (result.ToString ());
+			}
+			catch (Exception e) 
+			{
+				Logger.Error (e.Message);
+				return null;
+			}
+			return result;
 		}
+		#endregion
 	}
 
 	#region tester 
@@ -86,7 +109,8 @@ namespace Shared.Network.DataTransfer
 		public void test()
 		{
 			var comnds = prepareCommands ();
-			var str = TR50Serializer.Serialize (comnds);
+			TR50Serializer serializer = new TR50Serializer ();
+			var str = serializer.Serialize (comnds);
 			Logger.Debug ("converted JSON():\n" + str);
 		}
 
