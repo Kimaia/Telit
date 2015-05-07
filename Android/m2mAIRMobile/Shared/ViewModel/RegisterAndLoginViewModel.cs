@@ -36,6 +36,13 @@ namespace Shared.ViewModel
 
 		private async Task StartLoginAsync (string username, string password, OnError onError)
 		{
+			#if DEBUG 
+			var response = await authenticator.AuthenticateAsync (username, password);
+			if (response.IsOkCode())
+				AuthenticationSuccess(username, password, response.Content);
+			else
+				onError (response.StatusMessage, response.Content, (int)response.HttpStatusCode, "dismiss");
+			#else
 			Logger.Debug ("StartRegistration(),  User: " + username + ", password: " + password);
 			if (!TextUtils.ValidateEmail(username)) {
 				onError ("Invalid UserName", "The username you entered is not a valid email", 0x222D2A, "Ok");
@@ -50,13 +57,13 @@ namespace Shared.ViewModel
 						AuthenticationSuccess(username, password, response.Content);
 					else
 						onError (response.StatusMessage, response.Content, (int)response.HttpStatusCode, "dismiss");
-
 				}
 				catch (Exception e) {
 					Logger.Error ("Failed to Login", e);
 					onError ("StartLoginAsync failed", e.Message, 0, "dismiss");
 				}
 			}
+			#endif
 		}
 
 		private void AuthenticationSuccess(string username, string password, string sessionId)

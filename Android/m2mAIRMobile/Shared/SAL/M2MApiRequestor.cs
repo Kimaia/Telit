@@ -42,24 +42,24 @@ namespace Shared.SAL
 			return thingsList;
 		}
 
-		private async Task<RemoteResponse> PostAsync(TR50Request request)
-		{
-			var token = tokenSource.Token;
-			var response = await server.PostAsync(ApiPath, request.body, token);
-			Logger.Debug ("RequestAsync(), ResponseCode: " + response.StatusCode + ", StatusMessage: " + response.StatusMessage);
-			return response;
-		}
+
 
 		private TR50Request ConvertRequest(TR50Command command)
 		{
 			return Tr50Converter.ConvertRequest (command);
 		}
 
+		private async Task<RemoteResponse> PostAsync(TR50Request request)
+		{
+			var token = tokenSource.Token;
+			var response = await server.PostAsync(ApiPath, request.body, token);
+			Logger.Debug ("PostAsync(), ResponseCode: " + response.StatusCode + ", StatusMessage: " + response.StatusMessage);
+			return response;
+		}
+
 		private TR50Response<Type> ConvertResponse<Type>(RemoteResponse response)
 		{
-			var m2mResponse = Tr50Converter.ConvertResponse<Type> (response.Content);
-			Logger.Debug ("ConvertResponse() /n" + m2mResponse.Params.result.ToString ());
-			return m2mResponse;
+			return Tr50Converter.ConvertResponse<Type> (response.Content);
 		}
 
 		private List<Type> BuildResult<Type>(TR50Response<Type> m2mResponse)
