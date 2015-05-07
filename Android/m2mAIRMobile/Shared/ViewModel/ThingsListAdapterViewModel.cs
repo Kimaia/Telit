@@ -7,6 +7,7 @@ using Shared.Utils;
 using Shared.Model;
 using Shared.SAL;
 using Shared.Network.DataTransfer;
+using Shared.Network.DataTransfer.TR50;
 
 namespace Shared.ViewModel
 {
@@ -42,7 +43,8 @@ namespace Shared.ViewModel
 
 		private async Task<List<Thing>> LoadFromServerAsync ()
 		{
-			return await m2mRequestor.RequestAsync (prepareCommands());
+			var commands = prepareCommand ();
+			return await m2mRequestor.RequestListAsync<Thing> (commands);
 		}
 
 		private async Task InsertIntoDBAsync (List<Thing> list)
@@ -53,17 +55,13 @@ namespace Shared.ViewModel
 
 
 		#if DEBUG
-		public List<TR50Command> prepareCommands()
+		public TR50Command prepareCommand()
 		{
-			List<TR50Command> list = new List<TR50Command> ();
-			//			list.Add(new TR50Command ("things.list"));
-
-			TR50Params prms = new TR50Params ();
+			CommandParams prms = new CommandParams ();
 			prms.Params = new Dictionary<string,object>();
 			prms.Params.Add("offset", 0);
-			prms.Params.Add("limit", 1);
-			list.Add(new TR50Command ("thing.list", prms));
-			return list;
+			prms.Params.Add("limit", 3);
+			return new TR50Command (M2MCommands.CommandType.Thing_List, prms);
 		}
 		#endif
 	}

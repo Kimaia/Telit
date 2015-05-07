@@ -1,0 +1,130 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+using Shared.Utils;
+using Shared.Model;
+
+namespace Shared.Network.DataTransfer.TR50
+{
+	#region TR50 Mid Classes
+	public class TR50Request
+	{
+		public Dictionary<string, Dictionary<string,object>> body;
+	}
+
+	public class TR50RequestBlock
+	{
+		public Dictionary<string,object> block;
+
+		public TR50RequestBlock(Dictionary<string,object> dict)
+		{
+			block = dict;
+		}
+	}
+
+	public class TR50Response<Type>
+	{
+		public bool 				success;
+		public TR50Params<Type> 	Params;
+	}
+
+	public class TR50Params<Type>
+	{
+		public int count;
+		public List<string> fields;
+		public List<Type> 	result;
+	}
+	#endregion
+
+	public class TR50Serializer
+	{
+		#region DeSerialize
+		public TR50Response<Type> DeSerialize<Type>(string m2mresponse)
+		{
+			var Response = new TR50Response<Type> ();
+			JToken responseToken = JToken.Parse(m2mresponse);
+			JObject responseObject = responseToken["1"].Value<JObject>();
+			Response = responseObject.ToObject<TR50Response<Type>>();
+			return Response;
+		}
+
+		#endregion
+
+		#region Serialize
+		public TR50Request Serialize(TR50Command command)
+		{
+			var request = PrepareForSerialise (command);
+			Logger.Debug (JsonConvert.SerializeObject(request.body, Formatting.Indented));
+			return request;
+		}
+			
+		private TR50Request PrepareForSerialise(TR50Command command)
+		{
+			TR50Request request = new TR50Request ();
+			request.body = new Dictionary<string, Dictionary<string, object>> ();
+
+			// auth block
+			request.body.Add ("auth", prepareAuthBlock().block);
+
+			TR50RequestBlock b = prepareCommandBlock (command);
+			request.body.Add ("1", b.block);
+					
+			return request;
+		}
+
+		private TR50RequestBlock prepareAuthBlock ()
+		{
+			Dictionary<string, object> dict = new Dictionary<string, object> ();
+			dict.Add ("sessionId", Settings.Instance.GetSessionId());
+			return new TR50RequestBlock(dict);
+		}
+
+		private TR50RequestBlock prepareCommandBlock (TR50Command command)
+		{
+			Dictionary<string, object> dict = new Dictionary<string, object> ();
+			dict.Add ("command", command.Command);
+
+			TR50RequestBlock p = prepareParamsBlock (command.Params);
+			if (p != null)
+				dict.Add ("params", p.block);
+
+			return new TR50RequestBlock(dict);
+		}
+
+		private TR50RequestBlock prepareParamsBlock (CommandParams prms)
+		{
+			if (prms == null || prms.Params == null || prms.Params.Count == 0) {
+				Logger.Debug ("prepareParamsBlock() no params.");
+				return null;
+			}
+			return new TR50RequestBlock(prms.Params);
+		}
+		#endregion
+	}
+
+	#region tester 
+	public class SerializeTester
+	{
+		public void test()
+		{
+			var comnd = prepareCommand ();
+			TR50Serializer serializer = new TR50Serializer ();
+			var str = serializer.Serialize (comnd);
+			Logger.Debug ("converted JSON():\n" + str);
+		}
+
+		public TR50Command prepareCommand()
+		{
+			CommandParams prms = new CommandParams ();
+			prms.Params = new Dictionary<string,object>();
+			prms.Params.Add("thingKey", "mything");
+			prms.Params.Add("key", "myalarm");
+			prms.Params.Add("last", "24h");
+			return new TR50Command (M2MCommands.CommandType.Alarms, prms);
+		}
+	}
+	#endregion
+}

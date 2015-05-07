@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
-
 using SQLite;
 
 using Shared.DB;
 using Shared.Model;
 using Shared.Utils;
+
 
 namespace Shared.ViewModel
 {

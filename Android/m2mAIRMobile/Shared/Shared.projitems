@@ -17,7 +17,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\LauncherViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\RegisterAndLoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\UserDetails.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SAL\QueryStub.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Thing.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ThingsListAdapterViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\M2MServer.cs" />
@@ -26,13 +25,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)DB\Kimchi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DB\SQLiteAsyncConnectionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DB\SQLiteConnectionWrapper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50Serializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SAL\M2MAuthenticator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SAL\M2MApiRequestor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\RestSharpJsonNetSerializer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50Command.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\M2MCommands.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50\TR50Command.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50\TR50Serializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DB\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50\" />
   </ItemGroup>
 </Project>

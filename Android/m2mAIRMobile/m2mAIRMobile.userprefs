@@ -1,46 +1,51 @@
 ﻿<Properties StartupItem="m2mAIRMobile/Android.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.192.168.56.101:5555" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Shared/Network/M2MServer.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Nexus 4 (KitKat)" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Shared/Network/DataTransfer/TR50/TR50Serializer.cs">
     <Files>
-      <File FileName="Shared/Model/Thing.cs" Line="1" Column="1" />
-      <File FileName="Shared/Network/M2MServer.cs" Line="63" Column="1" />
-      <File FileName="Shared/DB/Dao.cs" Line="1" Column="1" />
-      <File FileName="Shared/Network/DataTransfer/TR50Request.cs" Line="1" Column="1" />
-      <File FileName="Shared/Network/DataTransfer/TR50Serializer.cs" Line="1" Column="1" />
-      <File FileName="Shared/SAL/M2MApiRequestor.cs" Line="46" Column="63" />
-      <File FileName="Shared/Network/DataTransfer/TR50Command.cs" Line="8" Column="28" />
+      <File FileName="Shared/SAL/M2MApiRequestor.cs" Line="75" Column="6" />
+      <File FileName="m2mAIRMobile/Source/Screens/ThingsListActivity.cs" Line="1" Column="1" />
+      <File FileName="Shared/ViewModel/LauncherViewModel.cs" Line="1" Column="1" />
+      <File FileName="Shared/Network/DataTransfer/M2MCommands.cs" Line="1" Column="1" />
+      <File FileName="Shared/Network/DataTransfer/TR50/TR50Serializer.cs" Line="60" Column="4" />
+      <File FileName="Shared/Network/DataTransfer/TR50/TR50Command.cs" Line="1" Column="1" />
+      <File FileName="Shared/ViewModel/ThingsListAdapterViewModel.cs" Line="1" Column="1" />
+      <File FileName="Shared/Model/Thing.cs" Line="7" Column="20" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="Android" selected="True" />
-          <Node name="Shared" expanded="True">
-            <Node name="Network" expanded="True">
-              <Node name="DataTransfer" expanded="True" />
+        <State name="__root__">
+          <Node name="m2mAIRMobile" expanded="True">
+            <Node name="Android" expanded="True">
+              <Node name="Resources" expanded="True" />
+              <Node name="Source" expanded="True">
+                <Node name="Screens" expanded="True" />
+              </Node>
             </Node>
-            <Node name="SAL" expanded="True" />
-            <Node name="Utils" expanded="True" />
-            <Node name="ViewModel" expanded="True" />
+            <Node name="Shared" expanded="True">
+              <Node name="Model" expanded="True" />
+              <Node name="Network" expanded="True">
+                <Node name="DataTransfer" expanded="True">
+                  <Node name="TR50" expanded="True">
+                    <Node name="TR50Serializer.cs" selected="True" />
+                  </Node>
+                </Node>
+              </Node>
+              <Node name="SAL" expanded="True" />
+              <Node name="Utils" expanded="True" />
+              <Node name="ViewModel" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State>
-          <Value>response</Value>
-        </State>
+        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Shared/SAL/M2MRequestor.cs" line="46" column="3" />
-      <Breakpoint file="/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Shared/SAL/M2MRequestor.cs" line="44" column="39" />
-      <Breakpoint file="/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Shared/Network/M2MServer.cs" line="35" column="2" />
-      <Breakpoint file="/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Shared/Network/M2MServer.cs" line="38" column="3" />
-      <Breakpoint file="/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Shared/SAL/M2MApiRequestor.cs" line="46" column="63" />
-      <Breakpoint file="/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Shared/Network/M2MServer.cs" line="60" column="1" />
-      <Breakpoint file="/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Shared/Network/M2MServer.cs" line="61" column="1" />
-      <Breakpoint file="/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Shared/Network/M2MServer.cs" line="63" column="1" />
+      <Breakpoint file="/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Shared/Network/DataTransfer/TR50/TR50Serializer.cs" line="47" column="2" />
+      <Breakpoint file="/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Shared/Network/DataTransfer/TR50/TR50Serializer.cs" line="79" column="4" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>

@@ -7,6 +7,7 @@ using Shared.Utils;
 using Shared.Model;
 using Shared.Network;
 using Shared.Network.DataTransfer;
+using Shared.Network.DataTransfer.TR50;
 
 namespace Shared.SAL
 {
@@ -19,34 +20,31 @@ namespace Shared.SAL
 		private readonly CancellationTokenSource tokenSource;
 		private readonly TR50Serializer serializer;
 
-		private List<TR50Command> commands;
+		private TR50Command command;
 
 		public M2MApiRequestor()
 		{
 			serializer = new TR50Serializer();
 			server = new M2MServer (M2MHost);
 			tokenSource = new CancellationTokenSource();
-			commands = null;
+			command = null;
 		}
 
 
 		// preform request to server
-		public async Task<List<Thing>> RequestAsync (List<TR50Command> commands)
+		public async Task<List<Type>> RequestListAsync<Type> (TR50Command command)
 		{
-			this.commands = commands;
+			this.command = command;
 
 			var request = Serialize();
 
 			var response = await PostAsync (request);
 
-			var thingsList = DeSerialize (response);
+			var serialized = DeSerialize<Type> (response);
+
+			var thingsList = BuildResult<Type> (serialized);
 
 			return thingsList;
-		}
-
-		private TR50Request Serialize()
-		{
-			return serializer.Serialize (this.commands);
 		}
 
 		private async Task<RemoteResponse> PostAsync(TR50Request request)
@@ -57,10 +55,21 @@ namespace Shared.SAL
 			return response;
 		}
 
-		private List<Thing> DeSerialize(RemoteResponse response)
+		private TR50Request Serialize()
 		{
-			var result = serializer.DeSerialize (this.commands, response.Content);
-			return result;
+			return serializer.Serialize (this.command);
+		}
+
+		private TR50Response<Type> DeSerialize<Type>(RemoteResponse response)
+		{
+			var m2mResponse = serializer.DeSerialize<Type> (response.Content);
+			Logger.Debug ("DeSerialize() /n" + m2mResponse.Params.result.ToString ());
+			return m2mResponse;
+		}
+
+		private List<Type> BuildResult<Type>(TR50Response<Type> m2mResponse)
+		{
+			return m2mResponse.Params.result;
 		}
 	}
 }
