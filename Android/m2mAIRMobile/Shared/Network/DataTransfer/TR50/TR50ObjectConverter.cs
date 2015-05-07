@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using Shared.Utils;
-using Shared.Model;
+
 
 namespace Shared.Network.DataTransfer.TR50
 {
@@ -39,22 +39,10 @@ namespace Shared.Network.DataTransfer.TR50
 	}
 	#endregion
 
-	public class TR50Serializer
+	public class TR50ObjectConverter
 	{
-		#region DeSerialize
-		public TR50Response<Type> DeSerialize<Type>(string m2mresponse)
-		{
-			var Response = new TR50Response<Type> ();
-			JToken responseToken = JToken.Parse(m2mresponse);
-			JObject responseObject = responseToken["1"].Value<JObject>();
-			Response = responseObject.ToObject<TR50Response<Type>>();
-			return Response;
-		}
-
-		#endregion
-
-		#region Serialize
-		public TR50Request Serialize(TR50Command command)
+		#region ConvertRequest
+		public TR50Request ConvertRequest(TR50Command command)
 		{
 			var request = PrepareForSerialise (command);
 			Logger.Debug (JsonConvert.SerializeObject(request.body, Formatting.Indented));
@@ -103,16 +91,29 @@ namespace Shared.Network.DataTransfer.TR50
 			return new TR50RequestBlock(prms.Params);
 		}
 		#endregion
+
+		#region ConvertResponse
+		public TR50Response<Type> ConvertResponse<Type>(string m2mresponse)
+		{
+			var Response = new TR50Response<Type> ();
+			JToken responseToken = JToken.Parse(m2mresponse);
+			JObject responseObject = responseToken["1"].Value<JObject>();
+			Response = responseObject.ToObject<TR50Response<Type>>();
+			return Response;
+		}
+
+		#endregion
+
 	}
 
 	#region tester 
-	public class SerializeTester
+	public class TR50ConvertTester
 	{
 		public void test()
 		{
 			var comnd = prepareCommand ();
-			TR50Serializer serializer = new TR50Serializer ();
-			var str = serializer.Serialize (comnd);
+			TR50ObjectConverter serializer = new TR50ObjectConverter ();
+			var str = serializer.ConvertRequest (comnd);
 			Logger.Debug ("converted JSON():\n" + str);
 		}
 

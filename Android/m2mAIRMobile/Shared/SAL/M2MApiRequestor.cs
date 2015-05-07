@@ -18,31 +18,26 @@ namespace Shared.SAL
 
 		private readonly M2MServer server;
 		private readonly CancellationTokenSource tokenSource;
-		private readonly TR50Serializer serializer;
-
-		private TR50Command command;
+		private readonly TR50ObjectConverter Tr50Converter;
 
 		public M2MApiRequestor()
 		{
-			serializer = new TR50Serializer();
+			Tr50Converter = new TR50ObjectConverter();
 			server = new M2MServer (M2MHost);
 			tokenSource = new CancellationTokenSource();
-			command = null;
 		}
 
 
 		// preform request to server
 		public async Task<List<Type>> RequestListAsync<Type> (TR50Command command)
 		{
-			this.command = command;
-
-			var request = Serialize();
+			var request = ConvertRequest(command);
 
 			var response = await PostAsync (request);
 
-			var serialized = DeSerialize<Type> (response);
+			var converted = ConvertResponse<Type> (response);
 
-			var thingsList = BuildResult<Type> (serialized);
+			var thingsList = BuildResult<Type> (converted);
 
 			return thingsList;
 		}
@@ -55,15 +50,15 @@ namespace Shared.SAL
 			return response;
 		}
 
-		private TR50Request Serialize()
+		private TR50Request ConvertRequest(TR50Command command)
 		{
-			return serializer.Serialize (this.command);
+			return Tr50Converter.ConvertRequest (command);
 		}
 
-		private TR50Response<Type> DeSerialize<Type>(RemoteResponse response)
+		private TR50Response<Type> ConvertResponse<Type>(RemoteResponse response)
 		{
-			var m2mResponse = serializer.DeSerialize<Type> (response.Content);
-			Logger.Debug ("DeSerialize() /n" + m2mResponse.Params.result.ToString ());
+			var m2mResponse = Tr50Converter.ConvertResponse<Type> (response.Content);
+			Logger.Debug ("ConvertResponse() /n" + m2mResponse.Params.result.ToString ());
 			return m2mResponse;
 		}
 

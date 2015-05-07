@@ -30,7 +30,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\RestSharpJsonNetSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\M2MCommands.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50\TR50Command.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50\TR50Serializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50\TR50ObjectConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DB\" />
