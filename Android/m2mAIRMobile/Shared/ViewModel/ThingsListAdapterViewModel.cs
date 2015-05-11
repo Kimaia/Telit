@@ -30,8 +30,10 @@ namespace Shared.ViewModel
 
 		public async Task PopulateThingsListAsync ()
 		{
-			thingsList = await dataManager.GetDataListAsync<Thing> (prepareCommand ());
-			Logger.Debug ("PopulateThingsList(), Things count:" + thingsList.Count);
+			await Task.Run (async () => {
+				thingsList = await dataManager.GetDataListAsync<Thing> (prepareCommand ());
+				Logger.Debug ("PopulateThingsList(), Things count:" + thingsList.Count);
+			});
 		}
 
 
