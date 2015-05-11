@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using Shared.Model;
 
-namespace Shared.Network.DataTransfer
+namespace Shared.Network
 {
 	public static class M2MCommands
 	{

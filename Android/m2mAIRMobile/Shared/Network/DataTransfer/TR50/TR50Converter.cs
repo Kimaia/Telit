@@ -39,7 +39,7 @@ namespace Shared.Network.DataTransfer.TR50
 	}
 	#endregion
 
-	public class TR50ObjectConverter
+	public class TR50Converter
 	{
 		#region ConvertRequest
 		public TR50Request ConvertRequest(TR50Command command)
@@ -112,7 +112,7 @@ namespace Shared.Network.DataTransfer.TR50
 		public void test()
 		{
 			var comnd = prepareCommand ();
-			TR50ObjectConverter serializer = new TR50ObjectConverter ();
+			TR50Converter serializer = new TR50Converter ();
 			var str = serializer.ConvertRequest (comnd);
 			Logger.Debug ("converted JSON():\n" + str);
 		}

@@ -2,68 +2,48 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using Shared.DB;
 using Shared.Utils;
 using Shared.Model;
-using Shared.SAL;
-using Shared.Network.DataTransfer;
+using Shared.ModelManager;
+using Shared.Network;
 using Shared.Network.DataTransfer.TR50;
 
 namespace Shared.ViewModel
 {
 	public class ThingsListAdapterViewModel
 	{
+		private readonly string Param_Offset = "offset";
+		private readonly string Param_Limit = "limit";
+		private readonly int Default_Offset = 0;
+		private readonly int Default_Limit = 50;
 
-		private M2MApiRequestor m2mRequestor;
+		private ModelServicesManager dataManager;
 		public List<Thing> thingsList { get; private set; }
 
 		public ThingsListAdapterViewModel ()
 		{
 			thingsList = new List<Thing> ();
-			m2mRequestor = new M2MApiRequestor();
+			dataManager = new ModelServicesManager();
 		}
+
 
 
 		public async Task PopulateThingsListAsync ()
 		{
-			// first load from DB
-			var dao = new Dao();
-			var list = await dao.LoadAll<Thing>();
-			if (list.Count == 0) 
-			{
-				// if DB empty - load from Server
-				list = await LoadFromServerAsync ();
-
-				// and insert into DB
-				await InsertIntoDBAsync(list);
-			}
-			thingsList = list;
+			thingsList = await dataManager.GetDataListAsync<Thing> (prepareCommand ());
 			Logger.Debug ("PopulateThingsList(), Things count:" + thingsList.Count);
 		}
 
-		private async Task<List<Thing>> LoadFromServerAsync ()
-		{
-			var commands = prepareCommand ();
-			return await m2mRequestor.RequestListAsync<Thing> (commands);
-		}
-
-		private async Task InsertIntoDBAsync (List<Thing> list)
-		{
-			var dao = new Dao();
-			await dao.InsertAll<Thing> (list);
-		}
 
 
-		#if DEBUG
-		public TR50Command prepareCommand()
+		private TR50Command prepareCommand()
 		{
 			CommandParams prms = new CommandParams ();
 			prms.Params = new Dictionary<string,object>();
-			prms.Params.Add("offset", 0);
-			prms.Params.Add("limit", 3);
+			prms.Params.Add(Param_Offset, Default_Offset);
+			prms.Params.Add(Param_Limit, Default_Limit);
 			return new TR50Command (M2MCommands.CommandType.Thing_List, prms);
 		}
-		#endif
 	}
 }
 

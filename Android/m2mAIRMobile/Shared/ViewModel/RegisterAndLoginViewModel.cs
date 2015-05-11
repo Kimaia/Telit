@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using Shared.SAL;
+using Shared.ModelManager;
 using Shared.Utils;
-using Shared.Model;
 
 namespace Shared.ViewModel
 {
@@ -14,11 +13,11 @@ namespace Shared.ViewModel
 		public event EventHandler RegisterationSuccess;
 		public event EventHandler LoginSuccess;
 
-		private M2MAuthenticator authenticator;
+		private ModelServicesManager authenticator;
 
 		public RegisterAndLoginViewModel ()
 		{
-			authenticator = M2MAuthenticator.Instance;
+			authenticator = new ModelServicesManager();
 		}
 
 		public delegate void OnError(string title, string message, int code, string dismissCaption);

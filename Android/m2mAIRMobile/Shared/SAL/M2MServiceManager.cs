@@ -11,18 +11,18 @@ using Shared.Network.DataTransfer.TR50;
 
 namespace Shared.SAL
 {
-	public class M2MApiRequestor
+	public class M2MServiceManager
 	{
 		private readonly string M2MHost = "https://api.devicewise.com";
 		private readonly string ApiPath = "/api";
 
 		private readonly M2MServer server;
 		private readonly CancellationTokenSource tokenSource;
-		private readonly TR50ObjectConverter Tr50Converter;
+		private readonly TR50Converter Tr50Converter;
 
-		public M2MApiRequestor()
+		public M2MServiceManager()
 		{
-			Tr50Converter = new TR50ObjectConverter();
+			Tr50Converter = new TR50Converter();
 			server = new M2MServer (M2MHost);
 			tokenSource = new CancellationTokenSource();
 		}
@@ -41,7 +41,6 @@ namespace Shared.SAL
 
 			return thingsList;
 		}
-
 
 
 		private TR50Request ConvertRequest(TR50Command command)
