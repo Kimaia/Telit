@@ -32,6 +32,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)SAL\M2MServiceManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\M2M\M2MServer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\M2M\M2MCommands.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ThingViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50\TR50Request.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50\TR50Response.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DB\" />

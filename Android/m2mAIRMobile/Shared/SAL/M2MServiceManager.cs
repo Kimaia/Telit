@@ -35,17 +35,26 @@ namespace Shared.SAL
 
 			var response = await PostAsync (request);
 
-			var converted = ConvertResponse<Type> (response);
+			var converted = ConvertResponse<TR50ListParams<Type>> (response);
 
-			var thingsList = BuildResult<Type> (converted);
+			var list = converted.Params.result;
 
-			return thingsList;
+			return list;
 		}
 
 
-		private TR50Request ConvertRequest(TR50Command command)
+		// preform request to server
+		public async Task<Type> RequestItemAsync<Type> (TR50Command command)
 		{
-			return Tr50Converter.ConvertRequest (command);
+			var request = ConvertRequest(command);
+
+			var response = await PostAsync (request);
+
+			var converted = ConvertResponse<Type> (response);
+
+			var item = converted.Params;
+
+			return item;
 		}
 
 		private async Task<RemoteResponse> PostAsync(TR50Request request)
@@ -56,14 +65,15 @@ namespace Shared.SAL
 			return response;
 		}
 
+
+		private TR50Request ConvertRequest(TR50Command command)
+		{
+			return Tr50Converter.ConvertRequest (command);
+		}
+
 		private TR50Response<Type> ConvertResponse<Type>(RemoteResponse response)
 		{
 			return Tr50Converter.ConvertResponse<Type> (response.Content);
-		}
-
-		private List<Type> BuildResult<Type>(TR50Response<Type> m2mResponse)
-		{
-			return m2mResponse.Params.result;
 		}
 	}
 }

@@ -31,7 +31,7 @@ namespace Shared.ViewModel
 			var db = Kimchi.Connection;
 			try
 			{
-				db.CreateTableAsync<Thing>();
+				db.CreateTableAsync<Thing>().Wait();
 
 				#if DEBUG
 				var dao = new Dao();

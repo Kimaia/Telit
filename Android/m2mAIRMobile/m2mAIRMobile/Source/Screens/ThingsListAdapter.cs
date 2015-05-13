@@ -40,9 +40,14 @@ namespace Android.Source.Screens
 			this.OnListPopulated (this, new EventArgs ());
         }
 
-        #region implemented abstract members of BaseAdapter
+		public Thing GetThingObject(int position)
+		{
+			return viewModel.thingsList[position];
+		}
 
-        public override long GetItemId(int position)
+
+        #region implemented abstract members of BaseAdapter
+		public override long GetItemId(int position)
         {
             return position;
 		}

@@ -4,6 +4,7 @@ using Android.App;
 using Android.OS;
 using Android.Content;
 using Android.Widget;
+using Android.Content.PM;
 
 using Shared.Model;
 using Shared.Utils;
@@ -24,9 +25,9 @@ namespace Android.Source.Screens
 
 			listView = FindViewById<ListView>(m2m.Android.Resource.Id.listView); 
 
-			this.adapter = new ThingsListAdapter(this);
-			this.adapter.OnListPopulated += new EventHandler (OnListPopulated);
-			this.adapter.PopulateThingsListAsync ();
+			adapter = new ThingsListAdapter(this);
+			adapter.OnListPopulated += new EventHandler (OnListPopulated);
+			adapter.PopulateThingsListAsync ();
 		}
 
 		public void OnListPopulated(object sender, EventArgs e)
@@ -38,8 +39,12 @@ namespace Android.Source.Screens
 
 		public void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)
 		{
-			Logger.Debug ("OnListItemClick()");
 			var intent = new Intent(this, typeof(ThingActivity));
+
+			var thing = adapter.GetThingObject (e.Position);
+			intent.PutExtra (Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER, thing.key);
+			Logger.Debug ("OnListItemClick() Thing key: " + thing.key);
+
 			StartActivity(intent);
 			Finish ();
 		}	

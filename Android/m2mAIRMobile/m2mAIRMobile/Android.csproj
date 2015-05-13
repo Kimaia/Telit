@@ -79,6 +79,7 @@
     <AndroidResource Include="Resources\layout\Main.axml" />
     <AndroidResource Include="Resources\layout\listcell_thing.xml" />
     <AndroidResource Include="Resources\layout\activity_things_list.xml" />
+    <AndroidResource Include="Resources\layout\activity_thing.xml" />
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

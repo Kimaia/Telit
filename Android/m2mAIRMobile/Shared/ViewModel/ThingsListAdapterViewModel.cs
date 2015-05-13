@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 using Shared.Utils;
 using Shared.Model;
@@ -12,11 +13,6 @@ namespace Shared.ViewModel
 {
 	public class ThingsListAdapterViewModel
 	{
-		private readonly string Param_Offset = "offset";
-		private readonly string Param_Limit = "limit";
-		private readonly int Default_Offset = 0;
-		private readonly int Default_Limit = 50;
-
 		private ModelServicesManager dataManager;
 		public List<Thing> thingsList { get; private set; }
 
@@ -42,8 +38,8 @@ namespace Shared.ViewModel
 		{
 			CommandParams prms = new CommandParams ();
 			prms.Params = new Dictionary<string,object>();
-			prms.Params.Add(Param_Offset, Default_Offset);
-			prms.Params.Add(Param_Limit, Default_Limit);
+			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_OFFSET, Shared.Model.Constants.TR50_PARAM_OFFSET_VALUE);
+			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_LIMIT, Shared.Model.Constants.TR50_PARAM_LIMIT_VALUE);
 			return new TR50Command (M2MCommands.CommandType.Thing_List, prms);
 		}
 	}

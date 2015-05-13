@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -10,33 +9,6 @@ using Shared.Utils;
 namespace Shared.Network.DataTransfer.TR50
 {
 	#region TR50 Mid Classes
-	public class TR50Request
-	{
-		public Dictionary<string, Dictionary<string,object>> body;
-	}
-
-	public class TR50RequestBlock
-	{
-		public Dictionary<string,object> block;
-
-		public TR50RequestBlock(Dictionary<string,object> dict)
-		{
-			block = dict;
-		}
-	}
-
-	public class TR50Response<Type>
-	{
-		public bool 				success;
-		public TR50Params<Type> 	Params;
-	}
-
-	public class TR50Params<Type>
-	{
-		public int count;
-		public List<string> fields;
-		public List<Type> 	result;
-	}
 	#endregion
 
 	public class TR50Converter

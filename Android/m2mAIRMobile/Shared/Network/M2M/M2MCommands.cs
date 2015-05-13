@@ -12,14 +12,14 @@ namespace Shared.Network
 		{
 			UnDefined_Type,
 			Thing_List, 
-			Properties, 
+			Thing_Find, 
 			Alarms
 		}
 
 		public static readonly Dictionary<CommandType, string> Names = new Dictionary<CommandType, string> {
 			{ CommandType.UnDefined_Type, null },
 			{ CommandType.Thing_List, "thing.list" },
-			{ CommandType.Properties, "Properties" },
+			{ CommandType.Thing_Find, "thing.find" },
 			{ CommandType.Alarms, "Alarms" }
 		};
 
