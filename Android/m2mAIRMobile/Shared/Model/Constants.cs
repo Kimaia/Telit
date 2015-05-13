@@ -4,6 +4,17 @@ namespace Shared.Model
 {
 	public static class Constants
 	{
+		#region VM_STATE
+		public enum VM_States
+		{
+			VM_State_Register,
+			VM_State_Login
+		}
+		public const string VM_STATE = "VM_State";
+		public const VM_States VM_STATE_REGISTER = VM_States.VM_State_Register;
+		public const VM_States VM_STATE_LOGIN = VM_States.VM_State_Login;
+		#endregion
+
 		#region TR50
 		public const string TR50_PARAM_KEY = "key";
 		public const string TR50_PARAM_OFFSET = "offset";

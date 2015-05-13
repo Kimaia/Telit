@@ -36,6 +36,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ThingViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50\TR50Request.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50\TR50Response.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\BaseViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DB\" />

@@ -55,6 +55,12 @@ namespace Shared.Utils
 				return true;
 			}
 			throw new Exception("Password null");
+		}	
+
+		public void ResetPassword()
+		{
+			settings[Password] = null;
+			settings.Save();
 		}
 
 		public string GetPassword()

@@ -19,7 +19,10 @@ namespace Shared.ViewModel
 		public LauncherViewModel()
 		{
 			#if DEBUG
+			Settings.Instance.SetRegistered(false);
 			Settings.Instance.SetSessionId(null);
+			Settings.Instance.SetUserName(null);
+			Settings.Instance.ResetPassword();
 			#endif
 
 			InitDB ();

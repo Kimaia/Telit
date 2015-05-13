@@ -33,7 +33,7 @@ namespace Shared.ViewModel
 
 				Expression<Func<Thing, bool>> predicate = t => (t.key.Equals(key));
 
-				handledThing = await dataManager.GetDataItemAsync<Thing> (prepareCommand (key), predicate);
+				handledThing = await dataManager.GetDBDataItemAsync<Thing> (prepareTR50Command (key), predicate);
 				Logger.Debug ("GetThingObject(), Thing key:" + key);
 
 				// raise event for completion
@@ -43,7 +43,7 @@ namespace Shared.ViewModel
 
 
 
-		private TR50Command prepareCommand(string key)
+		private TR50Command prepareTR50Command(string key)
 		{
 			CommandParams prms = new CommandParams ();
 			prms.Params = new Dictionary<string,object>();

@@ -27,7 +27,7 @@ namespace Android.Source.Screens
 
 			adapter = new ThingsListAdapter(this);
 			adapter.OnListPopulated += new EventHandler (OnListPopulated);
-			adapter.PopulateThingsListAsync ();
+			adapter.PopulateThingsListAsync (Intent.GetStringExtra(Shared.Model.Constants.VM_STATE));
 		}
 
 		public void OnListPopulated(object sender, EventArgs e)

@@ -29,12 +29,10 @@ namespace Android.Source.Screens
 			this.viewModel = new ThingsListAdapterViewModel();
 		}
 
-
-
-		public async void PopulateThingsListAsync()
+		public async void PopulateThingsListAsync(string vm_state)
         {
-			Logger.Debug ("PopulateThingsListAsync()");
-			await viewModel.PopulateThingsListAsync();
+			Logger.Info ("PopulateThingsListAsync(), VM_State:" + vm_state);
+			await viewModel.PopulateThingsListAsync(vm_state);
 
 			// raise event for completion
 			this.OnListPopulated (this, new EventArgs ());

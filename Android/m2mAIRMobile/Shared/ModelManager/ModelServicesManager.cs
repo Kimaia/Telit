@@ -11,6 +11,11 @@ using Shared.Network.DataTransfer.TR50;
 
 namespace Shared.ModelManager
 {
+	public class DBFetchException : Exception
+	{
+		public DBFetchException(string message) : base(message) {}
+	}
+
 	public class ModelServicesManager
 	{
 		private M2MAuthenticator m2mAuthenticator;
@@ -35,17 +40,12 @@ namespace Shared.ModelManager
 
 
 		#region item operations
-		public async Task<TEntity> GetDataItemAsync<TEntity>(TR50Command commands, Expression<Func<TEntity, bool>> predicate) where TEntity : class, new()
+		public async Task<TEntity> GetDBDataItemAsync<TEntity>(TR50Command commands, Expression<Func<TEntity, bool>> predicate) where TEntity : class, new()
 		{
 			// first load from DB
 			var item = await LoadItemFromDBAsync<TEntity> (predicate);
 			if (item == null) {
-				// if DB empty - load from Server
-				item = await LoadItemFromServerAsync<TEntity> (commands);
-				if (item != null) {
-					// and insert into DB
-					await InsertItemIntoDBAsync (item);
-				}
+				throw new DBFetchException("Failed fetch Item");
 			}
 			Logger.Debug ("GetDataItemAsync(), :" + item.ToString());
 			return item;
@@ -70,21 +70,25 @@ namespace Shared.ModelManager
 		#endregion
 
 		#region list operations
-		public async Task<List<Type>> GetDataListAsync<Type>(TR50Command commands) where Type : new()
+		public async Task<List<Type>> LoadM2MDataListAsync<Type>(TR50Command commands) where Type : new()
+		{
+			var list = await LoadListFromServerAsync<Type> (commands);
+			if (list.Count > 0) 
+			{
+				// insert into DB
+				await InsertListIntoDBAsync (list);
+			}
+
+			Logger.Debug ("LoadM2MDataListAsync(), List count:" + list.Count);
+			return list;
+		}
+
+		public async Task<List<Type>> GetDBDataListAsync<Type>() where Type : new()
 		{
 			// first load from DB
 			var list = await LoadListFromDBAsync<Type> ();
-			if (list.Count == 0) {
-				// if DB empty - load from Server
-				list = await LoadListFromServerAsync<Type> (commands);
-				if (list.Count > 0) {
-					// and insert into DB
-					await InsertListIntoDBAsync (list);
-				}
-			}
 
-				
-			Logger.Debug ("GetDataListAsync(), List count:" + list.Count);
+			Logger.Debug ("GetDBDataListAsync(), List count:" + list.Count);
 			return list;
 		}
 

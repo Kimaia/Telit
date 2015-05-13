@@ -45,10 +45,13 @@ namespace Android.Source.Screens
 			viewModel.StartLogin(username.Text, password.Text, ShowDialog); 
 		}
 
+
 		public void RegisterationSuccess(object sender, EventArgs e)
 		{
 			Logger.Debug ("RegistrationSuccess()");
 			var intent = new Intent(this, typeof(ThingsListActivity));
+			intent.PutExtra (Shared.Model.Constants.VM_STATE, 
+								Shared.Model.Constants.VM_States.VM_State_Register.ToString());
 			StartActivity(intent);
 			Finish ();
 		}
@@ -57,6 +60,8 @@ namespace Android.Source.Screens
 		{
 			Logger.Debug ("LoginSuccess()");
 			var intent = new Intent(this, typeof(ThingsListActivity));
+			intent.PutExtra (Shared.Model.Constants.VM_STATE, 
+								Shared.Model.Constants.VM_States.VM_State_Login.ToString());
 			StartActivity(intent);
 			Finish ();
 		}

@@ -11,7 +11,7 @@ using Shared.Network.DataTransfer.TR50;
 
 namespace Shared.ViewModel
 {
-	public class ThingsListAdapterViewModel
+	public class ThingsListAdapterViewModel : BaseViewModel
 	{
 		private ModelServicesManager dataManager;
 		public List<Thing> thingsList { get; private set; }
@@ -24,17 +24,27 @@ namespace Shared.ViewModel
 
 
 
-		public async Task PopulateThingsListAsync ()
+		public async Task PopulateThingsListAsync (string vm_state)
 		{
 			await Task.Run (async () => {
-				thingsList = await dataManager.GetDataListAsync<Thing> (prepareCommand ());
+				switch (GetVMState(vm_state))
+				{
+				case Shared.Model.Constants.VM_States.VM_State_Register:
+					thingsList = await dataManager.LoadM2MDataListAsync<Thing> (prepareTR50Command ());
+						break;
+				case Shared.Model.Constants.VM_States.VM_State_Login:
+						thingsList = await dataManager.GetDBDataListAsync<Thing> ();
+						break;
+					default:
+					throw new InvalidOperationException("Wrong VM_State:" + vm_state);
+				}
 				Logger.Debug ("PopulateThingsList(), Things count:" + thingsList.Count);
 			});
 		}
 
 
 
-		private TR50Command prepareCommand()
+		private TR50Command prepareTR50Command()
 		{
 			CommandParams prms = new CommandParams ();
 			prms.Params = new Dictionary<string,object>();
