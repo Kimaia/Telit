@@ -4,6 +4,7 @@ using System.Threading;
 
 using Android.App;
 using Android.OS;
+using Android.Widget;
 
 using Shared.Utils;
 
@@ -12,7 +13,7 @@ namespace Android.Source.Screens
 	[Activity (Label = "BaseActivity")]			
 	public abstract class BaseActivity : Activity
 	{
-
+		private ProgressDialog progressSpinner;
 		private Action onPause;
 		private Action onResume;
 
@@ -47,6 +48,28 @@ namespace Android.Source.Screens
 		}
 		#endregion
 
+
+
+		public void OpenErrorDialog(string msg, int errno)
+		{
+			Toast.MakeText(this, msg + " error: " + errno, ToastLength.Long).Show();
+		}
+
+		protected void ShowDialog(string title, string message, int errorCode, string dismiss)
+		{
+			Logger.Error ("OnEror() Dialog: " + message + ", error dode: " + errorCode);
+		}
+
+		public void PerformOnMainThread(Action action)
+		{
+			RunOnUiThread(action);
+		}
+
+		public bool IsActive 
+		{ 
+			get { return progressSpinner.IsShowing;}
+		}
+
 		protected void SetOnPause (Action action)
 		{
 			onPause = action;
@@ -54,11 +77,6 @@ namespace Android.Source.Screens
 		protected void SetOnResume (Action action)
 		{
 			onResume = action;
-		}
-
-		protected void ShowDialog(string title, string message, int errorCode, string dismiss)
-		{
-			Logger.Error ("OnEror() Dialog: " + message + ", error dode: " + errorCode);
 		}
 	}
 }

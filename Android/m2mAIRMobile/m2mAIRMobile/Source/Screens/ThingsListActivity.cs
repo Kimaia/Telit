@@ -26,15 +26,23 @@ namespace Android.Source.Screens
 			listView = FindViewById<ListView>(m2m.Android.Resource.Id.listView); 
 
 			adapter = new ThingsListAdapter(this);
-			adapter.OnListPopulated += new EventHandler (OnListPopulated);
-			adapter.PopulateThingsListAsync (Intent.GetStringExtra(Shared.Model.Constants.VM_STATE));
+			adapter.PopulateThingsListAsync (Intent.GetStringExtra(Shared.Model.Constants.VM_STATE), OnListPopulated, ShowDialog);
 		}
 
-		public void OnListPopulated(object sender, EventArgs e)
+		public void OnListPopulated()
 		{
-			Logger.Debug ("OnListPopulated()");
-			listView.Adapter = adapter;
-			listView.ItemClick += OnListItemClick;
+			try{
+				RunOnUiThread(()=>{
+					Logger.Debug ("OnListPopulated()");
+					listView.Adapter = adapter;
+					Logger.Debug ("OnListPopulated()2");
+					listView.ItemClick += OnListItemClick;
+				});
+			}
+			catch(Exception e){
+				Logger.Debug ("OnListPopulated(): " + e.Message);
+			}
+			
 		}
 
 		public void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)

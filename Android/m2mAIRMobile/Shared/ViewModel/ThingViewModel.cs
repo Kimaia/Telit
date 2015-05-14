@@ -11,7 +11,7 @@ using Shared.Network.DataTransfer.TR50;
 
 namespace Shared.ViewModel
 {
-	public class ThingViewModel
+	public class ThingViewModel : BaseViewModel
 	{
 		// events
 		public event EventHandler OnDBLoadThingObject;

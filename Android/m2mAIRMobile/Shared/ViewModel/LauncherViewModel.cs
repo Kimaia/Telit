@@ -8,7 +8,7 @@ using Shared.Utils;
 
 namespace Shared.ViewModel
 {
-	public class LauncherViewModel
+	public class LauncherViewModel : BaseViewModel
 	{
 
 		// events

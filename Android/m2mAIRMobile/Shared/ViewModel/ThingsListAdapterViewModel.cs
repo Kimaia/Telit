@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using Android.Content;
 
 using Shared.Utils;
 using Shared.Model;
@@ -18,28 +19,46 @@ namespace Shared.ViewModel
 
 		public ThingsListAdapterViewModel ()
 		{
-			thingsList = new List<Thing> ();
 			dataManager = new ModelServicesManager();
+			thingsList = new List<Thing> ();
 		}
 
 
-
-		public async Task PopulateThingsListAsync (string vm_state)
+		public async Task PopulateThingsList (string vm_state, OnSuccess onSuccess, OnError onError)
 		{
 			await Task.Run (async () => {
+				await PopulateThingsListAsync (vm_state, onSuccess, onError);
+				if (thingsList.Count == 0)
+					onError ("PopulateThingsList()", "Loaded Things List is Empty", 0, "dismiss");
+				else
+					onSuccess();
+			});
+		}
+			
+
+		public async Task PopulateThingsListAsync (string vm_state, OnSuccess onSuccess, OnError onError)
+		{
+			Logger.Info ("PopulateThingsListAsync(), VM_State:" + vm_state);
+			try
+			{
 				switch (GetVMState(vm_state))
 				{
 				case Shared.Model.Constants.VM_States.VM_State_Register:
 					thingsList = await dataManager.LoadM2MDataListAsync<Thing> (prepareTR50Command ());
 						break;
 				case Shared.Model.Constants.VM_States.VM_State_Login:
-						thingsList = await dataManager.GetDBDataListAsync<Thing> ();
+					thingsList = await dataManager.GetDBDataListAsync<Thing> ();
 						break;
-					default:
+				default:
 					throw new InvalidOperationException("Wrong VM_State:" + vm_state);
 				}
-				Logger.Debug ("PopulateThingsList(), Things count:" + thingsList.Count);
-			});
+				Logger.Debug ("PopulateThingsListAsync(), Things count:" + thingsList.Count);
+			}
+			catch (Exception e)
+			{
+				Logger.Error ("Failed PopulateThingsListAsync()", e);
+				onError("PopulateThingsListAsync() failed", e.Message, 0, "dismiss");
+			}
 		}
 
 

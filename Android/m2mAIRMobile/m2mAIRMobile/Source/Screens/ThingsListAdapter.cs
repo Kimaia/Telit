@@ -20,22 +20,17 @@ namespace Android.Source.Screens
 		private ThingsListAdapterViewModel viewModel;
         private Context context;
 
-		// events
-		public event EventHandler OnListPopulated;
-
 		public ThingsListAdapter(Context context)
 		{
 			this.context = context;
 			this.viewModel = new ThingsListAdapterViewModel();
 		}
 
-		public async void PopulateThingsListAsync(string vm_state)
-        {
-			Logger.Info ("PopulateThingsListAsync(), VM_State:" + vm_state);
-			await viewModel.PopulateThingsListAsync(vm_state);
 
-			// raise event for completion
-			this.OnListPopulated (this, new EventArgs ());
+
+		public async Task PopulateThingsListAsync(string vm_state, ThingsListAdapterViewModel.OnSuccess onSuccess, ThingsListAdapterViewModel.OnError onError)
+        {
+			await viewModel.PopulateThingsList(vm_state, onSuccess, onError);
         }
 
 		public Thing GetThingObject(int position)
