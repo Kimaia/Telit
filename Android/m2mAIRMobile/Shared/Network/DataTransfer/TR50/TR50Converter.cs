@@ -8,8 +8,10 @@ using Shared.Utils;
 
 namespace Shared.Network.DataTransfer.TR50
 {
-	#region TR50 Mid Classes
-	#endregion
+	public class TR50ConversionException : Exception
+	{
+		public TR50ConversionException(string message) : base(message) {}
+	}
 
 	public class TR50Converter
 	{
@@ -17,6 +19,10 @@ namespace Shared.Network.DataTransfer.TR50
 		public TR50Request ConvertRequest(TR50Command command)
 		{
 			var request = PrepareForSerialise (command);
+
+			if (request == null)
+				throw new TR50ConversionException ("Failed TR50 request convertion :" + command.ToString());
+
 			Logger.Debug (JsonConvert.SerializeObject(request.body, Formatting.Indented));
 			return request;
 		}
@@ -67,11 +73,20 @@ namespace Shared.Network.DataTransfer.TR50
 		#region ConvertResponse
 		public TR50Response<Type> ConvertResponse<Type>(string m2mresponse)
 		{
-			var Response = new TR50Response<Type> ();
-			JToken responseToken = JToken.Parse(m2mresponse);
-			JObject responseObject = responseToken["1"].Value<JObject>();
-			Response = responseObject.ToObject<TR50Response<Type>>();
-			return Response;
+			try
+			{
+				var Response = new TR50Response<Type> ();
+				JToken responseToken = JToken.Parse(m2mresponse);
+				JObject responseObject = responseToken ["1"].Value<JObject> ();
+				Response = responseObject.ToObject<TR50Response<Type>> ();
+				if (Response == null || Response.Params == null)
+					throw new TR50ConversionException ("Failed TR50 response convertion :" + m2mresponse);
+				return Response;
+			}
+			catch (Exception e) 
+			{
+				throw new TR50ConversionException ("Failed TR50 response convertion :" + e.Message + ", raw response: " + m2mresponse);
+			}
 		}
 
 		#endregion

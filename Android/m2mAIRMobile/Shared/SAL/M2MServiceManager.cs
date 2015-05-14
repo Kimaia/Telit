@@ -61,7 +61,9 @@ namespace Shared.SAL
 		{
 			var token = tokenSource.Token;
 			var response = await server.PostAsync(ApiPath, request.body, token);
-			Logger.Debug ("PostAsync(), ResponseCode: " + response.StatusCode + ", StatusMessage: " + response.StatusMessage);
+			if (!response.IsOkCode ())
+				throw new RemoteReturnedNotOkException (response.StatusMessage);
+			
 			return response;
 		}
 

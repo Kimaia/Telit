@@ -8,6 +8,7 @@ namespace Shared.ViewModel
 {
 	public class RegisterAndLoginViewModel
 	{
+		public delegate void OnError(string title, string message, int code, string dismissCaption);
 
 		// events
 		public event EventHandler RegisterationSuccess;
@@ -19,10 +20,6 @@ namespace Shared.ViewModel
 		{
 			authenticator = new ModelServicesManager();
 		}
-
-		public delegate void OnError(string title, string message, int code, string dismissCaption);
-
-
 
 
 		public void StartLogin (string username, string password, OnError onError)
@@ -36,11 +33,18 @@ namespace Shared.ViewModel
 		private async Task StartLoginAsync (string username, string password, OnError onError)
 		{
 			#if DEBUG 
-			var response = await authenticator.AuthenticateAsync (username, password);
-			if (response.IsOkCode())
-				AuthenticationSuccess(username, password, response.Content);
-			else
-				onError (response.StatusMessage, response.Content, (int)response.HttpStatusCode, "dismiss");
+			try
+			{
+				var response = await authenticator.AuthenticateAsync (username, password);
+				if (response.IsOkCode())
+					AuthenticationSuccess(username, password, response.Content);
+				else
+					onError (response.StatusMessage, response.Content, (int)response.HttpStatusCode, "dismiss");
+			}
+			catch (Exception e) {
+				Logger.Error ("Failed to Login", e);
+				onError ("StartLoginAsync failed", e.Message, 0, "dismiss");
+			}
 			#else
 			Logger.Debug ("StartRegistration(),  User: " + username + ", password: " + password);
 			if (!TextUtils.ValidateEmail(username)) {

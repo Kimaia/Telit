@@ -25,6 +25,11 @@ namespace Shared.Network.DataTransfer.TR50
 			Command = M2MCommands.Names[type];
 			Params = Prms;
 		}
+
+		public string ToString()
+		{
+			return "Command: " + Command;
+		}
 	}
 
 	public class CommandParams

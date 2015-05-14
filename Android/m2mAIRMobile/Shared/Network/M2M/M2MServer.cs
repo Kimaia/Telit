@@ -10,6 +10,15 @@ using Shared.Network.DataTransfer;
 
 namespace Shared.Network
 {
+	public class RemoteReturnedNotOkException : Exception
+	{
+		public RemoteReturnedNotOkException(string message) : base(message) {}
+		public static RemoteReturnedNotOkException FromResponse(RemoteResponse response)
+		{
+			return new RemoteReturnedNotOkException(response.StatusMessage);
+		}
+	}
+
 	public class M2MServer
 	{
         public const string M2MUrlKey = "M2MServerUrl";
@@ -30,51 +39,37 @@ namespace Shared.Network
 
 		public async Task<RemoteResponse> PostAsync(string path, Dictionary<string, object> urlParams, Dictionary<string, object> bodyParams, CancellationToken token = default(CancellationToken))
 		{
-			try
-			{
-				var request = CreateRequest(path, urlParams, Method.POST, bodyParams);
-				var response = await client.ExecuteTaskAsync(request, token);
+			var request = CreateRequest(path, urlParams, Method.POST, bodyParams);
+			var response = await client.ExecuteTaskAsync(request, token);
 
-				if (response.ErrorException != null)
-				{
-					throw response.ErrorException;
-				}
-
-				return new RemoteResponse (response.Content, 
-											response.StatusCode, 
-											response.StatusCode.ToString(), 
-											response.StatusDescription);
-			}
-			catch (Exception e) 
+			if (response.ErrorException != null)
 			{
-				Logger.Error (e.Message);
-				return default (RemoteResponse);
+				Logger.Error (response.ErrorException.Message);
+				throw response.ErrorException;
 			}
+
+			return new RemoteResponse (response.Content, 
+										response.StatusCode, 
+										response.StatusCode.ToString(), 
+										response.StatusDescription);
 		}
 
 
 		public async Task<RemoteResponse> PostAsync(string path, object body, CancellationToken token = default(CancellationToken))
 		{
-			try
-			{
-				var request = CreateRequest(path, Method.POST, body);
-				var response = await client.ExecuteTaskAsync(request, token);
+			var request = CreateRequest(path, Method.POST, body);
+			var response = await client.ExecuteTaskAsync(request, token);
 
-				if (response.ErrorException != null)
-				{
-					throw response.ErrorException;
-				}
-
-				return new RemoteResponse (response.Content, 
-					response.StatusCode, 
-					response.StatusCode.ToString(), 
-					response.StatusDescription);
-			}
-			catch (Exception e) 
+			if (response.ErrorException != null)
 			{
-				Logger.Error (e.Message);
-				return default (RemoteResponse);
+				Logger.Error (response.ErrorException.Message);
+				throw response.ErrorException;
 			}
+
+			return new RemoteResponse (response.Content, 
+				response.StatusCode, 
+				response.StatusCode.ToString(), 
+				response.StatusDescription);
 		}
 
 		private RestRequest CreateRequest(string path, Dictionary<string, object> urlParams, Method httpMethod, Dictionary<string, object> bodyParams)

@@ -33,7 +33,6 @@ namespace Shared.ModelManager
 		public async Task<RemoteResponse> AuthenticateAsync (string username, string password)
 		{
 			var response = await m2mAuthenticator.AuthenticateAsync(username,  password);
-			Logger.Debug ("AuthenticateAsync(), ResponseCode: " + response.StatusCode + ", StatusMessage: " + response.StatusMessage);
 			return response;
 		}
 		#endregion
@@ -73,13 +72,17 @@ namespace Shared.ModelManager
 		public async Task<List<Type>> LoadM2MDataListAsync<Type>(TR50Command commands) where Type : new()
 		{
 			var list = await LoadListFromServerAsync<Type> (commands);
-			if (list.Count > 0) 
+			if (list.Count == 0) 
+			{
+				Logger.Info ("LoadM2MDataListAsync(), Empty List");
+			}
+			else
 			{
 				// insert into DB
 				await InsertListIntoDBAsync (list);
+				Logger.Debug ("LoadM2MDataListAsync(), List count:" + list.Count);
 			}
 
-			Logger.Debug ("LoadM2MDataListAsync(), List count:" + list.Count);
 			return list;
 		}
 

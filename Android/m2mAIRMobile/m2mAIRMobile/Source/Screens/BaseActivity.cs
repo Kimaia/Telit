@@ -47,13 +47,18 @@ namespace Android.Source.Screens
 		}
 		#endregion
 
-		public void SetOnPause (Action action)
+		protected void SetOnPause (Action action)
 		{
 			onPause = action;
 		}
-		public void SetOnResume (Action action)
+		protected void SetOnResume (Action action)
 		{
 			onResume = action;
+		}
+
+		protected void ShowDialog(string title, string message, int errorCode, string dismiss)
+		{
+			Logger.Error ("OnEror() Dialog: " + message + ", error dode: " + errorCode);
 		}
 	}
 }

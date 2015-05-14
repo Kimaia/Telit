@@ -65,11 +65,6 @@ namespace Android.Source.Screens
 			StartActivity(intent);
 			Finish ();
 		}
-
-		public void ShowDialog(string title, string message, int errorCode, string dismiss)
-		{
-			Logger.Debug ("OnEror() Dialog: " + message + ", error dode: " + errorCode);
-		}
 	}
 }
 
