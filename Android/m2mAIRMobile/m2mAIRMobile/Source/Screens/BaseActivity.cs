@@ -10,7 +10,7 @@ using Shared.Utils;
 
 namespace Android.Source.Screens
 {
-	[Activity (Label = "BaseActivity")]			
+	[Activity]			
 	public abstract class BaseActivity : Activity
 	{
 		private ProgressDialog progressSpinner;
@@ -58,6 +58,7 @@ namespace Android.Source.Screens
 		protected void ShowDialog(string title, string message, int errorCode, string dismiss)
 		{
 			Logger.Error ("OnEror() Dialog: " + message + ", error dode: " + errorCode);
+			OpenErrorDialog (message, errorCode);
 		}
 
 		public void PerformOnMainThread(Action action)

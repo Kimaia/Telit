@@ -10,7 +10,7 @@ using Shared.ViewModel;
 
 namespace Android.Source.Screens
 {
-	[Activity (Label = "LoginActivity")]			
+	[Activity]			
 	public class RegisterAndLoginActivity : BaseActivity
 	{
 

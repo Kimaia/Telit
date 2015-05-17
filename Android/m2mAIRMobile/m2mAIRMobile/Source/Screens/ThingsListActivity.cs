@@ -11,7 +11,7 @@ using Shared.Utils;
 
 namespace Android.Source.Screens
 {
-	[Activity (Label = "ThingsListActivity")]			
+	[Activity]			
 	public class ThingsListActivity : BaseActivity
 	{
 		private ListView listView;
@@ -33,14 +33,12 @@ namespace Android.Source.Screens
 		{
 			try{
 				RunOnUiThread(()=>{
-					Logger.Debug ("OnListPopulated()");
 					listView.Adapter = adapter;
-					Logger.Debug ("OnListPopulated()2");
 					listView.ItemClick += OnListItemClick;
 				});
 			}
 			catch(Exception e){
-				Logger.Debug ("OnListPopulated(): " + e.Message);
+				ShowDialog ("OnListPopulated", e.Message, -1, "dismiss");
 			}
 			
 		}

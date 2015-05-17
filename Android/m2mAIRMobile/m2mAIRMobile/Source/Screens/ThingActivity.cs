@@ -17,7 +17,7 @@ using Shared.Utils;
 
 namespace Android.Source.Screens
 {
-	[Activity (Label = "ThingActivity")]			
+	[Activity]			
 	public class ThingActivity : BaseActivity
 	{
 		private ThingViewModel viewModel;

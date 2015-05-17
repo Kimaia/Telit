@@ -62,8 +62,9 @@ namespace Android.Source.Screens
 			if (view == null) 
 				view = LayoutInflater.From (context).Inflate (m2m.Android.Resource.Layout.listcell_thing, null);
 
-			view.FindViewById<TextView> (m2m.Android.Resource.Id.Text1).Text = item.id;
-			view.FindViewById<TextView> (m2m.Android.Resource.Id.Text2).Text = item.key;
+			view.FindViewById<TextView> (m2m.Android.Resource.Id.ThingName).Text = item.name;
+			view.FindViewById<TextView> (m2m.Android.Resource.Id.Status).Text = (item.connected) ? "Connected" : "Disconnected";
+			view.FindViewById<TextView> (m2m.Android.Resource.Id.LastSeen).Text = item.lastSeen;
 			return view;
 		}
 
