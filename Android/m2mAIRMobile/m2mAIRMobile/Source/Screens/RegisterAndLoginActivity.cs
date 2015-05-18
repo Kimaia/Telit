@@ -29,7 +29,7 @@ namespace Android.Source.Screens
 			viewModel.LoginSuccess += new EventHandler (LoginSuccess);
 
 			// Set our view from the "main" layout resource
-			SetContentView (m2m.Android.Resource.Layout.Main);
+			SetContentView (m2m.Android.Resource.Layout.activity_login);
 
 			username = FindViewById<EditText>(m2m.Android.Resource.Id.username);
 			password = FindViewById<EditText>(m2m.Android.Resource.Id.password);
