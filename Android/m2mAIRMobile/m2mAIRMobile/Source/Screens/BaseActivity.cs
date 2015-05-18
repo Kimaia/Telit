@@ -61,7 +61,16 @@ namespace Android.Source.Screens
 
 		public void OpenErrorDialog(string msg, int errno)
 		{
-			Toast.MakeText(this, msg + " error: " + errno, ToastLength.Long).Show();
+			try
+			{
+				RunOnUiThread(()=> {	
+					Toast.MakeText(this, msg, ToastLength.Long).Show();
+				});
+			}
+			catch (Exception e)
+			{
+				Logger.Error ("OpenErrorDialog(): " + e.Message);
+			}
 		}
 
 		protected void ShowDialog(string title, string message, int errorCode, string dismiss)
