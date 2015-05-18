@@ -40,19 +40,22 @@ namespace Android.Source.Screens
 		}
 		#endregion
 
-		private void OnLogin()
-		{
-			StartLoadingSpinner("Authenticating user credentials.");
-			viewModel.StartLogin(username.Text, password.Text, OnError); 
-		}
 
+		#region Callbacks
 		private void OnError(string title, string message, int errorCode, string dismiss)
 		{
 			StopLoadingSpinner ();
 			Logger.Error ("OnEror() Dialog: " + message + ", error dode: " + errorCode);
 			OpenErrorDialog (message, errorCode);
 		}
+		#endregion
 
+		#region Event handlers
+		private void OnLogin()
+		{
+			StartLoadingSpinner("Authenticating user credentials.");
+			viewModel.StartLogin(username.Text, password.Text, OnError); 
+		}
 
 		public void RegisterationSuccess(object sender, EventArgs e)
 		{
@@ -73,6 +76,7 @@ namespace Android.Source.Screens
 			StartActivity(intent);
 			Finish ();
 		}
+		#endregion
 	}
 }
 
