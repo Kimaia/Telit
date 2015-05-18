@@ -17,6 +17,8 @@ namespace Android.Source.Screens
 		private Action onPause;
 		private Action onResume;
 
+		protected TextView navigationTitle;
+
 		#region lifecycle
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -46,6 +48,13 @@ namespace Android.Source.Screens
 				onResume();
 			}
 		}
+
+		protected void SetNavigationTitle(string title)
+		{
+			navigationTitle = FindViewById<TextView> (m2m.Android.Resource.Id.Navigation_Title);
+			navigationTitle.Text = title;
+		}
+
 		#endregion
 
 

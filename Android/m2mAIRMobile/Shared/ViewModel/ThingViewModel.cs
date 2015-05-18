@@ -13,9 +13,6 @@ namespace Shared.ViewModel
 {
 	public class ThingViewModel : BaseViewModel
 	{
-		// events
-		public event EventHandler OnDBLoadThingObject;
-
 		private ModelServicesManager 	dataManager;
 		private Thing 					handledThing;
 
@@ -25,9 +22,7 @@ namespace Shared.ViewModel
 		}
 
 
-
-
-		public void GetThingObject (string key)
+		public void GetThingObject (string key, BaseViewModel.OnSuccess onSuccess, BaseViewModel.OnError onError)
 		{
 			Task.Run (async () => {
 
@@ -37,10 +32,14 @@ namespace Shared.ViewModel
 				Logger.Debug ("GetThingObject(), Thing key:" + key);
 
 				// raise event for completion
-				this.OnDBLoadThingObject (this, new EventArgs ());
+				onSuccess();
 			});
 		}
 
+		public Thing GetThing()
+		{
+			return handledThing;
+		}
 
 
 		private TR50Command prepareTR50Command(string key)

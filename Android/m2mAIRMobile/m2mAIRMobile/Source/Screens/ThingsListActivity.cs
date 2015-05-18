@@ -23,6 +23,8 @@ namespace Android.Source.Screens
 
 			SetContentView(m2m.Android.Resource.Layout.activity_things_list);
 
+			base.SetNavigationTitle ("Things");
+
 			listView = FindViewById<ListView>(m2m.Android.Resource.Id.listView); 
 
 			adapter = new ThingsListAdapter(this);

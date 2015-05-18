@@ -81,6 +81,9 @@
     <AndroidResource Include="Resources\layout\activity_things_list.xml" />
     <AndroidResource Include="Resources\layout\activity_thing.xml" />
     <AndroidResource Include="Resources\drawable-hdpi\car_icon.jpg" />
+    <AndroidResource Include="Resources\layout\nav_bar.xml" />
+    <AndroidResource Include="Resources\layout\thing_brief_description.xml" />
+    <AndroidResource Include="Resources\layout\location_details.xml" />
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
