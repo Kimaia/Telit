@@ -35,6 +35,11 @@ namespace Android.Source.Screens
 			{
 				onPause();
 			}
+
+			if (progressSpinner != null)
+			{
+				StopLoadingSpinner();
+			}
 			base.OnPause ();
 		}
 
@@ -59,18 +64,49 @@ namespace Android.Source.Screens
 
 
 
-		public void OpenErrorDialog(string msg, int errno)
+		public void StartLoadingSpinner(string msg, Action onCancel = null)
 		{
 			try
 			{
-				RunOnUiThread(()=> {	
-					Toast.MakeText(this, msg, ToastLength.Long).Show();
+				RunOnUiThread (() => {
+					if (progressSpinner != null)
+					{
+						StopLoadingSpinner();
+					}
+
+					progressSpinner = new ProgressDialog(this);
+					progressSpinner.SetCancelable(onCancel != null);
+					progressSpinner.CancelEvent +=  (sender, e) =>
+					{
+						onCancel();
+					};
+					progressSpinner.SetMessage(msg);
+					progressSpinner.Show();
 				});
 			}
-			catch (Exception e)
+			catch (Exception e) 
 			{
-				Logger.Error ("OpenErrorDialog(): " + e.Message);
+				Logger.Debug (e.Message);
 			}
+		}
+
+		public void StopLoadingSpinner()
+		{
+			PerformOnMainThread(() => {
+					if (progressSpinner != null) 
+					{
+						progressSpinner.Hide();
+						progressSpinner.Dismiss();
+						progressSpinner = null;
+					}
+				});
+		}
+
+		public void OpenErrorDialog(string msg, int errno)
+		{
+			RunOnUiThread (() => {
+				Toast.MakeText (this, msg, ToastLength.Long).Show ();
+			});
 		}
 
 		protected void ShowDialog(string title, string message, int errorCode, string dismiss)
@@ -81,7 +117,14 @@ namespace Android.Source.Screens
 
 		public void PerformOnMainThread(Action action)
 		{
-			RunOnUiThread(action);
+			try
+			{
+				RunOnUiThread(action);
+			}
+			catch (Exception e)
+			{
+				Logger.Error ("PerformOnMainThread - action(): " + action.Method.Name + ", Error message:" + e.Message);
+			}
 		}
 
 		public bool IsActive 
