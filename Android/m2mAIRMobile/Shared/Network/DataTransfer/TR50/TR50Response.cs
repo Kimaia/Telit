@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Shared.Model;
+
 namespace Shared.Network.DataTransfer.TR50
 {
 	public class TR50Response<ParamsType>
@@ -9,11 +11,11 @@ namespace Shared.Network.DataTransfer.TR50
 		public ParamsType 	Params;
 	}
 
-	public class TR50ListParams<DataType>
+	public class TR50ThingsListParams
 	{
 		public int 				count;
 		public List<string> 	fields;
-		public List<DataType> 	result;
+		public List<Thing> 		result;
 	}
 }
 

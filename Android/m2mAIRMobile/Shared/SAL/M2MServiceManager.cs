@@ -29,17 +29,15 @@ namespace Shared.SAL
 
 
 		// preform request to server
-		public async Task<List<Type>> RequestListAsync<Type> (TR50Command command)
+		public async Task<TR50Response<Type>> RequestListAsync<Type> (TR50Command command)
 		{
 			var request = ConvertRequest(command);
 
 			var response = await PostAsync (request);
 
-			var converted = ConvertResponse<TR50ListParams<Type>> (response);
+			var converted = ConvertResponse<Type> (response);
 
-			var list = converted.Params.result;
-
-			return list;
+			return converted ;
 		}
 
 

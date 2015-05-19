@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using Shared.DB;
 using Shared.SAL;
 using Shared.Utils;
+using Shared.Model;
 using Shared.Network.DataTransfer;
 using Shared.Network.DataTransfer.TR50;
 
@@ -69,44 +70,21 @@ namespace Shared.ModelManager
 		#endregion
 
 		#region list operations
-		public async Task<List<Type>> LoadM2MDataListAsync<Type>(TR50Command commands) where Type : new()
+		public async Task<TR50Response<Type>> LoadM2MDataListAsync<Type>(TR50Command commands) where Type : new()
 		{
-			var list = await LoadListFromServerAsync<Type> (commands);
-			if (list.Count == 0) 
-			{
-				Logger.Info ("LoadM2MDataListAsync(), Empty List");
-			}
-			else
-			{
-				// insert into DB
-				await InsertListIntoDBAsync (list);
-				Logger.Debug ("LoadM2MDataListAsync(), List count:" + list.Count);
-			}
-
-			return list;
+			return await m2mService.RequestListAsync<Type> (commands);
 		}
 
 		public async Task<List<Type>> GetDBDataListAsync<Type>() where Type : new()
 		{
-			// first load from DB
-			var list = await LoadListFromDBAsync<Type> ();
+			var dao = new Dao ();
+			var list = await dao.LoadAll<Type> ();
 
 			Logger.Debug ("GetDBDataListAsync(), List count:" + list.Count);
 			return list;
 		}
 
-		private async Task<List<Type>> LoadListFromDBAsync<Type> () where Type : new()
-		{
-			var dao = new Dao ();
-			return await dao.LoadAll<Type> ();
-		}
-
-		private async Task<List<Type>> LoadListFromServerAsync<Type> (TR50Command commands)
-		{
-			return await m2mService.RequestListAsync<Type> (commands);
-		}
-
-		private async Task InsertListIntoDBAsync<Type> (List<Type> list) where Type : new()
+		public async Task InsertListIntoDBAsync<Type> (List<Type> list) where Type : new()
 		{
 			var dao = new Dao();
 			await dao.InsertAll<Type> (list);

@@ -31,7 +31,10 @@ namespace Shared.ViewModel
 				if (thingsList.Count == 0)
 					onError ("PopulateThingsList()", "Loaded Things List is Empty", 0, "dismiss");
 				else
+				{
+					await dataManager.InsertListIntoDBAsync<Thing>(thingsList);
 					onSuccess();
+				}
 			});
 		}
 			
@@ -44,7 +47,9 @@ namespace Shared.ViewModel
 				switch (GetVMState(vm_state))
 				{
 				case Shared.Model.Constants.VM_States.VM_State_Register:
-					thingsList = await dataManager.LoadM2MDataListAsync<Thing> (prepareTR50Command ());
+					var command = prepareTR50Command ();
+					var response = await dataManager.LoadM2MDataListAsync<TR50ThingsListParams> (command);
+					thingsList = ParseTR50Response(response.Params);
 						break;
 				case Shared.Model.Constants.VM_States.VM_State_Login:
 					thingsList = await dataManager.GetDBDataListAsync<Thing> ();
@@ -70,6 +75,11 @@ namespace Shared.ViewModel
 			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_OFFSET, Shared.Model.Constants.TR50_PARAM_OFFSET_VALUE);
 			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_LIMIT, Shared.Model.Constants.TR50_PARAM_LIMIT_VALUE);
 			return new TR50Command (M2MCommands.CommandType.Thing_List, prms);
+		}
+
+		private List<Thing> ParseTR50Response(TR50ThingsListParams response)
+		{
+			return response.result;
 		}
 	}
 }
