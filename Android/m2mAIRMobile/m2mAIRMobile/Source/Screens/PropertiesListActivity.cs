@@ -20,6 +20,8 @@ namespace Android.Source.Screens
 	public class PropertiesListActivity : BaseActivity
 	{
 		private PropertiesListViewModel 	viewModel;
+		private PropertiesListAdapter		adapter;
+		private ListView					listView;
 
 		private Thing	 daThing;
 
@@ -43,9 +45,12 @@ namespace Android.Source.Screens
 			viewModel = new PropertiesListViewModel ();
 			string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
 			viewModel.GetThingObject (tkey, OnDBLoadThingObject, ShowDialog);
+
+			listView = FindViewById<ListView>(m2m.Android.Resource.Id.listView); 
 		}
 
 
+		#region Callbacks / Event handlers
 		public void OnDBLoadThingObject()
 		{
 			try{
@@ -56,12 +61,41 @@ namespace Android.Source.Screens
 					thingName.Text = daThing.name;
 					thingStatus.Text = (daThing.connected) ? "connected" : "disconnected";
 					thingLastSeen.Text = daThing.lastSeen;
+
+					adapter = new PropertiesListAdapter(this, daThing);
+					adapter.PopulatePropertiesListAsync (OnListPopulated, ShowDialog);
 				});
 			}
 			catch(Exception e){
 				ShowDialog ("OnDBLoadThingObject", e.Message, -1, "dismiss");
 			}
 		}
+
+		public void OnListPopulated()
+		{
+			try{
+				RunOnUiThread(()=>{
+					listView.Adapter = adapter;
+					listView.ItemClick += OnListItemClick;
+				});
+			}
+			catch(Exception e){
+				ShowDialog ("OnListPopulated", e.Message, -1, "dismiss");
+			}
+		}
+
+		public void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)
+		{
+//			var intent = new Intent(this, typeof(ThingActivity));
+//
+//			var thing = adapter.GetThingObject (e.Position);
+//			intent.PutExtra (Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER, thing.key);
+//			Logger.Debug ("OnListItemClick() Thing key: " + thing.key);
+//
+//			StartActivity(intent);
+//			Finish ();
+		}
+		#endregion
 	}
 }
 

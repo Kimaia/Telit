@@ -23,18 +23,18 @@ namespace Shared.Network.DataTransfer.TR50
 		public string 			id;
 		public string 			key;
 		public string 			name;
-		public string 			version;
+		public int	 			version;
 		public string 			createdBy;
 		public string 			createdOn;
 		public string 			updatedBy;
 		public string 			updatedOn;
 		public bool 			autoDefAttrs;
 		public bool 			autoDefProps;
-		public object 			properties;
 		public object 			alarms;
 		public object 			attributes;
 		public object 			methods;
 		public object 			tunnels;
+		public Dictionary<string, Property>	properties;
 	}
 }
 

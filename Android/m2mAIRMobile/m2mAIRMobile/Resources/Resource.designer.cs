@@ -68,50 +68,56 @@ namespace m2m.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060008
-			public const int City = 2131099656;
-			
-			// aapt resource value: 0x7f06000b
-			public const int Image = 2131099659;
-			
-			// aapt resource value: 0x7f06000f
-			public const int LastSeen = 2131099663;
-			
 			// aapt resource value: 0x7f06000a
-			public const int Navigation_Title = 2131099658;
-			
-			// aapt resource value: 0x7f060009
-			public const int State = 2131099657;
-			
-			// aapt resource value: 0x7f06000e
-			public const int Status = 2131099662;
-			
-			// aapt resource value: 0x7f060007
-			public const int Street = 2131099655;
-			
-			// aapt resource value: 0x7f06000c
-			public const int Text = 2131099660;
+			public const int City = 2131099658;
 			
 			// aapt resource value: 0x7f06000d
-			public const int ThingName = 2131099661;
+			public const int Image = 2131099661;
 			
-			// aapt resource value: 0x7f060005
-			public const int latitude = 2131099653;
+			// aapt resource value: 0x7f060011
+			public const int LastSeen = 2131099665;
 			
-			// aapt resource value: 0x7f060004
-			public const int listView = 2131099652;
+			// aapt resource value: 0x7f06000c
+			public const int Navigation_Title = 2131099660;
+			
+			// aapt resource value: 0x7f06000b
+			public const int State = 2131099659;
+			
+			// aapt resource value: 0x7f060010
+			public const int Status = 2131099664;
+			
+			// aapt resource value: 0x7f060009
+			public const int Street = 2131099657;
+			
+			// aapt resource value: 0x7f06000e
+			public const int Text = 2131099662;
+			
+			// aapt resource value: 0x7f06000f
+			public const int ThingName = 2131099663;
+			
+			// aapt resource value: 0x7f060007
+			public const int latitude = 2131099655;
+			
+			// aapt resource value: 0x7f060003
+			public const int listView = 2131099651;
 			
 			// aapt resource value: 0x7f060002
 			public const int login = 2131099650;
 			
-			// aapt resource value: 0x7f060006
-			public const int longiude = 2131099654;
+			// aapt resource value: 0x7f060008
+			public const int longiude = 2131099656;
 			
 			// aapt resource value: 0x7f060001
 			public const int password = 2131099649;
 			
-			// aapt resource value: 0x7f060003
-			public const int properties = 2131099651;
+			// aapt resource value: 0x7f060004
+			public const int properties = 2131099652;
+			
+			// aapt resource value: 0x7f060005
+			public const int propertyName = 2131099653;
+			
+			// aapt resource value: 0x7f060006
+			public const int unit = 2131099654;
 			
 			// aapt resource value: 0x7f060000
 			public const int username = 2131099648;
@@ -142,19 +148,22 @@ namespace m2m.Android
 			public const int activity_things_list = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int listcell_thing = 2130903044;
+			public const int list_cell_Property = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int location_details = 2130903045;
+			public const int listcell_thing = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int Main = 2130903046;
+			public const int location_details = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int nav_bar = 2130903047;
+			public const int Main = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int thing_brief_description = 2130903048;
+			public const int nav_bar = 2130903048;
+			
+			// aapt resource value: 0x7f030009
+			public const int thing_brief_description = 2130903049;
 			
 			static Layout()
 			{

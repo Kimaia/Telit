@@ -13,6 +13,7 @@ namespace Shared.Network
 			UnDefined_Type,
 			Thing_List, 
 			Thing_Find, 
+			Thing_Def_Find, 
 			Alarms
 		}
 
@@ -20,6 +21,7 @@ namespace Shared.Network
 			{ CommandType.UnDefined_Type, null },
 			{ CommandType.Thing_List, "thing.list" },
 			{ CommandType.Thing_Find, "thing.find" },
+			{ CommandType.Thing_Def_Find, "thing_def.find" },
 			{ CommandType.Alarms, "Alarms" }
 		};
 

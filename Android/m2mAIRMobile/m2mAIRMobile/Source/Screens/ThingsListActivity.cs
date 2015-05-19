@@ -31,6 +31,7 @@ namespace Android.Source.Screens
 			adapter.PopulateThingsListAsync (Intent.GetStringExtra(Shared.Model.Constants.LOGIN_STATE), OnListPopulated, ShowDialog);
 		}
 
+		#region Callbacks / Event handlers
 		public void OnListPopulated()
 		{
 			try{
@@ -55,7 +56,8 @@ namespace Android.Source.Screens
 
 			StartActivity(intent);
 			Finish ();
-		}	
+		}
+		#endregion
 	}
 }
 
