@@ -7,11 +7,4 @@
         layout="@layout/nav_bar" />
     <include
         layout="@layout/thing_brief_description" />
-    <include
-        layout="@layout/location_details" />
-    <Button
-        android:id="@+id/properties"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Properties" />
 </LinearLayout>

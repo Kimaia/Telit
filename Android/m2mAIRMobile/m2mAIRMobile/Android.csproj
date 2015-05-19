@@ -62,6 +62,7 @@
     <Compile Include="Source\Screens\ThingsListAdapter.cs" />
     <Compile Include="Source\Screens\ThingsListActivity.cs" />
     <Compile Include="Source\Screens\ThingActivity.cs" />
+    <Compile Include="Source\Screens\PropertiesListActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -85,6 +86,7 @@
     <AndroidResource Include="Resources\layout\thing_brief_description.xml" />
     <AndroidResource Include="Resources\layout\location_details.xml" />
     <AndroidResource Include="Resources\layout\activity_login.xml" />
+    <AndroidResource Include="Resources\layout\activity_properties_list.xml" />
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

@@ -52,6 +52,8 @@ namespace Android.Source.Screens
 			thingCity = FindViewById<TextView>(m2m.Android.Resource.Id.City);
 			thingState = FindViewById<TextView>(m2m.Android.Resource.Id.State);
 
+			Button properties = FindViewById<Button> (m2m.Android.Resource.Id.properties);
+			properties.Click += (object sender, EventArgs e) => { OnProperties(); };
 
 			viewModel = new ThingViewModel ();
 			string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
@@ -90,6 +92,18 @@ namespace Android.Source.Screens
 				Logger.Info ("Thing Key: " + daThing.key + "No Location data.");
 			}
 		}
+
+		#region Event handlers
+		private void OnProperties()
+		{
+			var intent = new Intent(this, typeof(PropertiesListActivity));
+			intent.PutExtra (Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER, daThing.key);
+			Logger.Debug ("OnListItemClick() Thing key: " + daThing.key);
+
+			StartActivity(intent);
+			Finish ();
+		}
+		#endregion
 	}
 }
 
