@@ -28,7 +28,7 @@ namespace Android.Source.Screens
 			listView = FindViewById<ListView>(m2m.Android.Resource.Id.listView); 
 
 			adapter = new ThingsListAdapter(this);
-			adapter.PopulateThingsListAsync (Intent.GetStringExtra(Shared.Model.Constants.VM_STATE), OnListPopulated, ShowDialog);
+			adapter.PopulateThingsListAsync (Intent.GetStringExtra(Shared.Model.Constants.LOGIN_STATE), OnListPopulated, ShowDialog);
 		}
 
 		public void OnListPopulated()

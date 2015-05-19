@@ -46,12 +46,12 @@ namespace Shared.ViewModel
 			{
 				switch (GetVMState(vm_state))
 				{
-				case Shared.Model.Constants.VM_States.VM_State_Register:
+				case Shared.Model.Constants.User_Login_States.Login_State_Register:
 					var command = prepareTR50Command ();
 					var response = await dataManager.LoadM2MDataListAsync<TR50ThingsListParams> (command);
 					thingsList = ParseTR50Response(response.Params);
 						break;
-				case Shared.Model.Constants.VM_States.VM_State_Login:
+				case Shared.Model.Constants.User_Login_States.Login_State_LoggedIn:
 					thingsList = await dataManager.GetDBDataListAsync<Thing> ();
 						break;
 				default:

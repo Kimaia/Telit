@@ -61,8 +61,8 @@ namespace Android.Source.Screens
 		{
 			Logger.Debug ("RegistrationSuccess()");
 			var intent = new Intent(this, typeof(ThingsListActivity));
-			intent.PutExtra (Shared.Model.Constants.VM_STATE, 
-								Shared.Model.Constants.VM_States.VM_State_Register.ToString());
+			intent.PutExtra (Shared.Model.Constants.LOGIN_STATE, 
+								Shared.Model.Constants.User_Login_States.Login_State_Register.ToString());
 			StartActivity(intent);
 			Finish ();
 		}
@@ -71,8 +71,8 @@ namespace Android.Source.Screens
 		{
 			Logger.Debug ("LoginSuccess()");
 			var intent = new Intent(this, typeof(ThingsListActivity));
-			intent.PutExtra (Shared.Model.Constants.VM_STATE, 
-								Shared.Model.Constants.VM_States.VM_State_Login.ToString());
+			intent.PutExtra (Shared.Model.Constants.LOGIN_STATE, 
+								Shared.Model.Constants.User_Login_States.Login_State_LoggedIn.ToString());
 			StartActivity(intent);
 			Finish ();
 		}

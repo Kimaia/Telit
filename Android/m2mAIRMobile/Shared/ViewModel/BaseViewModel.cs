@@ -14,9 +14,9 @@ namespace Shared.ViewModel
 		{
 		}
 
-		protected Shared.Model.Constants.VM_States GetVMState(string vm_state)
+		protected Shared.Model.Constants.User_Login_States GetVMState(string vm_state)
 		{
-			return (Shared.Model.Constants.VM_States)Enum.Parse(typeof(Shared.Model.Constants.VM_States), vm_state);
+			return (Shared.Model.Constants.User_Login_States)Enum.Parse(typeof(Shared.Model.Constants.User_Login_States), vm_state);
 		}
 
 	}
