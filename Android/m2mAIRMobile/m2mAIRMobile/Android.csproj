@@ -64,6 +64,7 @@
     <Compile Include="Source\Screens\ThingActivity.cs" />
     <Compile Include="Source\Screens\PropertiesListActivity.cs" />
     <Compile Include="Source\Screens\PropertiesListAdapter.cs" />
+    <Compile Include="Source\Screens\LocationTextView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -109,7 +110,7 @@
   <ItemGroup>
     <Folder Include="Source\" />
     <Folder Include="Source\Screens\" />
-    <Folder Include="Test\" />
+    <Folder Include="Source\CustomViews\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

@@ -7,8 +7,10 @@
         layout="@layout/nav_bar" />
     <include
         layout="@layout/thing_brief_description" />
-    <include
-        layout="@layout/location_details" />
+    <Android.Source.Screens.LocationTextView
+        android:id="@+id/LocationTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <Button
         android:id="@+id/properties"
         android:layout_width="match_parent"

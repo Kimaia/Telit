@@ -68,35 +68,38 @@ namespace m2m.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f06000a
-			public const int City = 2131099658;
-			
-			// aapt resource value: 0x7f06000d
-			public const int Image = 2131099661;
-			
-			// aapt resource value: 0x7f060011
-			public const int LastSeen = 2131099665;
-			
-			// aapt resource value: 0x7f06000c
-			public const int Navigation_Title = 2131099660;
-			
 			// aapt resource value: 0x7f06000b
-			public const int State = 2131099659;
-			
-			// aapt resource value: 0x7f060010
-			public const int Status = 2131099664;
-			
-			// aapt resource value: 0x7f060009
-			public const int Street = 2131099657;
+			public const int City = 2131099659;
 			
 			// aapt resource value: 0x7f06000e
-			public const int Text = 2131099662;
+			public const int Image = 2131099662;
+			
+			// aapt resource value: 0x7f060012
+			public const int LastSeen = 2131099666;
+			
+			// aapt resource value: 0x7f060004
+			public const int LocationTextView = 2131099652;
+			
+			// aapt resource value: 0x7f06000d
+			public const int Navigation_Title = 2131099661;
+			
+			// aapt resource value: 0x7f06000c
+			public const int State = 2131099660;
+			
+			// aapt resource value: 0x7f060011
+			public const int Status = 2131099665;
+			
+			// aapt resource value: 0x7f06000a
+			public const int Street = 2131099658;
 			
 			// aapt resource value: 0x7f06000f
-			public const int ThingName = 2131099663;
+			public const int Text = 2131099663;
 			
-			// aapt resource value: 0x7f060007
-			public const int latitude = 2131099655;
+			// aapt resource value: 0x7f060010
+			public const int ThingName = 2131099664;
+			
+			// aapt resource value: 0x7f060008
+			public const int latitude = 2131099656;
 			
 			// aapt resource value: 0x7f060003
 			public const int listView = 2131099651;
@@ -104,20 +107,20 @@ namespace m2m.Android
 			// aapt resource value: 0x7f060002
 			public const int login = 2131099650;
 			
-			// aapt resource value: 0x7f060008
-			public const int longiude = 2131099656;
+			// aapt resource value: 0x7f060009
+			public const int longiude = 2131099657;
 			
 			// aapt resource value: 0x7f060001
 			public const int password = 2131099649;
 			
-			// aapt resource value: 0x7f060004
-			public const int properties = 2131099652;
-			
 			// aapt resource value: 0x7f060005
-			public const int propertyName = 2131099653;
+			public const int properties = 2131099653;
 			
 			// aapt resource value: 0x7f060006
-			public const int unit = 2131099654;
+			public const int propertyName = 2131099654;
+			
+			// aapt resource value: 0x7f060007
+			public const int unit = 2131099655;
 			
 			// aapt resource value: 0x7f060000
 			public const int username = 2131099648;

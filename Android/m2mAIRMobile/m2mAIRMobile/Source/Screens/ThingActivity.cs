@@ -14,7 +14,6 @@ using Shared.ViewModel;
 using Shared.Model;
 using Shared.Utils;
 
-
 namespace Android.Source.Screens
 {
 	[Activity]			
@@ -27,11 +26,7 @@ namespace Android.Source.Screens
 		private TextView thingStatus;
 		private TextView thingLastSeen;
 
-		private TextView thingLat;
-		private TextView thingLong;
-		private TextView thingStreet;
-		private TextView thingCity;
-		private TextView thingState;
+		private LocationTextView locationView;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -46,11 +41,7 @@ namespace Android.Source.Screens
 			thingStatus = FindViewById<TextView>(m2m.Android.Resource.Id.Status);
 			thingLastSeen = FindViewById<TextView>(m2m.Android.Resource.Id.LastSeen);
 
-			thingLat = FindViewById<TextView>(m2m.Android.Resource.Id.latitude);
-			thingLong = FindViewById<TextView>(m2m.Android.Resource.Id.longiude);
-			thingStreet = FindViewById<TextView>(m2m.Android.Resource.Id.Street);
-			thingCity = FindViewById<TextView>(m2m.Android.Resource.Id.City);
-			thingState = FindViewById<TextView>(m2m.Android.Resource.Id.State);
+			locationView = FindViewById<LocationTextView>(m2m.Android.Resource.Id.LocationTextView);
 
 			Button properties = FindViewById<Button> (m2m.Android.Resource.Id.properties);
 			properties.Click += (object sender, EventArgs e) => { OnProperties(); };
@@ -68,28 +59,16 @@ namespace Android.Source.Screens
 				Logger.Debug ("OnDBLoadThingObject()");
 
 				daThing = viewModel.GetThing ();
+				
 				thingName.Text = daThing.name;
 				thingStatus.Text = (daThing.connected) ? "connected" : "disconnected";
 				thingLastSeen.Text = daThing.lastSeen;
 
-				SetLocation ();
+				locationView.SetLocation (daThing);
 				});
 			}
 			catch(Exception e){
 				ShowDialog ("OnDBLoadThingObject", e.Message, -1, "dismiss");
-			}
-		}
-
-		private void SetLocation()
-		{
-			if (daThing.loc != null) {
-				thingLat.Text = daThing.loc.lat.ToString ();
-				thingLong.Text = daThing.loc.lng.ToString ();
-				thingStreet.Text = daThing.loc.addr.street;
-				thingCity.Text = daThing.loc.addr.city;
-				thingState.Text = daThing.loc.addr.state;
-			} else {
-				Logger.Info ("Thing Key: " + daThing.key + "No Location data.");
 			}
 		}
 
