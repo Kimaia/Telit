@@ -1,54 +1,50 @@
 ﻿<Properties StartupItem="m2mAIRMobile/Android.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.192.168.56.101:5555" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Nexus 4 (KitKat)" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="m2mAIRMobile/Source/Screens/ThingActivity.cs">
     <Files>
-      <File FileName="Shared/ViewModel/ThingsListAdapterViewModel.cs" Line="34" Column="1" />
-      <File FileName="m2mAIRMobile/Source/Screens/ThingsListActivity.cs" Line="36" Column="1" />
-      <File FileName="m2mAIRMobile/Source/Screens/ThingsListAdapter.cs" Line="67" Column="65" />
-      <File FileName="m2mAIRMobile/Source/Screens/ThingActivity.cs" Line="21" Column="1" />
-      <File FileName="Shared/ViewModel/RegisterAndLoginViewModel.cs" Line="49" Column="1" />
-      <File FileName="m2mAIRMobile/Source/Screens/RegisterAndLoginActivity.cs" Line="14" Column="1" />
-      <File FileName="m2mAIRMobile/Source/Screens/BaseActivity.cs" Line="14" Column="1" />
+      <File FileName="Shared/ViewModel/ThingsListAdapterViewModel.cs" Line="1" Column="1" />
+      <File FileName="m2mAIRMobile/Source/Screens/ThingsListActivity.cs" Line="1" Column="1" />
+      <File FileName="m2mAIRMobile/Source/Screens/ThingsListAdapter.cs" Line="1" Column="1" />
+      <File FileName="m2mAIRMobile/Source/Screens/ThingActivity.cs" Line="53" Column="3" />
+      <File FileName="Shared/ViewModel/RegisterAndLoginViewModel.cs" Line="1" Column="1" />
+      <File FileName="m2mAIRMobile/Source/Screens/RegisterAndLoginActivity.cs" Line="1" Column="1" />
+      <File FileName="m2mAIRMobile/Source/Screens/BaseActivity.cs" Line="1" Column="1" />
       <File FileName="Shared/ViewModel/BaseViewModel.cs" Line="1" Column="1" />
       <File FileName="Shared/ViewModel/LauncherViewModel.cs" Line="1" Column="1" />
       <File FileName="Shared/ViewModel/ThingViewModel.cs" Line="1" Column="1" />
-      <File FileName="Shared/SAL/M2MAuthenticator.cs" Line="42" Column="21" />
+      <File FileName="Shared/SAL/M2MAuthenticator.cs" Line="1" Column="1" />
       <File FileName="m2mAIRMobile/Source/Screens/LauncherActivity.cs" Line="1" Column="1" />
       <File FileName="Shared/Model/Thing.cs" Line="1" Column="1" />
+      <File FileName="m2mAIRMobile/Source/Screens/LocationTextView.cs" Line="1" Column="1" />
+      <File FileName="m2mAIRMobile/Source/Screens/PropertiesListAdapter.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="m2mAIRMobile" expanded="True">
-            <Node name="Android" expanded="True" selected="True">
+            <Node name="Android" expanded="True">
               <Node name="Resources" expanded="True">
                 <Node name="layout" expanded="True" />
               </Node>
               <Node name="Source" expanded="True">
-                <Node name="Screens" expanded="True" />
+                <Node name="Screens" expanded="True">
+                  <Node name="ThingActivity.cs" selected="True" />
+                </Node>
               </Node>
             </Node>
             <Node name="Shared" expanded="True">
-              <Node name="Model" expanded="True" />
-              <Node name="ModelManager" expanded="True" />
-              <Node name="SAL" expanded="True" />
               <Node name="ViewModel" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Shared/ViewModel/RegisterAndLoginViewModel.cs" line="49" column="4" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
     <Watch file="Shared/Network/DataTransfer/TR50Serializer.cs" line="29" offsetX="430" offsetY="420" expression="req" liveUpdate="False" />
   </MonoDevelop.Ide.DebuggingService.PinnedWatches>
-  <MonoDevelop.Ide.ItemProperties.Android AndroidDesignerPreferredDevice="Nexus 4" AndroidDesignerPreferredTheme="Theme.Light" />
+  <MonoDevelop.Ide.ItemProperties.Android AndroidDesignerPreferredDevice="Nexus 4" />
 </Properties>
