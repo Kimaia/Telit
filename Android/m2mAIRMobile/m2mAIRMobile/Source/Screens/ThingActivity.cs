@@ -22,10 +22,7 @@ namespace Android.Source.Screens
 		private ThingViewModel 	viewModel;
 		private Thing 			daThing;
 
-		private TextView thingName;
-		private TextView thingStatus;
-		private TextView thingLastSeen;
-
+		private ThingBriefDescriptionView thingBriefView;
 		private LocationTextView locationView;
 
 		protected override void OnCreate (Bundle bundle)
@@ -37,10 +34,7 @@ namespace Android.Source.Screens
 
 			base.SetNavigationTitle ("Thing");
 
-			thingName = FindViewById<TextView>(m2m.Android.Resource.Id.ThingName);
-			thingStatus = FindViewById<TextView>(m2m.Android.Resource.Id.Status);
-			thingLastSeen = FindViewById<TextView>(m2m.Android.Resource.Id.LastSeen);
-
+			thingBriefView = FindViewById<ThingBriefDescriptionView>(m2m.Android.Resource.Id.ThingBriefDescriptionView);
 			locationView = FindViewById<LocationTextView>(m2m.Android.Resource.Id.LocationTextView);
 
 			Button properties = FindViewById<Button> (m2m.Android.Resource.Id.properties);
@@ -56,15 +50,10 @@ namespace Android.Source.Screens
 		{
 			try{
 				RunOnUiThread(()=>{
-				Logger.Debug ("OnDBLoadThingObject()");
-
-				daThing = viewModel.GetThing ();
-				
-				thingName.Text = daThing.name;
-				thingStatus.Text = (daThing.connected) ? "connected" : "disconnected";
-				thingLastSeen.Text = daThing.lastSeen;
-
-				locationView.SetLocation (daThing);
+					Logger.Debug ("OnDBLoadThingObject()");
+					daThing = viewModel.GetThing ();		
+					thingBriefView.SetThing (daThing);
+					locationView.SetLocation (daThing);
 				});
 			}
 			catch(Exception e){

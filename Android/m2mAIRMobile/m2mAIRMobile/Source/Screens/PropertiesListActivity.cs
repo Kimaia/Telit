@@ -25,9 +25,7 @@ namespace Android.Source.Screens
 
 		private Thing	 daThing;
 
-		private TextView thingName;
-		private TextView thingStatus;
-		private TextView thingLastSeen;
+		private ThingBriefDescriptionView thingBriefView;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -38,9 +36,7 @@ namespace Android.Source.Screens
 
 			base.SetNavigationTitle ("Properties");
 
-			thingName = FindViewById<TextView>(m2m.Android.Resource.Id.ThingName);
-			thingStatus = FindViewById<TextView>(m2m.Android.Resource.Id.Status);
-			thingLastSeen = FindViewById<TextView>(m2m.Android.Resource.Id.LastSeen);
+			thingBriefView = FindViewById<ThingBriefDescriptionView>(m2m.Android.Resource.Id.ThingBriefDescriptionView);
 
 			viewModel = new PropertiesListViewModel ();
 			string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
@@ -58,9 +54,7 @@ namespace Android.Source.Screens
 					Logger.Debug ("OnDBLoadThingObject()");
 
 					daThing = viewModel.GetThing ();
-					thingName.Text = daThing.name;
-					thingStatus.Text = (daThing.connected) ? "connected" : "disconnected";
-					thingLastSeen.Text = daThing.lastSeen;
+					thingBriefView.SetThing (daThing);
 
 					adapter = new PropertiesListAdapter(this, daThing);
 					adapter.PopulatePropertiesListAsync (OnListPopulated, ShowDialog);
