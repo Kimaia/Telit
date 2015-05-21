@@ -66,6 +66,7 @@
     <Compile Include="Source\Screens\PropertiesListAdapter.cs" />
     <Compile Include="Source\CustomViews\LocationTextView.cs" />
     <Compile Include="Source\CustomViews\ThingBriefDescriptionView.cs" />
+    <Compile Include="Source\CustomViews\NavigationBarView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

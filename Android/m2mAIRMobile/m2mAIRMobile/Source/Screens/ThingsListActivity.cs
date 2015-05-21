@@ -15,6 +15,7 @@ namespace Android.Source.Screens
 	public class ThingsListActivity : BaseActivity
 	{
 		private ListView listView;
+		private NavigationBarView navBar; 
 		private ThingsListAdapter adapter;
 
 		protected override void OnCreate(Bundle bundle)
@@ -23,10 +24,10 @@ namespace Android.Source.Screens
 
 			SetContentView(m2m.Android.Resource.Layout.activity_things_list);
 
-			base.SetNavigationTitle ("Things");
-
+			navBar = FindViewById<NavigationBarView>(m2m.Android.Resource.Id.NavigationBarView); 
 			listView = FindViewById<ListView>(m2m.Android.Resource.Id.listView); 
-
+			navBar.SetTitle("Things");
+		
 			adapter = new ThingsListAdapter(this);
 			adapter.PopulateThingsListAsync (Intent.GetStringExtra(Shared.Model.Constants.LOGIN_STATE), OnListPopulated, ShowDialog);
 		}

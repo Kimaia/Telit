@@ -22,6 +22,7 @@ namespace Android.Source.Screens
 		private ThingViewModel 	viewModel;
 		private Thing 			daThing;
 
+		private NavigationBarView navBar; 
 		private ThingBriefDescriptionView thingBriefView;
 		private LocationTextView locationView;
 
@@ -32,10 +33,10 @@ namespace Android.Source.Screens
 			// Set our view from the "main" layout resource
 			SetContentView (m2m.Android.Resource.Layout.activity_thing);
 
-			base.SetNavigationTitle ("Thing");
-
 			thingBriefView = FindViewById<ThingBriefDescriptionView>(m2m.Android.Resource.Id.ThingBriefDescriptionView);
 			locationView = FindViewById<LocationTextView>(m2m.Android.Resource.Id.LocationTextView);
+			navBar = FindViewById<NavigationBarView>(m2m.Android.Resource.Id.NavigationBarView); 
+			navBar.SetTitle("Thing");
 
 			Button properties = FindViewById<Button> (m2m.Android.Resource.Id.properties);
 			properties.Click += (object sender, EventArgs e) => { OnProperties(); };

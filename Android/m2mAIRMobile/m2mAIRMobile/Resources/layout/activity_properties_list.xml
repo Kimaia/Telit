@@ -3,8 +3,10 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
-    <include
-        layout="@layout/nav_bar" />
+    <Android.Source.Screens.NavigationBarView
+        android:id="@+id/NavigationBarView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <Android.Source.Screens.ThingBriefDescriptionView
         android:id="@+id/ThingBriefDescriptionView"
         android:layout_width="match_parent"

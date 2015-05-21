@@ -25,7 +25,8 @@ namespace Android.Source.Screens
 
 		private Thing	 daThing;
 
-		private ThingBriefDescriptionView thingBriefView;
+		private NavigationBarView 			navBar; 
+		private ThingBriefDescriptionView 	thingBriefView;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -34,9 +35,9 @@ namespace Android.Source.Screens
 			// Set our view from the "main" layout resource
 			SetContentView (m2m.Android.Resource.Layout.activity_properties_list);
 
-			base.SetNavigationTitle ("Properties");
-
 			thingBriefView = FindViewById<ThingBriefDescriptionView>(m2m.Android.Resource.Id.ThingBriefDescriptionView);
+			navBar = FindViewById<NavigationBarView>(m2m.Android.Resource.Id.NavigationBarView); 
+			navBar.SetTitle("Properties");
 
 			viewModel = new PropertiesListViewModel ();
 			string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
