@@ -76,10 +76,10 @@
     <Compile Include="Source\Screens\ThingsListActivity.cs" />
     <Compile Include="Source\Screens\PropertiesListActivity.cs" />
     <Compile Include="Source\Screens\PropertiesListAdapter.cs" />
-    <Compile Include="Source\CustomViews\LocationTextView.cs" />
-    <Compile Include="Source\CustomViews\ThingBriefDescriptionView.cs" />
-    <Compile Include="Source\CustomViews\NavigationBarView.cs" />
     <Compile Include="Source\Screens\ThingActivity.cs" />
+    <Compile Include="Source\Views\LocationTextView.cs" />
+    <Compile Include="Source\Views\ThingBriefDescriptionView.cs" />
+    <Compile Include="Source\Views\NavigationBarView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -132,7 +132,7 @@
   <ItemGroup>
     <Folder Include="Source\" />
     <Folder Include="Source\Screens\" />
-    <Folder Include="Source\CustomViews\" />
+    <Folder Include="Source\Views\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

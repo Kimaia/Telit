@@ -8,6 +8,7 @@ using Android.Content.PM;
 
 using Shared.Model;
 using Shared.Utils;
+using Android.Source.Views;
 
 namespace Android.Source.Screens
 {

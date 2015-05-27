@@ -13,6 +13,7 @@ using Android.Widget;
 using Shared.Utils;
 using Shared.Model;
 using Shared.ViewModel;
+using Android.Source.Views;
 
 namespace Android.Source.Screens
 {
