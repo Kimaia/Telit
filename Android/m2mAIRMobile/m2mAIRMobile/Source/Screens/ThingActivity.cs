@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
+using Android.Gms.Maps;
+using Android.Gms.Maps.Model;
 
 using Shared.ViewModel;
 using Shared.Model;
@@ -17,7 +14,7 @@ using Shared.Utils;
 namespace Android.Source.Screens
 {
 	[Activity]			
-	public class ThingActivity : BaseActivity
+	public class ThingActivity : BaseActivity, IOnMapReadyCallback
 	{
 		private ThingViewModel 	viewModel;
 		private Thing 			daThing;
@@ -25,6 +22,8 @@ namespace Android.Source.Screens
 		private NavigationBarView navBar; 
 		private ThingBriefDescriptionView thingBriefView;
 		private LocationTextView locationView;
+
+		private GoogleMap gMap;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -55,11 +54,26 @@ namespace Android.Source.Screens
 					daThing = viewModel.GetThing ();		
 					thingBriefView.SetThing (daThing);
 					locationView.SetLocation (daThing);
+
+					SetUpMap();
 				});
 			}
 			catch(Exception e){
 				ShowDialog ("OnDBLoadThingObject", e.Message, -1, "dismiss");
 			}
+		}
+
+		private void SetUpMap()
+		{
+			if (gMap == null) 
+			{
+				(FragmentManager.FindFragmentById<MapFragment>(m2m.Android.Resource.Id.map)).GetMapAsync(this);
+			}
+		}
+
+		public void OnMapReady(GoogleMap gmap)
+		{
+			gMap = gmap;	
 		}
 
 		#region Event handlers

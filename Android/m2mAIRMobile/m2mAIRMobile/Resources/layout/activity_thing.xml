@@ -15,6 +15,11 @@
         android:id="@+id/LocationTextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <fragment
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <Button
         android:id="@+id/properties"
         android:layout_width="match_parent"

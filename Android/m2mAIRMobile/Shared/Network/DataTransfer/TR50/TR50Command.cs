@@ -26,7 +26,7 @@ namespace Shared.Network.DataTransfer.TR50
 			Params = Prms;
 		}
 
-		public string ToString()
+		public override string ToString()
 		{
 			return "Command: " + Command;
 		}

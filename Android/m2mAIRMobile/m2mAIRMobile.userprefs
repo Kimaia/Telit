@@ -5,34 +5,10 @@
       <File FileName="Shared/ViewModel/ThingsListAdapterViewModel.cs" Line="1" Column="1" />
       <File FileName="m2mAIRMobile/Source/Screens/ThingsListActivity.cs" Line="1" Column="1" />
       <File FileName="m2mAIRMobile/Source/Screens/ThingsListAdapter.cs" Line="1" Column="1" />
-      <File FileName="m2mAIRMobile/Source/Screens/ThingActivity.cs" Line="15" Column="20" />
+      <File FileName="m2mAIRMobile/Source/Screens/ThingActivity.cs" Line="40" Column="21" />
       <File FileName="Shared/ViewModel/RegisterAndLoginViewModel.cs" Line="1" Column="1" />
-      <File FileName="m2mAIRMobile/Source/Screens/RegisterAndLoginActivity.cs" Line="1" Column="1" />
-      <File FileName="m2mAIRMobile/Source/Screens/BaseActivity.cs" Line="1" Column="1" />
-      <File FileName="Shared/ViewModel/LauncherViewModel.cs" Line="1" Column="1" />
-      <File FileName="Shared/ViewModel/ThingViewModel.cs" Line="1" Column="1" />
-      <File FileName="Shared/SAL/M2MAuthenticator.cs" Line="1" Column="1" />
-      <File FileName="m2mAIRMobile/Source/Screens/LauncherActivity.cs" Line="1" Column="1" />
-      <File FileName="Shared/Model/Thing.cs" Line="1" Column="1" />
-      <File FileName="m2mAIRMobile/Source/Screens/PropertiesListAdapter.cs" Line="1" Column="1" />
-      <File FileName="m2mAIRMobile/Source/Screens/PropertiesListActivity.cs" Line="1" Column="1" />
-      <File FileName="m2mAIRMobile/Source/CustomViews/ThingBriefDescriptionView.cs" Line="1" Column="1" />
+      <File FileName="../../../../../../../../private/var/folders/1j/m9jmpd7d7ql00ch7gbk9_mtw0000gp/T/6B39597D-D084-4A61-AE68-47F9D9607915/Android/m2mAIRMobile/m2mAIRMobile/Properties/AndroidManifest.xml" Line="1" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="m2mAIRMobile" expanded="True">
-            <Node name="Android" expanded="True" />
-            <Node name="Shared" expanded="True">
-              <Node name="ViewModel" expanded="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

@@ -27,6 +27,7 @@
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
     <ConsolePause>false</ConsolePause>
+    <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -52,6 +53,18 @@
     <Reference Include="SQLite">
       <HintPath>..\Components\sqlite-net-1.0.8.3\lib\android\SQLite.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.22.1.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="GooglePlayServicesLib">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.22.0.0.2\lib\MonoAndroid41\GooglePlayServicesLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.22.1.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.MediaRouter">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.MediaRouter.22.1.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
@@ -61,12 +74,12 @@
     <Compile Include="Source\Screens\RegisterAndLoginActivity.cs" />
     <Compile Include="Source\Screens\ThingsListAdapter.cs" />
     <Compile Include="Source\Screens\ThingsListActivity.cs" />
-    <Compile Include="Source\Screens\ThingActivity.cs" />
     <Compile Include="Source\Screens\PropertiesListActivity.cs" />
     <Compile Include="Source\Screens\PropertiesListAdapter.cs" />
     <Compile Include="Source\CustomViews\LocationTextView.cs" />
     <Compile Include="Source\CustomViews\ThingBriefDescriptionView.cs" />
     <Compile Include="Source\CustomViews\NavigationBarView.cs" />
+    <Compile Include="Source\Screens\ThingActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -106,6 +119,10 @@
     </XamarinComponentReference>
     <XamarinComponentReference Include="json.net">
       <Version>6.0.8.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="googleplayservices">
+      <Version>22.0.0.0</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
