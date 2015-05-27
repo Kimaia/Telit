@@ -6,7 +6,7 @@ using Shared.DB;
 namespace Shared.Model
 {
 	[Table("Thing")]
-	public class Thing : EntityWithAssociations
+	public class Thing
 	{
 
 		[Unique]
