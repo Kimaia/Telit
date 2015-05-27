@@ -16,7 +16,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\RemoteResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\LauncherViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\RegisterAndLoginViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\UserDetails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Thing.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ThingsListAdapterViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DB\Dao.cs" />

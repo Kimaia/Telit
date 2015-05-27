@@ -24,10 +24,10 @@ namespace Shared.ViewModel
 		}
 
 
-		public async Task PopulateThingsList (string vm_state, OnSuccess onSuccess, OnError onError)
+		public async Task PopulateThingsList (string login_state, OnSuccess onSuccess, OnError onError)
 		{
 			await Task.Run (async () => {
-				await PopulateThingsListAsync (vm_state, onSuccess, onError);
+				await PopulateThingsListAsync (login_state, onSuccess, onError);
 				if (thingsList.Count == 0)
 					onError ("PopulateThingsList()", "Loaded Things List is Empty", 0, "dismiss");
 				else
@@ -39,12 +39,12 @@ namespace Shared.ViewModel
 		}
 			
 
-		public async Task PopulateThingsListAsync (string vm_state, OnSuccess onSuccess, OnError onError)
+		public async Task PopulateThingsListAsync (string login_state, OnSuccess onSuccess, OnError onError)
 		{
-			Logger.Info ("PopulateThingsListAsync(), VM_State:" + vm_state);
+			Logger.Info ("PopulateThingsListAsync(), Login_State:" + login_state);
 			try
 			{
-				switch (GetVMState(vm_state))
+				switch (GetLoginState(login_state))
 				{
 				case Shared.Model.Constants.User_Login_States.Login_State_Register:
 					var command = prepareTR50Command ();
@@ -55,7 +55,7 @@ namespace Shared.ViewModel
 					thingsList = await dataManager.GetDBDataListAsync<Thing> ();
 						break;
 				default:
-					throw new InvalidOperationException("Wrong VM_State:" + vm_state);
+					throw new InvalidOperationException("Wrong VM_State:" + login_state);
 				}
 				Logger.Debug ("PopulateThingsListAsync(), Things count:" + thingsList.Count);
 			}
@@ -66,6 +66,10 @@ namespace Shared.ViewModel
 			}
 		}
 
+		private Shared.Model.Constants.User_Login_States GetLoginState(string vm_state)
+		{
+			return (Shared.Model.Constants.User_Login_States)Enum.Parse(typeof(Shared.Model.Constants.User_Login_States), vm_state);
+		}
 
 
 		private TR50Command prepareTR50Command()
