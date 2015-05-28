@@ -80,6 +80,7 @@
     <Compile Include="Source\Views\LocationTextView.cs" />
     <Compile Include="Source\Views\ThingBriefDescriptionView.cs" />
     <Compile Include="Source\Views\NavigationBarView.cs" />
+    <Compile Include="Source\Views\ThingMapFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
