@@ -31,11 +31,16 @@ namespace Android.Source.Screens
 		public async Task PopulateThingsListAsync(string vm_state, BaseViewModel.OnSuccess onSuccess, BaseViewModel.OnError onError)
         {
 			await viewModel.PopulateThingsList(vm_state, onSuccess, onError);
-        }
+		}
 
 		public Thing GetThingObject(int position)
 		{
 			return viewModel.thingsList[position];
+		}
+
+		public List<Thing> GetThingsList()
+		{
+			return viewModel.thingsList;
 		}
 
 

@@ -89,6 +89,9 @@ namespace m2m.Android.Source.Views
 
 		private bool IsValidCoordinates(Location loc)
 		{
+			if (loc == null)
+				return false;
+
 			if (loc.lat > 90 || loc.lat < -90 || loc.lng > 180 || loc.lng < -180) {
 				Logger.Error ("InvalidGeoCoordinates: Thing Id: " + daThing.id + ", Lat: " + loc.lat + ", Lng: " + loc.lng);
 				return false;

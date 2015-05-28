@@ -53,7 +53,7 @@ namespace Android.Source.Screens
 					daThing = viewModel.GetThing ();		
 					thingBriefView.SetThing (daThing);
 
-					SetMapThingMarker();
+					SetMapFragment();
 				});
 			}
 			catch(Exception e){
@@ -61,7 +61,7 @@ namespace Android.Source.Screens
 			}
 		}
 
-		private void SetMapThingMarker()
+		private void SetMapFragment()
 		{
 			(FragmentManager.FindFragmentById<ThingMapFragment> (m2m.Android.Resource.Id.map)).SetThing(daThing);
 		}

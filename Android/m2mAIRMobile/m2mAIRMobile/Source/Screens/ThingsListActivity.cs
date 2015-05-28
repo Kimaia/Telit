@@ -9,6 +9,7 @@ using Android.Content.PM;
 using Shared.Model;
 using Shared.Utils;
 using Android.Source.Views;
+using m2m.Android.Source.Views;
 
 namespace Android.Source.Screens
 {
@@ -40,12 +41,20 @@ namespace Android.Source.Screens
 				RunOnUiThread(()=>{
 					listView.Adapter = adapter;
 					listView.ItemClick += OnListItemClick;
+
+
+					SetMapFragment();
 				});
 			}
 			catch(Exception e){
 				ShowDialog ("OnListPopulated", e.Message, -1, "dismiss");
 			}
 			
+		}
+
+		private void SetMapFragment()
+		{
+			(FragmentManager.FindFragmentById<MultipleThingsMapFragment> (m2m.Android.Resource.Id.map)).SetThingsList (adapter.GetThingsList ());
 		}
 
 		public void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)

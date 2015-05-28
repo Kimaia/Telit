@@ -7,6 +7,16 @@
         android:id="@+id/NavigationBarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <fragment
+        class="m2m.Android.Source.Views.MultipleThingsMapFragment"
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:drawablePadding="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="5dp" />
     <ListView
         android:id="@+id/listView"
         android:layout_width="fill_parent"
