@@ -74,7 +74,6 @@ namespace Android.Source.Screens
 			Logger.Debug ("OnProperties() Thing key: " + daThing.key);
 
 			StartActivity(intent);
-			Finish ();
 		}
 		#endregion
 	}

@@ -57,7 +57,6 @@ namespace Android.Source.Screens
 			Logger.Debug ("OnListItemClick() Thing key: " + thing.key);
 
 			StartActivity(intent);
-			Finish ();
 		}
 		#endregion
 	}
