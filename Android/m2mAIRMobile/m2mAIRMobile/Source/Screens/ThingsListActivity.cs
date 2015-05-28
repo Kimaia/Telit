@@ -59,12 +59,16 @@ namespace Android.Source.Screens
 
 		public void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)
 		{
-			var intent = new Intent(this, typeof(ThingActivity));
-
+			Logger.Debug ("OnListItemClick()");
 			var thing = adapter.GetThingObject (e.Position);
-			intent.PutExtra (Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER, thing.key);
-			Logger.Debug ("OnListItemClick() Thing key: " + thing.key);
+			InitiateThingActivity (thing);
+		}
 
+		public void InitiateThingActivity(Thing thing)
+		{
+			var intent = new Intent(this, typeof(ThingActivity));
+			intent.PutExtra (Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER, thing.key);
+			Logger.Debug ("InitiateThingActivity() Thing key: " + thing.key);
 			StartActivity(intent);
 		}
 		#endregion

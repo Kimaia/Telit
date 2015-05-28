@@ -125,8 +125,8 @@ namespace m2m.Android.Source.Views
 
 		public View GetInfoWindow (Marker marker)
 		{
-			View view = activity.LayoutInflater.Inflate (m2m.Android.Resource.Layout.map_thing_info_window, null, false);
 			Thing T = markedThings [Convert.ToInt32 (marker.Title)];
+			View view = activity.LayoutInflater.Inflate (m2m.Android.Resource.Layout.map_thing_info_window, null, false);
 			view.FindViewById<TextView> (m2m.Android.Resource.Id.ThingName).Text = T.name;
 			view.FindViewById<TextView>(m2m.Android.Resource.Id.Status).Text = (T.connected) ? "connected" : "disconnected";
 			view.FindViewById<TextView> (m2m.Android.Resource.Id.LastSeen).Text = T.lastSeen;
@@ -140,7 +140,9 @@ namespace m2m.Android.Source.Views
 
 		void GoogleMap.IOnInfoWindowClickListener.OnInfoWindowClick (Marker marker)
 		{
-			return;
+			Logger.Debug ("OnInfoWindowClick()");
+			var thing = markedThings[Convert.ToInt32 (marker.Title)];
+			((ThingsListActivity)activity).InitiateThingActivity (thing);
 		}
 
 		public void OnMapClick (LatLng point)
