@@ -11,7 +11,8 @@
         class="m2m.Android.Source.Views.MultipleThingsMapFragment"
         android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="0px"
+        android:layout_weight="1"
         android:drawablePadding="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="15dp"
@@ -20,6 +21,7 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
         android:cacheColorHint="#FFDAFF7F" />
 </LinearLayout>

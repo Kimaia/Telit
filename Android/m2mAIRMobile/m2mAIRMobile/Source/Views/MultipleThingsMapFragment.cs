@@ -19,7 +19,7 @@ using Android.Source.Screens;
 
 namespace m2m.Android.Source.Views
 {
-	public class MultipleThingsMapFragment : MapFragment, IOnMapReadyCallback, GoogleMap.IInfoWindowAdapter, GoogleMap.IOnInfoWindowClickListener 
+	public class MultipleThingsMapFragment : MapFragment, IOnMapReadyCallback, GoogleMap.IInfoWindowAdapter, GoogleMap.IOnInfoWindowClickListener
 	{
 		private Activity 		activity;
 
@@ -64,11 +64,12 @@ namespace m2m.Android.Source.Views
 		private void SetCameraAndMarkers()
 		{
 			var bounds = SetBounds ();
-			CameraUpdate camera = CameraUpdateFactory.NewLatLngBounds (bounds, 10);
+			CameraUpdate camera = CameraUpdateFactory.NewLatLngBounds (bounds, 0);
 			gMap.MoveCamera (camera);
 
 			SetMarkers ();
 
+			gMap.MapClick += GMap_MapClick;
 			gMap.SetInfoWindowAdapter (this);
 			gMap.SetOnInfoWindowClickListener (this);
 		}
@@ -145,9 +146,9 @@ namespace m2m.Android.Source.Views
 			((ThingsListActivity)activity).InitiateThingActivity (thing);
 		}
 
-		public void OnMapClick (LatLng point)
+		void GMap_MapClick (object sender, GoogleMap.MapClickEventArgs e)
 		{
-			return;
+			((ThingsListActivity)activity).OnMapClick ();
 		}
 
 	}

@@ -71,6 +71,22 @@ namespace Android.Source.Screens
 			Logger.Debug ("InitiateThingActivity() Thing key: " + thing.key);
 			StartActivity(intent);
 		}
+
+		public void OnMapClick ()
+		{
+			if (listView.Visibility == Android.Views.ViewStates.Visible)
+				listView.Visibility = Android.Views.ViewStates.Gone;
+			else
+				listView.Visibility = Android.Views.ViewStates.Visible;
+		}
+
+		public override void OnBackPressed ()
+		{
+			if (listView.Visibility == Android.Views.ViewStates.Gone)
+				listView.Visibility = Android.Views.ViewStates.Visible;
+			else
+				base.OnBackPressed ();
+		}
 		#endregion
 	}
 }
