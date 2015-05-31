@@ -57,7 +57,7 @@ namespace Shared.ModelManager
 			return await dao.Find<TEntity> (predicate);
 		}
 
-		private async Task<Type> LoadItemFromServerAsync<Type> (TR50Command commands)
+		private async Task<Type> LoadItemFromServerAsync<Type> (TR50Command commands) where Type : ITR50IsPayloadEmpty
 		{
 			return await m2mService.RequestItemAsync<Type> (commands);
 		}
@@ -70,7 +70,7 @@ namespace Shared.ModelManager
 		#endregion
 
 		#region list operations
-		public async Task<TR50Response<Type>> LoadM2MDataListAsync<Type>(TR50Command commands) where Type : new()
+		public async Task<TR50Response<Type>> LoadM2MDataListAsync<Type>(TR50Command commands) where Type : ITR50IsPayloadEmpty, new() 
 		{
 			return await m2mService.RequestListAsync<Type> (commands);
 		}
