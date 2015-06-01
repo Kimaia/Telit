@@ -10,7 +10,7 @@ using Shared.ViewModel;
 
 namespace Android.Source.Screens
 {
-	[Activity]			
+	[Activity (ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class RegisterAndLoginActivity : BaseActivity
 	{
 

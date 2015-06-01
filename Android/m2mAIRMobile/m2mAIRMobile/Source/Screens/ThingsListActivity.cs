@@ -13,7 +13,7 @@ using m2m.Android.Source.Views;
 
 namespace Android.Source.Screens
 {
-	[Activity]			
+	[Activity (ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class ThingsListActivity : BaseActivity
 	{
 		private ListView listView;

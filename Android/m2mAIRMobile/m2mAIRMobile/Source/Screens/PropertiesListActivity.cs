@@ -17,7 +17,7 @@ using Android.Source.Views;
 
 namespace Android.Source.Screens
 {
-	[Activity]			
+	[Activity (ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class PropertiesListActivity : BaseActivity
 	{
 		private PropertiesListViewModel 	viewModel;

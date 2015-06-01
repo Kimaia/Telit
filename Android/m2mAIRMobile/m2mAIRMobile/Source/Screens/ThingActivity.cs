@@ -16,7 +16,7 @@ using m2m.Android.Source.Views;
 
 namespace Android.Source.Screens
 {
-	[Activity]			
+	[Activity (ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class ThingActivity : BaseActivity
 	{
 		private ThingViewModel 	viewModel;
