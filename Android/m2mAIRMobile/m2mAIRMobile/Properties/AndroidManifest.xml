@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.kimaia.telit.m2m">
 	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="21" />
-	<application android:label="m2mAIRMobile">
+	<application android:label="m2mAIRMobile" android:icon="@drawable/app_icon">
 		<meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyBa2JIjOkS9amnQnk-gTOiuuZbRIUXcsfg" />
 		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 	</application>

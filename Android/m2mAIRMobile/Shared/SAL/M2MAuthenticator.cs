@@ -40,7 +40,9 @@ namespace Shared.SAL
 
 			#if DEBUG
 			var bodyParams = new Dictionary<string, object> { { "username", "demo@devicewise.com" }, { "password", "demo123" }	};
-//			var bodyParams = new Dictionary<string, object> { { "username", username }, { "password", password }	};
+			#else
+//			var bodyParams = new Dictionary<string, object> { { "username", "demo@devicewise.com" }, { "password", "demo123" }	};
+			var bodyParams = new Dictionary<string, object> { { "username", username }, { "password", password }	};
 			#endif
 
 			var response = await server.PostAsync(AuthPath, null ,bodyParams, token);
