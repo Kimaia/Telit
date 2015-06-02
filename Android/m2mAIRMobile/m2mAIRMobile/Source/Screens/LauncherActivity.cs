@@ -9,7 +9,7 @@ using Shared.Utils;
 
 namespace Android.Source.Screens
 {
-	[Activity (Label = "m2mAIRMobile", MainLauncher = true, Icon = "@drawable/icon")]
+	[Activity (Label = "Mobile", MainLauncher = true, Icon = "@drawable/splash_icon")]
 	public class LauncherActivity : BaseActivity
 	{
 
