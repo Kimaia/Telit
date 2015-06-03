@@ -83,6 +83,7 @@
     <Compile Include="Source\Views\NavigationBarView.cs" />
     <Compile Include="Source\Views\ThingMapFragment.cs" />
     <Compile Include="Source\Views\MultipleThingsMapFragment.cs" />
+    <Compile Include="Source\Screens\PropertyActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -116,6 +117,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\app_icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\app_icon.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\app_icon.png" />
+    <AndroidResource Include="Resources\layout\activity_property.xml" />
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
