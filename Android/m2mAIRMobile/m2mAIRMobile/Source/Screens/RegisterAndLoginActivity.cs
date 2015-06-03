@@ -59,7 +59,6 @@ namespace Android.Source.Screens
 
 		public void RegisterationSuccess(object sender, EventArgs e)
 		{
-			Logger.Debug ("RegistrationSuccess()");
 			var intent = new Intent(this, typeof(ThingsListActivity));
 			intent.PutExtra (Shared.Model.Constants.LOGIN_STATE, 
 								Shared.Model.Constants.User_Login_States.Login_State_Register.ToString());
@@ -69,7 +68,6 @@ namespace Android.Source.Screens
 
 		public void LoginSuccess(object sender, EventArgs e)
 		{
-			Logger.Debug ("LoginSuccess()");
 			var intent = new Intent(this, typeof(ThingsListActivity));
 			intent.PutExtra (Shared.Model.Constants.LOGIN_STATE, 
 								Shared.Model.Constants.User_Login_States.Login_State_LoggedIn.ToString());

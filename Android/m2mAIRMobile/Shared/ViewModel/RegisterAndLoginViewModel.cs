@@ -30,6 +30,11 @@ namespace Shared.ViewModel
 
 		private async Task StartLoginAsync (string username, string password, OnError onError)
 		{
+			#if DEBUG
+			username = "demo@devicewise.com";
+			password = "demo123";
+			#endif
+
 			Logger.Debug ("StartRegistration(),  User: " + username + ", password: " + password);
 			if (!ValidateCredentials(username, password)) {
 				onError ("Invalid UserName", "The username you entered is not a valid email", 0x222D2A, "Ok");
@@ -54,13 +59,12 @@ namespace Shared.ViewModel
 
 		private void AuthenticationSuccess(string username, string password, string sessionId)
 		{
-			Logger.Info ("SessionId: " + sessionId);
 			if (!Settings.Instance.IsRegistered ()) {
 				// first Registration
 				// Set The Register status flag to true
 				// and store the registered user credentials - username, password
 				// store the established Session Id
-				Logger.Debug ("RegistrationSuccess()");
+				Logger.Debug ("RegistrationSuccess(), SessionId: " + sessionId);
 				Settings.Instance.SetRegistered (true);
 				Settings.Instance.SetUserName (username);
 				Settings.Instance.SetPassword (password);
@@ -68,7 +72,7 @@ namespace Shared.ViewModel
 				this.RegisterationSuccess (this, new EventArgs ());
 			} else {
 				// Login autentication - just store the session Id
-				Logger.Debug ("AuthenticationSuccess()");
+				Logger.Debug ("LoginSuccess(), SessionId: " + sessionId);
 				Settings.Instance.SetSessionId (sessionId);
 				this.LoginSuccess (this, new EventArgs ());
 			}
