@@ -40,21 +40,15 @@ namespace Shared.ModelManager
 
 
 		#region item operations
-		public async Task<TEntity> GetDBDataItemAsync<TEntity>(TR50Command commands, Expression<Func<TEntity, bool>> predicate) where TEntity : class, new()
+		public async Task<TEntity> LoadItemFromDBAsync<TEntity> (Expression<Func<TEntity, bool>> predicate) where TEntity : class, new()
 		{
-			// first load from DB
-			var item = await LoadItemFromDBAsync<TEntity> (predicate);
+			var dao = new Dao ();
+			var item = await dao.Find<TEntity> (predicate);
 			if (item == null) {
 				throw new DBFetchException("Failed fetch Item");
 			}
-			Logger.Debug ("GetDataItemAsync(), :" + item.ToString());
+			Logger.Debug ("LoadItemFromDBAsync(), :" + item.ToString());
 			return item;
-		}
-
-		private async Task<TEntity> LoadItemFromDBAsync<TEntity> (Expression<Func<TEntity, bool>> predicate) where TEntity : class, new()
-		{
-			var dao = new Dao ();
-			return await dao.Find<TEntity> (predicate);
 		}
 
 		private async Task<Type> LoadItemFromServerAsync<Type> (TR50Command commands) where Type : ITR50IsPayloadEmpty

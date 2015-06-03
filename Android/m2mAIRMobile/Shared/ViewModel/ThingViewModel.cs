@@ -28,7 +28,7 @@ namespace Shared.ViewModel
 
 				Expression<Func<Thing, bool>> predicate = t => (t.key.Equals(key));
 
-				handledThing = await dataManager.GetDBDataItemAsync<Thing> (prepareTR50Command (key), predicate);
+				handledThing = await dataManager.LoadItemFromDBAsync<Thing> (predicate);
 				Logger.Debug ("GetThingObject(), Thing key:" + key);
 
 				// raise event for completion

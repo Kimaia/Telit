@@ -90,29 +90,5 @@ namespace Shared.Network.DataTransfer.TR50
 		}
 
 		#endregion
-
 	}
-
-	#region tester 
-	public class TR50ConvertTester
-	{
-		public void test()
-		{
-			var comnd = prepareCommand ();
-			TR50Converter serializer = new TR50Converter ();
-			var str = serializer.ConvertRequest (comnd);
-			Logger.Debug ("converted JSON():\n" + str);
-		}
-
-		public TR50Command prepareCommand()
-		{
-			CommandParams prms = new CommandParams ();
-			prms.Params = new Dictionary<string,object>();
-			prms.Params.Add("thingKey", "mything");
-			prms.Params.Add("key", "myalarm");
-			prms.Params.Add("last", "24h");
-			return new TR50Command (M2MCommands.CommandType.Alarms, prms);
-		}
-	}
-	#endregion
 }

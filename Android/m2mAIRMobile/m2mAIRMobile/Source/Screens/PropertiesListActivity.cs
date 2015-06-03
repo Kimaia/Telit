@@ -14,6 +14,7 @@ using Shared.Utils;
 using Shared.Model;
 using Shared.ViewModel;
 using Android.Source.Views;
+using m2m.Android.Source.Screens;
 
 namespace Android.Source.Screens
 {
@@ -24,7 +25,7 @@ namespace Android.Source.Screens
 		private PropertiesListAdapter		adapter;
 		private ListView					listView;
 
-		private Thing	 daThing;
+		private Thing	 					daThing;
 
 		private NavigationBarView 			navBar; 
 		private ThingBriefDescriptionView 	thingBriefView;
@@ -82,14 +83,14 @@ namespace Android.Source.Screens
 
 		public void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)
 		{
-//			var intent = new Intent(this, typeof(ThingActivity));
-//
-//			var thing = adapter.GetThingObject (e.Position);
-//			intent.PutExtra (Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER, thing.key);
-//			Logger.Debug ("OnListItemClick() Thing key: " + thing.key);
-//
-//			StartActivity(intent);
-//			Finish ();
+			var intent = new Intent(this, typeof(PropertyActivity));
+			intent.PutExtra (Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER, daThing.key);
+
+			Property property = adapter.GetPropertyObject(e.Position);
+			intent.PutExtra (Shared.Model.Constants.DATA_MODEL_PROPERTY_NAME_IDENTIFIER, property.name);
+
+			Logger.Debug ("OnListItemClick() Thing key: " + daThing.key + ", property name: " + property.name);
+			StartActivity(intent);
 		}
 		#endregion
 	}

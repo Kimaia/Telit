@@ -54,7 +54,23 @@ namespace Shared.Network.DataTransfer.TR50
 
 		public bool IsPayloadEmpty ()
 		{
-			return true;
+			return (key != null);
+		}
+	}
+
+	public class TR50PropertyHistoryParams : ITR50IsPayloadEmpty
+	{
+		public class PropertyValue
+		{
+			int 	value;
+			string 	ts;
+		}
+
+		public List<PropertyValue>	values;
+
+		public bool IsPayloadEmpty ()
+		{
+			return (values.Count > 0);
 		}
 	}
 }

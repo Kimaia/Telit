@@ -39,6 +39,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\PropertiesListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\PropertiesListAdapterViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Property.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\PropertyViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DB\" />
