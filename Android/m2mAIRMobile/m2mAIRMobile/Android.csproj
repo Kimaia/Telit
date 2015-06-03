@@ -37,6 +37,7 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
+    <AndroidSupportedAbis>armeabi;armeabi-v7a;x86;arm64-v8a;x86_64</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -106,10 +107,15 @@
     <AndroidResource Include="Resources\layout\activity_login.xml" />
     <AndroidResource Include="Resources\layout\activity_properties_list.xml" />
     <AndroidResource Include="Resources\layout\list_cell_Property.xml" />
-    <AndroidResource Include="Resources\layout\thing_brief_description.xml" />
     <AndroidResource Include="Resources\layout\divider.xml" />
     <AndroidResource Include="Resources\layout\map_thing_layout.xml" />
     <AndroidResource Include="Resources\layout\map_thing_info_window.xml" />
+    <AndroidResource Include="Resources\layout\thing_brief_description.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\app_icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\app_icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\app_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\app_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\app_icon.png" />
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
