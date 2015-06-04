@@ -1,0 +1,4 @@
+DataSmoothing.MainActivity, DataSmoothing;md51d2b45a0688620e8cebd51292b2b8080.MainActivity
+DataSmoothing.MainActivity, DataSmoothing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md51d2b45a0688620e8cebd51292b2b8080.MainActivity
+DataSmoothing.MainActivity;md51d2b45a0688620e8cebd51292b2b8080.MainActivity
+datasmoothing.MainActivity;md51d2b45a0688620e8cebd51292b2b8080.MainActivity

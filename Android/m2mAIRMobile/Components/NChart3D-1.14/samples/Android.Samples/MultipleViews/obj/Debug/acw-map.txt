@@ -1,0 +1,4 @@
+MultipleViews.MainActivity, MultipleViews;md539ad901dffc539f92f6e697d9a92e554.MainActivity
+MultipleViews.MainActivity, MultipleViews, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md539ad901dffc539f92f6e697d9a92e554.MainActivity
+MultipleViews.MainActivity;md539ad901dffc539f92f6e697d9a92e554.MainActivity
+multipleviews.MainActivity;md539ad901dffc539f92f6e697d9a92e554.MainActivity

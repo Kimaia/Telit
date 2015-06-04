@@ -1,0 +1,2 @@
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/FloatingColor/bin/Debug/FloatingColor.dll
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/lib/android/NChart3D.dll

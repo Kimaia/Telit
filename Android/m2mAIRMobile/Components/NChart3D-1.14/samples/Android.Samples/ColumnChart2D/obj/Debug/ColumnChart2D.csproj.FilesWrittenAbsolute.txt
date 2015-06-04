@@ -1,0 +1,14 @@
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/ColumnChart2D/obj/Debug/MonoAndroid,Version=v4.4.AssemblyAttribute.cs
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/ColumnChart2D/bin/Debug/ColumnChart2D.dll.mdb
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/ColumnChart2D/bin/Debug/ColumnChart2D.dll
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/ColumnChart2D/bin/Debug/ColumnChart2D.ColumnChart2D.apk
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/ColumnChart2D/obj/Debug/android/bin/ColumnChart2D.ColumnChart2D.apk
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/ColumnChart2D/obj/Debug/res/layout/main.xml
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/ColumnChart2D/obj/Debug/res/values/strings.xml
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/ColumnChart2D/obj/Debug/res/drawable/icon.png
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/ColumnChart2D/obj/Debug/R.cs.flag
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/ColumnChart2D/bin/Debug/ColumnChart2D.ColumnChart2D-Signed.apk
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/ColumnChart2D/obj/Debug/uploadflags.txt
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/ColumnChart2D/obj/Debug/ColumnChart2D.dll
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/ColumnChart2D/obj/Debug/ColumnChart2D.dll.mdb
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/ColumnChart2D/bin/Debug/NChart3D.dll

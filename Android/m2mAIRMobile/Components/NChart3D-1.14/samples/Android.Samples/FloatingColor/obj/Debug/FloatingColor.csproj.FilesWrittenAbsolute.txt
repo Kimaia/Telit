@@ -1,0 +1,14 @@
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/FloatingColor/obj/Debug/MonoAndroid,Version=v4.4.AssemblyAttribute.cs
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/FloatingColor/bin/Debug/FloatingColor.dll.mdb
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/FloatingColor/bin/Debug/FloatingColor.dll
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/FloatingColor/bin/Debug/FloatingColor.FloatingColor.apk
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/FloatingColor/obj/Debug/android/bin/FloatingColor.FloatingColor.apk
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/FloatingColor/obj/Debug/res/layout/main.xml
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/FloatingColor/obj/Debug/res/values/strings.xml
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/FloatingColor/obj/Debug/res/drawable/icon.png
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/FloatingColor/obj/Debug/R.cs.flag
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/FloatingColor/bin/Debug/FloatingColor.FloatingColor-Signed.apk
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/FloatingColor/obj/Debug/uploadflags.txt
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/FloatingColor/obj/Debug/FloatingColor.dll
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/FloatingColor/obj/Debug/FloatingColor.dll.mdb
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/FloatingColor/bin/Debug/NChart3D.dll

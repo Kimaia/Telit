@@ -1,0 +1,4 @@
+ColumnChart2D.MainActivity, ColumnChart2D;md57657a9b6a6c48d264fc990fb3b7a7ae7.MainActivity
+ColumnChart2D.MainActivity, ColumnChart2D, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md57657a9b6a6c48d264fc990fb3b7a7ae7.MainActivity
+ColumnChart2D.MainActivity;md57657a9b6a6c48d264fc990fb3b7a7ae7.MainActivity
+columnchart2d.MainActivity;md57657a9b6a6c48d264fc990fb3b7a7ae7.MainActivity

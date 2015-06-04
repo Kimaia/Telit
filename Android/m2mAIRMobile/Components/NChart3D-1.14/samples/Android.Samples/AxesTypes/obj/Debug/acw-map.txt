@@ -1,0 +1,4 @@
+AxesTypes.MainActivity, AxesTypes;md5264cedd09e4c8b41e390e5e0d27d1641.MainActivity
+AxesTypes.MainActivity, AxesTypes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5264cedd09e4c8b41e390e5e0d27d1641.MainActivity
+AxesTypes.MainActivity;md5264cedd09e4c8b41e390e5e0d27d1641.MainActivity
+axestypes.MainActivity;md5264cedd09e4c8b41e390e5e0d27d1641.MainActivity

@@ -1,0 +1,4 @@
+MultipleCharts.MainActivity, MultipleCharts;md5620b2f86a9c90bc1ce4c4b18cc246c05.MainActivity
+MultipleCharts.MainActivity, MultipleCharts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5620b2f86a9c90bc1ce4c4b18cc246c05.MainActivity
+MultipleCharts.MainActivity;md5620b2f86a9c90bc1ce4c4b18cc246c05.MainActivity
+multiplecharts.MainActivity;md5620b2f86a9c90bc1ce4c4b18cc246c05.MainActivity

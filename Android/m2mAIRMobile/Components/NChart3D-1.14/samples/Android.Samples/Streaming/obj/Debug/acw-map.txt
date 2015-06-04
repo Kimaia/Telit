@@ -1,0 +1,4 @@
+Streaming.MainActivity, Streaming;md509251be84838ed119d0dab86b5e0ccaa.MainActivity
+Streaming.MainActivity, Streaming, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md509251be84838ed119d0dab86b5e0ccaa.MainActivity
+Streaming.MainActivity;md509251be84838ed119d0dab86b5e0ccaa.MainActivity
+streaming.MainActivity;md509251be84838ed119d0dab86b5e0ccaa.MainActivity

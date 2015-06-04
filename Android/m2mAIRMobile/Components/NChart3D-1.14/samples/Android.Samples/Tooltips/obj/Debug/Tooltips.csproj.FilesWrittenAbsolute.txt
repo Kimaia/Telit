@@ -1,0 +1,14 @@
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/Tooltips/obj/Debug/MonoAndroid,Version=v4.4.AssemblyAttribute.cs
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/Tooltips/bin/Debug/Tooltips.dll.mdb
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/Tooltips/bin/Debug/Tooltips.dll
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/Tooltips/bin/Debug/Tooltips.Tooltips.apk
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/Tooltips/obj/Debug/android/bin/Tooltips.Tooltips.apk
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/Tooltips/obj/Debug/res/layout/main.xml
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/Tooltips/obj/Debug/res/values/strings.xml
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/Tooltips/obj/Debug/res/drawable/icon.png
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/Tooltips/obj/Debug/R.cs.flag
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/Tooltips/bin/Debug/Tooltips.Tooltips-Signed.apk
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/Tooltips/obj/Debug/uploadflags.txt
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/Tooltips/obj/Debug/Tooltips.dll
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/Tooltips/obj/Debug/Tooltips.dll.mdb
+/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/Components/NChart3D-1.14/samples/Android.Samples/Tooltips/bin/Debug/NChart3D.dll

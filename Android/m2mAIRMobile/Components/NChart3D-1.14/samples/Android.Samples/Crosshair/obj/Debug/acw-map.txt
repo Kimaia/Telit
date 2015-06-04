@@ -1,0 +1,4 @@
+Crosshair.MainActivity, Crosshair;md59229d7a0dd4f2fe0aafbddc061386709.MainActivity
+Crosshair.MainActivity, Crosshair, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md59229d7a0dd4f2fe0aafbddc061386709.MainActivity
+Crosshair.MainActivity;md59229d7a0dd4f2fe0aafbddc061386709.MainActivity
+crosshair.MainActivity;md59229d7a0dd4f2fe0aafbddc061386709.MainActivity

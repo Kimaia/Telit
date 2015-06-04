@@ -1,0 +1,4 @@
+FloatingColor.MainActivity, FloatingColor;md59afb182b026bd01187441571485899c4.MainActivity
+FloatingColor.MainActivity, FloatingColor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md59afb182b026bd01187441571485899c4.MainActivity
+FloatingColor.MainActivity;md59afb182b026bd01187441571485899c4.MainActivity
+floatingcolor.MainActivity;md59afb182b026bd01187441571485899c4.MainActivity

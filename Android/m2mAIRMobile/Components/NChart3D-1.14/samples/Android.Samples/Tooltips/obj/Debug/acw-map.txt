@@ -1,0 +1,4 @@
+Tooltips.MainActivity, Tooltips;md515ff3835b5172702943c24b3cb56edf8.MainActivity
+Tooltips.MainActivity, Tooltips, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md515ff3835b5172702943c24b3cb56edf8.MainActivity
+Tooltips.MainActivity;md515ff3835b5172702943c24b3cb56edf8.MainActivity
+tooltips.MainActivity;md515ff3835b5172702943c24b3cb56edf8.MainActivity

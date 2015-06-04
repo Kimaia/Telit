@@ -1,0 +1,4 @@
+SecondaryAxis.MainActivity, SecondaryAxis;md5e8d59294a1eba115706b4d0c51730c5c.MainActivity
+SecondaryAxis.MainActivity, SecondaryAxis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5e8d59294a1eba115706b4d0c51730c5c.MainActivity
+SecondaryAxis.MainActivity;md5e8d59294a1eba115706b4d0c51730c5c.MainActivity
+secondaryaxis.MainActivity;md5e8d59294a1eba115706b4d0c51730c5c.MainActivity
