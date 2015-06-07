@@ -63,11 +63,11 @@
     <Reference Include="Xamarin.Android.Support.v7.MediaRouter">
       <HintPath>..\packages\Xamarin.Android.Support.v7.MediaRouter.22.1.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
     </Reference>
-    <Reference Include="SQLite">
-      <HintPath>..\Components\sqlite-net-1.0.8.3\lib\android\SQLite.dll</HintPath>
-    </Reference>
     <Reference Include="NChart3D">
       <HintPath>..\Components\NChart3D-1.14\lib\android\NChart3D.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLite">
+      <HintPath>..\Components\sqlite-net-1.0.8.3\lib\android\SQLite.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +87,7 @@
     <Compile Include="Source\Views\ThingMapFragment.cs" />
     <Compile Include="Source\Views\MultipleThingsMapFragment.cs" />
     <Compile Include="Source\Screens\PropertyActivity.cs" />
+    <Compile Include="Source\Views\ChartsView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -121,6 +122,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\app_icon.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\app_icon.png" />
     <AndroidResource Include="Resources\layout\activity_property.xml" />
+    <AndroidResource Include="Resources\layout\charts_view.xml" />
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

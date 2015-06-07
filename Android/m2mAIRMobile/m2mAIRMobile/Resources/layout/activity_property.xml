@@ -11,8 +11,8 @@
         android:id="@+id/ThingBriefDescriptionView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <com.nulana.NChart.NChartView
-        android:id="@+id/nchartView"
-        android:layout_height="fill_parent"
-        android:layout_width="fill_parent" />
+    <Android.Source.Views.ChartsView
+        android:id="@+id/chartsView"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
 </LinearLayout>
