@@ -70,7 +70,7 @@ namespace m2m.Android.Source.Screens
 				});
 			}
 			catch(Exception e){
-				ShowDialog ("OnDBLoadThingObject", e.Message, -1, "dismiss");
+				ShowDialog ("OnDBLoadThingObject", e.Message);
 			}
 		}
 

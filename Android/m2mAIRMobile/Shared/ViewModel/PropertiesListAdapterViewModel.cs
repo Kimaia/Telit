@@ -31,7 +31,7 @@ namespace Shared.ViewModel
 			await Task.Run (async () => {
 				await PopulatePropertiesListAsync (onSuccess, onError);
 				if (propertiesList.Count == 0)
-					onError ("PopulatePropertiesList()", "Loaded Properties List is Empty", 0, "dismiss");
+					onError ("PopulatePropertiesList()", "Loaded Properties List is Empty");
 				else
 					onSuccess();
 			});
@@ -49,8 +49,7 @@ namespace Shared.ViewModel
 			}
 			catch (Exception e)
 			{
-				Logger.Error ("Failed PopulatePropertiesListAsync()", e);
-				onError("PopulatePropertiesListAsync() failed", e.Message, 0, "dismiss");
+				onError("Failed Get Properties list", e.Message);
 			}
 		}
 

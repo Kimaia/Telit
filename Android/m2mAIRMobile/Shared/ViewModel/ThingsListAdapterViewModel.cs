@@ -29,7 +29,7 @@ namespace Shared.ViewModel
 			await Task.Run (async () => {
 				await PopulateThingsListAsync (login_state, onSuccess, onError);
 				if (thingsList.Count == 0)
-					onError ("PopulateThingsList()", "Loaded Things List is Empty", 0, "dismiss");
+					onError ("Loaded Things List is Empty", null);
 				else
 				{
 					await dataManager.InsertListIntoDBAsync<Thing>(thingsList);
@@ -61,8 +61,7 @@ namespace Shared.ViewModel
 			}
 			catch (Exception e)
 			{
-				Logger.Error ("Failed PopulateThingsListAsync()", e);
-				onError("PopulateThingsListAsync() failed", e.Message, 0, "dismiss");
+				onError("Failed get Things list", e.Message);
 			}
 		}
 

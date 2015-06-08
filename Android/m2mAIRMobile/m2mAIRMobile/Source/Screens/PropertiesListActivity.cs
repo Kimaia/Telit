@@ -61,7 +61,7 @@ namespace Android.Source.Screens
 				});
 			}
 			catch(Exception e){
-				ShowDialog ("OnDBLoadThingObject", e.Message, -1, "dismiss");
+				ShowDialog ("OnDBLoadThingObject", e.Message);
 			}
 		}
 
@@ -74,7 +74,7 @@ namespace Android.Source.Screens
 				});
 			}
 			catch(Exception e){
-				ShowDialog ("OnListPopulated", e.Message, -1, "dismiss");
+				ShowDialog ("OnListPopulated", e.Message);
 			}
 		}
 

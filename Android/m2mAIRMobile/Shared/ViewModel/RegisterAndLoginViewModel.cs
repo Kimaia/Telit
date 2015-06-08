@@ -37,7 +37,7 @@ namespace Shared.ViewModel
 
 			Logger.Debug ("StartRegistration(),  User: " + username + ", password: " + password);
 			if (!ValidateCredentials(username, password)) {
-				onError ("Invalid UserName", "The username you entered is not a valid email", 0x222D2A, "Ok");
+				onError ("Invalid UserName", "The username you entered is not a valid email");
 				return;
 			}
 			else 
@@ -48,11 +48,11 @@ namespace Shared.ViewModel
 					if (response.IsOkCode())
 						AuthenticationSuccess(username, password, response.Content);
 					else
-						onError (response.StatusMessage, response.Content, (int)response.HttpStatusCode, "dismiss");
+						onError (response.StatusMessage, response.Content);
 				}
-				catch (Exception e) {
-					Logger.Error ("Failed to Login", e);
-					onError ("StartLoginAsync failed", e.Message, 0, "dismiss");
+				catch (Exception e) 
+				{
+					onError ("Failed Login", e.Message);
 				}
 			}
 		}

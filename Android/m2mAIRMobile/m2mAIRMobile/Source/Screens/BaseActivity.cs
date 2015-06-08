@@ -94,18 +94,18 @@ namespace Android.Source.Screens
 				});
 		}
 
-		public void OpenErrorDialog(string msg, int errno)
+		public void OpenErrorDialog(string title, string msg)
 		{
 			RunOnUiThread (() => {
 				StopLoadingSpinner();
-				Toast.MakeText (this, msg, ToastLength.Long).Show ();
+				Toast.MakeText (this, title, ToastLength.Long).Show ();
 			});
 		}
 
-		protected void ShowDialog(string title, string message, int errorCode, string dismiss)
+		protected void ShowDialog(string title, string message)
 		{
-			Logger.Error ("OnEror() Dialog: " + message + ", error dode: " + errorCode);
-			OpenErrorDialog (message, errorCode);
+			Logger.Error("Exception cought: \n" + title + ",  " + message);
+			OpenErrorDialog (title, message);
 		}
 
 		public void PerformOnMainThread(Action action)

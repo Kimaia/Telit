@@ -25,14 +25,17 @@ namespace Shared.ViewModel
 		public void GetThingObject (string key, BaseViewModel.OnSuccess onSuccess, BaseViewModel.OnError onError)
 		{
 			Task.Run (async () => {
-
-				Expression<Func<Thing, bool>> predicate = t => (t.key.Equals(key));
-
-				handledThing = await dataManager.LoadItemFromDBAsync<Thing> (predicate);
-				Logger.Debug ("GetThingObject(), Thing key:" + key);
-
-				// raise event for completion
-				onSuccess();
+				try 
+				{
+					Logger.Debug ("GetThingObject(), Thing key:" + key);
+					Expression<Func<Thing, bool>> predicate = t => (t.key.Equals(key));
+					handledThing = await dataManager.LoadItemFromDBAsync<Thing> (predicate);
+					onSuccess();
+				}
+				catch (Exception e)
+				{
+					onError("Failed Get Thing Object", e.Message);
+				}
 			});
 		}
 

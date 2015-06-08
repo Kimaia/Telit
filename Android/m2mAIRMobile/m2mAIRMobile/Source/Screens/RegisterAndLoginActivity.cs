@@ -28,33 +28,22 @@ namespace Android.Source.Screens
 			viewModel.RegisterationSuccess += new EventHandler (RegisterationSuccess);
 			viewModel.LoginSuccess += new EventHandler (LoginSuccess);
 
-			// Set our view from the "main" layout resource
 			SetContentView (m2m.Android.Resource.Layout.activity_login);
 
 			username = FindViewById<EditText>(m2m.Android.Resource.Id.username);
 			password = FindViewById<EditText>(m2m.Android.Resource.Id.password);
 			Button login = FindViewById<Button> (m2m.Android.Resource.Id.login);
 
-			// When the user clicks login, send a REST authentication request to the m2m server
 			login.Click += (object sender, EventArgs e) => { OnLogin(); };
 		}
 		#endregion
 
 
-		#region Callbacks
-		private void OnError(string title, string message, int errorCode, string dismiss)
-		{
-			StopLoadingSpinner ();
-			Logger.Error ("OnEror() Dialog: " + message + ", error dode: " + errorCode);
-			OpenErrorDialog (message, errorCode);
-		}
-		#endregion
-
 		#region Event handlers
 		private void OnLogin()
 		{
 			StartLoadingSpinner("Authenticating user credentials.");
-			viewModel.StartLogin(username.Text, password.Text, OnError); 
+			viewModel.StartLogin(username.Text, password.Text, ShowDialog); 
 		}
 
 		public void RegisterationSuccess(object sender, EventArgs e)

@@ -13,6 +13,11 @@ namespace Shared.Network.DataTransfer.TR50
 		public TR50ConversionException(string message) : base(message) {}
 	}
 
+	public class TR50ResponseFailureException : Exception
+	{
+		public TR50ResponseFailureException(string message) : base(message) {}
+	}
+
 	public class TR50Converter
 	{
 		#region ConvertRequest
@@ -78,17 +83,28 @@ namespace Shared.Network.DataTransfer.TR50
 				var Response = new TR50Response<Type> ();
 				JToken responseToken = JToken.Parse(m2mresponse);
 				JObject responseObject = responseToken ["1"].Value<JObject> ();
-				Response = responseObject.ToObject<TR50Response<Type>> ();
-				if (Response == null || Response.Params == null)
-					throw new TR50ConversionException ("Failed TR50 response convertion :" + m2mresponse);
-				return Response;
+
+				JToken successToken = responseObject.First;
+				Boolean isSuccess = successToken.ToObject<Boolean>();
+				if (isSuccess)
+				{
+					Response = responseObject.ToObject<TR50Response<Type>> ();
+					if (Response == null || Response.Params == null)
+						throw new TR50ConversionException ("Failed TR50 response convertion :" + m2mresponse);
+					return Response;
+				}
+				else
+				{
+//					var errorCodes = responseObject["errorCodes"].ToObject<List<int>> ();
+					var errorMessages = responseObject["errorMessages"].ToObject<List<string>> ();
+					throw new TR50ResponseFailureException ("TR50 Response Failed :" + errorMessages.ToString());
+				}
 			}
 			catch (Exception e) 
 			{
 				throw new TR50ConversionException ("Failed TR50 response convertion :" + e.Message + ", raw response: " + m2mresponse);
 			}
 		}
-
 		#endregion
 	}
 }

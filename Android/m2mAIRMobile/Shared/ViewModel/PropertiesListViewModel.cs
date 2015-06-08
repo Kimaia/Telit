@@ -26,14 +26,17 @@ namespace Shared.ViewModel
 		public void GetThingObject (string key, BaseViewModel.OnSuccess onSuccess, BaseViewModel.OnError onError)
 		{
 			Task.Run (async () => {
-
-				Expression<Func<Thing, bool>> predicate = t => (t.key.Equals(key));
-
-				daThing = await dataManager.LoadItemFromDBAsync<Thing> (predicate);
-				Logger.Debug ("GetThingObject(), Thing key:" + key);
-
-				// raise event for completion
-				onSuccess();
+				try 
+				{
+					Logger.Debug ("GetThingObject(), Thing key:" + key);
+					Expression<Func<Thing, bool>> predicate = t => (t.key.Equals(key));
+					daThing = await dataManager.LoadItemFromDBAsync<Thing> (predicate);
+					onSuccess();
+				}
+				catch (Exception e)
+				{
+					onError("Failed Get Thing Object", e.Message);
+				}
 			});
 		}
 
@@ -48,13 +51,11 @@ namespace Shared.ViewModel
 				try 
 				{
 					var propertyHistory = await dataManager.LoadM2MDataListAsync<TR50PropertyHistoryParams> (prepareTR50Command (propertyName));
-					Logger.Debug ("GetPropertyHistory(), Property Name:" + propertyHistory.Params.values.ToString());
-
 					onSuccess();
 				}
 				catch (Exception e)
 				{
-					onError("Failed Get Property History", e.Message, 0, null);
+					onError("Failed Get Property History records", e.Message);
 				}
 			});
 		}

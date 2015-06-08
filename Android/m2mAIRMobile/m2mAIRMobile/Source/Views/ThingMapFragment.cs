@@ -122,7 +122,7 @@ namespace m2m.Android.Source.Views
 			CameraUpdate camera = CameraUpdateFactory.NewLatLng (new LatLng (0, 0));
 			gMap.MoveCamera (camera);
 
-			((BaseActivity)activity).OpenErrorDialog("Location UnAvailable", 0);
+			((BaseActivity)activity).OpenErrorDialog("Location UnAvailable", null);
 		}
 
 		public View GetInfoWindow (Marker marker)
