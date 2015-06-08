@@ -69,11 +69,7 @@ namespace Android.Source.Views
 		// Get points for the series.
 		public NChartPoint[] Points (NChartSeries series)
 		{
-			Random random = new Random ();
-			NChartPoint[] result = new NChartPoint[11];
-			for (int i = 0; i <= 10; ++i)
-				result [i] = new NChartPoint (NChartPointState.PointStateAlignedToXWithXY (i, random.Next (30) + 1), series);
-			return result;
+			return PointsStub (series);
 		}
 		// Get name of the series.
 		public string Name (NChartSeries series)
@@ -85,6 +81,17 @@ namespace Android.Source.Views
 		{
 			return null;
 		}
+
+		#if DEBUG
+		private NChartPoint[] PointsStub (NChartSeries series)
+		{
+			Random random = new Random ();
+			NChartPoint[] result = new NChartPoint[11];
+			for (int i = 0; i <= 10; ++i)
+				result [i] = new NChartPoint (NChartPointState.PointStateAlignedToXWithXY (i, random.Next (30) + 1), series);
+			return result;
+		}
+		#endif
 	}
 }
 

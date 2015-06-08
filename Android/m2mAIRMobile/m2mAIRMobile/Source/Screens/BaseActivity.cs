@@ -97,6 +97,7 @@ namespace Android.Source.Screens
 		public void OpenErrorDialog(string msg, int errno)
 		{
 			RunOnUiThread (() => {
+				StopLoadingSpinner();
 				Toast.MakeText (this, msg, ToastLength.Long).Show ();
 			});
 		}

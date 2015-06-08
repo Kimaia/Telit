@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 
 using Shared.Utils;
 using Shared.Model;
 using Shared.ViewModel;
 using Android.Source.Views;
-using m2m.Android.Source.Screens;
+using Android.Views;
 
 namespace Android.Source.Screens
 {
@@ -29,6 +23,7 @@ namespace Android.Source.Screens
 
 		private NavigationBarView 			navBar; 
 		private ThingBriefDescriptionView 	thingBriefView;
+		private ChartsView 					chartsView;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -41,6 +36,9 @@ namespace Android.Source.Screens
 			navBar = FindViewById<NavigationBarView>(m2m.Android.Resource.Id.NavigationBarView); 
 			navBar.SetTitle("Properties");
 
+			chartsView = FindViewById<ChartsView> (m2m.Android.Resource.Id.chartsView);
+			chartsView.LoadChartView ();
+
 			viewModel = new PropertiesListViewModel ();
 			string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
 			viewModel.GetThingObject (tkey, OnDBLoadThingObject, ShowDialog);
@@ -49,7 +47,6 @@ namespace Android.Source.Screens
 		}
 
 
-		#region Callbacks / Event handlers
 		public void OnDBLoadThingObject()
 		{
 			try{
@@ -73,7 +70,7 @@ namespace Android.Source.Screens
 			try{
 				RunOnUiThread(()=>{
 					listView.Adapter = adapter;
-					listView.ItemClick += OnListItemClick;
+//					listView.ItemClick += onCheckBoxClick;
 				});
 			}
 			catch(Exception e){
@@ -81,16 +78,26 @@ namespace Android.Source.Screens
 			}
 		}
 
-		public void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)
+		#region checkbox and chart
+		public void onCheckBoxClick(object sender, EventArgs e)
 		{
-			var intent = new Intent(this, typeof(PropertyActivity));
-			intent.PutExtra (Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER, daThing.key);
+			CheckBox cb = sender as CheckBox;
+			string propertyName = cb.Text;
+			bool checkedd = cb.Checked;
+			Logger.Debug ("onCheckBoxClick() property name: " + propertyName);
 
-			Property property = adapter.GetPropertyObject(e.Position);
-			intent.PutExtra (Shared.Model.Constants.DATA_MODEL_PROPERTY_NAME_IDENTIFIER, property.name);
+			viewModel.GetPropertyHistory(propertyName, OnPropertyHistory, ShowDialog); 
+			StartLoadingSpinner("Collecting Propertie's records.");
+		}
 
-			Logger.Debug ("OnListItemClick() Thing key: " + daThing.key + ", property name: " + property.name);
-			StartActivity(intent);
+		private void OnPropertyHistory()
+		{
+			StopLoadingSpinner ();
+
+			Logger.Debug ("OnPropertyHistory()");
+
+			// update chart
+			chartsView.Update();
 		}
 		#endregion
 	}

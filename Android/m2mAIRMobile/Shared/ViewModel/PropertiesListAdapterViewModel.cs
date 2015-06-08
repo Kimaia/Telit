@@ -14,9 +14,9 @@ namespace Shared.ViewModel
 {
 	public class PropertiesListAdapterViewModel : BaseViewModel
 	{
-		private ModelServicesManager 	dataManager;
-		private Thing 					daThing;
-		public Dictionary<string, Property> 			propertiesList { get; private set; }
+		private ModelServicesManager 			dataManager;
+		private Thing 							daThing;
+		public Dictionary<string, Property> 	propertiesList { get; private set; }
 
 		public PropertiesListAdapterViewModel (Thing thing)
 		{
@@ -33,10 +33,7 @@ namespace Shared.ViewModel
 				if (propertiesList.Count == 0)
 					onError ("PopulatePropertiesList()", "Loaded Properties List is Empty", 0, "dismiss");
 				else
-				{
-//					await dataManager.InsertListIntoDBAsync<Property>(propertiesList);
 					onSuccess();
-				}
 			});
 		}
 
@@ -56,8 +53,6 @@ namespace Shared.ViewModel
 				onError("PopulatePropertiesListAsync() failed", e.Message, 0, "dismiss");
 			}
 		}
-
-
 
 		private TR50Command prepareTR50Command()
 		{

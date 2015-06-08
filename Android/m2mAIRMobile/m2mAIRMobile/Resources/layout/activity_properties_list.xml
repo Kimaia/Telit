@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <Android.Source.Views.NavigationBarView
         android:id="@+id/NavigationBarView"
@@ -11,9 +11,15 @@
         android:id="@+id/ThingBriefDescriptionView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <Android.Source.Views.ChartsView
+        android:id="@+id/chartsView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp" />
     <ListView
         android:id="@+id/listView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:cacheColorHint="#FFDAFF7F" />
 </LinearLayout>

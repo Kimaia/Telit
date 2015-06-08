@@ -55,15 +55,30 @@ namespace Android.Source.Screens
 			throw new NotImplementedException();
 		}
 
+		private class ViewHolder : Java.Lang.Object
+		{
+			public CheckBox checkbox;
+		}
+
 		public override View GetView(int position, View convertView, ViewGroup parent)
 		{
 			var item = viewModel.propertiesList.ElementAt(position).Value;
+
+			ViewHolder holder = null;
 			View view = convertView;
 			if (view == null) 
+			{
 				view = LayoutInflater.From (context).Inflate (m2m.Android.Resource.Layout.list_cell_Property, null);
+				holder = new ViewHolder ();
+				holder.checkbox = view.FindViewById<CheckBox> (m2m.Android.Resource.Id.propertyName);
+				view.Tag = holder;
+				holder.checkbox.Click += ((PropertiesListActivity)context).onCheckBoxClick;
+			}
+			else
+				holder = (ViewHolder)view.Tag;
+			
+			holder.checkbox.Text = item.name;
 
-			view.FindViewById<TextView> (m2m.Android.Resource.Id.propertyName).Text = item.name;
-			view.FindViewById<TextView> (m2m.Android.Resource.Id.unit).Text = item.unit;
 			return view;
 		}
 

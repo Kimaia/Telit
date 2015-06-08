@@ -14,7 +14,8 @@ namespace Shared.ViewModel
 	public class PropertiesListViewModel
 	{
 		private ModelServicesManager 	dataManager;
-		private Thing 					handledThing;
+		private Thing 					daThing;
+//		private Dictionary<string, List<TR50PropertyHistoryParams.PropertyValue>> propertyHistory;
 
 		public PropertiesListViewModel ()
 		{
@@ -28,7 +29,7 @@ namespace Shared.ViewModel
 
 				Expression<Func<Thing, bool>> predicate = t => (t.key.Equals(key));
 
-				handledThing = await dataManager.LoadItemFromDBAsync<Thing> (predicate);
+				daThing = await dataManager.LoadItemFromDBAsync<Thing> (predicate);
 				Logger.Debug ("GetThingObject(), Thing key:" + key);
 
 				// raise event for completion
@@ -38,7 +39,24 @@ namespace Shared.ViewModel
 
 		public Thing GetThing()
 		{
-			return handledThing;
+			return daThing;
+		}
+
+		public void GetPropertyHistory (string propertyName, BaseViewModel.OnSuccess onSuccess, BaseViewModel.OnError onError)
+		{
+			Task.Run (async () => {
+				try 
+				{
+					var propertyHistory = await dataManager.LoadM2MDataListAsync<TR50PropertyHistoryParams> (prepareTR50Command (propertyName));
+					Logger.Debug ("GetPropertyHistory(), Property Name:" + propertyHistory.Params.values.ToString());
+
+					onSuccess();
+				}
+				catch (Exception e)
+				{
+					onError("Failed Get Property History", e.Message, 0, null);
+				}
+			});
 		}
 
 
@@ -46,8 +64,10 @@ namespace Shared.ViewModel
 		{
 			CommandParams prms = new CommandParams ();
 			prms.Params = new Dictionary<string,object>();
+			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_THINGKEY, daThing.key);
 			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_KEY, key);
-			return new TR50Command (M2MCommands.CommandType.Thing_Find, prms);
+			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_LAST, Shared.Model.Constants.TR50_PARAM_LAST_PERIOD_VALUE);
+			return new TR50Command (M2MCommands.CommandType.Property_History, prms);
 		}
 	}
 }
