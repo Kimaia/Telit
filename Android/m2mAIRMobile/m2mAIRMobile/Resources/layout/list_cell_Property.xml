@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="#ffefeff6">
     <CheckBox
-        android:id="@+id/propertyName"
+        android:id="@+id/propertyCheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="name"

@@ -15,11 +15,12 @@ namespace Shared.ViewModel
 	{
 		private ModelServicesManager 	dataManager;
 		private Thing 					daThing;
-//		private Dictionary<string, List<TR50PropertyHistoryParams.PropertyValue>> propertyHistory;
+		private Dictionary<string, List<TR50PropertyHistoryParams.PropertyValue>> checkedPropertiesHistory;
 
 		public PropertiesListViewModel ()
 		{
 			dataManager = new ModelServicesManager();
+			checkedPropertiesHistory = new Dictionary<string, List<TR50PropertyHistoryParams.PropertyValue>> ();
 		}
 
 
@@ -45,12 +46,13 @@ namespace Shared.ViewModel
 			return daThing;
 		}
 
-		public void GetPropertyHistory (string propertyName, BaseViewModel.OnSuccess onSuccess, BaseViewModel.OnError onError)
+		public void GetPropertyHistory (string propertyKey, BaseViewModel.OnSuccess onSuccess, BaseViewModel.OnError onError)
 		{
 			Task.Run (async () => {
 				try 
 				{
-					var propertyHistory = await dataManager.LoadM2MDataListAsync<TR50PropertyHistoryParams> (prepareTR50Command (propertyName));
+					var propertyHistory = await dataManager.LoadM2MDataListAsync<TR50PropertyHistoryParams> (prepareTR50Command (propertyKey));
+					CheckPropertyChart(propertyKey, propertyHistory.Params.values);
 					onSuccess();
 				}
 				catch (Exception e)
@@ -58,6 +60,17 @@ namespace Shared.ViewModel
 					onError("Failed Get Property History records", e.Message);
 				}
 			});
+		}
+
+		public void CheckPropertyChart (string propertyKey, List<TR50PropertyHistoryParams.PropertyValue> history)
+		{
+			checkedPropertiesHistory.Add(propertyKey, history);
+		}
+
+		public void UncheckPropertyChart (string propertyKey)
+		{
+			Logger.Debug ("UncheckPropertyChart() Property Key: " + propertyKey);
+			checkedPropertiesHistory.Remove(propertyKey);
 		}
 
 

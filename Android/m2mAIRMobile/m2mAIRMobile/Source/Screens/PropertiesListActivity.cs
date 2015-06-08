@@ -1,19 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Android.App;
 using Android.OS;
 using Android.Widget;
+using Android.Source.Views;
+using Android.Graphics;
 
 using Shared.Utils;
 using Shared.Model;
 using Shared.ViewModel;
-using Android.Source.Views;
-using Android.Views;
+using Shared.Charts;
 
 namespace Android.Source.Screens
 {
 	[Activity (ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
-	public class PropertiesListActivity : BaseActivity
+	public class PropertiesListActivity : BaseActivity, IChartDataSource
 	{
 		private PropertiesListViewModel 	viewModel;
 		private PropertiesListAdapter		adapter;
@@ -39,11 +41,11 @@ namespace Android.Source.Screens
 			chartsView = FindViewById<ChartsView> (m2m.Android.Resource.Id.chartsView);
 			chartsView.LoadChartView ();
 
-			viewModel = new PropertiesListViewModel ();
-			string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
-			viewModel.GetThingObject (tkey, OnDBLoadThingObject, ShowDialog);
-
 			listView = FindViewById<ListView>(m2m.Android.Resource.Id.listView); 
+
+			string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
+			viewModel = new PropertiesListViewModel ();
+			viewModel.GetThingObject (tkey, OnDBLoadThingObject, ShowDialog);
 		}
 
 
@@ -70,7 +72,6 @@ namespace Android.Source.Screens
 			try{
 				RunOnUiThread(()=>{
 					listView.Adapter = adapter;
-//					listView.ItemClick += onCheckBoxClick;
 				});
 			}
 			catch(Exception e){
@@ -78,27 +79,58 @@ namespace Android.Source.Screens
 			}
 		}
 
-		#region checkbox and chart
-		public void onCheckBoxClick(object sender, EventArgs e)
+		public void onCheckBoxClick(string key, bool isChecked)
 		{
-			CheckBox cb = sender as CheckBox;
-			string propertyName = cb.Text;
-			bool checkedd = cb.Checked;
-			Logger.Debug ("onCheckBoxClick() property name: " + propertyName);
-
-			viewModel.GetPropertyHistory(propertyName, OnPropertyHistory, ShowDialog); 
-			StartLoadingSpinner("Collecting Propertie's records.");
+			Logger.Debug ("onCheckBoxClick() property key: " + key + ", Checked: " + isChecked);
+			if (isChecked) {
+				viewModel.GetPropertyHistory (key, OnPropertyHistory, ShowDialog); 
+				StartLoadingSpinner ("Collecting Propertie's records.");
+			}
+			else 
+			{
+				UncheckPropertyChart (key);
+			}
 		}
 
 		private void OnPropertyHistory()
 		{
 			StopLoadingSpinner ();
-
 			Logger.Debug ("OnPropertyHistory()");
 
-			// update chart
 			chartsView.Update();
 		}
+
+		private void UncheckPropertyChart (string key)
+		{
+			viewModel.UncheckPropertyChart (key);
+		}
+
+		#region IChartDataSource
+		public Android.Graphics.Bitmap Image ()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public string Name ()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public List<Point> Points ()
+		{
+			return MakePoints ();
+		}
+
+		#if DEBUG
+		private List<Point> MakePoints ()
+		{
+			Random random = new Random ();
+			List<Point> points = new List<Point> ();
+			for (int i = 0; i <= 10; ++i)
+				points.Add (new Point (i, random.Next (30)));
+			return points;
+		}
+		#endif
 		#endregion
 	}
 }

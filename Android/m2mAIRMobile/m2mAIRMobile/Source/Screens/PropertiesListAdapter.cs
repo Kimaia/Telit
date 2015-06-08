@@ -62,7 +62,8 @@ namespace Android.Source.Screens
 
 		public override View GetView(int position, View convertView, ViewGroup parent)
 		{
-			var item = viewModel.propertiesList.ElementAt(position).Value;
+			string propertyKey = viewModel.propertiesList.ElementAt (position).Key; 
+			Property property = viewModel.propertiesList.ElementAt(position).Value;
 
 			ViewHolder holder = null;
 			View view = convertView;
@@ -70,14 +71,16 @@ namespace Android.Source.Screens
 			{
 				view = LayoutInflater.From (context).Inflate (m2m.Android.Resource.Layout.list_cell_Property, null);
 				holder = new ViewHolder ();
-				holder.checkbox = view.FindViewById<CheckBox> (m2m.Android.Resource.Id.propertyName);
+				holder.checkbox = view.FindViewById<CheckBox> (m2m.Android.Resource.Id.propertyCheckbox);
 				view.Tag = holder;
-				holder.checkbox.Click += ((PropertiesListActivity)context).onCheckBoxClick;
+				holder.checkbox.Click += delegate {
+					((PropertiesListActivity)context).onCheckBoxClick(propertyKey, holder.checkbox.Checked);
+				};
 			}
 			else
 				holder = (ViewHolder)view.Tag;
 			
-			holder.checkbox.Text = item.name;
+			holder.checkbox.Text = property.name;
 
 			return view;
 		}

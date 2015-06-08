@@ -14,6 +14,7 @@ using Android.Widget;
 
 using Android.Graphics;
 using NChart3D_Android;
+using Android.Source.Screens;
 
 
 namespace Android.Source.Views
@@ -21,27 +22,29 @@ namespace Android.Source.Views
 	public class ChartsView : LinearLayout, INChartSeriesDataSource
 	{
 		private NChartView		chartView;
+		private Context context;
 
 		public ChartsView (Context context) :
 			base (context)
 		{
-			Initialize ();
+			Initialize (context);
 		}
 
 		public ChartsView (Context context, IAttributeSet attrs) :
 			base (context, attrs)
 		{
-			Initialize ();
+			Initialize (context);
 		}
 
 		public ChartsView (Context context, IAttributeSet attrs, int defStyle) :
 			base (context, attrs, defStyle)
 		{
-			Initialize ();
+			Initialize (context);
 		}
 
-		void Initialize ()
+		void Initialize (Context context)
 		{
+			this.context = context;
 			LayoutInflater.From(Context).Inflate(m2m.Android.Resource.Layout.charts_view, this);
 			chartView = FindViewById<NChartView>(m2m.Android.Resource.Id.nchartView);
 		}
@@ -69,7 +72,8 @@ namespace Android.Source.Views
 		// Get points for the series.
 		public NChartPoint[] Points (NChartSeries series)
 		{
-			return PointsStub (series);
+			List<Point> points = ((PropertiesListActivity)context).Points ();
+			return ConvertPoints (series, points);
 		}
 		// Get name of the series.
 		public string Name (NChartSeries series)
@@ -80,6 +84,14 @@ namespace Android.Source.Views
 		public global::Android.Graphics.Bitmap Image (NChartSeries series)
 		{
 			return null;
+		}
+
+		private NChartPoint[] ConvertPoints(NChartSeries series, List<Point> points)
+		{
+			NChartPoint[] result = new NChartPoint[points.Count];
+			for (int i = 0; i < points.Count; ++i)
+				result [i] = new NChartPoint (NChartPointState.PointStateAlignedToXWithXY (points[i].X, points[i].Y), series);
+			return result;
 		}
 
 		#if DEBUG

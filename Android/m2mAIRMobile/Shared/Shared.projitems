@@ -39,12 +39,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\PropertiesListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\PropertiesListAdapterViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Property.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\PropertyViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Charts\IChartDataSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DB\" />
     <Folder Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50\" />
     <Folder Include="$(MSBuildThisFileDirectory)ModelManager\" />
     <Folder Include="$(MSBuildThisFileDirectory)Network\M2M\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Charts\" />
   </ItemGroup>
 </Project>
