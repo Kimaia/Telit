@@ -38,6 +38,13 @@ namespace Android.Source.Screens
 			return viewModel.propertiesList.ElementAt(position).Value;
 		}
 
+		public Property GetPropertyObject(string key)
+		{
+			Property prop = null;
+			viewModel.propertiesList.TryGetValue (key, out prop);
+			return prop;
+		}
+
 
 		#region implemented abstract members of BaseAdapter
 		public override long GetItemId(int position)
@@ -57,7 +64,7 @@ namespace Android.Source.Screens
 
 		private class ViewHolder : Java.Lang.Object
 		{
-			public CheckBox checkbox;
+			public RadioButton radioButton;
 		}
 
 		public override View GetView(int position, View convertView, ViewGroup parent)
@@ -71,16 +78,18 @@ namespace Android.Source.Screens
 			{
 				view = LayoutInflater.From (context).Inflate (m2m.Android.Resource.Layout.list_cell_Property, null);
 				holder = new ViewHolder ();
-				holder.checkbox = view.FindViewById<CheckBox> (m2m.Android.Resource.Id.propertyCheckbox);
+				holder.radioButton = view.FindViewById<RadioButton> (m2m.Android.Resource.Id.propertyRadioButton);
+				holder.radioButton.Checked = false;
 				view.Tag = holder;
-				holder.checkbox.Click += delegate {
-					((PropertiesListActivity)context).onCheckBoxClick(propertyKey, holder.checkbox.Checked);
+				holder.radioButton.Click += delegate {
+					holder.radioButton.Checked = true;
+					((PropertiesListActivity)context).onRadioButtonClick(propertyKey);
 				};
 			}
 			else
 				holder = (ViewHolder)view.Tag;
 			
-			holder.checkbox.Text = property.name;
+			holder.radioButton.Text = property.name;
 
 			return view;
 		}

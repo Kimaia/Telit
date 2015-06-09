@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Android.Graphics;
+
 using Shared.Model;
 
 namespace Shared.Network.DataTransfer.TR50
 {
+	public class TR50NullDataException : Exception
+	{
+		public TR50NullDataException(string message) : base(message) {}
+	}
 
 	public interface ITR50IsPayloadEmpty
 	{
@@ -62,8 +68,16 @@ namespace Shared.Network.DataTransfer.TR50
 	{
 		public class PropertyValue
 		{
-			int 	value;
-			string 	ts;
+			int 	value 	{ set; get; }
+			string 	ts 		{ set; get; }
+
+			public Point ToPoint()
+			{
+				if (ts != null)
+					return new Point (unchecked((int)DateTime.Parse (ts).Ticks), value);
+				else
+					throw new TR50NullDataException ("Property record TimeStamp is null");
+			}
 		}
 
 		public List<PropertyValue>	values;

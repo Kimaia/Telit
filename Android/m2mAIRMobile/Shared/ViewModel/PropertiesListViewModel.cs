@@ -8,23 +8,26 @@ using Shared.Model;
 using Shared.ModelManager;
 using Shared.Network;
 using Shared.Network.DataTransfer.TR50;
+using Android.Graphics;
 
 namespace Shared.ViewModel
 {
 	public class PropertiesListViewModel
 	{
-		private ModelServicesManager 	dataManager;
-		private Thing 					daThing;
-		private Dictionary<string, List<TR50PropertyHistoryParams.PropertyValue>> checkedPropertiesHistory;
+		public delegate void OnSuccess(string key);
+
+		private ModelServicesManager 							dataManager;
+		private Thing											daThing;
+		private string	 										displayedPropertyKey;
+		private List<TR50PropertyHistoryParams.PropertyValue> 	displayedHistoryRecords;
 
 		public PropertiesListViewModel ()
 		{
 			dataManager = new ModelServicesManager();
-			checkedPropertiesHistory = new Dictionary<string, List<TR50PropertyHistoryParams.PropertyValue>> ();
 		}
 
 
-		public void GetThingObject (string key, BaseViewModel.OnSuccess onSuccess, BaseViewModel.OnError onError)
+		public void GetThingObjectAsync (string key, BaseViewModel.OnSuccess onSuccess, BaseViewModel.OnError onError)
 		{
 			Task.Run (async () => {
 				try 
@@ -46,14 +49,17 @@ namespace Shared.ViewModel
 			return daThing;
 		}
 
-		public void GetPropertyHistory (string propertyKey, BaseViewModel.OnSuccess onSuccess, BaseViewModel.OnError onError)
+		public void GetPropertyHistoryAsync (string propertyKey, OnSuccess onSuccess, BaseViewModel.OnError onError)
 		{
 			Task.Run (async () => {
 				try 
 				{
-					var propertyHistory = await dataManager.LoadM2MDataListAsync<TR50PropertyHistoryParams> (prepareTR50Command (propertyKey));
-					CheckPropertyChart(propertyKey, propertyHistory.Params.values);
-					onSuccess();
+					this.displayedPropertyKey = propertyKey;
+					var historyRecords = await dataManager.LoadM2MDataListAsync<TR50PropertyHistoryParams> (prepareTR50Command (propertyKey));
+					this.displayedHistoryRecords = historyRecords.Params.values;
+					Logger.Debug ("StorePropertyRecords, Property Key: " + propertyKey);
+
+					onSuccess(propertyKey);
 				}
 				catch (Exception e)
 				{
@@ -61,17 +67,35 @@ namespace Shared.ViewModel
 				}
 			});
 		}
-
-		public void CheckPropertyChart (string propertyKey, List<TR50PropertyHistoryParams.PropertyValue> history)
+			
+		//TODO make async
+		public List<Point> GetScaledHistoryPoints (string propertyKey)
 		{
-			checkedPropertiesHistory.Add(propertyKey, history);
+			if (displayedHistoryRecords != null)
+				return ScaleAndConvert ();
+			else
+				return GetStupPoints ();
 		}
 
-		public void UncheckPropertyChart (string propertyKey)
+		private List<Point> ScaleAndConvert()
 		{
-			Logger.Debug ("UncheckPropertyChart() Property Key: " + propertyKey);
-			checkedPropertiesHistory.Remove(propertyKey);
+			List<Point> points = new List<Point> ();
+			foreach (TR50PropertyHistoryParams.PropertyValue pv in displayedHistoryRecords)
+				points.Add (pv.ToPoint ());
+
+			return points;
 		}
+
+		#if DEBUG
+		private List<Point> GetStupPoints ()
+		{
+			Random random = new Random ();
+			List<Point> points = new List<Point> ();
+			for (int i = 0; i <= 10; ++i)
+				points.Add (new Point (i, random.Next (30)));
+			return points;
+		}
+		#endif
 
 
 		private TR50Command prepareTR50Command(string key)

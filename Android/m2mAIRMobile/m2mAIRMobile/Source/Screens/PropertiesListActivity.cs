@@ -45,7 +45,7 @@ namespace Android.Source.Screens
 
 			string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
 			viewModel = new PropertiesListViewModel ();
-			viewModel.GetThingObject (tkey, OnDBLoadThingObject, ShowDialog);
+			viewModel.GetThingObjectAsync (tkey, OnDBLoadThingObject, ShowDialog);
 		}
 
 
@@ -79,58 +79,46 @@ namespace Android.Source.Screens
 			}
 		}
 
-		public void onCheckBoxClick(string key, bool isChecked)
+		public void onRadioButtonClick(string key)
 		{
-			Logger.Debug ("onCheckBoxClick() property key: " + key + ", Checked: " + isChecked);
-			if (isChecked) {
-				viewModel.GetPropertyHistory (key, OnPropertyHistory, ShowDialog); 
-				StartLoadingSpinner ("Collecting Propertie's records.");
-			}
-			else 
-			{
-				UncheckPropertyChart (key);
-			}
+			Logger.Debug ("onRadioButtonClick() property key: " + key);
+			viewModel.GetPropertyHistoryAsync (key, OnPropertyHistory, ShowDialog); 
+			StartLoadingSpinner ("Collecting Propertie's records.");
 		}
 
-		private void OnPropertyHistory()
+		private void OnPropertyHistory(string key)
 		{
 			StopLoadingSpinner ();
 			Logger.Debug ("OnPropertyHistory()");
 
-			chartsView.Update();
-		}
-
-		private void UncheckPropertyChart (string key)
-		{
-			viewModel.UncheckPropertyChart (key);
+			chartsView.Update(key);
 		}
 
 		#region IChartDataSource
-		public Android.Graphics.Bitmap Image ()
+		public Android.Graphics.Bitmap Image (string key)
 		{
 			throw new NotImplementedException ();
 		}
 
-		public string Name ()
+		public string Name (string key)
 		{
-			throw new NotImplementedException ();
+			var prop = adapter.GetPropertyObject (key);
+			return prop.name;
 		}
 
-		public List<Point> Points ()
+		public List<Point> Points (string key)
 		{
-			return MakePoints ();
-		}
-
-		#if DEBUG
-		private List<Point> MakePoints ()
-		{
-			Random random = new Random ();
-			List<Point> points = new List<Point> ();
-			for (int i = 0; i <= 10; ++i)
-				points.Add (new Point (i, random.Next (30)));
+			var points = viewModel.GetScaledHistoryPoints (key);
 			return points;
 		}
-		#endif
+
+		public string AxisName (string key, Axis axis) {
+			if (axis == Axis.X)
+				return "P- X Axis";
+			else if (axis == Axis.Y)
+				return "P- Y Axis";
+			return null;
+		}
 		#endregion
 	}
 }

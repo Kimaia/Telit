@@ -19,10 +19,13 @@ using Android.Source.Screens;
 
 namespace Android.Source.Views
 {
-	public class ChartsView : LinearLayout, INChartSeriesDataSource
+	public class ChartsView : LinearLayout, INChartSeriesDataSource, INChartValueAxisDataSource
 	{
-		private NChartView		chartView;
-		private Context context;
+		private NChartView	chartView;
+		private Context 	context;
+
+		private string 		currentKey;
+
 
 		public ChartsView (Context context) :
 			base (context)
@@ -56,7 +59,17 @@ namespace Android.Source.Views
 			chartView.Chart.LicenseKey = "";
 			chartView.Chart.CartesianSystem.Margin = new NChartMargin (10.0f, 10.0f, 10.0f, 20.0f);
 			chartView.Chart.ShouldAntialias = true;
+			AddChart ();
+		}
 
+		public void Update(string key)
+		{
+			currentKey = key;
+			chartView.Chart.UpdateData ();
+		}
+
+		public void AddChart()
+		{
 			// series
 			NChartColumnSeries series = new NChartColumnSeries ();
 			series.Brush = new NChartSolidColorBrush (Color.Red);
@@ -64,27 +77,70 @@ namespace Android.Source.Views
 			chartView.Chart.AddSeries (series);
 		}
 
-		public void Update()
-		{
-			chartView.Chart.UpdateData ();
-		}
-
+		#region INChartSeriesDataSource
 		// Get points for the series.
 		public NChartPoint[] Points (NChartSeries series)
 		{
-			List<Point> points = ((PropertiesListActivity)context).Points ();
+			List<Point> points = ((PropertiesListActivity)context).Points (currentKey);
 			return ConvertPoints (series, points);
 		}
 		// Get name of the series.
 		public string Name (NChartSeries series)
 		{
-			return "My series";
+			return ((PropertiesListActivity)context).Name (currentKey);
 		}
 
 		public global::Android.Graphics.Bitmap Image (NChartSeries series)
 		{
 			return null;
 		}
+		#endregion
+
+		#region INChartValueAxisDataSource
+		public string Name (NChartValueAxis nChartValueAxis)
+		{
+			Shared.Charts.Axis axis;
+			if (nChartValueAxis.Kind == NChartValueAxisKind.X)
+				axis = Shared.Charts.Axis.X;
+			else if (nChartValueAxis.Kind == NChartValueAxisKind.Y)
+				axis = Shared.Charts.Axis.Y;
+			else
+				return null;
+			
+			return ((PropertiesListActivity)context).AxisName (currentKey, axis);
+		}
+
+		public string DoubleToString (double value, NChartValueAxis axis)
+		{
+			throw new NotImplementedException ();
+		}
+
+		public Java.Lang.Number Length (NChartValueAxis axis)
+		{
+			throw new NotImplementedException ();
+		}
+
+		public Java.Lang.Number Max (NChartValueAxis axis)
+		{
+			throw new NotImplementedException ();
+		}
+
+		public Java.Lang.Number Min (NChartValueAxis axis)
+		{
+			throw new NotImplementedException ();
+		}
+
+		public Java.Lang.Number Step (NChartValueAxis axis)
+		{
+			throw new NotImplementedException ();
+		}
+
+		public string[] Ticks (NChartValueAxis axis)
+		{
+			throw new NotImplementedException ();
+		}
+		#endregion
+
 
 		private NChartPoint[] ConvertPoints(NChartSeries series, List<Point> points)
 		{
