@@ -13,12 +13,15 @@ using Shared.Utils;
 using Android.Views;
 using Android.Source.Views;
 using m2m.Android.Source.Views;
+using System.Collections.Generic;
 
 namespace Android.Source.Screens
 {
 	[Activity (ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class ThingActivity : BaseActivity
 	{
+		public delegate void OnLocationHistorytSuccess(List<LatLng> locationHistory);
+
 		private ThingViewModel 	viewModel;
 		private Thing 			daThing;
 
@@ -38,6 +41,8 @@ namespace Android.Source.Screens
 
 			Button properties = FindViewById<Button> (m2m.Android.Resource.Id.properties);
 			properties.Click += (object sender, EventArgs e) => { OnProperties(); };
+			Button locationHistory = FindViewById<Button> (m2m.Android.Resource.Id.locationHistory);
+			locationHistory.Click += (object sender, EventArgs e) => { OnLocationHistoryClicked(); };
 
 			viewModel = new ThingViewModel ();
 			string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
@@ -66,7 +71,7 @@ namespace Android.Source.Screens
 			(FragmentManager.FindFragmentById<ThingMapFragment> (m2m.Android.Resource.Id.map)).SetThing(daThing);
 		}
 
-		#region Event handlers
+		#region Properties
 		private void OnProperties()
 		{
 			var intent = new Intent(this, typeof(PropertiesListActivity));
@@ -74,6 +79,27 @@ namespace Android.Source.Screens
 			Logger.Debug ("OnProperties() Thing key: " + daThing.key);
 
 			StartActivity(intent);
+		}
+		#endregion
+
+		#region Location History
+		private void OnLocationHistoryClicked()
+		{
+			Logger.Debug ("OnLocationHistory() Thing key: " + daThing.key);
+			viewModel.GetLocationHistoryAsync (daThing.key, OnLocationHistoryRecords, ShowDialog); 
+			StartLoadingSpinner ("Collecting Location history records.");
+		}
+
+		private void OnLocationHistoryRecords(List<LatLng> history)
+		{
+			StopLoadingSpinner ();
+			Logger.Debug ("OnLocationHistoryRecords()");
+			try{
+				RunOnUiThread(() => (FragmentManager.FindFragmentById<ThingMapFragment> (m2m.Android.Resource.Id.map)).PresentLocationHistory (history));
+			}
+			catch(Exception e){
+				ShowDialog ("Location History Unavailable", e.Message);
+			}
 		}
 		#endregion
 	}

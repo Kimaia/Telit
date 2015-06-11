@@ -15,6 +15,7 @@ using Android.Gms.Maps.Model;
 using Shared.Model;
 using Shared.Utils;
 using Android.Source.Screens;
+using Shared.Network.DataTransfer.TR50;
 
 namespace m2m.Android.Source.Views
 {
@@ -150,6 +151,14 @@ namespace m2m.Android.Source.Views
 			return;
 		}
 
+		#region Location History
+		public void PresentLocationHistory(List<LatLng> history)
+		{
+			Logger.Debug ("PresentLocationHistory()");
+			foreach (LatLng point in history)
+				gMap.AddMarker (new MarkerOptions ().SetPosition (point));
+		}
+		#endregion
 	}
 }
 

@@ -78,5 +78,30 @@ namespace Shared.Network.DataTransfer.TR50
 		}
 
 	}
-}
 
+	public class TR50LocationHistoryParams : ITR50HasPayload
+	{
+		public int	 							sampling;
+		public List<TR50LocationHistoryValue> 	values;
+
+		public bool HasPayload ()	{ return (values.Count > 0); }
+	}
+
+	public class TR50LocationHistoryValue : ITR50HasPayload
+	{
+		public string 	ts;
+		public string	thingId;
+		public string	corrId;
+		public float 	lat; 
+		public float 	lng; 
+		public float 	fixAcc;
+		public string 	fixType;
+		public float 	heading; 
+		public float 	altitude; 
+		public float 	speed;
+		public float 	delta;
+		public Address	addr;
+
+		public bool HasPayload ()	{ return (ts != null);	}
+	}
+}
