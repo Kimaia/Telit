@@ -14,7 +14,8 @@ namespace Shared.Network
 			Thing_List, 
 			Thing_Find, 
 			Thing_Def_Find, 
-			Property_History
+			Property_History,
+			Property_Aggregate
 		}
 
 		public static readonly Dictionary<CommandType, string> Names = new Dictionary<CommandType, string> {
@@ -22,7 +23,8 @@ namespace Shared.Network
 			{ CommandType.Thing_List, "thing.list" },
 			{ CommandType.Thing_Find, "thing.find" },
 			{ CommandType.Thing_Def_Find, "thing_def.find" },
-			{ CommandType.Property_History, "property.history" }
+			{ CommandType.Property_History, "property.history" },
+			{ CommandType.Property_Aggregate, "property.aggregate" }
 		};
 
 	}

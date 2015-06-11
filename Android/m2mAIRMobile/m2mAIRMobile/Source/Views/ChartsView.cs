@@ -71,8 +71,8 @@ namespace Android.Source.Views
 		public void AddChart()
 		{
 			// series
-			NChartColumnSeries series = new NChartColumnSeries ();
-			series.Brush = new NChartSolidColorBrush (Color.Red);
+			NChartAreaSeries series = new NChartAreaSeries ();	// new NChartColumnSeries ();, new NChartLineSeries ();
+			series.Brush = new NChartSolidColorBrush (Color.Gray);
 			series.DataSource = this;
 			chartView.Chart.AddSeries (series);
 		}

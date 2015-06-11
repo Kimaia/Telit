@@ -19,6 +19,7 @@ namespace Android.Source.Screens
 	{
 		private PropertiesListAdapterViewModel viewModel;
 		private Context context;
+		private RadioButton activeButton;
 
 		public PropertiesListAdapter(Context context, Thing daThing)
 		{
@@ -82,6 +83,9 @@ namespace Android.Source.Screens
 				holder.radioButton.Checked = false;
 				view.Tag = holder;
 				holder.radioButton.Click += delegate {
+					if (activeButton != null)
+						activeButton.Checked = false;
+					activeButton = holder.radioButton;
 					holder.radioButton.Checked = true;
 					((PropertiesListActivity)context).onRadioButtonClick(propertyKey);
 				};

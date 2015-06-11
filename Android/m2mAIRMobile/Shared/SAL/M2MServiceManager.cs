@@ -29,7 +29,7 @@ namespace Shared.SAL
 
 
 		// preform request to server
-		public async Task<TR50Response<Type>> RequestListAsync<Type> (TR50Command command) where Type : ITR50IsPayloadEmpty
+		public async Task<TR50Response<Type>> RequestListAsync<Type> (TR50Command command) where Type : ITR50HasPayload
 		{
 			var request = ConvertRequest(command);
 
@@ -42,7 +42,7 @@ namespace Shared.SAL
 
 
 		// preform request to server
-		public async Task<Type> RequestItemAsync<Type> (TR50Command command) where Type : ITR50IsPayloadEmpty
+		public async Task<Type> RequestItemAsync<Type> (TR50Command command) where Type : ITR50HasPayload
 		{
 			var request = ConvertRequest(command);
 
@@ -71,7 +71,7 @@ namespace Shared.SAL
 			return Tr50Converter.ConvertRequest (command);
 		}
 
-		private TR50Response<Type> ConvertResponse<Type>(RemoteResponse response) where Type : ITR50IsPayloadEmpty
+		private TR50Response<Type> ConvertResponse<Type>(RemoteResponse response) where Type : ITR50HasPayload
 		{
 			return Tr50Converter.ConvertResponse<Type> (response.Content);
 		}

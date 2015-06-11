@@ -16,10 +16,9 @@ namespace Shared.ViewModel
 	{
 		public delegate void OnSuccess(string key);
 
-		private ModelServicesManager 							dataManager;
-		private Thing											daThing;
-		private string	 										displayedPropertyKey;
-		private List<TR50PropertyHistoryParams.PropertyValue> 	displayedHistoryRecords;
+		private ModelServicesManager 		dataManager;
+		private Thing						daThing;
+		private List<TR50PropertyValue> 	displayedHistoryRecords;
 
 		public PropertiesListViewModel ()
 		{
@@ -39,7 +38,7 @@ namespace Shared.ViewModel
 				}
 				catch (Exception e)
 				{
-					onError("Failed Get Thing Object", e.Message);
+					onError("Thing Object Unavailable", e.Message);
 				}
 			});
 		}
@@ -54,7 +53,6 @@ namespace Shared.ViewModel
 			Task.Run (async () => {
 				try 
 				{
-					this.displayedPropertyKey = propertyKey;
 					var historyRecords = await dataManager.LoadM2MDataListAsync<TR50PropertyHistoryParams> (prepareTR50Command (propertyKey));
 					this.displayedHistoryRecords = historyRecords.Params.values;
 					Logger.Debug ("StorePropertyRecords, Property Key: " + propertyKey);
@@ -63,7 +61,7 @@ namespace Shared.ViewModel
 				}
 				catch (Exception e)
 				{
-					onError("Failed Get Property History records", e.Message);
+					onError("Property's records Unavailable", e.Message);
 				}
 			});
 		}
@@ -80,7 +78,7 @@ namespace Shared.ViewModel
 		private List<Point> ScaleAndConvert()
 		{
 			List<Point> points = new List<Point> ();
-			foreach (TR50PropertyHistoryParams.PropertyValue pv in displayedHistoryRecords)
+			foreach (TR50PropertyValue pv in displayedHistoryRecords)
 				points.Add (pv.ToPoint ());
 
 			return points;

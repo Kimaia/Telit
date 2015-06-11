@@ -12,35 +12,29 @@ namespace Shared.Network.DataTransfer.TR50
 		public TR50NullDataException(string message) : base(message) {}
 	}
 
-	public interface ITR50IsPayloadEmpty
+	public interface ITR50HasPayload
 	{
-		bool IsPayloadEmpty ();
+		bool HasPayload ();
 	}
 
-	public class TR50Response<ParamsType> : ITR50IsPayloadEmpty where ParamsType : ITR50IsPayloadEmpty
+	public class TR50Response<ParamsType> : ITR50HasPayload where ParamsType : ITR50HasPayload
 	{
 		public bool			success;
 		public ParamsType 	Params;
 
-		public bool IsPayloadEmpty ()
-		{
-			return (success && !Params.IsPayloadEmpty ());
-		}
+		public bool HasPayload ()	{ return (success && Params.HasPayload ()); }
 	}
 		
-	public class TR50ThingsListParams : ITR50IsPayloadEmpty
+	public class TR50ThingsListParams : ITR50HasPayload
 	{
 		public int 				count;
 		public List<string> 	fields;
 		public List<Thing> 		result;
 
-		public bool IsPayloadEmpty ()
-		{
-			return (count > 0);
-		}
+		public bool HasPayload () 	{ return (count > 0); }
 	}
 
-	public class TR50ThingDefParams : ITR50IsPayloadEmpty
+	public class TR50ThingDefParams : ITR50HasPayload
 	{
 		public string 			id;
 		public string 			key;
@@ -58,34 +52,31 @@ namespace Shared.Network.DataTransfer.TR50
 		public object 			tunnels;
 		public Dictionary<string, Property>	properties;
 
-		public bool IsPayloadEmpty ()
-		{
-			return (key != null);
-		}
+		public bool HasPayload ()	{ return (key != null);	}
 	}
 
-	public class TR50PropertyHistoryParams : ITR50IsPayloadEmpty
+	public class TR50PropertyHistoryParams : ITR50HasPayload
 	{
-		public class PropertyValue
-		{
-			int 	value 	{ set; get; }
-			string 	ts 		{ set; get; }
+		public List<TR50PropertyValue>	values;
 
-			public Point ToPoint()
-			{
-				if (ts != null)
-					return new Point (unchecked((int)DateTime.Parse (ts).Ticks), value);
-				else
-					throw new TR50NullDataException ("Property record TimeStamp is null");
-			}
+		public bool HasPayload () 	{ return (values.Count > 0); }
+	}
+
+	public class TR50PropertyValue : ITR50HasPayload
+	{
+		int 	value 	{ set; get; }
+		string 	ts 		{ set; get; }
+
+		public bool HasPayload () {	return (ts != null); }
+
+		public Point ToPoint()
+		{
+			if (ts != null)
+				return new Point (unchecked((int)DateTime.Parse (ts).Ticks), value);
+			else
+				throw new TR50NullDataException ("Property record TimeStamp is null");
 		}
 
-		public List<PropertyValue>	values;
-
-		public bool IsPayloadEmpty ()
-		{
-			return (values.Count > 0);
-		}
 	}
 }
 

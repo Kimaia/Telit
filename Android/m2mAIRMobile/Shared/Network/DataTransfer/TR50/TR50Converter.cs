@@ -76,7 +76,7 @@ namespace Shared.Network.DataTransfer.TR50
 		#endregion
 
 		#region ConvertResponse
-		public TR50Response<Type> ConvertResponse<Type>(string m2mresponse) where Type : ITR50IsPayloadEmpty
+		public TR50Response<Type> ConvertResponse<Type>(string m2mresponse) where Type : ITR50HasPayload
 		{
 			try
 			{

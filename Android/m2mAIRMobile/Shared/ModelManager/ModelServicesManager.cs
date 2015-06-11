@@ -51,7 +51,7 @@ namespace Shared.ModelManager
 			return item;
 		}
 
-		private async Task<Type> LoadItemFromServerAsync<Type> (TR50Command commands) where Type : ITR50IsPayloadEmpty
+		private async Task<Type> LoadItemFromServerAsync<Type> (TR50Command commands) where Type : ITR50HasPayload
 		{
 			return await m2mService.RequestItemAsync<Type> (commands);
 		}
@@ -64,7 +64,7 @@ namespace Shared.ModelManager
 		#endregion
 
 		#region list operations
-		public async Task<TR50Response<Type>> LoadM2MDataListAsync<Type>(TR50Command commands) where Type : ITR50IsPayloadEmpty, new() 
+		public async Task<TR50Response<Type>> LoadM2MDataListAsync<Type>(TR50Command commands) where Type : ITR50HasPayload, new() 
 		{
 			return await m2mService.RequestListAsync<Type> (commands);
 		}
