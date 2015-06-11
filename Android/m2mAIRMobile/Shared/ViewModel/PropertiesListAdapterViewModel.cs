@@ -14,13 +14,13 @@ namespace Shared.ViewModel
 {
 	public class PropertiesListAdapterViewModel : BaseViewModel
 	{
-		private ModelServicesManager 			dataManager;
+		private DALManager 			dataManager;
 		private Thing 							daThing;
 		public Dictionary<string, Property> 	propertiesList { get; private set; }
 
 		public PropertiesListAdapterViewModel (Thing thing)
 		{
-			dataManager = new ModelServicesManager();
+			dataManager = new DALManager();
 			daThing = thing;
 			propertiesList = new Dictionary<string, Property> ();
 		}
@@ -43,7 +43,7 @@ namespace Shared.ViewModel
 			try
 			{
 				var command = prepareTR50Command ();
-				var response = await dataManager.LoadM2MDataListAsync<TR50ThingDefParams> (command);
+				var response = await dataManager.M2MLoadListAsync<TR50ThingDefParams> (command);
 				propertiesList = ParseTR50Response(response.Params);
 				Logger.Debug ("PopulatePropertiesListAsync(), Properties count:" + propertiesList.Count);
 			}

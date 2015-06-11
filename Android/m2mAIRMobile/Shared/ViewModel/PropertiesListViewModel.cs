@@ -16,13 +16,13 @@ namespace Shared.ViewModel
 	{
 		public delegate void OnSuccess(string key);
 
-		private ModelServicesManager 		dataManager;
+		private DALManager 		dataManager;
 		private Thing						daThing;
 		private List<TR50PropertyValue> 	displayedHistoryRecords;
 
 		public PropertiesListViewModel ()
 		{
-			dataManager = new ModelServicesManager();
+			dataManager = new DALManager();
 		}
 
 
@@ -33,7 +33,7 @@ namespace Shared.ViewModel
 				{
 					Logger.Debug ("GetThingObject(), Thing key:" + key);
 					Expression<Func<Thing, bool>> predicate = t => (t.key.Equals(key));
-					daThing = await dataManager.LoadItemFromDBAsync<Thing> (predicate);
+					daThing = await dataManager.DBLoadItemAsync<Thing> (predicate);
 					onSuccess();
 				}
 				catch (Exception e)
@@ -53,7 +53,7 @@ namespace Shared.ViewModel
 			Task.Run (async () => {
 				try 
 				{
-					var historyRecords = await dataManager.LoadM2MDataListAsync<TR50PropertyHistoryParams> (prepareTR50Command (propertyKey));
+					var historyRecords = await dataManager.M2MLoadListAsync<TR50PropertyHistoryParams> (prepareTR50Command (propertyKey));
 					this.displayedHistoryRecords = historyRecords.Params.values;
 					Logger.Debug ("StorePropertyRecords, Property Key: " + propertyKey);
 

@@ -12,11 +12,11 @@ namespace Shared.ViewModel
 		public event EventHandler RegisterationSuccess;
 		public event EventHandler LoginSuccess;
 
-		private ModelServicesManager authenticator;
+		private DALManager authenticator;
 
 		public RegisterAndLoginViewModel ()
 		{
-			authenticator = new ModelServicesManager();
+			authenticator = new DALManager();
 		}
 
 
@@ -59,6 +59,8 @@ namespace Shared.ViewModel
 
 		private void AuthenticationSuccess(string username, string password, string sessionId)
 		{
+			Settings.Instance.SetSessionId (sessionId);
+
 			if (!Settings.Instance.IsRegistered ()) {
 				// first Registration
 				// Set The Register status flag to true
@@ -68,12 +70,10 @@ namespace Shared.ViewModel
 				Settings.Instance.SetRegistered (true);
 				Settings.Instance.SetUserName (username);
 				Settings.Instance.SetPassword (password);
-				Settings.Instance.SetSessionId (sessionId);
 				this.RegisterationSuccess (this, new EventArgs ());
 			} else {
 				// Login autentication - just store the session Id
 				Logger.Debug ("LoginSuccess(), SessionId: " + sessionId);
-				Settings.Instance.SetSessionId (sessionId);
 				this.LoginSuccess (this, new EventArgs ());
 			}
 

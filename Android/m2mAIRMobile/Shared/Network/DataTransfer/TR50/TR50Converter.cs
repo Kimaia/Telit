@@ -20,6 +20,8 @@ namespace Shared.Network.DataTransfer.TR50
 
 	public class TR50Converter
 	{
+		private const string TR50FailureHeader = "\"success\": false";
+
 		#region ConvertRequest
 		public TR50Request ConvertRequest(TR50Command command)
 		{
@@ -82,6 +84,14 @@ namespace Shared.Network.DataTransfer.TR50
 			{
 				var Response = new TR50Response<Type> ();
 				JToken responseToken = JToken.Parse(m2mresponse);
+
+				// check if failed for authentication
+				if (responseToken.First.ToString().Equals(TR50FailureHeader))
+				{
+					var errorMessages = responseToken["errorMessages"].ToObject<List<string>> ();
+					throw new TR50ResponseFailureException ("TR50 Response Failed :" + errorMessages.ToString());
+				}
+
 				JObject responseObject = responseToken ["1"].Value<JObject> ();
 
 				JToken successToken = responseObject.First;
@@ -95,7 +105,6 @@ namespace Shared.Network.DataTransfer.TR50
 				}
 				else
 				{
-//					var errorCodes = responseObject["errorCodes"].ToObject<List<int>> ();
 					var errorMessages = responseObject["errorMessages"].ToObject<List<string>> ();
 					throw new TR50ResponseFailureException ("TR50 Response Failed :" + errorMessages.ToString());
 				}

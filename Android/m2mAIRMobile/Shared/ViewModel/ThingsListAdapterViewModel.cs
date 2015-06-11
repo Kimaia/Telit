@@ -14,12 +14,12 @@ namespace Shared.ViewModel
 {
 	public class ThingsListAdapterViewModel : BaseViewModel
 	{
-		private ModelServicesManager dataManager;
+		private DALManager dataManager;
 		public List<Thing> thingsList { get; private set; }
 
 		public ThingsListAdapterViewModel ()
 		{
-			dataManager = new ModelServicesManager();
+			dataManager = new DALManager();
 			thingsList = new List<Thing> ();
 		}
 
@@ -32,7 +32,7 @@ namespace Shared.ViewModel
 					onError ("Loaded Things List is Empty", null);
 				else
 				{
-					await dataManager.InsertListIntoDBAsync<Thing>(thingsList);
+					await dataManager.DBInsertListAsync<Thing>(thingsList);
 					onSuccess();
 				}
 			});
@@ -47,12 +47,10 @@ namespace Shared.ViewModel
 				switch (GetLoginState(login_state))
 				{
 				case Shared.Model.Constants.User_Login_States.Login_State_Register:
-					var command = prepareTR50Command ();
-					var response = await dataManager.LoadM2MDataListAsync<TR50ThingsListParams> (command);
-					thingsList = ParseTR50Response(response.Params);
-						break;
 				case Shared.Model.Constants.User_Login_States.Login_State_LoggedIn:
-					thingsList = await dataManager.GetDBDataListAsync<Thing> ();
+					var command = prepareTR50Command ();
+					var response = await dataManager.M2MLoadListAsync<TR50ThingsListParams> (command);
+					thingsList = ParseTR50Response(response.Params);
 						break;
 				default:
 					throw new InvalidOperationException("Wrong VM_State:" + login_state);

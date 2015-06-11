@@ -11,7 +11,7 @@ using Shared.Network.DataTransfer.TR50;
 
 namespace Shared.SAL
 {
-	public class M2MServiceManager
+	public class M2MApiService
 	{
 		private readonly string M2MHost = "https://api.devicewise.com";
 		private readonly string ApiPath = "/api";
@@ -20,7 +20,7 @@ namespace Shared.SAL
 		private readonly CancellationTokenSource tokenSource;
 		private readonly TR50Converter Tr50Converter;
 
-		public M2MServiceManager()
+		public M2MApiService()
 		{
 			Tr50Converter = new TR50Converter();
 			server = new M2MServer (M2MHost);
@@ -73,6 +73,7 @@ namespace Shared.SAL
 
 		private TR50Response<Type> ConvertResponse<Type>(RemoteResponse response) where Type : ITR50HasPayload
 		{
+			Logger.Debug (response.Content);
 			return Tr50Converter.ConvertResponse<Type> (response.Content);
 		}
 	}

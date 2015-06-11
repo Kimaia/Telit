@@ -13,12 +13,12 @@ namespace Shared.ViewModel
 {
 	public class ThingViewModel : BaseViewModel
 	{
-		private ModelServicesManager 	dataManager;
+		private DALManager 	dataManager;
 		private Thing 					handledThing;
 
 		public ThingViewModel ()
 		{
-			dataManager = new ModelServicesManager();
+			dataManager = new DALManager();
 		}
 
 
@@ -29,7 +29,7 @@ namespace Shared.ViewModel
 				{
 					Logger.Debug ("GetThingObject(), Thing key:" + key);
 					Expression<Func<Thing, bool>> predicate = t => (t.key.Equals(key));
-					handledThing = await dataManager.LoadItemFromDBAsync<Thing> (predicate);
+					handledThing = await dataManager.DBLoadItemAsync<Thing> (predicate);
 					onSuccess();
 				}
 				catch (Exception e)

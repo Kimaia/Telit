@@ -18,13 +18,6 @@ namespace Shared.ViewModel
 
 		public LauncherViewModel()
 		{
-			#if DEBUG
-			Settings.Instance.SetRegistered(false);
-			Settings.Instance.SetSessionId(null);
-			Settings.Instance.SetUserName(null);
-			Settings.Instance.ResetPassword();
-			#endif
-
 			InitDB ();
 		}
 
@@ -43,7 +36,7 @@ namespace Shared.ViewModel
 			}
 			catch(Exception e)
 			{
-				Logger.Error("Failed to initialize db: " + e);
+				Logger.Error("Failed Initialize db" + e);
 				throw;
 			}
 			finally
