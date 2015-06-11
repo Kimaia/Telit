@@ -9,7 +9,6 @@ namespace Shared.ViewModel
 	public class RegisterAndLoginViewModel : BaseViewModel
 	{
 		// events
-		public event EventHandler RegisterationSuccess;
 		public event EventHandler LoginSuccess;
 
 		private DALManager authenticator;
@@ -35,9 +34,9 @@ namespace Shared.ViewModel
 			password = "demo123";
 			#endif
 
-			Logger.Debug ("StartRegistration(),  User: " + username + ", password: " + password);
+			Logger.Debug ("StartLoginAsync(),  User: " + username + ", password: " + password);
 			if (!ValidateCredentials(username, password)) {
-				onError ("Invalid UserName", "The username you entered is not a valid email");
+				onError ("Invalid UserName", "Username is not a valid email");
 				return;
 			}
 			else 
@@ -59,23 +58,9 @@ namespace Shared.ViewModel
 
 		private void AuthenticationSuccess(string username, string password, string sessionId)
 		{
+			Logger.Debug ("LoginSuccess(), SessionId: " + sessionId);
 			Settings.Instance.SetSessionId (sessionId);
-
-			if (!Settings.Instance.IsRegistered ()) {
-				// first Registration
-				// Set The Register status flag to true
-				// and store the registered user credentials - username, password
-				// store the established Session Id
-				Logger.Debug ("RegistrationSuccess(), SessionId: " + sessionId);
-				Settings.Instance.SetRegistered (true);
-				Settings.Instance.SetUserName (username);
-				Settings.Instance.SetPassword (password);
-				this.RegisterationSuccess (this, new EventArgs ());
-			} else {
-				// Login autentication - just store the session Id
-				Logger.Debug ("LoginSuccess(), SessionId: " + sessionId);
-				this.LoginSuccess (this, new EventArgs ());
-			}
+			this.LoginSuccess (this, new EventArgs ());
 
 		}
 

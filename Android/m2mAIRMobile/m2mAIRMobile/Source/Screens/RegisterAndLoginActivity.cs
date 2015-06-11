@@ -25,7 +25,6 @@ namespace Android.Source.Screens
 			base.OnCreate (bundle);
 
 			viewModel = new RegisterAndLoginViewModel ();
-			viewModel.RegisterationSuccess += new EventHandler (RegisterationSuccess);
 			viewModel.LoginSuccess += new EventHandler (LoginSuccess);
 
 			SetContentView (m2m.Android.Resource.Layout.activity_login);
@@ -46,20 +45,9 @@ namespace Android.Source.Screens
 			viewModel.StartLogin(username.Text, password.Text, ShowDialog); 
 		}
 
-		public void RegisterationSuccess(object sender, EventArgs e)
-		{
-			var intent = new Intent(this, typeof(ThingsListActivity));
-			intent.PutExtra (Shared.Model.Constants.LOGIN_STATE, 
-								Shared.Model.Constants.User_Login_States.Login_State_Register.ToString());
-			StartActivity(intent);
-			Finish ();
-		}
-
 		public void LoginSuccess(object sender, EventArgs e)
 		{
 			var intent = new Intent(this, typeof(ThingsListActivity));
-			intent.PutExtra (Shared.Model.Constants.LOGIN_STATE, 
-								Shared.Model.Constants.User_Login_States.Login_State_LoggedIn.ToString());
 			StartActivity(intent);
 			Finish ();
 		}

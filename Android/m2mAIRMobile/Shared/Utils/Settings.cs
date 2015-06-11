@@ -5,83 +5,16 @@ namespace Shared.Utils
 {
 	public class Settings
 	{
-		private const string Registered = "Registered";
-		private const string UserName = "UserName";
-		private const string Password = "Password";
 		private const string SessionId = "SessioId";
 
 		private static readonly Settings instance = new Settings();
-
 		public static Settings Instance { get { return instance; } }
-
 		private readonly IsolatedStorageSettings settings;
-
 		private Settings()
 		{
 			settings = IsolatedStorageSettings.ApplicationSettings;
 		}
 
-		public void SetRegistered(bool value)
-		{
-			settings[Registered] = value.ToString();
-			settings.Save();
-		}
-
-		public string GetRegistered()
-		{
-			string result = null;
-			settings.TryGetValue(Registered, out result);
-			return result;
-		}
-
-
-		public bool IsRegistered()
-		{
-			return (GetRegistered () == true.ToString());
-		}	
-
-		public bool SetPassword(string pwd)
-		{
-			string password = string.Empty;
-			if (!string.IsNullOrEmpty(pwd))
-			{
-				if (settings.TryGetValue(Password, out password) && string.Equals(password, pwd))
-				{	//password exist and equal						
-					return false;
-				}
-				//update token with new value
-				settings[Password] = pwd;
-				settings.Save();
-				return true;
-			}
-			throw new Exception("Password null");
-		}	
-
-		public void ResetPassword()
-		{
-			settings[Password] = null;
-			settings.Save();
-		}
-
-		public string GetPassword()
-		{
-			string result = null;
-			settings.TryGetValue (Password, out result);
-			return result;
-		}
-
-		public void SetUserName(string value)
-		{
-			settings[UserName] = value;
-			settings.Save();
-		}
-
-		public string GetUserName()
-		{
-			string result = null;
-			settings.TryGetValue(UserName, out result);
-			return result;
-		}
 
 		public void SetSessionId(string value)
 		{

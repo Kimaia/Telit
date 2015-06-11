@@ -11,11 +11,6 @@ namespace Shared.ViewModel
 	public class LauncherViewModel : BaseViewModel
 	{
 
-		// events
-		public event EventHandler UserNotRegistered;
-		public event EventHandler UserLoggedOut;
-		public event EventHandler UserLoggedIn;
-
 		public LauncherViewModel()
 		{
 			InitDB ();
@@ -45,31 +40,9 @@ namespace Shared.ViewModel
 			}
 		}
 
-		public void GetLoginStatus ()
+		public bool IsLoggedIn ()
 		{
-			// get last Session Id
-			if (Settings.Instance.GetSessionId () != null) 
-			{
-				// user Logged In
-				Logger.Debug ("Logged In");
-				this.UserLoggedIn (this, new EventArgs ());
-			}
-			else
-			{
-				if (Settings.Instance.GetUserName () != null) 
-				{
-					// user Logged Out
-					Logger.Debug ("Logged Out");
-					this.UserLoggedOut (this, new EventArgs ());
-				}
-				else
-				{
-					// Not Registered
-					Logger.Debug ("User Not Registered");
-					Settings.Instance.SetRegistered (false);
-					this.UserNotRegistered (this, new EventArgs ());
-				}
-			}
+			return (Settings.Instance.GetSessionId () != null); 
 		}
 	}
 }

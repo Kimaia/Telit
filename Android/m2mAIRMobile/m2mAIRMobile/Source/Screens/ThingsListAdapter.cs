@@ -28,9 +28,9 @@ namespace Android.Source.Screens
 
 
 
-		public async Task PopulateThingsListAsync(string vm_state, BaseViewModel.OnSuccess onSuccess, BaseViewModel.OnError onError)
+		public async Task PopulateThingsListAsync(BaseViewModel.OnSuccess onSuccess, BaseViewModel.OnError onError)
         {
-			await viewModel.PopulateThingsList(vm_state, onSuccess, onError);
+			await viewModel.PopulateThingsList(onSuccess, onError);
 		}
 
 		public Thing GetThingObject(int position)

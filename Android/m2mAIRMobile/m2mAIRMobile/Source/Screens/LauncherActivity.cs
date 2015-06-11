@@ -21,25 +21,13 @@ namespace Android.Source.Screens
 
 			viewModel = new LauncherViewModel ();
 
-			viewModel.UserNotRegistered += new EventHandler (PreRegister);
-			viewModel.UserLoggedOut += new EventHandler (LoggedOut);
-			viewModel.UserLoggedIn += new EventHandler (LoggedIn);
-
-			viewModel.GetLoginStatus ();
-
+			if (viewModel.IsLoggedIn ())
+				LoggedIn ();
+			else
+				LoggedOut ();
 		}
 
-		// 
-		private void PreRegister(object sender, EventArgs e) 
-		{
-			Logger.Debug ("PreRegister()");
-			var intent = new Intent(this, typeof(RegisterAndLoginActivity));
-			StartActivity(intent);
-			Finish ();
-		}
-
-		// 
-		private void LoggedOut(object sender, EventArgs e) 
+		private void LoggedOut() 
 		{
 			Logger.Debug ("LoggedOut");
 			var intent = new Intent(this, typeof(RegisterAndLoginActivity));
@@ -48,12 +36,10 @@ namespace Android.Source.Screens
 		}
 
 		// 
-		private void LoggedIn(object sender, EventArgs e) 
+		private void LoggedIn() 
 		{
 			Logger.Debug ("LoggedIn");
 			var intent = new Intent(this, typeof(ThingsListActivity));
-			intent.PutExtra (Shared.Model.Constants.LOGIN_STATE, 
-				Shared.Model.Constants.User_Login_States.Login_State_LoggedIn.ToString());
 			StartActivity(intent);
 			Finish ();
 		}

@@ -24,10 +24,10 @@ namespace Shared.ViewModel
 		}
 
 
-		public async Task PopulateThingsList (string login_state, OnSuccess onSuccess, OnError onError)
+		public async Task PopulateThingsList (OnSuccess onSuccess, OnError onError)
 		{
 			await Task.Run (async () => {
-				await PopulateThingsListAsync (login_state, onSuccess, onError);
+				await PopulateThingsListAsync (onSuccess, onError);
 				if (thingsList.Count == 0)
 					onError ("Loaded Things List is Empty", null);
 				else
@@ -39,33 +39,19 @@ namespace Shared.ViewModel
 		}
 			
 
-		public async Task PopulateThingsListAsync (string login_state, OnSuccess onSuccess, OnError onError)
+		public async Task PopulateThingsListAsync (OnSuccess onSuccess, OnError onError)
 		{
-			Logger.Info ("PopulateThingsListAsync(), Login_State:" + login_state);
 			try
 			{
-				switch (GetLoginState(login_state))
-				{
-				case Shared.Model.Constants.User_Login_States.Login_State_Register:
-				case Shared.Model.Constants.User_Login_States.Login_State_LoggedIn:
-					var command = prepareTR50Command ();
-					var response = await dataManager.M2MLoadListAsync<TR50ThingsListParams> (command);
-					thingsList = ParseTR50Response(response.Params);
-						break;
-				default:
-					throw new InvalidOperationException("Wrong VM_State:" + login_state);
-				}
+				var command = prepareTR50Command ();
+				var response = await dataManager.M2MLoadListAsync<TR50ThingsListParams> (command);
+				thingsList = ParseTR50Response(response.Params);
 				Logger.Debug ("PopulateThingsListAsync(), Things count:" + thingsList.Count);
 			}
 			catch (Exception e)
 			{
 				onError("Failed get Things list", e.Message);
 			}
-		}
-
-		private Shared.Model.Constants.User_Login_States GetLoginState(string vm_state)
-		{
-			return (Shared.Model.Constants.User_Login_States)Enum.Parse(typeof(Shared.Model.Constants.User_Login_States), vm_state);
 		}
 
 

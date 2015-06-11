@@ -4,17 +4,6 @@ namespace Shared.Model
 {
 	public static class Constants
 	{
-		#region LOGIN_STATE
-		public enum User_Login_States
-		{
-			Login_State_Register,
-			Login_State_LoggedIn
-		}
-		public const string LOGIN_STATE = "Login_State";
-		public const User_Login_States VM_STATE_REGISTER = User_Login_States.Login_State_Register;
-		public const User_Login_States VM_STATE_LOGIN = User_Login_States.Login_State_LoggedIn;
-		#endregion
-
 		#region TR50
 		public const string TR50_PARAM_KEY = "key";
 		public const string TR50_PARAM_THINGKEY = "thingKey";
