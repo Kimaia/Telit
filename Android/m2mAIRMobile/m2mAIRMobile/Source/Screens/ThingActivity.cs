@@ -20,8 +20,6 @@ namespace Android.Source.Screens
 	[Activity (ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class ThingActivity : BaseActivity
 	{
-		public delegate void OnLocationHistorytSuccess(List<LatLng> locationHistory);
-
 		private ThingViewModel 	viewModel;
 		private Thing 			daThing;
 
@@ -86,20 +84,7 @@ namespace Android.Source.Screens
 		private void OnLocationHistoryClicked()
 		{
 			Logger.Debug ("OnLocationHistory() Thing key: " + daThing.key);
-			viewModel.GetLocationHistoryAsync (daThing.key, OnLocationHistoryRecords, ShowDialog); 
-			StartLoadingSpinner ("Collecting Location history records.");
-		}
-
-		private void OnLocationHistoryRecords(List<LatLng> history)
-		{
-			StopLoadingSpinner ();
-			Logger.Debug ("OnLocationHistoryRecords()");
-			try{
-				RunOnUiThread(() => (FragmentManager.FindFragmentById<ThingMapFragment> (m2m.Android.Resource.Id.map)).PresentLocationHistory (history));
-			}
-			catch(Exception e){
-				ShowDialog ("Location History Unavailable", e.Message);
-			}
+			FragmentManager.FindFragmentById<ThingMapFragment> (m2m.Android.Resource.Id.map).OnLocationHistoryClicked();
 		}
 		#endregion
 	}

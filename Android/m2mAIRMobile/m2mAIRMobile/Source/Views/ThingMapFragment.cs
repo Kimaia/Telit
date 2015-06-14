@@ -16,6 +16,7 @@ using Shared.Model;
 using Shared.Utils;
 using Android.Source.Screens;
 using Shared.Network.DataTransfer.TR50;
+using Shared.ViewModel;
 
 namespace m2m.Android.Source.Views
 {
@@ -26,13 +27,22 @@ namespace m2m.Android.Source.Views
 
 	public class ThingMapFragment : MapFragment, IOnMapReadyCallback, GoogleMap.IInfoWindowAdapter, GoogleMap.IOnInfoWindowClickListener 
 	{
-		private Activity 		activity;
+		public delegate void OnLocationHistorytSuccess(List<LatLng> locationHistory);
 
-		private GoogleMap 		gMap;
-		private Thing 			daThing;
+		private Activity 				activity;
+		private MapFragmentViewModel 	viewModel;
+
+		private GoogleMap		 		gMap;
+		private Thing 					daThing;
+		private LatLng 					thingLatLng;
+		private MarkerOptions 			locationMarker; 
+		private List<MarkerOptions> 	historyMarkers;
+		private LatLngBounds			historyBounds;
+		private bool 					historyVisible;
 
 		public ThingMapFragment() : base()
 		{
+			viewModel = new MapFragmentViewModel ();
 			daThing = null;
 		}
 
@@ -48,11 +58,6 @@ namespace m2m.Android.Source.Views
 			base.OnCreate (savedInstanceState);
 
 			GetMapAsync (this);
-		}
-
-		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-		{
-			return base.OnCreateView (inflater, container, savedInstanceState);
 		}
 		#endregion 
 
@@ -102,12 +107,12 @@ namespace m2m.Android.Source.Views
 
 		private void SetGeo()
 		{
-			LatLng latlng = new LatLng (daThing.loc.lat, daThing.loc.lng);
-			CameraUpdate camera = CameraUpdateFactory.NewLatLngZoom (latlng, 10);
+			thingLatLng = new LatLng (daThing.loc.lat, daThing.loc.lng);
+			CameraUpdate camera = CameraUpdateFactory.NewLatLngZoom (thingLatLng, 10);
 			gMap.MoveCamera (camera);
 
-			MarkerOptions options = new MarkerOptions ().SetPosition (latlng).SetTitle (daThing.name).Draggable (true);
-			gMap.AddMarker (options);
+			locationMarker = new MarkerOptions ().SetPosition (thingLatLng).SetTitle (daThing.name).Draggable (true);
+			gMap.AddMarker (locationMarker);
 		}
 
 		private void SetAddress()
@@ -152,11 +157,70 @@ namespace m2m.Android.Source.Views
 		}
 
 		#region Location History
-		public void PresentLocationHistory(List<LatLng> history)
+		public void OnLocationHistoryClicked()
 		{
-			Logger.Debug ("PresentLocationHistory()");
-			foreach (LatLng point in history)
-				gMap.AddMarker (new MarkerOptions ().SetPosition (point));
+			Logger.Debug ("OnLocationHistoryClicked()");
+			if (historyMarkers == null) 
+			{
+				viewModel.GetLocationHistoryAsync (daThing.key, OnLocationHistoryRecords, ((BaseActivity)this.activity).ShowDialog);
+				((BaseActivity)this.activity).StartLoadingSpinner ("Collecting Location history records.");
+				return;
+			}
+			else
+				ToggleLocationHistorys ();
+		}
+
+		public void OnLocationHistoryRecords(List<LatLng> history)
+		{
+			Logger.Debug ("OnLocationHistoryRecords()");
+			((BaseActivity)this.activity).StopLoadingSpinner ();
+
+			SetHistoryMarkers (history);
+
+			historyVisible = false;
+			ToggleLocationHistorys ();
+		}
+
+		private void SetHistoryMarkers(List<LatLng> history)
+		{
+			historyMarkers = new List<MarkerOptions> ();
+			var builder = new LatLngBounds.Builder();
+			foreach (LatLng point in history) {
+				builder.Include (point);
+				MarkerOptions mrk = new MarkerOptions ().SetPosition (point).InvokeIcon (BitmapDescriptorFactory.FromResource (Resource.Drawable.mm_20_yellow));
+				historyMarkers.Add (mrk);
+			}
+			historyBounds = builder.Build ();
+		}
+
+		private void ToggleLocationHistorys()
+		{
+			try{
+				((BaseActivity)this.activity).RunOnUiThread(()=>{
+
+					if (this.historyVisible)
+					{
+						historyVisible = false;
+						gMap.Clear();
+						gMap.AddMarker (locationMarker);
+
+						CameraUpdate camera = CameraUpdateFactory.NewLatLngZoom (thingLatLng, 10);
+						gMap.MoveCamera (camera);
+					}
+					else
+					{
+						historyVisible = true;
+						foreach (MarkerOptions mrk in historyMarkers) 
+							gMap.AddMarker (mrk);
+
+						CameraUpdate camera = CameraUpdateFactory.NewLatLngBounds (historyBounds, 300);
+						gMap.MoveCamera (camera);
+					}
+				});
+			}
+			catch(Exception e){
+				((BaseActivity)this.activity).ShowDialog ("Location History Unavailable", e.Message);
+			}
 		}
 		#endregion
 	}

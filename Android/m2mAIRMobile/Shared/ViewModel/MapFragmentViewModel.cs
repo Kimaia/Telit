@@ -1,49 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq.Expressions;
-
-using Shared.Utils;
-using Shared.Model;
-using Shared.ModelManager;
-using Shared.Network;
+using m2m.Android.Source.Views;
 using Shared.Network.DataTransfer.TR50;
 using Android.Gms.Maps.Model;
-using Android.Source.Screens;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Shared.ModelManager;
+using Shared.Network;
 
 namespace Shared.ViewModel
 {
-	public class ThingViewModel : BaseViewModel
+	public class MapFragmentViewModel
 	{
-		private DALManager 					dataManager;
-		private Thing 						handledThing;
+		private DALManager 		dataManager;
 
-		public ThingViewModel ()
+		public MapFragmentViewModel ()
 		{
 			dataManager = new DALManager();
 		}
 
 
-		public void GetThingObject (string key, BaseViewModel.OnSuccess onSuccess, BaseViewModel.OnError onError)
+		public void GetLocationHistoryAsync (string thingKey, ThingMapFragment.OnLocationHistorytSuccess onSuccess, BaseViewModel.OnError onError)
 		{
 			Task.Run (async () => {
 				try 
 				{
-					Logger.Debug ("GetThingObject(), Thing key:" + key);
-					Expression<Func<Thing, bool>> predicate = t => (t.key.Equals(key));
-					handledThing = await dataManager.DBLoadItemAsync<Thing> (predicate);
-					onSuccess();
+					var response = await dataManager.M2MLoadListAsync<TR50LocationHistoryParams> (prepareTR50Command (M2MCommands.CommandType.Location_History, thingKey));
+					onSuccess(ConvertToLatLng(response.Params));
 				}
 				catch (Exception e)
 				{
-					onError("Failed Get Thing Object", e.Message);
+					onError("Location History Unavailable", e.Message);
 				}
 			});
 		}
 
-		public Thing GetThing()
+		public List<LatLng> ConvertToLatLng(TR50LocationHistoryParams locationHistory)
 		{
-			return handledThing;
+			List<LatLng> history = new List<LatLng> ();
+			foreach (TR50LocationHistoryValue point in locationHistory.values) 
+				history.Add(new LatLng(point.lat, point.lng));
+
+			return history;
 		}
 
 

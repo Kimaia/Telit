@@ -102,7 +102,7 @@ namespace Android.Source.Screens
 			});
 		}
 
-		protected void ShowDialog(string title, string message)
+		public void ShowDialog(string title, string message)
 		{
 			Logger.Error("Exception cought: \n" + title + ",  " + message);
 			OpenErrorDialog (title, message);
