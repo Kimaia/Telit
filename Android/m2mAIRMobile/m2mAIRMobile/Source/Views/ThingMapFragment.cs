@@ -133,11 +133,9 @@ namespace m2m.Android.Source.Views
 
 		public View GetInfoWindow (Marker marker)
 		{
-			
-			View view = activity.LayoutInflater.Inflate (m2m.Android.Resource.Layout.map_thing_info_window, null, false);
-			view.FindViewById<TextView> (m2m.Android.Resource.Id.ThingName).Text = daThing.name;
-			view.FindViewById<TextView>(m2m.Android.Resource.Id.Status).Text = (daThing.connected) ? "connected" : "disconnected";
-			view.FindViewById<TextView> (m2m.Android.Resource.Id.LastSeen).Text = daThing.lastSeen;
+			View view = activity.LayoutInflater.Inflate (m2m.Android.Resource.Layout.map_thing_info_geoLocation, null, false);
+			view.FindViewById<TextView> (m2m.Android.Resource.Id.lat).Text = daThing.loc.lat.ToString();
+			view.FindViewById<TextView> (m2m.Android.Resource.Id.lng).Text = daThing.loc.lng.ToString();
 			return view;
 		}
 

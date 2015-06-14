@@ -54,7 +54,13 @@ namespace Shared.ViewModel
 				try 
 				{
 					var historyRecords = await dataManager.M2MLoadListAsync<TR50PropertyHistoryParams> (prepareTR50Command (propertyKey));
-					this.displayedHistoryRecords = historyRecords.Params.values;
+					if (historyRecords.Params.HasPayload())
+					{
+						displayedHistoryRecords = new List<TR50PropertyValue>();
+						foreach (TR50PropertyValue pv in historyRecords.Params.values)
+							if (pv.HasPayload())
+								this.displayedHistoryRecords.Add(pv);
+					}
 					Logger.Debug ("StorePropertyRecords, Property Key: " + propertyKey);
 
 					onSuccess(propertyKey);
@@ -69,7 +75,7 @@ namespace Shared.ViewModel
 		//TODO make async
 		public List<Point> GetScaledHistoryPoints (string propertyKey)
 		{
-			if (displayedHistoryRecords != null)
+			if (displayedHistoryRecords.Count > 0)
 				return ScaleAndConvert ();
 			else
 				return GetStupPoints ();
@@ -102,7 +108,8 @@ namespace Shared.ViewModel
 			prms.Params = new Dictionary<string,object>();
 			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_THINGKEY, daThing.key);
 			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_KEY, key);
-			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_LAST, Shared.Model.Constants.TR50_PARAM_LAST_PERIOD_VALUE);
+			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_RECORDS, Shared.Model.Constants.TR50_PARAM_RECORDS_VALUE);
+//			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_LAST, Shared.Model.Constants.TR50_PARAM_LAST_PERIOD_VALUE);
 			return new TR50Command (M2MCommands.CommandType.Property_History, prms);
 		}
 	}

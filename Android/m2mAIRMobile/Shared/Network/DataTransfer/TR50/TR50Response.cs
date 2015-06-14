@@ -59,7 +59,7 @@ namespace Shared.Network.DataTransfer.TR50
 	{
 		public List<TR50PropertyValue>	values;
 
-		public bool HasPayload () 	{ return (values.Count > 0); }
+		public bool HasPayload () 	{ return ((values != null) && (values.Count > 0)); }
 	}
 
 	public class TR50PropertyValue : ITR50HasPayload

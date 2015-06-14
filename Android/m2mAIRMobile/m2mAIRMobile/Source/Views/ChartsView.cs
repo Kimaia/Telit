@@ -56,7 +56,7 @@ namespace Android.Source.Views
 		public void LoadChartView ()
 		{
 			// chart
-			chartView.Chart.LicenseKey = "";
+			chartView.Chart.LicenseKey = "plf4E6SYNIynnmYSIuJK67UXWX3XqaMXTPO0KOFWJB+tIt0ABOgbqCrSYbhPDsYqjrEPycTNNZA8AYmh9h845udCeGSKDks5yVpv5FmhCz+B1KOKfECXhM4w202sJFMphO+HufuwET8Kxtuv+7nPBpDpydQwys1+sZ4EiUa5kAVH//DneMNjrZ+ScjwpXyiAAIy7AIsm3pdzQ1GFB018mbJeRBFTf7vrT7tL787/1L+xGCciaC2ZVqpu4+CWw2nadhgRmskoSEjutuyRmt4/C2MgNSLI9uBXfcOWUlJK3eEdyJXPnOhV1vrTDRA9eYAq+iylpeiZp9OWtDnD67mQMn02/1xo1iHs3z/qvJUKiru27EcO3XLXpfVGvbGSDr9CYpZDEB7e1hKqZi0l5QA7FKrrM7w6FVhJJI8suatTaVyB3x2e8qZ9gKNh0YrY3BTAS9jnEwdYRpIrfEho+lNP3NIPp101PC4kjgub7EAo2c1yGA2k7xovc2UG9vR6oyR0DQmcjHSszM2EK5B5Dj8wPZL2fn19AA07mC7JKsxA8yp4RbK7hU9Cr2Y21I3ceN4L22N8R8CkHdFoP1CS20Ru61YIH6hzhplCteqrcz5u62BPEGk+3UGPws2RsQqC/UOhEf5OhhmJxT+KcqjcTf6waRQe+YByaymMKi8o79p+IK8=";
 			chartView.Chart.CartesianSystem.Margin = new NChartMargin (10.0f, 10.0f, 10.0f, 20.0f);
 			chartView.Chart.ShouldAntialias = true;
 			AddChart ();
@@ -72,7 +72,8 @@ namespace Android.Source.Views
 		{
 			// series
 			NChartAreaSeries series = new NChartAreaSeries ();	// new NChartColumnSeries ();, new NChartLineSeries ();
-			series.Brush = new NChartSolidColorBrush (Color.Gray);
+			series.Brush = new NChartSolidColorBrush (Color.Orange);
+			series.Brush.Opacity = 0.7f;
 			series.DataSource = this;
 			chartView.Chart.AddSeries (series);
 		}
