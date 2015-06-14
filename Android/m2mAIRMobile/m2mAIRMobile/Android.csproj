@@ -121,6 +121,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\app_icon.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\app_icon.png" />
     <AndroidResource Include="Resources\layout\charts_view.xml" />
+    <AndroidResource Include="Resources\drawable\mm_20_yellow.png" />
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
@@ -150,6 +151,7 @@
     <Folder Include="Source\" />
     <Folder Include="Source\Screens\" />
     <Folder Include="Source\Views\" />
+    <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
