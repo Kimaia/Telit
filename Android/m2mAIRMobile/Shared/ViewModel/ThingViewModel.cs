@@ -45,26 +45,6 @@ namespace Shared.ViewModel
 		{
 			return handledThing;
 		}
-
-
-		private TR50Command prepareTR50Command(M2MCommands.CommandType command, string key)
-		{
-			CommandParams prms = new CommandParams ();
-			prms.Params = new Dictionary<string,object> ();
-
-			switch (command) {
-			case M2MCommands.CommandType.Thing_Find:
-				prms.Params.Add (Shared.Model.Constants.TR50_PARAM_KEY, key);
-				break;
-			case M2MCommands.CommandType.Location_History:
-				prms.Params.Add (Shared.Model.Constants.TR50_PARAM_THINGKEY, key);
-				prms.Params.Add(Shared.Model.Constants.TR50_PARAM_RECORDS, 20);
-				break;
-			default:
-				throw new InvalidOperationException ("Wrong M2M CommandType:" + command);
-			}
-			return new TR50Command (command, prms);
-		}
 	}
 }
 

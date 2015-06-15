@@ -42,7 +42,7 @@ namespace Shared.ViewModel
 		{
 			try
 			{
-				var command = prepareTR50Command ();
+				var command = TR50CommandFactory.Build (M2MCommands.CommandType.Thing_Def_Find, daThing.defkey);
 				var response = await dataManager.M2MLoadListAsync<TR50ThingDefParams> (command);
 				propertiesList = ParseTR50Response(response.Params);
 				Logger.Debug ("PopulatePropertiesListAsync(), Properties count:" + propertiesList.Count);
@@ -51,14 +51,6 @@ namespace Shared.ViewModel
 			{
 				onError("Failed Get Properties list", e.Message);
 			}
-		}
-
-		private TR50Command prepareTR50Command()
-		{
-			CommandParams prms = new CommandParams ();
-			prms.Params = new Dictionary<string,object>();
-			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_KEY, daThing.defkey);
-			return new TR50Command (M2MCommands.CommandType.Thing_Def_Find, prms);
 		}
 
 		private Dictionary<string, Property> ParseTR50Response(TR50ThingDefParams response)

@@ -43,7 +43,7 @@ namespace Shared.ViewModel
 		{
 			try
 			{
-				var command = prepareTR50Command ();
+				var command = TR50CommandFactory.Build (M2MCommands.CommandType.Thing_List, null);
 				var response = await dataManager.M2MLoadListAsync<TR50ThingsListParams> (command);
 				thingsList = ParseTR50Response(response.Params);
 				Logger.Debug ("PopulateThingsListAsync(), Things count:" + thingsList.Count);
@@ -52,16 +52,6 @@ namespace Shared.ViewModel
 			{
 				onError("Failed get Things list", e.Message);
 			}
-		}
-
-
-		private TR50Command prepareTR50Command()
-		{
-			CommandParams prms = new CommandParams ();
-			prms.Params = new Dictionary<string,object>();
-			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_OFFSET, Shared.Model.Constants.TR50_PARAM_OFFSET_VALUE);
-			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_LIMIT, Shared.Model.Constants.TR50_PARAM_LIMIT_VALUE);
-			return new TR50Command (M2MCommands.CommandType.Thing_List, prms);
 		}
 
 		private List<Thing> ParseTR50Response(TR50ThingsListParams response)

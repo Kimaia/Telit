@@ -53,7 +53,8 @@ namespace Shared.ViewModel
 			Task.Run (async () => {
 				try 
 				{
-					var historyRecords = await dataManager.M2MLoadListAsync<TR50PropertyHistoryParams> (prepareTR50Command (propertyKey));
+					var command = TR50CommandFactory.Build (M2MCommands.CommandType.Property_History, daThing.key, propertyKey);
+					var historyRecords = await dataManager.M2MLoadListAsync<TR50PropertyHistoryParams> (command);
 					if (historyRecords.Params.HasPayload())
 					{
 						displayedHistoryRecords = new List<TR50PropertyValue>();
@@ -100,18 +101,6 @@ namespace Shared.ViewModel
 			return points;
 		}
 		#endif
-
-
-		private TR50Command prepareTR50Command(string key)
-		{
-			CommandParams prms = new CommandParams ();
-			prms.Params = new Dictionary<string,object>();
-			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_THINGKEY, daThing.key);
-			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_KEY, key);
-			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_RECORDS, Shared.Model.Constants.TR50_PARAM_RECORDS_VALUE);
-//			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_LAST, Shared.Model.Constants.TR50_PARAM_LAST_PERIOD_VALUE);
-			return new TR50Command (M2MCommands.CommandType.Property_History, prms);
-		}
 	}
 }
 

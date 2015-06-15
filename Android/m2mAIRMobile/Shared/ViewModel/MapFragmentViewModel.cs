@@ -24,7 +24,8 @@ namespace Shared.ViewModel
 			Task.Run (async () => {
 				try 
 				{
-					var response = await dataManager.M2MLoadListAsync<TR50LocationHistoryParams> (prepareTR50Command (M2MCommands.CommandType.Location_History, thingKey));
+					var command = TR50CommandFactory.Build (M2MCommands.CommandType.Location_History, thingKey);
+					var response = await dataManager.M2MLoadListAsync<TR50LocationHistoryParams> (command);
 					onSuccess(ConvertToLatLng(response.Params));
 				}
 				catch (Exception e)
@@ -41,26 +42,6 @@ namespace Shared.ViewModel
 				history.Add(new LatLng(point.lat, point.lng));
 
 			return history;
-		}
-
-
-		private TR50Command prepareTR50Command(M2MCommands.CommandType command, string key)
-		{
-			CommandParams prms = new CommandParams ();
-			prms.Params = new Dictionary<string,object> ();
-
-			switch (command) {
-			case M2MCommands.CommandType.Thing_Find:
-				prms.Params.Add (Shared.Model.Constants.TR50_PARAM_KEY, key);
-				break;
-			case M2MCommands.CommandType.Location_History:
-				prms.Params.Add (Shared.Model.Constants.TR50_PARAM_THINGKEY, key);
-				prms.Params.Add(Shared.Model.Constants.TR50_PARAM_RECORDS, 20);
-				break;
-			default:
-				throw new InvalidOperationException ("Wrong M2M CommandType:" + command);
-			}
-			return new TR50Command (command, prms);
 		}
 	}
 }

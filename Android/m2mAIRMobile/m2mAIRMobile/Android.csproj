@@ -122,6 +122,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\app_icon.png" />
     <AndroidResource Include="Resources\layout\charts_view.xml" />
     <AndroidResource Include="Resources\drawable\mm_20_yellow.png" />
+    <AndroidResource Include="Resources\layout\map_thing_info_geoLocation.axml" />
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
