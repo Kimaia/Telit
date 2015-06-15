@@ -91,7 +91,6 @@ namespace Shared.ViewModel
 			return points;
 		}
 
-		#if DEBUG
 		private List<Point> GetStupPoints ()
 		{
 			Random random = new Random ();
@@ -100,7 +99,6 @@ namespace Shared.ViewModel
 				points.Add (new Point (i, random.Next (30)));
 			return points;
 		}
-		#endif
 	}
 }
 

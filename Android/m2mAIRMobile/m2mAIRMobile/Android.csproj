@@ -112,7 +112,6 @@
     <AndroidResource Include="Resources\layout\activity_properties_list.xml" />
     <AndroidResource Include="Resources\layout\list_cell_Property.xml" />
     <AndroidResource Include="Resources\layout\divider.xml" />
-    <AndroidResource Include="Resources\layout\map_thing_layout.xml" />
     <AndroidResource Include="Resources\layout\map_thing_info_window.xml" />
     <AndroidResource Include="Resources\layout\thing_brief_description.xml" />
     <AndroidResource Include="Resources\drawable-hdpi\app_icon.png" />

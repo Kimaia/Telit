@@ -194,7 +194,7 @@ namespace m2m.Android.Source.Views
 		private void ToggleLocationHistorys()
 		{
 			try{
-				((BaseActivity)this.activity).RunOnUiThread(()=>{
+				this.activity.RunOnUiThread(()=>{
 
 					if (this.historyVisible)
 					{
@@ -211,7 +211,7 @@ namespace m2m.Android.Source.Views
 						foreach (MarkerOptions mrk in historyMarkers) 
 							gMap.AddMarker (mrk);
 
-						CameraUpdate camera = CameraUpdateFactory.NewLatLngBounds (historyBounds, 300);
+						CameraUpdate camera = CameraUpdateFactory.NewLatLngBounds (historyBounds, 20);
 						gMap.MoveCamera (camera);
 					}
 				});

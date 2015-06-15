@@ -72,6 +72,8 @@ namespace Android.Source.Screens
 			try{
 				RunOnUiThread(()=>{
 					listView.Adapter = adapter;
+
+					ShowDialog ("Select a property to view", null);
 				});
 			}
 			catch(Exception e){
