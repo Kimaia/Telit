@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Android.Graphics;
+using Shared.Network.DataTransfer.TR50;
 
 namespace Shared.Charts
 {
@@ -8,10 +9,8 @@ namespace Shared.Charts
 
 	public interface IChartDataSource
 	{
-		Android.Graphics.Bitmap 	Image (string key);
+		List<TR50PropertyValue> 	Points (string key);
 		string 						Name (string key);
-		List<Point> 				Points (string key);
-		string 						AxisName (string key, Axis axis);
 	}
 }
 

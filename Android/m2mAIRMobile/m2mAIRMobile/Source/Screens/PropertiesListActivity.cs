@@ -15,7 +15,7 @@ using Shared.Charts;
 namespace Android.Source.Screens
 {
 	[Activity (ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
-	public class PropertiesListActivity : BaseActivity, IChartDataSource
+	public class PropertiesListActivity : BaseActivity
 	{
 		private PropertiesListViewModel 	viewModel;
 		private PropertiesListAdapter		adapter;
@@ -38,14 +38,15 @@ namespace Android.Source.Screens
 			navBar = FindViewById<NavigationBarView>(m2m.Android.Resource.Id.NavigationBarView); 
 			navBar.SetTitle("Properties");
 
-			chartsView = FindViewById<ChartsView> (m2m.Android.Resource.Id.chartsView);
-			chartsView.LoadChartView ();
-
 			listView = FindViewById<ListView>(m2m.Android.Resource.Id.listView); 
 
 			string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
 			viewModel = new PropertiesListViewModel ();
 			viewModel.GetThingObjectAsync (tkey, OnDBLoadThingObject, ShowDialog);
+
+			chartsView = FindViewById<ChartsView> (m2m.Android.Resource.Id.chartsView);
+			chartsView.SetViewModel (viewModel);
+			chartsView.LoadChartView ();
 		}
 
 
@@ -67,6 +68,7 @@ namespace Android.Source.Screens
 			}
 		}
 
+		#region Property list
 		public void OnListPopulated()
 		{
 			try{
@@ -80,11 +82,13 @@ namespace Android.Source.Screens
 				ShowDialog ("OnListPopulated", e.Message);
 			}
 		}
+		#endregion
 
-		public void onRadioButtonClick(string key)
+		#region Property history
+		public void onPropertySelected(string key)
 		{
-			Logger.Debug ("onRadioButtonClick() property key: " + key);
-			viewModel.GetPropertyHistoryAsync (key, OnPropertyHistory, ShowDialog); 
+			Logger.Debug ("onPropertySelected() property key: " + key);
+			viewModel.GetPropertyHistoryAsync (key, adapter.GetPropertyObject(key), OnPropertyHistory, OnPropertyHistoryError); 
 			StartLoadingSpinner ("Collecting Propertie's records.");
 		}
 
@@ -96,30 +100,11 @@ namespace Android.Source.Screens
 			chartsView.Update(key);
 		}
 
-		#region IChartDataSource
-		public Android.Graphics.Bitmap Image (string key)
+		private void OnPropertyHistoryError(string key, string msg)
 		{
-			throw new NotImplementedException ();
-		}
-
-		public string Name (string key)
-		{
-			var prop = adapter.GetPropertyObject (key);
-			return prop.name;
-		}
-
-		public List<Point> Points (string key)
-		{
-			var points = viewModel.GetScaledHistoryPoints (key);
-			return points;
-		}
-
-		public string AxisName (string key, Axis axis) {
-			if (axis == Axis.X)
-				return "P- X Axis";
-			else if (axis == Axis.Y)
-				return "P- Y Axis";
-			return null;
+			StopLoadingSpinner ();
+			ShowDialog (msg, null);
+			chartsView.RemoveAllCharts();
 		}
 		#endregion
 	}

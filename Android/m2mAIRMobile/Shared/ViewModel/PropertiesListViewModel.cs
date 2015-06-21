@@ -9,15 +9,18 @@ using Shared.ModelManager;
 using Shared.Network;
 using Shared.Network.DataTransfer.TR50;
 using Android.Graphics;
+using Shared.Charts;
 
 namespace Shared.ViewModel
 {
-	public class PropertiesListViewModel
+	public class PropertiesListViewModel: IChartDataSource
 	{
 		public delegate void OnSuccess(string key);
+		public delegate void OnError(string key, string msg);
 
-		private DALManager 		dataManager;
+		private DALManager 					dataManager;
 		private Thing						daThing;
+		private Property 					daProperty;
 		private List<TR50PropertyValue> 	displayedHistoryRecords;
 
 		public PropertiesListViewModel ()
@@ -48,11 +51,12 @@ namespace Shared.ViewModel
 			return daThing;
 		}
 
-		public void GetPropertyHistoryAsync (string propertyKey, OnSuccess onSuccess, BaseViewModel.OnError onError)
+		public void GetPropertyHistoryAsync (string propertyKey, Property property, OnSuccess onSuccess, OnError onError)
 		{
 			Task.Run (async () => {
 				try 
 				{
+					daProperty = property;
 					var command = TR50CommandFactory.Build (M2MCommands.CommandType.Property_History, daThing.key, propertyKey);
 					var historyRecords = await dataManager.M2MLoadListAsync<TR50PropertyHistoryParams> (command);
 					if (historyRecords.Params.HasPayload())
@@ -61,44 +65,35 @@ namespace Shared.ViewModel
 						foreach (TR50PropertyValue pv in historyRecords.Params.values)
 							if (pv.HasPayload())
 								this.displayedHistoryRecords.Add(pv);
-					}
-					Logger.Debug ("StorePropertyRecords, Property Key: " + propertyKey);
 
-					onSuccess(propertyKey);
+						onSuccess(propertyKey);
+					}
+					else
+					{
+						// display error dialog and cleaer the graph display
+						onError(propertyKey, "Property has no history records");
+					}
 				}
 				catch (Exception e)
 				{
-					onError("Property's records Unavailable", e.Message);
+					onError(propertyKey, "Property's records Unavailable: " + e.Message);
 				}
 			});
 		}
 			
-		//TODO make async
-		public List<Point> GetScaledHistoryPoints (string propertyKey)
+
+		#region IChartDataSource
+		public List<TR50PropertyValue> Points (string propertyKey)
 		{
-			if (displayedHistoryRecords.Count > 0)
-				return ScaleAndConvert ();
-			else
-				return GetStupPoints ();
+			return displayedHistoryRecords;
 		}
 
-		private List<Point> ScaleAndConvert()
+		public string Name (string key)
 		{
-			List<Point> points = new List<Point> ();
-			foreach (TR50PropertyValue pv in displayedHistoryRecords)
-				points.Add (pv.ToPoint ());
-
-			return points;
+			return daProperty.name;
 		}
+		#endregion
 
-		private List<Point> GetStupPoints ()
-		{
-			Random random = new Random ();
-			List<Point> points = new List<Point> ();
-			for (int i = 0; i <= 10; ++i)
-				points.Add (new Point (i, random.Next (30)));
-			return points;
-		}
 	}
 }
 

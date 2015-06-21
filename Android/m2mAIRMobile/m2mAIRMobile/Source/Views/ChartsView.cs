@@ -15,17 +15,25 @@ using Android.Widget;
 using Android.Graphics;
 using NChart3D_Android;
 using Android.Source.Screens;
+using Shared.Charts;
+using Shared.ViewModel;
+using Shared.Network.DataTransfer.TR50;
+using System.Threading.Tasks;
 
 
 namespace Android.Source.Views
 {
 	public class ChartsView : LinearLayout, INChartSeriesDataSource, INChartValueAxisDataSource
 	{
-		private NChartView	chartView;
-		private Context 	context;
+		private NChartView					chartView;
+		private Context 					context;
+		private PropertiesListViewModel 	viewModel;
 
-		private string 		currentKey;
-
+		private string 						currentKey;
+		private List<Point> 				daPoints;
+		private List<TR50PropertyValue> 	m2mPoints;
+		private int minX, maxX;
+		private long minY, maxY;
 
 		public ChartsView (Context context) :
 			base (context)
@@ -53,6 +61,12 @@ namespace Android.Source.Views
 		}
 
 
+		public void SetViewModel (PropertiesListViewModel 	vm)
+		{
+			viewModel = vm;
+		}
+
+
 		public void LoadChartView ()
 		{
 			// chart
@@ -60,12 +74,6 @@ namespace Android.Source.Views
 			chartView.Chart.CartesianSystem.Margin = new NChartMargin (10.0f, 10.0f, 10.0f, 20.0f);
 			chartView.Chart.ShouldAntialias = true;
 			AddChart ();
-		}
-
-		public void Update(string key)
-		{
-			currentKey = key;
-			chartView.Chart.UpdateData ();
 		}
 
 		public void AddChart()
@@ -78,17 +86,30 @@ namespace Android.Source.Views
 			chartView.Chart.AddSeries (series);
 		}
 
+		public void Update(string key)
+		{
+			currentKey = key;
+	
+			chartView.Chart.CartesianSystem.XAxis.DataSource = this;
+			chartView.Chart.UpdateData ();
+		}
+
+		public void RemoveAllCharts()
+		{
+			chartView.Chart.RemoveAllSeries ();
+		}
+
 		#region INChartSeriesDataSource
 		// Get points for the series.
 		public NChartPoint[] Points (NChartSeries series)
 		{
-			List<Point> points = ((PropertiesListActivity)context).Points (currentKey);
-			return ConvertPoints (series, points);
+			m2mPoints = viewModel.Points (currentKey);
+			return ConvertScaleAndAnalysePoints (series);
 		}
 		// Get name of the series.
 		public string Name (NChartSeries series)
 		{
-			return ((PropertiesListActivity)context).Name (currentKey);
+			return viewModel.Name (currentKey);
 		}
 
 		public global::Android.Graphics.Bitmap Image (NChartSeries series)
@@ -98,69 +119,107 @@ namespace Android.Source.Views
 		#endregion
 
 		#region INChartValueAxisDataSource
-		public string Name (NChartValueAxis nChartValueAxis)
+		public string Name (NChartValueAxis axis)
 		{
-			Shared.Charts.Axis axis;
-			if (nChartValueAxis.Kind == NChartValueAxisKind.X)
-				axis = Shared.Charts.Axis.X;
-			else if (nChartValueAxis.Kind == NChartValueAxisKind.Y)
-				axis = Shared.Charts.Axis.Y;
-			else
-				return null;
-			
-			return ((PropertiesListActivity)context).AxisName (currentKey, axis);
+			if (axis.Kind == NChartValueAxisKind.X)
+				return "X Axis";
+			else 
+				return "Y Axis";
 		}
 
 		public string DoubleToString (double value, NChartValueAxis axis)
 		{
-			throw new NotImplementedException ();
+			return null;
 		}
 
 		public Java.Lang.Number Length (NChartValueAxis axis)
 		{
-			throw new NotImplementedException ();
+			return null;
 		}
 
 		public Java.Lang.Number Max (NChartValueAxis axis)
 		{
-			throw new NotImplementedException ();
+			if (axis.Kind == NChartValueAxisKind.X)
+				return (Java.Lang.Number)maxX;
+			else
+				return (Java.Lang.Number)maxY;
 		}
 
 		public Java.Lang.Number Min (NChartValueAxis axis)
 		{
-			throw new NotImplementedException ();
+			if (axis.Kind == NChartValueAxisKind.X)
+				return (Java.Lang.Number)minX;
+			else
+				return (Java.Lang.Number)minY;
 		}
 
 		public Java.Lang.Number Step (NChartValueAxis axis)
 		{
-			throw new NotImplementedException ();
+			return null;
 		}
 
 		public string[] Ticks (NChartValueAxis axis)
 		{
-			throw new NotImplementedException ();
+			if (axis.Kind == NChartValueAxisKind.X) 
+			{
+				string[] ticks = new string[3];
+				ticks [0] = m2mPoints [0].ts;
+				ticks [1] = m2mPoints[m2mPoints.Count/2].ts;
+				ticks [2] = m2mPoints.Last ().ts;
+				return ticks;
+			}
+			else
+				return null;		
 		}
 		#endregion
 
-
-		private NChartPoint[] ConvertPoints(NChartSeries series, List<Point> points)
+		#region NChartPoint
+		private NChartPoint[] ConvertScaleAndAnalysePoints(NChartSeries series)
 		{
-			NChartPoint[] result = new NChartPoint[points.Count];
-			for (int i = 0; i < points.Count; ++i)
-				result [i] = new NChartPoint (NChartPointState.PointStateAlignedToXWithXY (points[i].X, points[i].Y), series);
+			Convert2Points ();
+
+			return Convert2NChartPoints (series);
+		}
+
+		private void Convert2Points()
+		{
+			daPoints = new List<Point> ();
+			long firstX = TS2Seconds (m2mPoints [0].ts);
+			foreach (TR50PropertyValue pv in m2mPoints) 
+			{
+				PointF pf = new PointF (TS2Seconds (pv.ts) - firstX, pv.value);
+				daPoints.Add (new Point((int)pf.X, (int)pf.Y));
+			}
+		}
+
+		private NChartPoint[] Convert2NChartPoints(NChartSeries series)
+		{
+			minY = maxY = daPoints [0].Y;
+			NChartPoint[] result = new NChartPoint[daPoints.Count];
+			for (int i = 0; i < daPoints.Count; ++i) 
+			{
+				Point pi = daPoints [i];
+
+				if (minY > pi.Y)
+					minY = pi.Y;
+				else if (maxY < pi.Y)
+					maxY = pi.Y;
+
+				result [i] = new NChartPoint (NChartPointState.PointStateAlignedToXWithXY (pi.X, pi.Y), series);
+			}
+
+			minX = daPoints [0].X;
+			maxX = daPoints.Last().X;
+
 			return result;
 		}
 
-		#if DEBUG
-		private NChartPoint[] PointsStub (NChartSeries series)
+		private long TS2Seconds(string ts)
 		{
-			Random random = new Random ();
-			NChartPoint[] result = new NChartPoint[11];
-			for (int i = 0; i <= 10; ++i)
-				result [i] = new NChartPoint (NChartPointState.PointStateAlignedToXWithXY (i, random.Next (30) + 1), series);
-			return result;
+			return (DateTime.Parse (ts)).Ticks / 10000000;
 		}
-		#endif
+
+		#endregion
 	}
 }
 

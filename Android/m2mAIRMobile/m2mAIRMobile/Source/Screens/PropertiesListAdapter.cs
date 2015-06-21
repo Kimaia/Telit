@@ -87,7 +87,7 @@ namespace Android.Source.Screens
 						activeButton.Checked = false;
 					activeButton = holder.radioButton;
 					holder.radioButton.Checked = true;
-					((PropertiesListActivity)context).onRadioButtonClick(propertyKey);
+					((PropertiesListActivity)context).onPropertySelected(propertyKey);
 				};
 			}
 			else

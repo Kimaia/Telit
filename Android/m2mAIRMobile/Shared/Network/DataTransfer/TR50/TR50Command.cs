@@ -17,7 +17,8 @@ namespace Shared.Network.DataTransfer.TR50
 
 		public const int 	TR50_PARAM_OFFSET_VALUE = 0;
 		public const int 	TR50_PARAM_LIMIT_VALUE = 50;
-		public const string TR50_PARAM_LAST_PERIOD_VALUE = "24h";
+		public const string TR50_PARAM_LAST_PERIOD_24h = "24h";
+		public const string TR50_PARAM_LAST_PERIOD_1h = "1h";
 		public const int 	TR50_PARAM_RECORDS_VALUE = 50;
 	}
 
