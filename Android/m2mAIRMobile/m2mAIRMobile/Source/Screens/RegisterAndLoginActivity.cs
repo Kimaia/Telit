@@ -42,7 +42,7 @@ namespace Android.Source.Screens
 		private void OnLogin()
 		{
 			StartLoadingSpinner("Authenticating user credentials.");
-			viewModel.StartLogin(username.Text, password.Text, ShowDialog); 
+			viewModel.StartLogin(username.Text, password.Text, OpenErrorDialog); 
 		}
 
 		public void LoginSuccess(object sender, EventArgs e)

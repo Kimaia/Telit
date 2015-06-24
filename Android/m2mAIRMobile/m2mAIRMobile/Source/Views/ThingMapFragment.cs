@@ -128,7 +128,7 @@ namespace m2m.Android.Source.Views
 			CameraUpdate camera = CameraUpdateFactory.NewLatLng (new LatLng (0, 0));
 			gMap.MoveCamera (camera);
 
-			((BaseActivity)activity).OpenErrorDialog("Location UnAvailable", null);
+			((BaseActivity)activity).ShowDialog("Location UnAvailable", null);
 		}
 
 		public View GetInfoWindow (Marker marker)
@@ -160,7 +160,7 @@ namespace m2m.Android.Source.Views
 			Logger.Debug ("OnLocationHistoryClicked()");
 			if (historyMarkers == null) 
 			{
-				viewModel.GetLocationHistoryAsync (daThing.key, OnLocationHistoryRecords, ((BaseActivity)this.activity).ShowDialog);
+				viewModel.GetLocationHistoryAsync (daThing.key, OnLocationHistoryRecords, ((BaseActivity)this.activity).OpenErrorDialog);
 				((BaseActivity)this.activity).StartLoadingSpinner ("Collecting Location history records.");
 				return;
 			}
@@ -217,7 +217,7 @@ namespace m2m.Android.Source.Views
 				});
 			}
 			catch(Exception e){
-				((BaseActivity)this.activity).ShowDialog ("Location History Unavailable", e.Message);
+				((BaseActivity)this.activity).OpenErrorDialog ("Location History Unavailable", e.Message);
 			}
 		}
 		#endregion

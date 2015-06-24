@@ -77,6 +77,7 @@ namespace Android.Source.Screens
 			View view = convertView;
 			if (view == null) 
 			{
+				Logger.Debug ("PropertiesListAdapter.GetView() position:" + position);
 				view = LayoutInflater.From (context).Inflate (m2m.Android.Resource.Layout.list_cell_Property, null);
 				holder = new ViewHolder ();
 				holder.radioButton = view.FindViewById<RadioButton> (m2m.Android.Resource.Id.propertyRadioButton);

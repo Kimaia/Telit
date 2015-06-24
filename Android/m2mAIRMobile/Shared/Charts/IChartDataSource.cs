@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Android.Graphics;
 using Shared.Network.DataTransfer.TR50;
 
 namespace Shared.Charts

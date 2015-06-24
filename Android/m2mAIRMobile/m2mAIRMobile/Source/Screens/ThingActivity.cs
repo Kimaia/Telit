@@ -44,7 +44,7 @@ namespace Android.Source.Screens
 
 			viewModel = new ThingViewModel ();
 			string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
-			viewModel.GetThingObject (tkey, OnDBLoadThingObject, ShowDialog);
+			viewModel.GetThingObject (tkey, OnDBLoadThingObject, OpenErrorDialog);
 		}
 
 
@@ -60,7 +60,7 @@ namespace Android.Source.Screens
 				});
 			}
 			catch(Exception e){
-				ShowDialog ("OnDBLoadThingObject", e.Message);
+				OpenErrorDialog ("OnDBLoadThingObject", e.Message);
 			}
 		}
 

@@ -52,6 +52,13 @@ namespace Android.Source.Screens
 			}
 		}
 
+		protected override void OnStop ()
+		{
+			Logger.Debug ("ThreadId-" + Thread.CurrentThread.ManagedThreadId + "," + this.GetType().Name + "," + MethodBase.GetCurrentMethod().Name);
+
+			base.OnStop ();
+		}
+
 		#endregion
 
 
@@ -94,8 +101,9 @@ namespace Android.Source.Screens
 				});
 		}
 
-		public void OpenErrorDialog(string title, string msg)
+		public void OpenErrorDialog(string title, string message)
 		{
+			Logger.Error("Error cought: \n" + title + ",  " + message);
 			RunOnUiThread (() => {
 				StopLoadingSpinner();
 				Toast.MakeText (this, title, ToastLength.Long).Show ();
@@ -104,8 +112,10 @@ namespace Android.Source.Screens
 
 		public void ShowDialog(string title, string message)
 		{
-			Logger.Error("Exception cought: \n" + title + ",  " + message);
-			OpenErrorDialog (title, message);
+			RunOnUiThread (() => {
+				StopLoadingSpinner();
+				Toast.MakeText (this, title, ToastLength.Long).Show ();
+			});
 		}
 
 		public void PerformOnMainThread(Action action)

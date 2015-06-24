@@ -44,18 +44,13 @@ namespace Shared.ViewModel
 			{
 				var command = TR50CommandFactory.Build (M2MCommands.CommandType.Thing_Def_Find, daThing.defkey);
 				var response = await dataManager.M2MLoadListAsync<TR50ThingDefParams> (command);
-				propertiesList = ParseTR50Response(response.Params);
+				propertiesList = response.Params.properties;
 				Logger.Debug ("PopulatePropertiesListAsync(), Properties count:" + propertiesList.Count);
 			}
 			catch (Exception e)
 			{
 				onError("Failed Get Properties list", e.Message);
 			}
-		}
-
-		private Dictionary<string, Property> ParseTR50Response(TR50ThingDefParams response)
-		{
-			return response.properties;
 		}
 	}
 }

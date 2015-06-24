@@ -31,7 +31,7 @@ namespace Android.Source.Screens
 			navBar.SetTitle("Things");
 		
 			adapter = new ThingsListAdapter(this);
-			adapter.PopulateThingsListAsync (OnListPopulated, ShowDialog);
+			adapter.PopulateThingsListAsync (OnListPopulated, OpenErrorDialog);
 		}
 
 		#region Callbacks / Event handlers

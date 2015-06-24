@@ -8,12 +8,11 @@ using Shared.Model;
 using Shared.ModelManager;
 using Shared.Network;
 using Shared.Network.DataTransfer.TR50;
-using Android.Graphics;
 using Shared.Charts;
 
 namespace Shared.ViewModel
 {
-	public class PropertiesListViewModel: IChartDataSource
+	public class PropertyHistoryViewModel: IChartDataSource
 	{
 		public delegate void OnSuccess(string key);
 		public delegate void OnError(string key, string msg);
@@ -23,7 +22,17 @@ namespace Shared.ViewModel
 		private Property 					daProperty;
 		private List<TR50PropertyValue> 	displayedHistoryRecords;
 
-		public PropertiesListViewModel ()
+		// singleton
+		private static PropertyHistoryViewModel instance;
+		public static PropertyHistoryViewModel Instance 
+		{
+			get {
+				if (instance == null)
+					instance = new PropertyHistoryViewModel ();
+				return instance; 
+			}
+		}
+		private PropertyHistoryViewModel ()
 		{
 			dataManager = new DALManager();
 		}
@@ -50,6 +59,7 @@ namespace Shared.ViewModel
 		{
 			return daThing;
 		}
+
 
 		public void GetPropertyHistoryAsync (string propertyKey, Property property, OnSuccess onSuccess, OnError onError)
 		{

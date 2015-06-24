@@ -5,7 +5,6 @@ using Android.App;
 using Android.OS;
 using Android.Widget;
 using Android.Source.Views;
-using Android.Graphics;
 
 using Shared.Utils;
 using Shared.Model;
@@ -17,7 +16,7 @@ namespace Android.Source.Screens
 	[Activity (ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class PropertiesListActivity : BaseActivity
 	{
-		private PropertiesListViewModel 	viewModel;
+		private PropertyHistoryViewModel 	historyViewModel;
 		private PropertiesListAdapter		adapter;
 		private ListView					listView;
 
@@ -41,12 +40,19 @@ namespace Android.Source.Screens
 			listView = FindViewById<ListView>(m2m.Android.Resource.Id.listView); 
 
 			string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
-			viewModel = new PropertiesListViewModel ();
-			viewModel.GetThingObjectAsync (tkey, OnDBLoadThingObject, ShowDialog);
+			historyViewModel = PropertyHistoryViewModel.Instance;
+			historyViewModel.GetThingObjectAsync (tkey, OnDBLoadThingObject, OpenErrorDialog);
 
 			chartsView = FindViewById<ChartsView> (m2m.Android.Resource.Id.chartsView);
-			chartsView.SetViewModel (viewModel);
+			chartsView.SetViewModel (historyViewModel);
 			chartsView.LoadChartView ();
+		}
+
+		protected override void OnStop ()
+		{
+			chartsView.Cleanup ();
+
+			base.OnStop ();
 		}
 
 
@@ -56,15 +62,15 @@ namespace Android.Source.Screens
 				RunOnUiThread(()=>{
 					Logger.Debug ("OnDBLoadThingObject()");
 
-					daThing = viewModel.GetThing ();
+					daThing = historyViewModel.GetThing ();
 					thingBriefView.SetThing (daThing);
 
 					adapter = new PropertiesListAdapter(this, daThing);
-					adapter.PopulatePropertiesListAsync (OnListPopulated, ShowDialog);
+					adapter.PopulatePropertiesListAsync (OnListPopulated, OpenErrorDialog);
 				});
 			}
 			catch(Exception e){
-				ShowDialog ("OnDBLoadThingObject", e.Message);
+				OpenErrorDialog ("OnDBLoadThingObject", e.Message);
 			}
 		}
 
@@ -79,7 +85,7 @@ namespace Android.Source.Screens
 				});
 			}
 			catch(Exception e){
-				ShowDialog ("OnListPopulated", e.Message);
+				OpenErrorDialog ("OnListPopulated", e.Message);
 			}
 		}
 		#endregion
@@ -88,7 +94,7 @@ namespace Android.Source.Screens
 		public void onPropertySelected(string key)
 		{
 			Logger.Debug ("onPropertySelected() property key: " + key);
-			viewModel.GetPropertyHistoryAsync (key, adapter.GetPropertyObject(key), OnPropertyHistory, OnPropertyHistoryError); 
+			historyViewModel.GetPropertyHistoryAsync (key, adapter.GetPropertyObject(key), OnPropertyHistory, OnPropertyHistoryError); 
 			StartLoadingSpinner ("Collecting Propertie's records.");
 		}
 
@@ -103,7 +109,7 @@ namespace Android.Source.Screens
 		private void OnPropertyHistoryError(string key, string msg)
 		{
 			StopLoadingSpinner ();
-			ShowDialog (msg, null);
+			OpenErrorDialog (msg, null);
 			chartsView.RemoveAllCharts();
 		}
 		#endregion

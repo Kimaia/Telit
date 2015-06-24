@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Android.Graphics;
-
 using Shared.Model;
 
 namespace Shared.Network.DataTransfer.TR50
@@ -68,15 +66,6 @@ namespace Shared.Network.DataTransfer.TR50
 		public string ts;
 
 		public bool HasPayload () {	return (ts != null); }
-
-		public Point ToPoint()
-		{
-			if (ts != null)
-				return new Point (unchecked((int)DateTime.Parse (ts).Ticks/10000), value);
-			else
-				throw new TR50NullDataException ("Property record TimeStamp is null");
-		}
-
 	}
 
 	public class TR50LocationHistoryParams : ITR50HasPayload
