@@ -8,8 +8,8 @@ namespace Shared.Charts
 
 	public interface IChartDataSource
 	{
-		List<TR50PropertyValue> 	Points (string key);
-		string 						Name (string key);
+		List<TR50PropertyValue> 	Points ();
+		string 						Name ();
 	}
 }
 

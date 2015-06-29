@@ -10,6 +10,7 @@ using Shared.Utils;
 using Shared.Model;
 using Shared.ViewModel;
 using Shared.Charts;
+using m2m.Android.Source.Views;
 
 namespace Android.Source.Screens
 {
@@ -25,6 +26,7 @@ namespace Android.Source.Screens
 		private NavigationBarView 			navBar; 
 		private ThingBriefDescriptionView 	thingBriefView;
 		private ChartsView 					chartsView;
+		private SelectorBar					selectorBar;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -33,22 +35,18 @@ namespace Android.Source.Screens
 			// Set our view from the "main" layout resource
 			SetContentView (m2m.Android.Resource.Layout.activity_properties_list);
 
+			ViewModel = PropertyViewModel.Instance;
+			string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
+			ViewModel.GetThingObjectAsync (tkey, OnDBLoadThingObject, OpenErrorDialog);
+
 			thingBriefView = FindViewById<ThingBriefDescriptionView>(m2m.Android.Resource.Id.ThingBriefDescriptionView);
 			navBar = FindViewById<NavigationBarView>(m2m.Android.Resource.Id.NavigationBarView); 
 			navBar.SetTitle("Properties");
 
-			//TODO replace with selector
-			Button history = FindViewById<Button> (m2m.Android.Resource.Id.mode_history);
-			history.Click += (object sender, EventArgs e) => { OnModeHistory(); };
-			Button continuous = FindViewById<Button> (m2m.Android.Resource.Id.mode_continuous);
-			continuous.Click += (object sender, EventArgs e) => { OnModeContinuous(); };
-
-
 			listView = FindViewById<ListView>(m2m.Android.Resource.Id.listView); 
 
-			string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
-			ViewModel = PropertyViewModel.Instance;
-			ViewModel.GetThingObjectAsync (tkey, OnDBLoadThingObject, OpenErrorDialog);
+			selectorBar = FindViewById<SelectorBar> (m2m.Android.Resource.Id.SelectorBar);
+			selectorBar.SetViewModel (ViewModel);
 
 			chartsView = FindViewById<ChartsView> (m2m.Android.Resource.Id.chartsView);
 			chartsView.SetViewModel (ViewModel);
@@ -90,21 +88,6 @@ namespace Android.Source.Screens
 		}
 		#endregion
 
-		#region Presentation Mode
-		//TODO replace with selector
-		public void OnModeHistory()
-		{
-			Logger.Debug ("OnModeHistory");
-			ViewModel.PresentationMode = PropertyViewModel.PropertyPresentationMode.History;
-		}
-
-		public void OnModeContinuous()
-		{
-			Logger.Debug ("OnModeContinuous");
-			ViewModel.PresentationMode = PropertyViewModel.PropertyPresentationMode.Continuous;
-		}
-		#endregion
-
 		#region Property
 		public void OnPropertySelected(string key)
 		{
@@ -116,7 +99,7 @@ namespace Android.Source.Screens
 		private void OnPropertyData(string key)
 		{
 			StopLoadingSpinner ();
-			Logger.Debug ("OnPropertyHistory()");
+			Logger.Debug ("OnPropertyData()");
 			chartsView.DrawChart(key);
 		}
 

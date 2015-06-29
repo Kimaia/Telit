@@ -26,9 +26,8 @@ namespace Android.Source.Views
 	public class ChartsView : LinearLayout, INChartSeriesDataSource, INChartValueAxisDataSource
 	{
 		private NChartView					nchartView;
-		private PropertyViewModel 	viewModel;
+		private IChartDataSource 			viewModel;
 
-		private string 						currentKey;
 		private List<Point> 				daPoints;
 		private List<TR50PropertyValue> 	m2mPoints;
 		private int minX, maxX;
@@ -81,20 +80,22 @@ namespace Android.Source.Views
 		public void AddSeries()
 		{
 			// series
-			NChartAreaSeries series = new NChartAreaSeries ();
-			series.Brush = new NChartSolidColorBrush (Android.Graphics.Color.Orange);
+//			NChartLineSeries series = new NChartLineSeries(); //NChartAreaSeries ();
+			NChartColumnSeries series = new NChartColumnSeries ();
+			series.Brush = new NChartSolidColorBrush (Android.Graphics.Color.Red);
 			series.Brush.Opacity = 0.7f;
+			series.BorderThickness = 2.0f;
+			series.BorderBrush = new NChartSolidColorBrush(Android.Graphics.Color.Black);
+
 			series.DataSource = this;
 			nchartView.Chart.AddSeries (series);
 		}
 
 		public void DrawChart(string key)
 		{
-			currentKey = key;
-	
+			nchartView.Chart.Background = new NChartLinearGradientBrush(Android.Graphics.Color.Gray, Android.Graphics.Color.White);
+			nchartView.Chart.CartesianSystem.Margin = new NChartMargin (10.0f, 10.0f, 10.0f, 20.0f);
 			nchartView.Chart.CartesianSystem.XAxis.DataSource = this;
-//			nchartView.Chart.Background = new NChartLinearGradientBrush(Color.FromArgb(255, 160, 160, 160), Color.White);
-
 			nchartView.Chart.UpdateData ();
 		}
 
@@ -109,13 +110,13 @@ namespace Android.Source.Views
 		// Get points for the series.
 		public NChartPoint[] Points (NChartSeries series)
 		{
-			m2mPoints = viewModel.Points (currentKey);
+			m2mPoints = viewModel.Points ();
 			return ConvertScaleAndAnalysePoints (series);
 		}
 		// Get name of the series.
 		public string Name (NChartSeries series)
 		{
-			return viewModel.Name (currentKey);
+			return viewModel.Name ();
 		}
 
 		public global::Android.Graphics.Bitmap Image (NChartSeries series)

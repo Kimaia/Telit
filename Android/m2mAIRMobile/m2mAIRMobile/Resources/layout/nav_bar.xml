@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logout"
-            android:textSize="10dip"
+            android:textSize="16dip"
             android:textColor="#FF267F00" />
         <TextView
             android:id="@+id/Navigation_Title"

@@ -17,24 +17,10 @@
         android:layout_height="300dp"
         android:paddingBottom="2dp"
         android:paddingTop="2dp" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dip">
-        <Button
-            android:id="@+id/mode_history"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="History" />
-        <Button
-            android:id="@+id/mode_continuous"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="continuous" />
-    </LinearLayout>
+    <Android.Source.Views.SelectorBar
+        android:id="@+id/SelectorBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"

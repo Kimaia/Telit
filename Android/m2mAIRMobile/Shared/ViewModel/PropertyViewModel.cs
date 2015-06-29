@@ -40,6 +40,7 @@ namespace Shared.ViewModel
 		{
 			dataManager = new DALManager();
 			displayedRecords = new List<TR50PropertyValue>();
+			PresentationMode = PropertyPresentationMode.History; // default value;
 		}
 
 
@@ -77,6 +78,13 @@ namespace Shared.ViewModel
 				GetPropertyContinuousAsync (propertyKey, property, onSuccess, onError);
 				break;
 			}
+		}
+
+		public void SetPresentationMode(PropertyPresentationMode mode)
+		{
+			Logger.Debug ("SetPresentationMode: " + mode);
+			PresentationMode = mode;
+			displayedRecords.Clear();
 		}
 
 
@@ -148,12 +156,12 @@ namespace Shared.ViewModel
 		#endregion
 
 		#region IChartDataSource
-		public List<TR50PropertyValue> Points (string propertyKey)
+		public List<TR50PropertyValue> Points ()
 		{
 			return displayedRecords;
 		}
 
-		public string Name (string key)
+		public string Name ()
 		{
 			return daProperty.name;
 		}

@@ -103,7 +103,7 @@ namespace Shared.Network.DataTransfer.TR50
 		private static string CurrentTime()
 		{
 			DateTime dt = DateTime.Now;
-			return dt.ToString ("d");
+			return dt.ToString ("s") + 'Z';
 		}
 	}
 

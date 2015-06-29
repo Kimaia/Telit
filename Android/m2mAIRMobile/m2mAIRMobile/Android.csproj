@@ -87,6 +87,7 @@
     <Compile Include="Source\Views\ThingMapFragment.cs" />
     <Compile Include="Source\Views\MultipleThingsMapFragment.cs" />
     <Compile Include="Source\Views\ChartsView.cs" />
+    <Compile Include="Source\Views\SelectorBar.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -122,6 +123,7 @@
     <AndroidResource Include="Resources\layout\charts_view.xml" />
     <AndroidResource Include="Resources\drawable\mm_20_yellow.png" />
     <AndroidResource Include="Resources\layout\map_thing_info_geoLocation.axml" />
+    <AndroidResource Include="Resources\layout\view_selector_bar.xml" />
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
