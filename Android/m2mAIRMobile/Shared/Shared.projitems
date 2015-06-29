@@ -40,7 +40,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)SAL\M2MAuthService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAL\DALManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MapFragmentViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\PropertyHistoryViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\PropertyViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)DB\" />

@@ -64,7 +64,7 @@ namespace m2m.Android.Source.Views
 		private void SetCameraAndMarkers()
 		{
 			var bounds = SetBounds ();
-			CameraUpdate camera = CameraUpdateFactory.NewLatLngBounds (bounds, 20);
+			CameraUpdate camera = CameraUpdateFactory.NewLatLngBounds (bounds, 100, 100, 20);
 			gMap.MoveCamera (camera);
 
 			SetMarkers ();

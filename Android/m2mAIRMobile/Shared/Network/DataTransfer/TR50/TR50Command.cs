@@ -14,6 +14,7 @@ namespace Shared.Network.DataTransfer.TR50
 		public const string TR50_PARAM_END = "end";
 		public const string TR50_PARAM_LAST = "last";
 		public const string TR50_PARAM_RECORDS = "records";
+		public const string TR50_PARAM_TS = "ts";
 
 		public const int 	TR50_PARAM_OFFSET_VALUE = 0;
 		public const int 	TR50_PARAM_LIMIT_VALUE = 50;
@@ -85,6 +86,11 @@ namespace Shared.Network.DataTransfer.TR50
 				prms.Params.Add (Constants.TR50_PARAM_KEY, key2);
 				prms.Params.Add (Constants.TR50_PARAM_RECORDS, Constants.TR50_PARAM_RECORDS_VALUE);
 				break;
+			case M2MCommands.CommandType.Property_Current:
+				prms.Params.Add (Constants.TR50_PARAM_THINGKEY, key1);
+				prms.Params.Add (Constants.TR50_PARAM_KEY, key2);
+				prms.Params.Add (Constants.TR50_PARAM_TS, CurrentTime());
+				break;
 			case M2MCommands.CommandType.Thing_Def_Find:
 				prms.Params.Add (Constants.TR50_PARAM_DEFKEY, key1);
 				break;
@@ -92,6 +98,12 @@ namespace Shared.Network.DataTransfer.TR50
 				throw new InvalidOperationException ("Wrong M2M CommandType:" + command);
 			}
 			return new TR50Command (command, prms);
+		}
+
+		private static string CurrentTime()
+		{
+			DateTime dt = DateTime.Now;
+			return dt.ToString ("d");
 		}
 	}
 

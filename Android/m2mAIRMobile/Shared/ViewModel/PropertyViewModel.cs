@@ -8,44 +8,55 @@ using Shared.Model;
 using Shared.ModelManager;
 using Shared.Network;
 using Shared.Network.DataTransfer.TR50;
+using Shared.Charts;
 
 namespace Shared.ViewModel
 {
-	public class PropertyViewModel : BaseViewModel
+	public class PropertyViewModel: IChartDataSource
 	{
-		private ModelServicesManager 	dataManager;
-		private Thing 					daThing;
+		public delegate void OnSuccess(string key);
+		public delegate void OnError(string key, string msg);
 
-		public PropertyViewModel ()
+		public enum PropertyPresentationMode { History, Continuous }
+
+		private DALManager 					dataManager;
+		private Thing						daThing;
+		private Property 					daProperty;
+
+		public 	PropertyPresentationMode 	PresentationMode { get; set; }
+		private List<TR50PropertyValue> 	displayedRecords;
+
+		// singleton
+		private static PropertyViewModel instance;
+		public static PropertyViewModel Instance 
 		{
-			dataManager = new ModelServicesManager();
+			get {
+				if (instance == null)
+					instance = new PropertyViewModel ();
+				return instance; 
+			}
+		}
+		private PropertyViewModel ()
+		{
+			dataManager = new DALManager();
+			displayedRecords = new List<TR50PropertyValue>();
 		}
 
 
-		public void GetThingObject (string key, BaseViewModel.OnSuccess onSuccess, BaseViewModel.OnError onError)
+		public void GetThingObjectAsync (string key, BaseViewModel.OnSuccess onSuccess, BaseViewModel.OnError onError)
 		{
 			Task.Run (async () => {
-
-				Expression<Func<Thing, bool>> predicate = t => (t.key.Equals(key));
-
-				daThing = await dataManager.LoadItemFromDBAsync<Thing> (predicate);
-				Logger.Debug ("GetThingObject(), Thing key:" + key);
-
-				// raise event for completion
-				onSuccess();
-			});
-		}
-
-		public void GetPropertyHistory (string propertyName, BaseViewModel.OnSuccess onSuccess, BaseViewModel.OnError onError)
-		{
-			Task.Run (async () => {
-
-				var propertyHistory = await dataManager.LoadM2MDataListAsync<TR50PropertyHistoryParams> (prepareTR50Command (propertyName));
-				Logger.Debug ("GetPropertyHistory(), Property Name:" + propertyHistory.Params.values.ToString());
-//
-//				propertyHistory.Params.values.ToString()
-
-				onSuccess();
+				try 
+				{
+					Logger.Debug ("GetThingObject(), Thing key:" + key);
+					Expression<Func<Thing, bool>> predicate = t => (t.key.Equals(key));
+					daThing = await dataManager.DBLoadItemAsync<Thing> (predicate);
+					onSuccess();
+				}
+				catch (Exception e)
+				{
+					onError("Thing Object Unavailable", e.Message);
+				}
 			});
 		}
 
@@ -55,15 +66,99 @@ namespace Shared.ViewModel
 		}
 
 
-		private TR50Command prepareTR50Command(string key)
+		public void OnPropertySelected(string propertyKey, Property property, OnSuccess onSuccess, OnError onError)
 		{
-			CommandParams prms = new CommandParams ();
-			prms.Params = new Dictionary<string,object>();
-			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_THINGKEY, daThing.key);
-			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_KEY, key);
-			prms.Params.Add(Shared.Model.Constants.TR50_PARAM_LAST, Shared.Model.Constants.TR50_PARAM_LAST_PERIOD_VALUE);
-			return new TR50Command (M2MCommands.CommandType.Property_History, prms);
+			switch (PresentationMode) 
+			{
+			case PropertyPresentationMode.History:
+				GetPropertyHistoryAsync (propertyKey, property, onSuccess, onError);
+				break;
+			case PropertyPresentationMode.Continuous:
+				GetPropertyContinuousAsync (propertyKey, property, onSuccess, onError);
+				break;
+			}
 		}
+
+
+		#region History
+		public void GetPropertyHistoryAsync (string propertyKey, Property property, OnSuccess onSuccess, OnError onError)
+		{
+			Task.Run (async () => {
+				try 
+				{
+					daProperty = property;
+					var command = TR50CommandFactory.Build (M2MCommands.CommandType.Property_History, daThing.key, propertyKey);
+					var historyRecords = await dataManager.M2MLoadListAsync<TR50PropertyHistoryParams> (command);
+					if (historyRecords.Params.HasPayload())
+					{
+						displayedRecords.Clear();
+						foreach (TR50PropertyValue pv in historyRecords.Params.values)
+							if (pv.HasPayload())
+								displayedRecords.Add(pv);
+
+						onSuccess(propertyKey);
+					}
+					else
+					{
+						// display error dialog and cleaer the graph display
+						displayedRecords.Clear();
+						onError(propertyKey, "Property has no history records");
+					}
+				}
+				catch (Exception e)
+				{
+					displayedRecords.Clear();
+					onError(propertyKey, "Property's records Unavailable: " + e.Message);
+				}
+			});
+		}
+		#endregion
+			
+		#region Continuous
+		public void GetPropertyContinuousAsync (string propertyKey, Property property, OnSuccess onSuccess, OnError onError)
+		{
+			Task.Run (async () => {
+				try 
+				{
+					daProperty = property;
+					var command = TR50CommandFactory.Build (M2MCommands.CommandType.Property_Current, daThing.key, propertyKey);
+					var currentRecord = await dataManager.M2MLoadListAsync<TR50PropertyValue> (command);
+					if (currentRecord.Params.HasPayload())
+					{
+						TR50PropertyValue pv = currentRecord.Params;
+						if (pv.HasPayload())
+							displayedRecords.Insert(0, pv);
+
+						onSuccess(propertyKey);
+					}
+					else
+					{						
+						// display error dialog and clear the graph display
+						displayedRecords.Clear();
+						onError(propertyKey, "Property has no history records");
+					}
+				}
+				catch (Exception e)
+				{
+					displayedRecords.Clear();
+					onError(propertyKey, "Property's records Unavailable: " + e.Message);
+				}
+			});
+		}
+		#endregion
+
+		#region IChartDataSource
+		public List<TR50PropertyValue> Points (string propertyKey)
+		{
+			return displayedRecords;
+		}
+
+		public string Name (string key)
+		{
+			return daProperty.name;
+		}
+		#endregion
+
 	}
 }
 

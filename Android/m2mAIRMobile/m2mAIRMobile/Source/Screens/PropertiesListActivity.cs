@@ -16,7 +16,7 @@ namespace Android.Source.Screens
 	[Activity (ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class PropertiesListActivity : BaseActivity
 	{
-		private PropertyHistoryViewModel 	historyViewModel;
+		private PropertyViewModel 			ViewModel;
 		private PropertiesListAdapter		adapter;
 		private ListView					listView;
 
@@ -37,14 +37,21 @@ namespace Android.Source.Screens
 			navBar = FindViewById<NavigationBarView>(m2m.Android.Resource.Id.NavigationBarView); 
 			navBar.SetTitle("Properties");
 
+			//TODO replace with selector
+			Button history = FindViewById<Button> (m2m.Android.Resource.Id.mode_history);
+			history.Click += (object sender, EventArgs e) => { OnModeHistory(); };
+			Button continuous = FindViewById<Button> (m2m.Android.Resource.Id.mode_continuous);
+			continuous.Click += (object sender, EventArgs e) => { OnModeContinuous(); };
+
+
 			listView = FindViewById<ListView>(m2m.Android.Resource.Id.listView); 
 
 			string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
-			historyViewModel = PropertyHistoryViewModel.Instance;
-			historyViewModel.GetThingObjectAsync (tkey, OnDBLoadThingObject, OpenErrorDialog);
+			ViewModel = PropertyViewModel.Instance;
+			ViewModel.GetThingObjectAsync (tkey, OnDBLoadThingObject, OpenErrorDialog);
 
 			chartsView = FindViewById<ChartsView> (m2m.Android.Resource.Id.chartsView);
-			chartsView.SetViewModel (historyViewModel);
+			chartsView.SetViewModel (ViewModel);
 			chartsView.LoadChartView ();
 		}
 
@@ -58,20 +65,13 @@ namespace Android.Source.Screens
 
 		public void OnDBLoadThingObject()
 		{
-			try{
-				RunOnUiThread(()=>{
-					Logger.Debug ("OnDBLoadThingObject()");
+			Logger.Debug ("OnDBLoadThingObject()");
 
-					daThing = historyViewModel.GetThing ();
-					thingBriefView.SetThing (daThing);
+			daThing = ViewModel.GetThing ();
+			thingBriefView.SetThing (daThing);
 
-					adapter = new PropertiesListAdapter(this, daThing);
-					adapter.PopulatePropertiesListAsync (OnListPopulated, OpenErrorDialog);
-				});
-			}
-			catch(Exception e){
-				OpenErrorDialog ("OnDBLoadThingObject", e.Message);
-			}
+			adapter = new PropertiesListAdapter(this, daThing);
+			adapter.PopulatePropertiesListAsync (OnListPopulated, OpenErrorDialog);
 		}
 
 		#region Property list
@@ -90,27 +90,41 @@ namespace Android.Source.Screens
 		}
 		#endregion
 
-		#region Property history
-		public void onPropertySelected(string key)
+		#region Presentation Mode
+		//TODO replace with selector
+		public void OnModeHistory()
+		{
+			Logger.Debug ("OnModeHistory");
+			ViewModel.PresentationMode = PropertyViewModel.PropertyPresentationMode.History;
+		}
+
+		public void OnModeContinuous()
+		{
+			Logger.Debug ("OnModeContinuous");
+			ViewModel.PresentationMode = PropertyViewModel.PropertyPresentationMode.Continuous;
+		}
+		#endregion
+
+		#region Property
+		public void OnPropertySelected(string key)
 		{
 			Logger.Debug ("onPropertySelected() property key: " + key);
-			historyViewModel.GetPropertyHistoryAsync (key, adapter.GetPropertyObject(key), OnPropertyHistory, OnPropertyHistoryError); 
+			ViewModel.OnPropertySelected (key, adapter.GetPropertyObject(key), OnPropertyData, OnPropertyDataError); 
 			StartLoadingSpinner ("Collecting Propertie's records.");
 		}
 
-		private void OnPropertyHistory(string key)
+		private void OnPropertyData(string key)
 		{
 			StopLoadingSpinner ();
 			Logger.Debug ("OnPropertyHistory()");
-
-			chartsView.Update(key);
+			chartsView.DrawChart(key);
 		}
 
-		private void OnPropertyHistoryError(string key, string msg)
+		private void OnPropertyDataError(string key, string msg)
 		{
 			StopLoadingSpinner ();
 			OpenErrorDialog (msg, null);
-			chartsView.RemoveAllCharts();
+//			chartsView.ClearChart();
 		}
 		#endregion
 	}

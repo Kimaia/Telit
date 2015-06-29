@@ -16,6 +16,7 @@ namespace Shared.Network
 			Thing_Def_Find, 
 			Property_History,
 			Property_Aggregate,
+			Property_Current,
 			Location_History
 		}
 
@@ -26,6 +27,7 @@ namespace Shared.Network
 			{ CommandType.Thing_Def_Find, "thing_def.find" },
 			{ CommandType.Property_History, "property.history" },
 			{ CommandType.Property_Aggregate, "property.aggregate" },
+			{ CommandType.Property_Current, "property.current" },
 			{ CommandType.Location_History, "location.history" }
 		};
 
