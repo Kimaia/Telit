@@ -35,7 +35,7 @@ namespace Android.Source.Screens
 			// Set our view from the "main" layout resource
 			SetContentView (m2m.Android.Resource.Layout.activity_properties_list);
 
-			ViewModel = PropertyViewModel.Instance;
+			ViewModel = new PropertyViewModel();
 			string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
 			ViewModel.GetThingObjectAsync (tkey, OnDBLoadThingObject, OpenErrorDialog);
 

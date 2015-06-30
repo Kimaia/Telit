@@ -28,16 +28,7 @@ namespace Shared.ViewModel
 		private List<TR50PropertyValue> 	displayedRecords;
 
 		// singleton
-		private static PropertyViewModel instance;
-		public static PropertyViewModel Instance 
-		{
-			get {
-				if (instance == null)
-					instance = new PropertyViewModel ();
-				return instance; 
-			}
-		}
-		private PropertyViewModel ()
+		public PropertyViewModel() 
 		{
 			dataManager = new DALManager();
 			displayedRecords = new List<TR50PropertyValue>();

@@ -75,26 +75,21 @@ namespace Android.Source.Screens
 
 			ViewHolder holder = null;
 			View view = convertView;
-			if (view == null) 
-			{
-				Logger.Debug ("PropertiesListAdapter.GetView() position:" + position);
-				view = LayoutInflater.From (context).Inflate (m2m.Android.Resource.Layout.list_cell_Property, null);
-				holder = new ViewHolder ();
-				holder.radioButton = view.FindViewById<RadioButton> (m2m.Android.Resource.Id.propertyRadioButton);
-				holder.radioButton.Checked = false;
-				view.Tag = holder;
-				holder.radioButton.Click += delegate {
-					if (activeButton != null)
-						activeButton.Checked = false;
-					activeButton = holder.radioButton;
-					holder.radioButton.Checked = true;
-					((PropertiesListActivity)context).OnPropertySelected(propertyKey);
-				};
-			}
-			else
-				holder = (ViewHolder)view.Tag;
-			
+
+			// TODO no resycling of Views
+			view = LayoutInflater.From (context).Inflate (m2m.Android.Resource.Layout.list_cell_Property, null);
+			holder = new ViewHolder ();
+			holder.radioButton = view.FindViewById<RadioButton> (m2m.Android.Resource.Id.propertyRadioButton);
+			holder.radioButton.Checked = false;
 			holder.radioButton.Text = property.name;
+			view.Tag = holder;
+			holder.radioButton.Click += delegate {
+				if (activeButton != null)
+					activeButton.Checked = false;
+				activeButton = holder.radioButton;
+				holder.radioButton.Checked = true;
+				((PropertiesListActivity)context).OnPropertySelected(propertyKey);
+			};
 
 			return view;
 		}
