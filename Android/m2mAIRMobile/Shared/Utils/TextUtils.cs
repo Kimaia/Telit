@@ -10,6 +10,11 @@ namespace Shared.Utils
 			return !email.StartsWith("@") && email.Contains("@");
 		}
 
+		public static string CurrentTime()
+		{
+			DateTime dt = DateTime.Now;
+			return dt.ToString ("s") + 'Z';
+		}
 	}
 }
 

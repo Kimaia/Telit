@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Shared.Utils;
 
 namespace Shared.Network.DataTransfer.TR50
 {
@@ -89,7 +90,7 @@ namespace Shared.Network.DataTransfer.TR50
 			case M2MCommands.CommandType.Property_Current:
 				prms.Params.Add (Constants.TR50_PARAM_THINGKEY, key1);
 				prms.Params.Add (Constants.TR50_PARAM_KEY, key2);
-				prms.Params.Add (Constants.TR50_PARAM_TS, CurrentTime());
+				prms.Params.Add (Constants.TR50_PARAM_TS, TextUtils.CurrentTime());
 				break;
 			case M2MCommands.CommandType.Thing_Def_Find:
 				prms.Params.Add (Constants.TR50_PARAM_DEFKEY, key1);
@@ -98,12 +99,6 @@ namespace Shared.Network.DataTransfer.TR50
 				throw new InvalidOperationException ("Wrong M2M CommandType:" + command);
 			}
 			return new TR50Command (command, prms);
-		}
-
-		private static string CurrentTime()
-		{
-			DateTime dt = DateTime.Now;
-			return dt.ToString ("s") + 'Z';
 		}
 	}
 

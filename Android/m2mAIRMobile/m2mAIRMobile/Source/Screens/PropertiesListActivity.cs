@@ -92,18 +92,18 @@ namespace Android.Source.Screens
 		public void OnPropertySelected(string key)
 		{
 			Logger.Debug ("onPropertySelected() property key: " + key);
-			ViewModel.OnPropertySelected (key, adapter.GetPropertyObject(key), OnPropertyData, OnPropertyDataError); 
+			ViewModel.OnPropertySelected (adapter.GetPropertyObject(key), OnPropertyData, OnPropertyDataError); 
 			StartLoadingSpinner ("Collecting Propertie's records.");
 		}
 
-		private void OnPropertyData(string key)
+		private void OnPropertyData()
 		{
 			StopLoadingSpinner ();
 			Logger.Debug ("OnPropertyData()");
-			chartsView.DrawChart(key);
+			chartsView.DrawChart();
 		}
 
-		private void OnPropertyDataError(string key, string msg)
+		private void OnPropertyDataError(string msg)
 		{
 			StopLoadingSpinner ();
 			OpenErrorDialog (msg, null);

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Shared.Network.DataTransfer.TR50;
+using System.Drawing;
 
 namespace Shared.Charts
 {
@@ -8,8 +8,9 @@ namespace Shared.Charts
 
 	public interface IChartDataSource
 	{
-		List<TR50PropertyValue> 	Points ();
-		string 						Name ();
+		List<Point> 	Points ();
+		string 			Name ();
+		string[] 		Ticks ();
 	}
 }
 

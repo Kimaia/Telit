@@ -25,13 +25,12 @@ namespace Android.Source.Views
 {
 	public class ChartsView : LinearLayout, INChartSeriesDataSource, INChartValueAxisDataSource
 	{
-		private NChartView					nchartView;
-		private IChartDataSource 			viewModel;
+		private NChartView			nchartView;
+		private IChartDataSource 	viewModel;
 
-		private List<Point> 				daPoints;
-		private List<TR50PropertyValue> 	m2mPoints;
-		private int minX, maxX;
-		private long minY, maxY;
+		private List<Point> 		m2mPoints;
+		private int 				minX, maxX;
+		private long 				minY, maxY;
 
 		public ChartsView (Context context) :
 			base (context)
@@ -81,8 +80,8 @@ namespace Android.Source.Views
 		{
 			// series
 //			NChartLineSeries series = new NChartLineSeries(); //NChartAreaSeries ();
-			NChartColumnSeries series = new NChartColumnSeries ();
-			series.Brush = new NChartSolidColorBrush (Android.Graphics.Color.Red);
+			NChartAreaSeries series = new NChartAreaSeries ();
+			series.Brush = new NChartSolidColorBrush (Android.Graphics.Color.Orange);
 			series.Brush.Opacity = 0.7f;
 			series.BorderThickness = 2.0f;
 			series.BorderBrush = new NChartSolidColorBrush(Android.Graphics.Color.Black);
@@ -91,7 +90,7 @@ namespace Android.Source.Views
 			nchartView.Chart.AddSeries (series);
 		}
 
-		public void DrawChart(string key)
+		public void DrawChart()
 		{
 			nchartView.Chart.Background = new NChartLinearGradientBrush(Android.Graphics.Color.Gray, Android.Graphics.Color.White);
 			nchartView.Chart.CartesianSystem.Margin = new NChartMargin (10.0f, 10.0f, 10.0f, 20.0f);
@@ -111,8 +110,13 @@ namespace Android.Source.Views
 		public NChartPoint[] Points (NChartSeries series)
 		{
 			m2mPoints = viewModel.Points ();
-			return ConvertScaleAndAnalysePoints (series);
+
+			if (m2mPoints == null || m2mPoints.Count == 0)
+				return new NChartPoint[0];
+			else
+				return Convert2NChartPoints (m2mPoints, series);
 		}
+
 		// Get name of the series.
 		public string Name (NChartSeries series)
 		{
@@ -170,46 +174,21 @@ namespace Android.Source.Views
 			if (m2mPoints == null || m2mPoints.Count == 0)
 				return null;
 			
-			if (axis.Kind == NChartValueAxisKind.X) 
-			{
-				string[] ticks = new string[2];
-				ticks [0] = m2mPoints [0].ts;
-				if (m2mPoints.Count > 1)
-					ticks [1] = m2mPoints.Last ().ts;
-				return ticks;
-			}
+			if (axis.Kind == NChartValueAxisKind.X)
+				return viewModel.Ticks ();
 			else
 				return null;		
 		}
 		#endregion
 
 		#region NChartPoint
-		private NChartPoint[] ConvertScaleAndAnalysePoints(NChartSeries series)
+		private NChartPoint[] Convert2NChartPoints(List<Point> points,  NChartSeries series)
 		{
-			if (m2mPoints.Count == 0)
-				return new NChartPoint[0];
-			else
-			{				
-				Convert2Points ();
-				return Convert2NChartPoints (series);
-			}
-		}
-
-		private void Convert2Points()
-		{
-			daPoints = new List<Point> ();
-			long firstX = TS2Seconds (m2mPoints [0].ts);
-			foreach (TR50PropertyValue pv in m2mPoints) 
-				daPoints.Add (TR50Point2PointAdjusted(pv, firstX));
-		}
-
-		private NChartPoint[] Convert2NChartPoints(NChartSeries series)
-		{
-			minY = maxY = daPoints [0].Y;
-			NChartPoint[] result = new NChartPoint[daPoints.Count];
-			for (int i = 0; i < daPoints.Count; ++i) 
+			minY = maxY = points [0].Y;
+			NChartPoint[] result = new NChartPoint[points.Count];
+			for (int i = 0; i < points.Count; ++i) 
 			{
-				Point pi = daPoints [i];
+				Point pi = points [i];
 
 				if (minY > pi.Y)
 					minY = pi.Y;
@@ -219,23 +198,11 @@ namespace Android.Source.Views
 				result [i] = new NChartPoint (NChartPointState.PointStateAlignedToXWithXY (pi.X, pi.Y), series);
 			}
 
-			minX = daPoints [0].X;
-			maxX = daPoints.Last().X;
+			maxX = points [0].X;
+			minX = points.Last().X;
 
 			return result;
 		}
-
-		private Point TR50Point2PointAdjusted(TR50PropertyValue tr50p, long zeroPoint)
-		{
-			PointF pf = new PointF (TS2Seconds (tr50p.ts) - zeroPoint, tr50p.value);
-			return new Point ((int)pf.X, (int)pf.Y);
-		}
-
-		private long TS2Seconds(string ts)
-		{
-			return (DateTime.Parse (ts)).Ticks / 10000000;
-		}
-
 		#endregion
 	}
 }
