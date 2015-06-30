@@ -178,10 +178,15 @@ namespace Shared.ViewModel
 
 		public string[] Ticks ()
 		{
-			string[] ticks = new string[2];
+			int count = displayedRecords.Count;
+			string[] ticks = new string[count];
 			ticks [0] = displayedRecords [0].ts;
-			if (displayedRecords.Count > 1)
-				ticks [1] = displayedRecords[displayedRecords.Count-1].ts;
+			if (count > 1) 
+			{
+				for (int i=1 ; i<count-1 ; i++)
+					ticks[i] = "";
+				ticks [count - 1] = displayedRecords [displayedRecords.Count - 1].ts;
+			}
 			return ticks;
 		}
 		#endregion
@@ -203,7 +208,7 @@ namespace Shared.ViewModel
 			var points = new List<Point> ();
 			long baseMeasureX = TS2Seconds (displayedRecords[0].ts);
 			foreach (TR50PropertyValue pv in displayedRecords) 
-				points.Insert (0, TR50Point2PointAdjusted(pv, baseMeasureX));  // in Reverse order
+				points.Add(TR50Point2PointAdjusted(pv, baseMeasureX));
 
 			// Log the converted points
 			Logger.Debug ("Converted Points: " + PointsLog(points));
