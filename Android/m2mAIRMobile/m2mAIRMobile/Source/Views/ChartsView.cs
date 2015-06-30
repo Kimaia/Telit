@@ -27,6 +27,7 @@ namespace Android.Source.Views
 	{
 		private NChartView			nchartView;
 		private IChartDataSource 	viewModel;
+		private string 				licenseKey;
 
 		private List<Point> 		m2mPoints;
 		private int 				minX, maxX;
@@ -54,6 +55,7 @@ namespace Android.Source.Views
 		{
 			LayoutInflater.From(Context).Inflate(m2m.Android.Resource.Layout.charts_view, this);
 			nchartView = FindViewById<NChartView>(m2m.Android.Resource.Id.nchartView);
+			licenseKey = context.Resources.GetString(m2m.Android.Resource.String.NChart_Key);
 		}
 
 		public void Cleanup ()
@@ -70,16 +72,20 @@ namespace Android.Source.Views
 		public void LoadChartView ()
 		{
 			// chart
-			nchartView.Chart.LicenseKey = "plf4E6SYNIynnmYSIuJK67UXWX3XqaMXTPO0KOFWJB+tIt0ABOgbqCrSYbhPDsYqjrEPycTNNZA8AYmh9h845udCeGSKDks5yVpv5FmhCz+B1KOKfECXhM4w202sJFMphO+HufuwET8Kxtuv+7nPBpDpydQwys1+sZ4EiUa5kAVH//DneMNjrZ+ScjwpXyiAAIy7AIsm3pdzQ1GFB018mbJeRBFTf7vrT7tL787/1L+xGCciaC2ZVqpu4+CWw2nadhgRmskoSEjutuyRmt4/C2MgNSLI9uBXfcOWUlJK3eEdyJXPnOhV1vrTDRA9eYAq+iylpeiZp9OWtDnD67mQMn02/1xo1iHs3z/qvJUKiru27EcO3XLXpfVGvbGSDr9CYpZDEB7e1hKqZi0l5QA7FKrrM7w6FVhJJI8suatTaVyB3x2e8qZ9gKNh0YrY3BTAS9jnEwdYRpIrfEho+lNP3NIPp101PC4kjgub7EAo2c1yGA2k7xovc2UG9vR6oyR0DQmcjHSszM2EK5B5Dj8wPZL2fn19AA07mC7JKsxA8yp4RbK7hU9Cr2Y21I3ceN4L22N8R8CkHdFoP1CS20Ru61YIH6hzhplCteqrcz5u62BPEGk+3UGPws2RsQqC/UOhEf5OhhmJxT+KcqjcTf6waRQe+YByaymMKi8o79p+IK8=";
-//			nchartView.Chart.CartesianSystem.Margin = new NChartMargin (10.0f, 10.0f, 10.0f, 20.0f);
+			nchartView.Chart.LicenseKey = licenseKey;
 			nchartView.Chart.ShouldAntialias = true;
+			nchartView.Chart.Background = new NChartLinearGradientBrush(Android.Graphics.Color.Gray, Android.Graphics.Color.White);
+//			nchartView.Chart.CartesianSystem.Margin = new NChartMargin (10.0f, 10.0f, 10.0f, 20.0f);
+			nchartView.Chart.CartesianSystem.XAxis.DataSource = this;
+			nchartView.Chart.CartesianSystem.YAxis.DataSource = this;
 			AddSeries ();
 		}
 
 		public void AddSeries()
 		{
 			// series
-//			NChartLineSeries series = new NChartLineSeries(); //NChartAreaSeries ();
+//			NChartColumnSeries series = new NChartColumnSeries();
+//			NChartLineSeries series = new NChartLineSeries();
 			NChartAreaSeries series = new NChartAreaSeries ();
 			series.Brush = new NChartSolidColorBrush (Android.Graphics.Color.Orange);
 			series.Brush.Opacity = 0.7f;
@@ -92,9 +98,6 @@ namespace Android.Source.Views
 
 		public void DrawChart()
 		{
-			nchartView.Chart.Background = new NChartLinearGradientBrush(Android.Graphics.Color.Gray, Android.Graphics.Color.White);
-			nchartView.Chart.CartesianSystem.Margin = new NChartMargin (10.0f, 10.0f, 10.0f, 20.0f);
-			nchartView.Chart.CartesianSystem.XAxis.DataSource = this;
 			nchartView.Chart.UpdateData ();
 		}
 
@@ -171,13 +174,15 @@ namespace Android.Source.Views
 
 		public string[] Ticks (NChartValueAxis axis)
 		{
-			if (m2mPoints == null || m2mPoints.Count == 0)
-				return null;
-			
-			if (axis.Kind == NChartValueAxisKind.X)
-				return viewModel.Ticks ();
-			else
-				return null;		
+			return null;
+//
+//			if (m2mPoints == null || m2mPoints.Count == 0)
+//				return null;
+//			
+//			if (axis.Kind == NChartValueAxisKind.X)
+//				return viewModel.Ticks ();
+//			else
+//				return null;		
 		}
 		#endregion
 
