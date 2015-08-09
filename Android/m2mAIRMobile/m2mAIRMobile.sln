@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Android", "m2mAIRMobile\Android.csproj", "{18927E1F-ED62-4082-9FCE-94CF64AD9083}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarAppAndroid", "m2mAIRMobile\CarAppAndroid.csproj", "{18927E1F-ED62-4082-9FCE-94CF64AD9083}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "Shared\Shared.shproj", "{A720C89D-2016-4C6A-AD92-1A6370170BAC}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CarAppShared", "Shared\CarAppShared.shproj", "{A720C89D-2016-4C6A-AD92-1A6370170BAC}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TelitAccessShare", "TelitAccessShare\TelitAccessShare.shproj", "{BABBED45-1501-4155-8CA8-3A4B78A56043}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

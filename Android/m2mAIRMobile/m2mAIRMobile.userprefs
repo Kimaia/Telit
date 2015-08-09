@@ -1,47 +1,13 @@
-﻿<Properties StartupItem="m2mAIRMobile/Android.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.192.168.56.101:5555" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="m2mAIRMobile/Source/CustomViews/ThingMapFragment.cs">
+﻿<Properties StartupItem="m2mAIRMobile/CarAppAndroid.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.6d9f4709" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Shared/ViewModel/ThingViewModel.cs">
     <Files>
-      <File FileName="Shared/ViewModel/ThingsListAdapterViewModel.cs" Line="30" Column="41" />
-      <File FileName="m2mAIRMobile/Source/Screens/ThingsListActivity.cs" Line="32" Column="21" />
-      <File FileName="m2mAIRMobile/Source/Screens/ThingsListAdapter.cs" Line="1" Column="1" />
-      <File FileName="m2mAIRMobile/Source/Screens/ThingActivity.cs" Line="34" Column="3" />
-      <File FileName="Shared/Model/UserDetails.cs" Line="5" Column="25" />
-      <File FileName="Shared/SAL/M2MAuthenticator.cs" Line="46" Column="27" />
-      <File FileName="Shared/Network/DataTransfer/RemoteResponse.cs" Line="17" Column="2" />
-      <File FileName="Shared/ModelManager/ModelServicesManager.cs" Line="34" Column="49" />
-      <File FileName="Shared/ViewModel/RegisterAndLoginViewModel.cs" Line="56" Column="41" />
-      <File FileName="Shared/ViewModel/BaseViewModel.cs" Line="3" Column="1" />
-      <File FileName="Shared/Model/Constants.cs" Line="8" Column="3" />
-      <File FileName="m2mAIRMobile/Source/Screens/RegisterAndLoginActivity.cs" Line="1" Column="1" />
-      <File FileName="m2mAIRMobile/Source/CustomViews/ThingBriefDescriptionView.cs" Line="56" Column="72" />
-      <File FileName="m2mAIRMobile/Source/CustomViews/ThingMapFragment.cs" Line="29" Column="1" />
+      <File FileName="Shared/ViewModel/ThingViewModel.cs" Line="1" Column="1" />
+      <File FileName="Shared/ViewModel/MapFragmentViewModel.cs" Line="1" Column="1" />
+      <File FileName="m2mAIRMobile/Source/Views/MultipleThingsMapFragment.cs" Line="1" Column="1" />
+      <File FileName="m2mAIRMobile/Source/Views/ChartsView.cs" Line="1" Column="1" />
+      <File FileName="Shared/Charts/IChartDataSource.cs" Line="1" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="m2mAIRMobile" expanded="True">
-            <Node name="Android" expanded="True">
-              <Node name="Resources" expanded="True">
-                <Node name="layout" expanded="True" />
-              </Node>
-              <Node name="Source" expanded="True">
-                <Node name="CustomViews" expanded="True">
-                  <Node name="ThingMapFragment.cs" selected="True" />
-                </Node>
-                <Node name="Screens" expanded="True" />
-              </Node>
-            </Node>
-            <Node name="Shared" expanded="True">
-              <Node name="ViewModel" expanded="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
@@ -54,5 +20,5 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
     <Watch file="Shared/Network/DataTransfer/TR50Serializer.cs" line="29" offsetX="430" offsetY="420" expression="req" liveUpdate="False" />
   </MonoDevelop.Ide.DebuggingService.PinnedWatches>
-  <MonoDevelop.Ide.ItemProperties.Android AndroidDesignerPreferredDevice="Nexus 4" />
+  <MonoDevelop.Ide.ItemProperties.LockAndSafe AndroidDesignerPreferredDevice="Nexus 4" />
 </Properties>

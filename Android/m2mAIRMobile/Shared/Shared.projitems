@@ -9,44 +9,17 @@
     <Import_RootNamespace>Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Utils\IsolatedStorageSettings.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utils\Settings.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utils\TextUtils.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utils\Logger.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\RemoteResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\LauncherViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\RegisterAndLoginViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Thing.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ThingsListAdapterViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DB\Dao.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DB\EntityWithAssociations.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DB\Kimchi.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DB\SQLiteAsyncConnectionExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DB\SQLiteConnectionWrapper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\RestSharpJsonNetSerializer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50\TR50Command.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50\TR50Converter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\M2M\M2MServer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\M2M\M2MCommands.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ThingViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50\TR50Request.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50\TR50Response.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\BaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\PropertiesListAdapterViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Property.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Charts\IChartDataSource.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SAL\M2MApiService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SAL\M2MAuthService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DAL\DALManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MapFragmentViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\PropertyViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)DB\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Network\DataTransfer\TR50\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Network\M2M\" />
     <Folder Include="$(MSBuildThisFileDirectory)Charts\" />
-    <Folder Include="$(MSBuildThisFileDirectory)DAL\" />
   </ItemGroup>
 </Project>
