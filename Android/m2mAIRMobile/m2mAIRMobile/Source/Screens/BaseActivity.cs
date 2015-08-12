@@ -10,139 +10,145 @@ using Shared.Utils;
 
 namespace Android.Source.Screens
 {
-	[Activity]			
-	public abstract class BaseActivity : Activity
-	{
-		private ProgressDialog progressSpinner;
-		private Action onPause;
-		private Action onResume;
+    [Activity]			
+    public abstract class BaseActivity : Activity
+    {
+        private ProgressDialog progressSpinner;
+        private Action onPause;
+        private Action onResume;
 
-		#region lifecycle
-		protected override void OnCreate (Bundle bundle)
-		{
-			base.OnCreate (bundle);
+        #region lifecycle
 
-			Logger.Debug ("ThreadId-" + Thread.CurrentThread.ManagedThreadId + "," + this.GetType().Name + "," + MethodBase.GetCurrentMethod().Name);
-		}
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
 
-		protected override void OnPause ()
-		{
-			Logger.Debug ("ThreadId-" + Thread.CurrentThread.ManagedThreadId + "," + this.GetType().Name + "," + MethodBase.GetCurrentMethod().Name);
+            Logger.Debug("ThreadId-" + Thread.CurrentThread.ManagedThreadId + "," + this.GetType().Name + "," + MethodBase.GetCurrentMethod().Name);
+        }
 
-			if (onPause != null)
-			{
-				onPause();
-			}
+        protected override void OnPause()
+        {
+            Logger.Debug("ThreadId-" + Thread.CurrentThread.ManagedThreadId + "," + this.GetType().Name + "," + MethodBase.GetCurrentMethod().Name);
 
-			if (progressSpinner != null)
-			{
-				StopLoadingSpinner();
-			}
-			base.OnPause ();
-		}
+            if (onPause != null)
+            {
+                onPause();
+            }
 
-		protected override void OnResume ()
-		{
-			Logger.Debug ("ThreadId-" + Thread.CurrentThread.ManagedThreadId + "," + this.GetType().Name + "," + MethodBase.GetCurrentMethod().Name);
+            if (progressSpinner != null)
+            {
+                StopLoadingSpinner();
+            }
+            base.OnPause();
+        }
 
-			base.OnResume ();
-			if (onResume != null)
-			{
-				onResume();
-			}
-		}
+        protected override void OnResume()
+        {
+            Logger.Debug("ThreadId-" + Thread.CurrentThread.ManagedThreadId + "," + this.GetType().Name + "," + MethodBase.GetCurrentMethod().Name);
 
-		protected override void OnStop ()
-		{
-			Logger.Debug ("ThreadId-" + Thread.CurrentThread.ManagedThreadId + "," + this.GetType().Name + "," + MethodBase.GetCurrentMethod().Name);
+            base.OnResume();
+            if (onResume != null)
+            {
+                onResume();
+            }
+        }
 
-			base.OnStop ();
-		}
+        protected override void OnStop()
+        {
+            Logger.Debug("ThreadId-" + Thread.CurrentThread.ManagedThreadId + "," + this.GetType().Name + "," + MethodBase.GetCurrentMethod().Name);
 
-		#endregion
+            base.OnStop();
+        }
+
+        #endregion
 
 
 
-		public void StartLoadingSpinner(string msg, Action onCancel = null)
-		{
-			try
-			{
-				RunOnUiThread (() => {
-					if (progressSpinner != null)
-					{
-						StopLoadingSpinner();
-					}
+        public void StartLoadingSpinner(string msg, Action onCancel = null)
+        {
+            try
+            {
+                RunOnUiThread(() =>
+                    {
+                        if (progressSpinner != null)
+                        {
+                            StopLoadingSpinner();
+                        }
 
-					progressSpinner = new ProgressDialog(this);
-					progressSpinner.SetCancelable(onCancel != null);
-					progressSpinner.CancelEvent +=  (sender, e) =>
-					{
-						onCancel();
-					};
-					progressSpinner.SetMessage(msg);
-					progressSpinner.Show();
-				});
-			}
-			catch (Exception e) 
-			{
-				Logger.Debug (e.Message);
-			}
-		}
+                        progressSpinner = new ProgressDialog(this);
+                        progressSpinner.SetCancelable(onCancel != null);
+                        progressSpinner.CancelEvent += (sender, e) =>
+                        {
+                            onCancel();
+                        };
+                        progressSpinner.SetMessage(msg);
+                        progressSpinner.Show();
+                    });
+            }
+            catch (Exception e)
+            {
+                Logger.Debug(e.Message);
+            }
+        }
 
-		public void StopLoadingSpinner()
-		{
-			PerformOnMainThread(() => {
-					if (progressSpinner != null) 
-					{
-						progressSpinner.Hide();
-						progressSpinner.Dismiss();
-						progressSpinner = null;
-					}
-				});
-		}
+        public void StopLoadingSpinner()
+        {
+            PerformOnMainThread(() =>
+                {
+                    if (progressSpinner != null)
+                    {
+                        progressSpinner.Hide();
+                        progressSpinner.Dismiss();
+                        progressSpinner = null;
+                    }
+                });
+        }
 
-		public void OpenErrorDialog(string title, string message)
-		{
-			Logger.Error("Error cought: \n" + title + ",  " + message);
-			RunOnUiThread (() => {
-				StopLoadingSpinner();
-				Toast.MakeText (this, title, ToastLength.Long).Show ();
-			});
-		}
+        public void OpenErrorDialog(string title, string message)
+        {
+            Logger.Error("Error cought: \n" + title + ",  " + message);
+            RunOnUiThread(() =>
+                {
+                    StopLoadingSpinner();
+                    Toast.MakeText(this, title, ToastLength.Long).Show();
+                });
+        }
 
-		public void ShowDialog(string title, string message)
-		{
-			RunOnUiThread (() => {
-				StopLoadingSpinner();
-				Toast.MakeText (this, title, ToastLength.Long).Show ();
-			});
-		}
+        public void ShowDialog(string title, string message)
+        {
+            RunOnUiThread(() =>
+                {
+                    StopLoadingSpinner();
+                    Toast.MakeText(this, title, ToastLength.Long).Show();
+                });
+        }
 
-		public void PerformOnMainThread(Action action)
-		{
-			try
-			{
-				RunOnUiThread(action);
-			}
-			catch (Exception e)
-			{
-				Logger.Error ("PerformOnMainThread - action(): " + action.Method.Name + ", Error message:" + e.Message);
-			}
-		}
+        public void PerformOnMainThread(Action action)
+        {
+            try
+            {
+                RunOnUiThread(action);
+            }
+            catch (Exception e)
+            {
+                Logger.Error("PerformOnMainThread - action(): " + action.Method.Name + ", Error message:" + e.Message);
+            }
+        }
 
-		public bool IsActive 
-		{ 
-			get { return progressSpinner.IsShowing;}
-		}
+        public bool IsActive
+        { 
+            get { return progressSpinner.IsShowing; }
+        }
 
-		protected void SetOnPause (Action action)
-		{
-			onPause = action;
-		}
-		protected void SetOnResume (Action action)
-		{
-			onResume = action;
-		}
-	}
+        protected void SetOnPause(Action action)
+        {
+            onPause = action;
+        }
+
+        protected void SetOnResume(Action action)
+        {
+            onResume = action;
+        }
+    }
 }
 

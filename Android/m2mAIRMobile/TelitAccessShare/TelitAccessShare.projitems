@@ -32,5 +32,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Logger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\TextUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\BaseModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\LauncherModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\PropertiesListAdapterModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\PropertyModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\RegisterAndLoginModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\ThingModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Charts\IChartDataSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\ThingsListAdapterModel.cs" />
   </ItemGroup>
 </Project>

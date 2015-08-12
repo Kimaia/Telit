@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <RelativeLayout
+        android:id="@+id/lock_sprite_layout"
+        android:layout_width="100dp"
+        android:layout_height="75dp"
+        android:layout_marginRight="5dp" />
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="fill_parent"
+        android:layout_height="75dp"
+        android:textColor="#FFF"
+        android:text="very important"
+        android:gravity="center_vertical"
+        android:layout_toRightOf="@id/lock_sprite_layout"
+        android:layout_alignBaseline="@id/lock_sprite_layout"
+        android:layout_alignTop="@id/lock_sprite_layout" />
+<!--        
+-->
+</RelativeLayout>

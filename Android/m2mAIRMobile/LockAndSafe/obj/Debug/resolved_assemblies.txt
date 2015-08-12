@@ -1,0 +1,9 @@
+/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/obj/Debug/assemblies/LockAndSafe.dll
+/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/obj/Debug/assemblies/NChart3D.dll
+/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/obj/Debug/assemblies/Newtonsoft.Json.dll
+/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/obj/Debug/assemblies/SQLite.dll
+/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/obj/Debug/assemblies/RestSharp.MonoDroid.dll
+/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/obj/Debug/assemblies/Xamarin.Android.Support.v4.dll
+/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/obj/Debug/assemblies/Xamarin.Android.Support.v7.AppCompat.dll
+/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/obj/Debug/assemblies/Xamarin.Android.Support.v7.MediaRouter.dll
+/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/obj/Debug/assemblies/GooglePlayServicesLib.dll

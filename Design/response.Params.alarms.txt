@@ -1,0 +1,132 @@
+response.Params.alarms	
+{
+
+	{   
+		"reason": 
+		{     
+		"name": "Transmit Reason",     
+		"states": 
+			[       
+				{         "name": "No reason recorded",         "color": "#000000"       },       
+				{         "name": "Response",         "color": "#000000"       },       
+				{         "name": "Tracking",         "color": "#000000"       },       
+				{         "name": "-",         "color": "#000000"       },       
+				{         "name": "Event",         "color": "#000000"       },       
+				{         "name": "-",         "color": "#000000"       },       
+				{         "name": "Emergency",         "color": "#000000"       },       
+				{         "name": "Low battery",         "color": "#FF0000"       },       
+				{         "name": "Static pin IN",         "color": "#000000"       },       
+				{         "name": "Static pin OUT",         "color": "#000000"       },       
+				{         "name": "Strong Impact",         "color": "#000000"       },       
+				{         "name": "Mobile pin IN",         "color": "#000000"       },       
+				{         "name": "Mobile pin OUT",         "color": "#000000"       },       
+				{         "name": "Weak impact",         "color": "#000000"       },       
+				{         "name": "Location update",         "color": "#000000"       },       
+				{         "name": "-",         "color": "#000000"       },       
+				{         "name": "-",         "color": "#000000"       },       
+				{         "name": "-",         "color": "#000000"       },       
+				{         "name": "-",         "color": "#000000"       },       
+				{         "name": "-",         "color": "#000000"       },       
+				{         "name": "-",         "color": "#000000"       },       
+				{         "name": "-",         "color": "#000000"       },       
+				{         "name": "Closed",         "color": "#777777"       },       
+				{         "name": "Opened",         "color": "#007700"       },       
+				{         "name": "Maintenance",         "color": "#000000"       },      
+				 {         "name": "Break-in",         "color": "#CC0000"       },       
+				 {         "name": "-",         "color": "#000000"       },       
+				 {         "name": "-",         "color": "#000000"       },       
+				 {         "name": "-",         "color": "#000000"       },       
+				 {         "name": "Power on",         "color": "#000000"       },       
+				 {         "name": "Light off",         "color": "#000000"       },       
+				 {         "name": "Light on",         "color": "#000000"       },       
+				 {         "name": "Temperature low",         "color": "#000000"       },       
+				 {         "name": "Temperature high",         "color": "#000000"       },       
+				 {         "name": "-",         "color": "#000000"       },       
+				 {         "name": "-",         "color": "#000000"       },       
+				 {         "name": "-",         "color": "#000000"       },       
+				 {         "name": "-",         "color": "#000000"       },       
+				 {         "name": "Logging",         "color": "#000000"       }     
+			]   
+
+		},   
+
+
+		"state": 
+		{     "name": "Lock state",     
+		    "states": 
+			[       
+				{ "name": "-", "color": "#000000" },       
+				{ "name": "Locked", "color": "#777777"       },       
+				{ "name": "Unlocked",         "color": "#00FF00"       },       
+				{ "name": "Maintenance",         "color": "#E35F5F"       },       
+				{ "name": "Break-in",         "color": "#770000"       }     
+			]   
+		} 
+	}
+}	Newtonsoft.Json.Linq.JObject
+
+
+
+
+
+
+
+
+{"1":
+	{
+		"success":true,
+		"params":
+		{
+			"count":7,
+			"fields":
+			[
+				"id",
+				"key",
+				"name",
+				"defKey","gateway","connected","lastSeen","loc","proto","remoteAddr","type","data","properties","alarms","attrs","createdOn","updatedOn"
+			],
+			"result":
+			[
+				{
+					"alarms":
+					{
+						"reason":    {"ts":"2015-07-28T12:21:48Z","state":4},
+					    "state":    {"ts":"2015-07-28T12:21:48Z","state":1}
+					},
+				     "connected": false,
+				     "createdOn":"2015-07-27T07:49:23.347Z",
+				     "defKey":"watchlock",
+				     "id":"55b5e283709441490bba0822",
+				     "key":"199000",
+				     "lastSeen":"2015-07-28T18:29:03.493Z",
+				     "loc":
+			     	{
+			     		"addr":
+			     		{
+			     			"streetNumber":"",
+			     			"street":"Airport North Road",
+			     			"city":"Nairobi",
+			     			"state":"Nairobi",
+			     			"zipCode":"00200",
+			     			"country":"KE"
+			     		},
+			     		"lat":-1.32562,
+			     		"lng":36.89828
+			     	},
+				     "locUpdated":"2015-07-28T12:21:51Z",
+				     "name":"WL 199000 (virtual)",
+				     "properties":{"voltage":{"ts":"2015-07-28T12:21:48Z","value":3.72}},
+				     "type":"Starcom Watchlock Thing",
+				     "updatedOn":"2015-07-28T17:53:12.396Z"
+				},
+				
+				{
+					"alarms":
+					{
+						"reason":{"ts":"2015-08-01T17:19:29Z","state":2},
+						"state":{"ts":"2015-07-31T13:48:38Z","state":1}
+					},
+					"connected":false,"createdOn":"2015-07-29T05:10:38.379Z","defKey":"watchlock","id":"55b8604e7094416b151c80c2","key":"425003","lastSeen":"2015-08-02T03:20:26.091Z","loc":{"addr":{"streetNumber":"","street":"Avenida Antimonio","city":"Centro","state":"TB","zipCode":"86010","country":"MX"},"lat":18.02502,"lng":-92.91106},"locUpdated":"2015-08-01T16:19:36Z","name":"WL 425003","properties":{"voltage":{"ts":"2015-08-02T03:19:29Z","value":3.33}},"type":"Starcom Watchlock Thing","updatedOn":"2015-07-29T05:10:38.379Z"
+					},
+					{
+						"alarms":{"reason":{"ts":"2015-08-11T13:52:40Z","state":23},"state":{"ts":"2015-08-11T13:52:40Z","state":2}},"connected":false,"createdOn":"2015-07-29T05:09:58.853Z","defKey":"watchlock","id":"55b86026b2157c307907d4cc","key":"433596","lastSeen":"2015-08-11T13:53:40.308Z","loc":{"addr":{"streetNumber":"","street":"Carretera Mazatlán-Culiacán","city":"","state":"","zipCode":"","country":""},"lat":24.64648,"lng":-107.44469},"locUpdated":"2015-08-11T13:48:14Z","name":"WL 433596","properties":{"voltage":{"ts":"2015-08-11T13:52:40Z","value":3.78}},"type":"Starcom Watchlock Thing","updatedOn":"2015-07-29T05:09:58.853Z"},{"alarms":{"reason":{"ts":"2015-07-29T18:58:53Z","state":2},"state":{"ts":"2015-07-29T05:10:15Z","state":1}},"connected":false,"createdOn":"2015-07-29T05:07:07.302Z","defKey":"watchlock","id":"55b85f7bb2157c307907cd9e","key":"434479","lastSeen":"2015-07-29T18:59:26.784Z","loc":{"addr":{"streetNumber":"","street":"Самыбалдиева улица","city":"Бишкек","state":"","zipCode":"724318","country":"KG"},"lat":42.86874,"lng":74.69344},"locUpdated":"2015-07-29T18:58:53Z","name":"WL 434479","properties":{"voltage":{"ts":"2015-07-29T18:58:53Z","value":3.53}},"type":"Starcom Watchlock Thing","updatedOn":"2015-07-29T05:07:07.302Z"},{"alarms":{"reason":{"ts":"2015-07-29T11:46:47Z","state":14},"state":{"ts":"2015-07-29T09:02:09Z","state":2}},"connected":false,"createdOn":"2015-07-29T05:09:37.254Z","defKey":"watchlock","id":"55b860117094416b151c772b","key":"434850","lastSeen":"2015-07-29T11:49:47.801Z","loc":{"addr":{"streetNumber":"","street":"2-й Восточный проезд","city":"сельское поселение Село Ворсино","state":"Калужская область","zipCode":"","country":"RU"},"lat":55.2381,"lng":36.69571},"locUpdated":"2015-07-29T11:46:47Z","name":"WL 434850","properties":{"voltage":{"ts":"2015-07-29T11:46:47Z","value":3.79}},"type":"Starcom Watchlock Thing","updatedOn":"2015-07-29T05:09:37.254Z"},{"connected":false,"createdOn":"2015-07-30T13:25:09.163Z","defKey":"watchlock","id":"55ba25b5b2157c307927f48e","key":"454074","name":"WL 454074","type":"Starcom Watchlock Thing","updatedOn":"2015-07-30T13:25:09.163Z"},{"alarms":{"reason":{"ts":"2015-07-29T23:04:10Z","state":38},"state":{"ts":"2015-07-29T06:20:22Z","state":0}},"connected":false,"createdOn":"2015-07-29T05:07:21.405Z","defKey":"watchlock","id":"55b85f89b2157c307907ce07","key":"496689","lastSeen":"2015-07-30T02:11:39.76Z","loc":{"addr":{"streetNumber":"","street":"Clementi Avenue 3","city":"","state":"","zipCode":"120449","country":"SG"},"lat":1.31256,"lng":103.76621},"locUpdated":"2015-07-29T07:48:50Z","name":"WL 496689","properties":{"voltage":{"ts":"2015-07-30T02:09:10Z","value":3.31}},"type":"Starcom Watchlock Thing","updatedOn":"2015-07-29T05:07:21.405Z"}]}}}
