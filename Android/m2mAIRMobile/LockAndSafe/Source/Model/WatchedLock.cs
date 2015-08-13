@@ -7,6 +7,7 @@ using Shared.Model;
 
 namespace com.telit.lock_and_safe
 {
+    
     [Table("WatchedLock")]
     public class WatchedLock
     {
@@ -40,28 +41,10 @@ namespace com.telit.lock_and_safe
         [Ignore]
         public Array  	locWithin		{ get; set; }
 
-        [Ignore]
-        public Gateway 	gateway			{ get; set; }
-
-        public string RawGateway
-        {
-            get
-            {
-                return gateway == null ? null : JsonConvert.SerializeObject(gateway);
-            }
-            set
-            {
-                gateway = value == null ? null : JsonConvert.DeserializeObject<Gateway>(value);
-            }
-        }
-
+        
         [Ignore]
         public Location	  	loc				{ get; set; }
 
-        [Ignore]
-        public LockAlarms alarms { get; set; }
-
-        
         public string RawLocation
         {
             get
@@ -74,8 +57,49 @@ namespace com.telit.lock_and_safe
             }
         }
 
-        //		public string data			{ get; set; }
+        
+        
+        public string alarms_json
+        {
+            get
+            {
+                return alarms == null ? null : JsonConvert.SerializeObject(alarms);
+            }
+            set
+            {
+                alarms = value == null ? null : JsonConvert.DeserializeObject<LockAlarms>(value);
+            }
+        }
 
+        [Ignore]
+        public LockAlarms alarms { get; set; }
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        public string properties_json
+        {
+            get
+            {
+                return properties == null ? null : JsonConvert.SerializeObject(properties);
+            }
+            set
+            {
+                properties = value == null ? null : JsonConvert.DeserializeObject<LockProperties>(value);
+            }
+        }
+
+        [Ignore]
+        public LockProperties properties { get; set; }
+
+        
+        
         public WatchedLock()
         {
         }
@@ -86,12 +110,79 @@ namespace com.telit.lock_and_safe
             this.key = key;
             this.name = name;
         }
-    }
 
-    public class LockAlarms : Entity
-    {
-        public Alarm     reason   { get; set; }
+        public static string stateReason(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return   "No reason recorded";
+                case 1:
+                    return   "Response";
+                case 2:
+                    return   "Tracking";
+                case 4:
+                    return   "Event";
+                case 6:
+                    return   "Emergency";
+                case 7:
+                    return   "Low battery";
+                case 8:
+                    return   "Static pin IN";
+                case 9:
+                    return   "Static pin OUT";
+                case 10:
+                    return   "Strong Impact";
+                case 11:
+                    return   "Mobile pin IN";
+                case 12:
+                    return   "Mobile pin OUT";
+                case 13:
+                    return   "Weak impact";
+                case 14:
+                    return   "Location update";
+                case 22:
+                    return   "Closed";
+                case 23:
+                    return   "Opened";
+                case 24:
+                    return   "Maintenance";
+                case 25:
+                    return   "Break-in";
+                case 29:
+                    return   "Power on";
+                case 30:
+                    return   "Light off";
+                case 31:
+                    return   "Light on";
+                case 32:
+                    return   "Temperature low";
+                case 33:
+                    return   "Temperature high";
+                case 38:
+                    return   "Logging";
+                default:
+                    return   "-";
+            }
+        }
 
-        public Alarm     state    { get; set; }
+        
+        
+        
+        public class LockAlarms
+        {
+            public AlarmResponse     reason   { get; set; }
+
+            public AlarmResponse     state    { get; set; }
+        }
+
+        
+        
+        public class LockProperties
+        {
+            public PropertyResponse  voltage   { get; set; }
+        }
+    
+    
     }
 }

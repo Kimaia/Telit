@@ -14,7 +14,7 @@ using Android.Graphics;
 
 namespace com.telit.lock_and_safe
 {
-    [Activity(ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
+    [Activity(ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, Icon = "@drawable/ic_launcher")]			
     public class RegisterAndLoginActivity : BaseActivity
     {
 

@@ -81,6 +81,9 @@
     <Compile Include="Source\Model\WatchedLock.cs" />
     <Compile Include="Source\Model\LocksListAdapterModel.cs" />
     <Compile Include="Source\Activities\LocksListActivity.cs" />
+    <Compile Include="Source\Activities\LockDetailsActivity.cs" />
+    <Compile Include="Source\Model\WatchLockModel.cs" />
+    <Compile Include="Source\Model\LockAppLauncherModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -95,7 +98,6 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\values\attrs.xml" />
-    <AndroidResource Include="Resources\layout\LoginLayout.axml" />
     <AndroidResource Include="Resources\drawable-hdpi\sprite.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_launcher.png" />
@@ -111,6 +113,10 @@
     <AndroidResource Include="Resources\drawable-hdpi\unlocked.png" />
     <AndroidResource Include="Resources\drawable-hdpi\broke_in_lock.png" />
     <AndroidResource Include="Resources\layout\lock_progress_dialog.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\lock_cover_image.png" />
+    <AndroidResource Include="Resources\layout\LoginLayout.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\battery.png" />
+    <AndroidResource Include="Resources\layout\lock_activiry_layout.axml" />
   </ItemGroup>
   <Import Project="..\TelitAccessShare\TelitAccessShare.projitems" Label="Shared" Condition="Exists('..\TelitAccessShare\TelitAccessShare.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

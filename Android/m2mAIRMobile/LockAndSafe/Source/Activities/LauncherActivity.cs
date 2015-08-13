@@ -18,7 +18,7 @@ namespace com.telit.lock_and_safe
         {
             base.OnCreate(bundle);
 
-            var viewModel = new LauncherModel();
+            var viewModel = new LockAppLauncherModel();
 
             if (viewModel.IsLoggedIn())
                 LoggedIn();

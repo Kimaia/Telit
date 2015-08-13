@@ -13,7 +13,7 @@ using LockAndSafe;
 
 namespace com.telit.lock_and_safe
 {
-    [Activity(ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
+    [Activity(ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, Icon = "@drawable/ic_launcher")]			
     public class LocksListActivity : BaseActivity
     {
         private ListView listView;
@@ -65,15 +65,15 @@ namespace com.telit.lock_and_safe
         {
             Logger.Debug("OnListItemClick()");
             var watchLock = adapter.GetLockObject(e.Position);
-            InitiateThingActivity(watchLock);
+            InitiateLockDetailsActivity(watchLock);
         }
 
-        public void InitiateThingActivity(WatchedLock selectedLock)
+        public void InitiateLockDetailsActivity(WatchedLock selectedLock)
         {
-//            var intent = new Intent(this, typeof(ThingActivity));
-//            intent.PutExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER, thing.key);
-//            Logger.Debug("InitiateThingActivity() Thing key: " + thing.key);
-//            StartActivity(intent);
+            var intent = new Intent(this, typeof(LockDetailsActivity));
+            intent.PutExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER, selectedLock.key);
+            Logger.Debug("InitiateThingActivity() Thing key: " + selectedLock.key);
+            StartActivity(intent);
         }
 
         public void OnMapClick()

@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 using Shared.Utils;
 using Shared.Model;
-using Shared.Model;
 using LockAndSafe;
 using Android.Graphics;
 using Shared.Network.DataTransfer.TR50;
@@ -95,38 +94,42 @@ namespace com.telit.lock_and_safe
                 view = LayoutInflater.From(context).Inflate(Resource.Layout.listcell_lock, null);
 
             view.FindViewById<TextView>(Resource.Id.lock_name).Text = item.name;
-            view.FindViewById<TextView>(Resource.Id.lock_type).Text = item.key.Split("Thing".ToArray())[0];
+            view.FindViewById<TextView>(Resource.Id.lock_type).Text = item.type;
             view.FindViewById<TextView>(Resource.Id.lock_address).Text = (item.loc == null || item.loc.addr == null) ? "unknown address" : item.loc.addr.ToString();
             
             ImageView statusImage = view.FindViewById<ImageView>(Resource.Id.status_image_view);
             
             if (item.alarms != null && item.alarms.state != null)
             {
-                switch (item.alarms.state.state)
-                {
-                    case (int)LockState.Unknown:
-                        statusImage.SetImageBitmap(unknown);
-                        break;
-                    case (int)LockState.Locked:
-                        statusImage.SetImageBitmap(locked);
-                        break;
-                    case (int)LockState.Unlocked:
-                        statusImage.SetImageBitmap(unlocked);
-                        break;
-                    case (int)LockState.Maintenence:
-                        statusImage.SetImageBitmap(maintenence);
-                        break;
-                    case (int)LockState.BreakIn:
-                        statusImage.SetImageBitmap(broken);
-                        break;
-                    default:
-                        break;
-                }
+                Bitmap img = GetImageForStatus(item.alarms.state.state);
+                if (img != null)
+                    statusImage.SetImageBitmap(img);
+                    
+                
             }
             return view;
         }
 
         #endregion
+
+        public static Bitmap GetImageForStatus(int state)
+        {
+            switch (state)
+            {
+                case (int)LockState.Unknown:
+                    return unknown;
+                case (int)LockState.Locked:
+                    return locked;
+                case (int)LockState.Unlocked:
+                    return unlocked;
+                case (int)LockState.Maintenence:
+                    return maintenence;
+                case (int)LockState.BreakIn:
+                    return broken;
+                default:
+                    return null;
+            }
+        }
         
     }
 }

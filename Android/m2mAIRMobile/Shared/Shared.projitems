@@ -10,5 +10,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MapFragmentModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\LauncherModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Model\" />
   </ItemGroup>
 </Project>

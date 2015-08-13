@@ -96,16 +96,7 @@ namespace Shared.Model
         public Address	addr	 		{ get; set; }
     }
 
-    public class Alarm : Entity
-    {
-        public int     state   { get; set; }
-
-        public int     duration{ get; set; }
-
-        public string  msg     { get; set; }
-
-        public string  ts      { get; set; }
-    }
+    
 
     public class Address : Entity
     {

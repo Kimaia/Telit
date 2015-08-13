@@ -141,8 +141,8 @@ namespace Shared.Model
                         #if DEBUG
                         var currentRecord = GetCurrentStub();
                         #else
-//					var command = TR50CommandFactory.Build (M2MCommands.CommandType.Property_Current, daThing.key, daProperty.key);
-//					var currentRecord = await dataManager.M2MLoadListAsync<TR50PropertyValue> (command);
+                        var command = TR50CommandFactory.Build(M2MCommands.CommandType.Property_Current, daThing.key, daProperty.key);
+                        var currentRecord = await dataManager.M2MLoadListAsync<TR50PropertyValue>(command);
                         #endif
 
                         if (currentRecord.Params.HasPayload())

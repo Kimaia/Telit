@@ -55,7 +55,7 @@ namespace com.telit.lock_and_safe
                                 locksList.RemoveAt(i);
                         }
                         
-//                        await DataManager.DBInsertListAsync<Thing>(locksList);
+                        await DataManager.DBInsertListAsync<WatchedLock>(locksList);
                         onSuccess();
                     }
                 });

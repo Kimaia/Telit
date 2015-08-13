@@ -5,19 +5,20 @@ using Shared.DB;
 
 namespace Shared.Model
 {
-	[Table("Property")]
-	public class Property : EntityWithAssociations
-	{
+    [Table("Property")]
+    public class Property : Entity
+    {
 
-		[Unique]
-		public string 	key		{ get; set; }
+        [Unique]
+        public string 	key		{ get; set; }
 
-		public string 	name		{ get; set; }
-		public string 	unit		{ get; set; }
+        public string 	name		{ get; set; }
 
-		public Property ()
-		{
-		}
-	}
+        public string 	unit		{ get; set; }
+
+        public Property()
+        {
+        }
+    }
 }
 

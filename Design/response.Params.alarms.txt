@@ -51,6 +51,39 @@ response.Params.alarms
 		},   
 
 
+
+switch(reason)
+{
+    case 0: return   "No reason recorded" ;
+    case 1: return   "Response";
+    case 2: return   "Tracking";
+    case 4: return   "Event";
+    case 6: return   "Emergency";
+    case 7: return   "Low battery";
+    case 8: return   "Static pin IN";
+    case 9: return   "Static pin OUT";
+    case 10: return   "Strong Impact";
+    case 11: return   "Mobile pin IN";
+    case 12: return   "Mobile pin OUT";
+    case 13: return   "Weak impact";
+    case 14: return   "Location update";
+    case 22: return   "Closed";
+    case 23: return   "Opened";
+    case 24: return   "Maintenance";
+    case 25: return   "Break-in";
+    case 29: return   "Power on";
+    case 30: return   "Light off";
+    case 31: return   "Light on";
+    case 32: return   "Temperature low";
+    case 33: return   "Temperature high";
+    case 38: return   "Logging";
+    default: return   "-";
+}
+
+
+
+
+
 		"state": 
 		{     "name": "Lock state",     
 		    "states": 
@@ -64,6 +97,13 @@ response.Params.alarms
 		} 
 	}
 }	Newtonsoft.Json.Linq.JObject
+
+
+
+
+
+
+
 
 
 
@@ -115,7 +155,13 @@ response.Params.alarms
 			     	},
 				     "locUpdated":"2015-07-28T12:21:51Z",
 				     "name":"WL 199000 (virtual)",
-				     "properties":{"voltage":{"ts":"2015-07-28T12:21:48Z","value":3.72}},
+				     "properties":
+				     {
+				     	"voltage":
+				     	{
+				     		"ts":"2015-07-28T12:21:48Z","value":3.72
+				     	}
+				     },
 				     "type":"Starcom Watchlock Thing",
 				     "updatedOn":"2015-07-28T17:53:12.396Z"
 				},
