@@ -31,8 +31,7 @@ namespace com.telit.lock_and_safe
         private ImageView stateImage;
         private TextView reasonText;
         
-        //        private LockMapFragment mapFragment;
-        //        private GoogleMap map;
+        private LockMapFragment mapFragment;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -50,9 +49,9 @@ namespace com.telit.lock_and_safe
             
             
             
-//            viewModel = new WatchLockModel();
-//            string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
-//            viewModel.GetLockObject(tkey, OnDBLoadLockObject, OpenErrorDialog);
+            viewModel = new WatchLockModel();
+            string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
+            viewModel.GetLockObject(tkey, OnDBLoadLockObject, OpenErrorDialog);
         }
 
 
@@ -72,8 +71,8 @@ namespace com.telit.lock_and_safe
                             if (theLock.loc.addr != null)
                                 lockAddress.Text = theLock.loc.addr.ToString();
                             
-//                            mapFragment = (LockMapFragment)FragmentManager.FindFragmentById(Resource.Id.lock_map);
-//                            mapFragment.SetLock(theLock);
+                            mapFragment = (LockMapFragment)FragmentManager.FindFragmentById(Resource.Id.lock_map);
+                            mapFragment.SetLock(theLock);
                                 
                         } 
                         if (theLock.alarms != null)

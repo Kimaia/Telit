@@ -2120,7 +2120,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int NavigationBarView=0x7f0c0053;
-        public static final int Navigation_Title=0x7f0c0068;
+        public static final int Navigation_Title=0x7f0c006d;
         public static final int action_bar=0x7f0c0045;
         public static final int action_bar_activity_content=0x7f0c0000;
         public static final int action_bar_container=0x7f0c0044;
@@ -2138,7 +2138,7 @@ containing a value of this type.
         public static final int adjust_height=0x7f0c0009;
         public static final int adjust_width=0x7f0c000a;
         public static final int always=0x7f0c002b;
-        public static final int batery_voltage=0x7f0c005a;
+        public static final int batery_voltage=0x7f0c005b;
         public static final int beginning=0x7f0c0028;
         public static final int book_now=0x7f0c0019;
         public static final int buyButton=0x7f0c0015;
@@ -2166,33 +2166,38 @@ containing a value of this type.
         public static final int icon=0x7f0c003a;
         public static final int ifRoom=0x7f0c002d;
         public static final int image=0x7f0c0037;
+        public static final int latitude=0x7f0c0065;
         public static final int listMode=0x7f0c0020;
         public static final int listView=0x7f0c0054;
         public static final int list_item=0x7f0c0039;
         public static final int lock_address=0x7f0c0059;
+        public static final int lock_map=0x7f0c005e;
         public static final int lock_name=0x7f0c0057;
+        public static final int lock_reason=0x7f0c0058;
         public static final int lock_short_discription=0x7f0c0056;
-        public static final int lock_sprite_layout=0x7f0c005d;
-        public static final int lock_type=0x7f0c0058;
-        public static final int login=0x7f0c0061;
-        public static final int logout=0x7f0c0067;
+        public static final int lock_sprite_layout=0x7f0c005f;
+        public static final int lock_type=0x7f0c005a;
+        public static final int login=0x7f0c0063;
+        public static final int logout=0x7f0c006c;
+        public static final int longitude=0x7f0c0066;
+        public static final int mapView=0x7f0c0064;
         public static final int match_parent=0x7f0c0017;
-        public static final int media_route_control_frame=0x7f0c0065;
-        public static final int media_route_disconnect_button=0x7f0c0066;
-        public static final int media_route_list=0x7f0c0062;
-        public static final int media_route_volume_layout=0x7f0c0063;
-        public static final int media_route_volume_slider=0x7f0c0064;
+        public static final int media_route_control_frame=0x7f0c006a;
+        public static final int media_route_disconnect_button=0x7f0c006b;
+        public static final int media_route_list=0x7f0c0067;
+        public static final int media_route_volume_layout=0x7f0c0068;
+        public static final int media_route_volume_slider=0x7f0c0069;
         public static final int middle=0x7f0c002a;
         public static final int monochrome=0x7f0c001f;
         public static final int never=0x7f0c002e;
         public static final int none=0x7f0c000b;
         public static final int normal=0x7f0c000d;
-        public static final int password=0x7f0c0060;
+        public static final int password=0x7f0c0062;
         public static final int production=0x7f0c0012;
         public static final int progress_circular=0x7f0c0005;
         public static final int progress_horizontal=0x7f0c0006;
         public static final int radio=0x7f0c003f;
-        public static final int reason_text=0x7f0c005c;
+        public static final int reason_text=0x7f0c005d;
         public static final int sandbox=0x7f0c0013;
         public static final int satellite=0x7f0c000e;
         public static final int search_badge=0x7f0c0049;
@@ -2211,17 +2216,17 @@ containing a value of this type.
         public static final int showHome=0x7f0c0025;
         public static final int showTitle=0x7f0c0026;
         public static final int split_action_bar=0x7f0c0007;
-        public static final int state_image=0x7f0c005b;
+        public static final int state_image=0x7f0c005c;
         public static final int status_image_view=0x7f0c0055;
         public static final int strict_sandbox=0x7f0c0014;
         public static final int submit_area=0x7f0c0050;
         public static final int tabMode=0x7f0c0021;
         public static final int terrain=0x7f0c000f;
-        public static final int text=0x7f0c005e;
+        public static final int text=0x7f0c0060;
         public static final int title=0x7f0c003b;
         public static final int up=0x7f0c0008;
         public static final int useLogo=0x7f0c0027;
-        public static final int username=0x7f0c005f;
+        public static final int username=0x7f0c0061;
         public static final int withText=0x7f0c002f;
         public static final int wrap_content=0x7f0c0018;
     }
@@ -2258,11 +2263,13 @@ containing a value of this type.
         public static final int lock_activiry_layout=0x7f030019;
         public static final int lock_progress_dialog=0x7f03001a;
         public static final int loginlayout=0x7f03001b;
-        public static final int mr_media_route_chooser_dialog=0x7f03001c;
-        public static final int mr_media_route_controller_dialog=0x7f03001d;
-        public static final int mr_media_route_list_item=0x7f03001e;
-        public static final int nav_bar=0x7f03001f;
-        public static final int support_simple_spinner_dropdown_item=0x7f030020;
+        public static final int map_fragment=0x7f03001c;
+        public static final int map_thing_info_geolocation=0x7f03001d;
+        public static final int mr_media_route_chooser_dialog=0x7f03001e;
+        public static final int mr_media_route_controller_dialog=0x7f03001f;
+        public static final int mr_media_route_list_item=0x7f030020;
+        public static final int nav_bar=0x7f030021;
+        public static final int support_simple_spinner_dropdown_item=0x7f030022;
     }
     public static final class raw {
         public static final int gtm_analytics=0x7f050000;

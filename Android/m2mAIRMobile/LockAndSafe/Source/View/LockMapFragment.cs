@@ -15,18 +15,10 @@ using Android.Gms.Maps.Model;
 using Shared.Model;
 using Shared.Utils;
 using Shared.Network.DataTransfer.TR50;
-using Shared.Model;
 using LockAndSafe;
 
 namespace com.telit.lock_and_safe
 {
-    //    public class ThingInvalidGeoCoordinates : Exception
-    //    {
-    //        public ThingInvalidGeoCoordinates(string message)
-    //            : base(message)
-    //        {
-    //        }
-    //    }
 
     public class LockMapFragment : MapFragment, IOnMapReadyCallback, GoogleMap.IInfoWindowAdapter, GoogleMap.IOnInfoWindowClickListener
     {
@@ -117,7 +109,7 @@ namespace com.telit.lock_and_safe
             lockLatLng = new LatLng(theLock.loc.lat, theLock.loc.lng);
             CameraUpdate camera = CameraUpdateFactory.NewLatLngZoom(lockLatLng, 10);
             gMap.MoveCamera(camera);
-            var markerDescriptor = BitmapDescriptorFactory.FromBitmap(LocksListAdapter.GetImageForStatus(theLock.alarms.state.state));
+            var markerDescriptor = BitmapDescriptorFactory.FromResource(GetImageResourceForStatus(theLock.alarms.state.state));
             locationMarker = new MarkerOptions().SetPosition(lockLatLng).SetTitle(theLock.name).Draggable(true).InvokeIcon(markerDescriptor);
             gMap.AddMarker(locationMarker);
         }
@@ -161,6 +153,26 @@ namespace com.telit.lock_and_safe
             return;
         }
 
+        
+        public static int GetImageResourceForStatus(int state)
+        {
+            switch (state)
+            {
+                case (int)LockState.Unknown:
+                    return Resource.Drawable.unknown_small;
+                case (int)LockState.Locked:
+                    return Resource.Drawable.locked_small;
+                case (int)LockState.Unlocked:
+                    return Resource.Drawable.unlocked_small;
+                case (int)LockState.Maintenence:
+                    return Resource.Drawable.maintenence_small;
+                case (int)LockState.BreakIn:
+                    return Resource.Drawable.broke_in_lock_small;
+                default:
+                    return Resource.Drawable.unknown_small;
+            }
+        }
+        
         
     }
 }

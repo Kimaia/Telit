@@ -41,3 +41,5 @@
 /Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/obj/Release/uploadflags.txt
 /Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/obj/Release/LockAndSafe.dll
 /Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/obj/Release/LockAndSafe.dll.mdb
+/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/obj/Release/res/layout/map_thing_info_geolocation.xml
+/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/obj/Release/res/layout/map_fragment.xml

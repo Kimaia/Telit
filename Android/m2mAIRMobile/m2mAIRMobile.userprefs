@@ -1,38 +1,12 @@
 ﻿<Properties StartupItem="LockAndSafe/LockAndSafe.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Nexus_5_API_21_x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="m2mAIRMobile/Source/Screens/ThingActivity.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.6d9f4709" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="LockAndSafe/Properties/AndroidManifest.xml">
     <Files>
-      <File FileName="LockAndSafe/Properties/AndroidManifest.xml" Line="5" Column="3" />
-      <File FileName="LockAndSafe/Source/Activities/LockDetailsActivity.cs" Line="20" Column="46" />
-      <File FileName="LockAndSafe/Source/Activities/BaseActivity.cs" Line="22" Column="42" />
-      <File FileName="m2mAIRMobile/Source/Views/ThingMapFragment.cs" Line="14" Column="30" />
-      <File FileName="m2mAIRMobile/Source/Screens/ThingActivity.cs" Line="67" Column="34" />
+      <File FileName="LockAndSafe/Source/View/LockMapFragment.cs" Line="58" Column="10" />
+      <File FileName="LockAndSafe/Source/Activities/LockDetailsActivity.cs" Line="18" Column="34" />
+      <File FileName="LockAndSafe/Source/Model/WatchLockModel.cs" Line="1" Column="1" />
+      <File FileName="LockAndSafe/Properties/AndroidManifest.xml" Line="2" Column="126" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="m2mAIRMobile" expanded="True">
-            <Node name="CarAppAndroid" expanded="True">
-              <Node name="Source" expanded="True">
-                <Node name="Screens" expanded="True">
-                  <Node name="ThingActivity.cs" selected="True" />
-                </Node>
-                <Node name="Views" expanded="True" />
-              </Node>
-            </Node>
-            <Node name="LockAndSafe" expanded="True">
-              <Node name="ComponentReferenceFolder" expanded="True" />
-              <Node name="Properties" expanded="True" />
-              <Node name="Source" expanded="True">
-                <Node name="Activities" expanded="True" />
-                <Node name="Model" expanded="True" />
-                <Node name="View" expanded="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
@@ -45,6 +19,5 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
     <Watch file="Shared/Network/DataTransfer/TR50Serializer.cs" line="29" offsetX="430" offsetY="420" expression="req" liveUpdate="False" />
   </MonoDevelop.Ide.DebuggingService.PinnedWatches>
-  <MonoDevelop.Ide.ItemProperties.LockAndSafe AndroidDesignerPreferredDevice="Nexus 4" />
   <MonoDevelop.Ide.ItemProperties.CarAppAndroid AndroidDesignerPreferredDevice="Nexus 4" />
 </Properties>

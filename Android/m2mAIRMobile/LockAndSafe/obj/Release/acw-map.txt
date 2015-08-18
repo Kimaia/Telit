@@ -30,6 +30,10 @@ com.telit.lock_and_safe.LockDetailsActivity, LockAndSafe;md5aa0e609ec1a7b8f4c54b
 com.telit.lock_and_safe.LockDetailsActivity, LockAndSafe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5aa0e609ec1a7b8f4c54b28698359c708.LockDetailsActivity
 com.telit.lock_and_safe.LockDetailsActivity;md5aa0e609ec1a7b8f4c54b28698359c708.LockDetailsActivity
 com.telit.lock_and_safe.LockDetailsActivity;md5aa0e609ec1a7b8f4c54b28698359c708.LockDetailsActivity
+com.telit.lock_and_safe.LockMapFragment, LockAndSafe;md5aa0e609ec1a7b8f4c54b28698359c708.LockMapFragment
+com.telit.lock_and_safe.LockMapFragment, LockAndSafe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5aa0e609ec1a7b8f4c54b28698359c708.LockMapFragment
+com.telit.lock_and_safe.LockMapFragment;md5aa0e609ec1a7b8f4c54b28698359c708.LockMapFragment
+com.telit.lock_and_safe.LockMapFragment;md5aa0e609ec1a7b8f4c54b28698359c708.LockMapFragment
 Android.Support.V4.App.FragmentManager/IOnBackStackChangedListenerImplementor, Xamarin.Android.Support.v4;mono.android.support.v4.app.FragmentManager_OnBackStackChangedListenerImplementor
 Android.Support.V4.App.FragmentManager/IOnBackStackChangedListenerImplementor, Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.v4.app.FragmentManager_OnBackStackChangedListenerImplementor
 Android.Support.V4.App.FragmentManager.IOnBackStackChangedListenerImplementor;mono.android.support.v4.app.FragmentManager_OnBackStackChangedListenerImplementor

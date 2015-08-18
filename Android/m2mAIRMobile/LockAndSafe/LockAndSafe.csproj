@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidSigningKeyStore>locks_debug.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>kimaia</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>locks_debug</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>kimaia</AndroidSigningKeyPass>
+  </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -28,6 +35,10 @@
     <AndroidLinkMode>None</AndroidLinkMode>
     <ConsolePause>false</ConsolePause>
     <JavaMaximumHeapSize>4G</JavaMaximumHeapSize>
+    <AndroidSigningKeyStore>/Users/haggai/.android/debug.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>android</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>androiddebugkey</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>android</AndroidSigningKeyPass>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -37,6 +48,11 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
+    <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidSigningKeyStore>/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/release_key.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>kimaia</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>Release</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>kimaia</AndroidSigningKeyPass>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -119,6 +135,12 @@
     <AndroidResource Include="Resources\drawable-hdpi\battery.png" />
     <AndroidResource Include="Resources\layout\lock_activiry_layout.axml" />
     <AndroidResource Include="Resources\layout\map_thing_info_geoLocation.axml" />
+    <AndroidResource Include="Resources\layout\map_fragment.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\broke_in_lock_small.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\locked_small.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\maintenence_small.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\unknown_small.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\unlocked_small.png" />
   </ItemGroup>
   <Import Project="..\TelitAccessShare\TelitAccessShare.projitems" Label="Shared" Condition="Exists('..\TelitAccessShare\TelitAccessShare.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
