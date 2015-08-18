@@ -22,3 +22,5 @@ uploadflags.txt
 com.telit.lock_and_safe-Signed.apk
 Android/m2mAIRMobile/LockAndSafe/bin/*
 android-samples
+mscorlib.dll.mdb
+Android/m2mAIRMobile/LockAndSafe/obj/**

@@ -1,11 +1,10 @@
 ﻿<Properties StartupItem="LockAndSafe/LockAndSafe.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.6d9f4709" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="LockAndSafe/Properties/AndroidManifest.xml">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.6d9f4709" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="LockAndSafe/Source/View/LockMapFragment.cs">
     <Files>
-      <File FileName="LockAndSafe/Source/View/LockMapFragment.cs" Line="58" Column="10" />
-      <File FileName="LockAndSafe/Source/Activities/LockDetailsActivity.cs" Line="18" Column="34" />
-      <File FileName="LockAndSafe/Source/Model/WatchLockModel.cs" Line="1" Column="1" />
-      <File FileName="LockAndSafe/Properties/AndroidManifest.xml" Line="2" Column="126" />
+      <File FileName="LockAndSafe/Source/Activities/LockDetailsActivity.cs" Line="35" Column="1" />
+      <File FileName="LockAndSafe/Source/View/LockMapFragment.cs" Line="172" Column="59" />
+      <File FileName="LockAndSafe/Source/View/LocksListAdapter.cs" Line="140" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
