@@ -94,7 +94,12 @@ namespace com.telit.lock_and_safe
                 view = LayoutInflater.From(context).Inflate(Resource.Layout.listcell_lock, null);
 
             view.FindViewById<TextView>(Resource.Id.lock_name).Text = item.name;
-            view.FindViewById<TextView>(Resource.Id.lock_type).Text = item.type;
+            
+            if (item.alarms != null && item.alarms.reason != null)
+                view.FindViewById<TextView>(Resource.Id.lock_reason).Text = WatchedLock.stateReason(item.alarms.reason.state);
+            else
+                view.FindViewById<TextView>(Resource.Id.lock_reason).Text = WatchedLock.stateReason(0);
+            
             view.FindViewById<TextView>(Resource.Id.lock_address).Text = (item.loc == null || item.loc.addr == null) ? "unknown address" : item.loc.addr.ToString();
             
             ImageView statusImage = view.FindViewById<ImageView>(Resource.Id.status_image_view);

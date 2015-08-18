@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="10dip">
         <TextView
-            android:id="@+id/lat"
+            android:id="@+id/latitude"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FF267F00"
@@ -17,7 +17,7 @@
             android:textStyle="italic"
             android:text="Lat" />
         <TextView
-            android:id="@+id/lng"
+            android:id="@+id/longitude"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FF267F00"

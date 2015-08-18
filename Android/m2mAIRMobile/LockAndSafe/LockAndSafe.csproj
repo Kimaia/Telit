@@ -84,6 +84,7 @@
     <Compile Include="Source\Activities\LockDetailsActivity.cs" />
     <Compile Include="Source\Model\WatchLockModel.cs" />
     <Compile Include="Source\Model\LockAppLauncherModel.cs" />
+    <Compile Include="Source\View\LockMapFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -117,6 +118,7 @@
     <AndroidResource Include="Resources\layout\LoginLayout.axml" />
     <AndroidResource Include="Resources\drawable-hdpi\battery.png" />
     <AndroidResource Include="Resources\layout\lock_activiry_layout.axml" />
+    <AndroidResource Include="Resources\layout\map_thing_info_geoLocation.axml" />
   </ItemGroup>
   <Import Project="..\TelitAccessShare\TelitAccessShare.projitems" Label="Shared" Condition="Exists('..\TelitAccessShare\TelitAccessShare.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

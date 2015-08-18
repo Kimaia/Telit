@@ -1,35 +1,35 @@
 ﻿<Properties StartupItem="LockAndSafe/LockAndSafe.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.6d9f4709" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TelitAccessShare/SAL/M2MApiService.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Nexus_5_API_21_x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="m2mAIRMobile/Source/Screens/ThingActivity.cs">
     <Files>
-      <File FileName="LockAndSafe/Source/View/LocksListAdapter.cs" Line="154" Column="22" />
-      <File FileName="TelitAccessShare/Model/ThingsListAdapterModel.cs" Line="65" Column="56" />
-      <File FileName="TelitAccessShare/Network/DataTransfer/TR50/TR50Response.cs" Line="32" Column="5" />
-      <File FileName="TelitAccessShare/DAL/DALManager.cs" Line="56" Column="48" />
-      <File FileName="TelitAccessShare/SAL/M2MApiService.cs" Line="36" Column="45" />
-      <File FileName="TelitAccessShare/Network/DataTransfer/TR50/TR50Converter.cs" Line="95" Column="27" />
-      <File FileName="TelitAccessShare/Model/Thing.cs" Line="61" Column="21" />
-      <File FileName="TelitAccessShare/Model/BaseModel.cs" Line="1" Column="1" />
-      <File FileName="TelitAccessShare/Model/Constants.cs" Line="1" Column="1" />
-      <File FileName="TelitAccessShare/Model/LauncherModel.cs" Line="1" Column="1" />
-      <File FileName="TelitAccessShare/Model/PropertiesListAdapterModel.cs" Line="1" Column="1" />
-      <File FileName="TelitAccessShare/Model/Property.cs" Line="1" Column="1" />
-      <File FileName="TelitAccessShare/Model/PropertyModel.cs" Line="1" Column="1" />
-      <File FileName="TelitAccessShare/Model/RegisterAndLoginModel.cs" Line="1" Column="1" />
-      <File FileName="TelitAccessShare/Model/ThingModel.cs" Line="1" Column="1" />
+      <File FileName="LockAndSafe/Properties/AndroidManifest.xml" Line="5" Column="3" />
+      <File FileName="LockAndSafe/Source/Activities/LockDetailsActivity.cs" Line="20" Column="46" />
+      <File FileName="LockAndSafe/Source/Activities/BaseActivity.cs" Line="22" Column="42" />
+      <File FileName="m2mAIRMobile/Source/Views/ThingMapFragment.cs" Line="14" Column="30" />
+      <File FileName="m2mAIRMobile/Source/Screens/ThingActivity.cs" Line="67" Column="34" />
     </Files>
     <Pads>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State>
-          <Value>response.Content</Value>
-          <Value>converted</Value>
-          <Value>thing.defkey</Value>
-          <Value>item</Value>
-          <Value>item.loc.addr</Value>
-          <Value>response.Params.alarms</Value>
-          <Value>response</Value>
-          <Value>response</Value>
-          <Value>converted</Value>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="m2mAIRMobile" expanded="True">
+            <Node name="CarAppAndroid" expanded="True">
+              <Node name="Source" expanded="True">
+                <Node name="Screens" expanded="True">
+                  <Node name="ThingActivity.cs" selected="True" />
+                </Node>
+                <Node name="Views" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="LockAndSafe" expanded="True">
+              <Node name="ComponentReferenceFolder" expanded="True" />
+              <Node name="Properties" expanded="True" />
+              <Node name="Source" expanded="True">
+                <Node name="Activities" expanded="True" />
+                <Node name="Model" expanded="True" />
+                <Node name="View" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
         </State>
       </Pad>
     </Pads>
@@ -40,11 +40,6 @@
       <Breakpoint file="/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/m2mAIRMobile/Source/CustomViews/ThingMapFragment.cs" line="59" column="4" />
       <Breakpoint file="/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/m2mAIRMobile/Source/Screens/ThingActivity.cs" line="71" column="13" />
       <Breakpoint file="/Users/eranks/Dropbox (Kimaia)/Shared/Projects/Telit/Android/m2mAIRMobile/m2mAIRMobile/Source/CustomViews/ThingMapFragment.cs" line="29" column="1" />
-      <Breakpoint file="/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/Source/View/LocksListAdapter.cs" line="106" column="1" />
-      <Breakpoint file="/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/Source/View/LocksListAdapter.cs" line="91" column="1" />
-      <Breakpoint file="/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/TelitAccessShare/SAL/M2MApiService.cs" line="34" column="1" />
-      <Breakpoint file="/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/TelitAccessShare/SAL/M2MApiService.cs" line="40" column="1" />
-      <Breakpoint file="/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/TelitAccessShare/SAL/M2MApiService.cs" line="38" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>

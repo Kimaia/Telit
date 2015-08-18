@@ -8,8 +8,13 @@ using Android.Widget;
 
 using Shared.Utils;
 using Android.Graphics;
+
+using Android.Gms.Maps;
+using Android.Gms.Maps.Model;
+
 using LockAndSafe;
 using Android.Views;
+
 
 namespace com.telit.lock_and_safe
 {

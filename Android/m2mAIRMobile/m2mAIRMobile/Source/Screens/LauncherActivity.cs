@@ -6,6 +6,7 @@ using Android.OS;
 
 using Shared.Utils;
 using Shared.Model;
+using CarAppShared.Model;
 
 namespace Android.Source.Screens
 {

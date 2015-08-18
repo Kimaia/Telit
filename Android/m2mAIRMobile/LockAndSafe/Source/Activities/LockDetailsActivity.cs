@@ -13,6 +13,7 @@ using Android.Views;
 using System.Collections.Generic;
 using Android.Graphics;
 using LockAndSafe;
+using System.Threading.Tasks;
 
 namespace com.telit.lock_and_safe
 {
@@ -29,6 +30,9 @@ namespace com.telit.lock_and_safe
         private TextView bateryVoltage;
         private ImageView stateImage;
         private TextView reasonText;
+        
+        //        private LockMapFragment mapFragment;
+        //        private GoogleMap map;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -44,9 +48,11 @@ namespace com.telit.lock_and_safe
             reasonText = FindViewById<TextView>(Resource.Id.reason_text);
             stateImage = FindViewById<ImageView>(Resource.Id.state_image);
             
-            viewModel = new WatchLockModel();
-            string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
-            viewModel.GetLockObject(tkey, OnDBLoadLockObject, OpenErrorDialog);
+            
+            
+//            viewModel = new WatchLockModel();
+//            string tkey = Intent.GetStringExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER);
+//            viewModel.GetLockObject(tkey, OnDBLoadLockObject, OpenErrorDialog);
         }
 
 
@@ -61,8 +67,15 @@ namespace com.telit.lock_and_safe
                         lockName.Text = theLock.name;
                         lockType.Text = theLock.type;
                         bateryVoltage.Text = "" + theLock.properties.voltage.value;
-                        if (theLock.loc != null && theLock.loc.addr != null)
-                            lockAddress.Text = theLock.loc.addr.ToString();
+                        if (theLock.loc != null)
+                        {
+                            if (theLock.loc.addr != null)
+                                lockAddress.Text = theLock.loc.addr.ToString();
+                            
+//                            mapFragment = (LockMapFragment)FragmentManager.FindFragmentById(Resource.Id.lock_map);
+//                            mapFragment.SetLock(theLock);
+                                
+                        } 
                         if (theLock.alarms != null)
                         {
                             if (theLock.alarms.state != null)

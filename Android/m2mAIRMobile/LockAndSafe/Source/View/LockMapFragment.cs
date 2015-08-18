@@ -14,40 +14,36 @@ using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Shared.Model;
 using Shared.Utils;
-using Android.Source.Screens;
 using Shared.Network.DataTransfer.TR50;
 using Shared.Model;
+using LockAndSafe;
 
-namespace m2m.Android.Source.Views
+namespace com.telit.lock_and_safe
 {
-    public class ThingInvalidGeoCoordinates : Exception
-    {
-        public ThingInvalidGeoCoordinates(string message)
-            : base(message)
-        {
-        }
-    }
+    //    public class ThingInvalidGeoCoordinates : Exception
+    //    {
+    //        public ThingInvalidGeoCoordinates(string message)
+    //            : base(message)
+    //        {
+    //        }
+    //    }
 
-    public class ThingMapFragment : MapFragment, IOnMapReadyCallback, GoogleMap.IInfoWindowAdapter, GoogleMap.IOnInfoWindowClickListener
+    public class LockMapFragment : MapFragment, IOnMapReadyCallback, GoogleMap.IInfoWindowAdapter, GoogleMap.IOnInfoWindowClickListener
     {
         public delegate void OnLocationHistorytSuccess(List<LatLng> locationHistory);
 
         private Activity activity;
-        private MapFragmentModel viewModel;
-
+        
         private GoogleMap gMap;
-        private Thing daThing;
-        private LatLng thingLatLng;
+        private WatchedLock theLock;
+        private LatLng lockLatLng;
         private MarkerOptions locationMarker;
-        private List<MarkerOptions> historyMarkers;
-        private LatLngBounds historyBounds;
-        private bool historyVisible;
 
-        public ThingMapFragment()
+        
+        public LockMapFragment()
             : base()
         {
-            viewModel = new MapFragmentModel();
-            daThing = null;
+            theLock = null;
         }
 
         #region lifecycle
@@ -70,20 +66,20 @@ namespace m2m.Android.Source.Views
         public void OnMapReady(GoogleMap gmap)
         {
             gMap = gmap;
-            if (daThing != null)
+            if (theLock != null)
                 SetCameraAndMarker();
         }
 
-        public void SetThing(Thing thing)
+        public void SetLock(WatchedLock lck)
         {
-            daThing = thing;
+            theLock = lck;
             if (gMap != null)
                 SetCameraAndMarker();
         }
 
         private void SetCameraAndMarker()
         {
-            Location loc = daThing.loc;
+            Location loc = theLock.loc;
             if (loc == null)
                 SetLocationUnAvailable();
             else
@@ -107,9 +103,9 @@ namespace m2m.Android.Source.Views
             if (loc == null)
                 return false;
 
-            if (loc.lat > 90 || loc.lat < -90 || loc.lng > 180 || loc.lng < -180)
+            if (loc.lat > 90 || loc.lat < -90) //|| loc.lng > 180 || loc.lng < -180)
             {
-                Logger.Error("InvalidGeoCoordinates: Thing Id: " + daThing.id + ", Lat: " + loc.lat + ", Lng: " + loc.lng);
+                Logger.Error("InvalidGeoCoordinates: Thing Id: " + theLock.id + ", Lat: " + loc.lat + ", Lng: " + loc.lng);
                 return false;
             }
             else
@@ -118,11 +114,11 @@ namespace m2m.Android.Source.Views
 
         private void SetGeo()
         {
-            thingLatLng = new LatLng(daThing.loc.lat, daThing.loc.lng);
-            CameraUpdate camera = CameraUpdateFactory.NewLatLngZoom(thingLatLng, 10);
+            lockLatLng = new LatLng(theLock.loc.lat, theLock.loc.lng);
+            CameraUpdate camera = CameraUpdateFactory.NewLatLngZoom(lockLatLng, 10);
             gMap.MoveCamera(camera);
-
-            locationMarker = new MarkerOptions().SetPosition(thingLatLng).SetTitle(daThing.name).Draggable(true);
+            var markerDescriptor = BitmapDescriptorFactory.FromBitmap(LocksListAdapter.GetImageForStatus(theLock.alarms.state.state));
+            locationMarker = new MarkerOptions().SetPosition(lockLatLng).SetTitle(theLock.name).Draggable(true).InvokeIcon(markerDescriptor);
             gMap.AddMarker(locationMarker);
         }
 
@@ -144,9 +140,9 @@ namespace m2m.Android.Source.Views
 
         public View GetInfoWindow(Marker marker)
         {
-            View view = activity.LayoutInflater.Inflate(m2m.Android.Resource.Layout.map_thing_info_geoLocation, null, false);
-            view.FindViewById<TextView>(m2m.Android.Resource.Id.lat).Text = daThing.loc.lat.ToString();
-            view.FindViewById<TextView>(m2m.Android.Resource.Id.lng).Text = daThing.loc.lng.ToString();
+            View view = activity.LayoutInflater.Inflate(Resource.Layout.map_thing_info_geoLocation, null, false);
+            view.FindViewById<TextView>(Resource.Id.latitude).Text = theLock.loc.lat.ToString();
+            view.FindViewById<TextView>(Resource.Id.longitude).Text = theLock.loc.lng.ToString();
             return view;
         }
 
@@ -165,79 +161,7 @@ namespace m2m.Android.Source.Views
             return;
         }
 
-        #region Location History
-
-        public void OnLocationHistoryClicked()
-        {
-            Logger.Debug("OnLocationHistoryClicked()");
-            if (historyMarkers == null)
-            {
-                viewModel.GetLocationHistoryAsync(daThing.key, OnLocationHistoryRecords, ((BaseActivity)this.activity).OpenErrorDialog);
-                ((BaseActivity)this.activity).StartLoadingSpinner("Collecting Location history records.");
-                return;
-            }
-            else
-                ToggleLocationHistorys();
-        }
-
-        public void OnLocationHistoryRecords(List<LatLng> history)
-        {
-            Logger.Debug("OnLocationHistoryRecords()");
-            ((BaseActivity)this.activity).StopLoadingSpinner();
-
-            SetHistoryMarkers(history);
-
-            historyVisible = false;
-            ToggleLocationHistorys();
-        }
-
-        private void SetHistoryMarkers(List<LatLng> history)
-        {
-            historyMarkers = new List<MarkerOptions>();
-            var builder = new LatLngBounds.Builder();
-            foreach (LatLng point in history)
-            {
-                builder.Include(point);
-                MarkerOptions mrk = new MarkerOptions().SetPosition(point).InvokeIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.mm_20_yellow));
-                historyMarkers.Add(mrk);
-            }
-            historyBounds = builder.Build();
-        }
-
-        private void ToggleLocationHistorys()
-        {
-            try
-            {
-                this.activity.RunOnUiThread(() =>
-                    {
-
-                        if (this.historyVisible)
-                        {
-                            historyVisible = false;
-                            gMap.Clear();
-                            gMap.AddMarker(locationMarker);
-
-                            CameraUpdate camera = CameraUpdateFactory.NewLatLngZoom(thingLatLng, 10);
-                            gMap.MoveCamera(camera);
-                        }
-                        else
-                        {
-                            historyVisible = true;
-                            foreach (MarkerOptions mrk in historyMarkers)
-                                gMap.AddMarker(mrk);
-
-                            CameraUpdate camera = CameraUpdateFactory.NewLatLngBounds(historyBounds, 20);
-                            gMap.MoveCamera(camera);
-                        }
-                    });
-            }
-            catch (Exception e)
-            {
-                ((BaseActivity)this.activity).OpenErrorDialog("Location History Unavailable", e.Message);
-            }
-        }
-
-        #endregion
+        
     }
 }
 

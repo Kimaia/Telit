@@ -116,4 +116,9 @@
                 android:layout_gravity="center_vertical" />
         </LinearLayout>
     </LinearLayout>
+    <fragment
+        android:id="@+id/lock_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="com.telit.lock_and_safe.LockMapFragment" />
 </LinearLayout>

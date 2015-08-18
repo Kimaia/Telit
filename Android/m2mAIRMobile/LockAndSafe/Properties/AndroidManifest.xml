@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" package="com.telit.lock_and_safe" android:versionName="0.01">
 	<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="21" />
 	<application android:label="Lock And Safe" android:icon="@drawable/ic_launcher">
-		<meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyBa2JIjOkS9amnQnk-gTOiuuZbRIUXcsfg" />
+		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCb-KGSYVNMQ2T1-A7efawDARGQEhRG1r4"/>
 		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 	</application>
 	<uses-feature android:glEsVersion="0x00020000" android:required="true" />
@@ -10,8 +10,12 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-	<uses-permission android:name="com.kimaia.telit.m2m.permission.MAPS_RECEIVE" />
-	<permission android:name="com.kimaia.telit.m2m.permission.MAPS_RECEIVE" android:protectionLevel="signature" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+	<!-- Permission to receive remote notifications from Google Play Services -->
+    <!-- Notice here that we have the package name of our application as a prefix on the permissions. -->
+    <uses-permission android:name="com.telit.lock_and_safe.permission.MAPS_RECEIVE" />
+    <permission android:name="com.telit.lock_and_safe.permission.MAPS_RECEIVE" android:protectionLevel="signature" />
+
 </manifest>
