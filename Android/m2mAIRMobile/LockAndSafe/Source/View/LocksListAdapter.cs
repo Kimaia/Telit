@@ -104,6 +104,11 @@ namespace com.telit.lock_and_safe
             
             ImageView statusImage = view.FindViewById<ImageView>(Resource.Id.status_image_view);
             
+            
+            TextView lastSeen = view.FindViewById<TextView>(Resource.Id.lock_last_seen);
+            if (lastSeen != null)
+                lastSeen.Text = "Last Seen: " + item.lastSeen;
+            
             if (item.alarms != null && item.alarms.state != null)
             {
                 Bitmap img = GetImageForStatus(item.alarms.state.state);

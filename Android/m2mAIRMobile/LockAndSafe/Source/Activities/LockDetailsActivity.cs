@@ -30,6 +30,7 @@ namespace com.telit.lock_and_safe
         private TextView bateryVoltage;
         private ImageView stateImage;
         private TextView reasonText;
+        private TextView lastSeenText;
         
         private LockMapFragment mapFragment;
 
@@ -38,13 +39,14 @@ namespace com.telit.lock_and_safe
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.lock_activiry_layout);
+            SetContentView(Resource.Layout.lock_activity_layout);
 
             lockName = FindViewById<TextView>(Resource.Id.lock_name);
             lockType = FindViewById<TextView>(Resource.Id.lock_type);
             lockAddress = FindViewById<TextView>(Resource.Id.lock_address);
             bateryVoltage = FindViewById<TextView>(Resource.Id.batery_voltage);
             reasonText = FindViewById<TextView>(Resource.Id.reason_text);
+            lastSeenText = FindViewById<TextView>(Resource.Id.last_seen_text);
             stateImage = FindViewById<ImageView>(Resource.Id.state_image);
             
             
@@ -66,6 +68,7 @@ namespace com.telit.lock_and_safe
                         lockName.Text = theLock.name;
                         lockType.Text = theLock.type;
                         bateryVoltage.Text = "" + theLock.properties.voltage.value;
+                        lastSeenText.Text = theLock.lastSeen ;
                         if (theLock.loc != null)
                         {
                             if (theLock.loc.addr != null)
