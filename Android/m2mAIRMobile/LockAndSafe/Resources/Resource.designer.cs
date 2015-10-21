@@ -1521,8 +1521,8 @@ namespace LockAndSafe
 			// aapt resource value: 0x7f0c0053
 			public const int NavigationBarView = 2131492947;
 			
-			// aapt resource value: 0x7f0c006d
-			public const int Navigation_Title = 2131492973;
+			// aapt resource value: 0x7f0c0070
+			public const int Navigation_Title = 2131492976;
 			
 			// aapt resource value: 0x7f0c0045
 			public const int action_bar = 2131492933;
@@ -1575,8 +1575,8 @@ namespace LockAndSafe
 			// aapt resource value: 0x7f0c002b
 			public const int always = 2131492907;
 			
-			// aapt resource value: 0x7f0c005b
-			public const int batery_voltage = 2131492955;
+			// aapt resource value: 0x7f0c005c
+			public const int batery_voltage = 2131492956;
 			
 			// aapt resource value: 0x7f0c0028
 			public const int beginning = 2131492904;
@@ -1659,8 +1659,11 @@ namespace LockAndSafe
 			// aapt resource value: 0x7f0c0037
 			public const int image = 2131492919;
 			
-			// aapt resource value: 0x7f0c0065
-			public const int latitude = 2131492965;
+			// aapt resource value: 0x7f0c0060
+			public const int last_seen_text = 2131492960;
+			
+			// aapt resource value: 0x7f0c0068
+			public const int latitude = 2131492968;
 			
 			// aapt resource value: 0x7f0c0020
 			public const int listMode = 2131492896;
@@ -1674,8 +1677,11 @@ namespace LockAndSafe
 			// aapt resource value: 0x7f0c0059
 			public const int lock_address = 2131492953;
 			
-			// aapt resource value: 0x7f0c005e
-			public const int lock_map = 2131492958;
+			// aapt resource value: 0x7f0c005a
+			public const int lock_last_seen = 2131492954;
+			
+			// aapt resource value: 0x7f0c0061
+			public const int lock_map = 2131492961;
 			
 			// aapt resource value: 0x7f0c0057
 			public const int lock_name = 2131492951;
@@ -1686,41 +1692,41 @@ namespace LockAndSafe
 			// aapt resource value: 0x7f0c0056
 			public const int lock_short_discription = 2131492950;
 			
-			// aapt resource value: 0x7f0c005f
-			public const int lock_sprite_layout = 2131492959;
+			// aapt resource value: 0x7f0c0062
+			public const int lock_sprite_layout = 2131492962;
 			
-			// aapt resource value: 0x7f0c005a
-			public const int lock_type = 2131492954;
-			
-			// aapt resource value: 0x7f0c0063
-			public const int login = 2131492963;
-			
-			// aapt resource value: 0x7f0c006c
-			public const int logout = 2131492972;
+			// aapt resource value: 0x7f0c005b
+			public const int lock_type = 2131492955;
 			
 			// aapt resource value: 0x7f0c0066
-			public const int longitude = 2131492966;
+			public const int login = 2131492966;
 			
-			// aapt resource value: 0x7f0c0064
-			public const int mapView = 2131492964;
+			// aapt resource value: 0x7f0c006f
+			public const int logout = 2131492975;
+			
+			// aapt resource value: 0x7f0c0069
+			public const int longitude = 2131492969;
+			
+			// aapt resource value: 0x7f0c0067
+			public const int mapView = 2131492967;
 			
 			// aapt resource value: 0x7f0c0017
 			public const int match_parent = 2131492887;
 			
+			// aapt resource value: 0x7f0c006d
+			public const int media_route_control_frame = 2131492973;
+			
+			// aapt resource value: 0x7f0c006e
+			public const int media_route_disconnect_button = 2131492974;
+			
 			// aapt resource value: 0x7f0c006a
-			public const int media_route_control_frame = 2131492970;
+			public const int media_route_list = 2131492970;
 			
 			// aapt resource value: 0x7f0c006b
-			public const int media_route_disconnect_button = 2131492971;
+			public const int media_route_volume_layout = 2131492971;
 			
-			// aapt resource value: 0x7f0c0067
-			public const int media_route_list = 2131492967;
-			
-			// aapt resource value: 0x7f0c0068
-			public const int media_route_volume_layout = 2131492968;
-			
-			// aapt resource value: 0x7f0c0069
-			public const int media_route_volume_slider = 2131492969;
+			// aapt resource value: 0x7f0c006c
+			public const int media_route_volume_slider = 2131492972;
 			
 			// aapt resource value: 0x7f0c002a
 			public const int middle = 2131492906;
@@ -1737,8 +1743,8 @@ namespace LockAndSafe
 			// aapt resource value: 0x7f0c000d
 			public const int normal = 2131492877;
 			
-			// aapt resource value: 0x7f0c0062
-			public const int password = 2131492962;
+			// aapt resource value: 0x7f0c0065
+			public const int password = 2131492965;
 			
 			// aapt resource value: 0x7f0c0012
 			public const int production = 2131492882;
@@ -1752,8 +1758,8 @@ namespace LockAndSafe
 			// aapt resource value: 0x7f0c003f
 			public const int radio = 2131492927;
 			
-			// aapt resource value: 0x7f0c005d
-			public const int reason_text = 2131492957;
+			// aapt resource value: 0x7f0c005f
+			public const int reason_text = 2131492959;
 			
 			// aapt resource value: 0x7f0c0013
 			public const int sandbox = 2131492883;
@@ -1794,6 +1800,9 @@ namespace LockAndSafe
 			// aapt resource value: 0x7f0c0016
 			public const int selectionDetails = 2131492886;
 			
+			// aapt resource value: 0x7f0c005e
+			public const int seperator = 2131492958;
+			
 			// aapt resource value: 0x7f0c003e
 			public const int shortcut = 2131492926;
 			
@@ -1809,8 +1818,8 @@ namespace LockAndSafe
 			// aapt resource value: 0x7f0c0007
 			public const int split_action_bar = 2131492871;
 			
-			// aapt resource value: 0x7f0c005c
-			public const int state_image = 2131492956;
+			// aapt resource value: 0x7f0c005d
+			public const int state_image = 2131492957;
 			
 			// aapt resource value: 0x7f0c0055
 			public const int status_image_view = 2131492949;
@@ -1827,8 +1836,8 @@ namespace LockAndSafe
 			// aapt resource value: 0x7f0c000f
 			public const int terrain = 2131492879;
 			
-			// aapt resource value: 0x7f0c0060
-			public const int text = 2131492960;
+			// aapt resource value: 0x7f0c0063
+			public const int text = 2131492963;
 			
 			// aapt resource value: 0x7f0c003b
 			public const int title = 2131492923;
@@ -1839,8 +1848,8 @@ namespace LockAndSafe
 			// aapt resource value: 0x7f0c0027
 			public const int useLogo = 2131492903;
 			
-			// aapt resource value: 0x7f0c0061
-			public const int username = 2131492961;
+			// aapt resource value: 0x7f0c0064
+			public const int username = 2131492964;
 			
 			// aapt resource value: 0x7f0c002f
 			public const int withText = 2131492911;
@@ -1956,7 +1965,7 @@ namespace LockAndSafe
 			public const int listcell_lock = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int lock_activiry_layout = 2130903065;
+			public const int lock_activity_layout = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
 			public const int lock_progress_dialog = 2130903066;

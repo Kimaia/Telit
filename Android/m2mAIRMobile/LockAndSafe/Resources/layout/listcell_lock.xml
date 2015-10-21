@@ -55,6 +55,14 @@
                         android:textSize="11dip"
                         android:textColor="#0B2545"
                         android:textStyle="italic" />
+                    <TextView
+                        android:id="@+id/lock_last_seen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Last Seen: N\A"
+                        android:textSize="10dip"
+                        android:textColor="#AA0B2545"
+                        android:textStyle="italic" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

@@ -49,10 +49,11 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
     <AndroidKeyStore>True</AndroidKeyStore>
-    <AndroidSigningKeyStore>/Users/haggai/Dropbox (Kimaia)/Kimaia/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/release_key.keystore</AndroidSigningKeyStore>
+    <AndroidSigningKeyStore>/Users/haggai/Code/Repository/Telit/Android/m2mAIRMobile/LockAndSafe/release_key.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>kimaia</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>Release</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>kimaia</AndroidSigningKeyPass>
+    <JavaMaximumHeapSize>4G</JavaMaximumHeapSize>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -133,7 +134,6 @@
     <AndroidResource Include="Resources\drawable-hdpi\lock_cover_image.png" />
     <AndroidResource Include="Resources\layout\LoginLayout.axml" />
     <AndroidResource Include="Resources\drawable-hdpi\battery.png" />
-    <AndroidResource Include="Resources\layout\lock_activiry_layout.axml" />
     <AndroidResource Include="Resources\layout\map_thing_info_geoLocation.axml" />
     <AndroidResource Include="Resources\layout\map_fragment.axml" />
     <AndroidResource Include="Resources\drawable-hdpi\broke_in_lock_small.png" />
@@ -141,6 +141,7 @@
     <AndroidResource Include="Resources\drawable-hdpi\maintenence_small.png" />
     <AndroidResource Include="Resources\drawable-hdpi\unknown_small.png" />
     <AndroidResource Include="Resources\drawable-hdpi\unlocked_small.png" />
+    <AndroidResource Include="Resources\layout\lock_activity_layout.axml" />
   </ItemGroup>
   <Import Project="..\TelitAccessShare\TelitAccessShare.projitems" Label="Shared" Condition="Exists('..\TelitAccessShare\TelitAccessShare.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
