@@ -24,3 +24,15 @@ Android/m2mAIRMobile/LockAndSafe/bin/*
 android-samples
 mscorlib.dll.mdb
 Android/m2mAIRMobile/LockAndSafe/obj/**
+**.dll.mdb
+Mono.Android.dll.mdb
+System.Core.dll.mdb
+System.dll.mdb
+System.Runtime.Serialization.dll.mdb
+System.Xml.dll.mdb
+System.Xml.Linq.dll.mdb
+mono.android.jar
+resolved_assemblies.txt
+resourcepaths.cache
+m2mAIRMobile.userprefs
+.DS_Store
