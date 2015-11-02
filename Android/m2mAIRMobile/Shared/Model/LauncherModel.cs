@@ -42,7 +42,7 @@ namespace CarAppShared.Model
 
         public bool IsLoggedIn()
         {
-            return (Settings.Instance.GetSessionId() != null); 
+            return (Settings.Instance[Settings.UserId] != null); 
         }
     }
 }

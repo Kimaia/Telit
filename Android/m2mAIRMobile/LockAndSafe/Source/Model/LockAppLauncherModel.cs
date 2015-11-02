@@ -42,7 +42,8 @@ namespace com.telit.lock_and_safe
 
         public bool IsLoggedIn()
         {
-            return (Settings.Instance.GetSessionId() != null); 
+            object o = Settings.Instance[Settings.UserId];
+            return (Settings.Instance[Settings.UserId] != null); 
         }
     }
 }

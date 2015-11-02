@@ -137,7 +137,11 @@ IEnumerable<KeyValuePair<string, object>>, IEnumerable
         {
             get
             {
-                return settings[key];
+                try{
+                    return settings[key];
+                }catch(Exception e){
+                    return null;
+                }
             }
             set
             {

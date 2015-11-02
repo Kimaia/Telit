@@ -16,6 +16,7 @@ namespace com.telit.lock_and_safe
     [Activity(ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, Icon = "@drawable/ic_launcher")]			
     public class LocksListActivity : BaseActivity
     {
+        private RegisterAndLoginModel viewModel;
         private ListView listView;
         private NavigationBarView navBar;
         private LocksListAdapter adapter;
@@ -31,7 +32,17 @@ namespace com.telit.lock_and_safe
             navBar.SetTitle("Locks");
 		
             adapter = new LocksListAdapter(this);
-            adapter.PopulateLocksListAsync(OnListPopulated, OpenErrorDialog);
+            listView.ItemClick += OnListItemClick;
+            viewModel = new RegisterAndLoginModel();
+            viewModel.LoginSuccess += new EventHandler(LoginSuccess);
+
+        }
+        
+        protected override void OnResume()
+        {
+            base.OnResume();
+            StartLoadingSpinner("Connecting To Server..");
+            viewModel.StartLogin(Settings.Instance[Settings.UserId] as string, Settings.Instance[Settings.UserPw] as string, OpenErrorDialog); 
         }
 
         #region Callbacks / Event handlers
@@ -43,9 +54,8 @@ namespace com.telit.lock_and_safe
                 RunOnUiThread(() =>
                     {
                         listView.Adapter = adapter;
-                        listView.ItemClick += OnListItemClick;
-
-
+                        
+                        StopLoadingSpinner();
 //                        SetMapFragment();
                     });
             }
@@ -56,11 +66,7 @@ namespace com.telit.lock_and_safe
 			
         }
 
-        //        private void SetMapFragment()
-        //        {
-        //            (FragmentManager.FindFragmentById<MultipleThingsMapFragment>(m2m.Android.Resource.Id.map)).SetThingsList(adapter.GetThingsList());
-        //        }
-
+        
         public void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             Logger.Debug("OnListItemClick()");
@@ -72,6 +78,7 @@ namespace com.telit.lock_and_safe
         {
             var intent = new Intent(this, typeof(LockDetailsActivity));
             intent.PutExtra(Shared.Model.Constants.DATA_MODEL_THING_KEY_IDENTIFIER, selectedLock.key);
+            intent.SetFlags(ActivityFlags.NewTask | ActivityFlags.SingleTop) ; //  FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             Logger.Debug("InitiateThingActivity() Thing key: " + selectedLock.key);
             StartActivity(intent);
         }
@@ -93,6 +100,27 @@ namespace com.telit.lock_and_safe
         }
 
         #endregion
+        
+        
+        private void OnLogin()
+        {
+            string user = Settings.Instance[Settings.UserId] as string;
+            string pw   = Settings.Instance[Settings.UserPw] as string;
+            //            #if !DEBUG
+            //            if (!user.Equals("") && !pw.Equals(""))
+            //            {
+            //            #endif
+            StartLoadingSpinner("Authenticating user credentials.");
+            viewModel.StartLogin(user, pw, OpenErrorDialog); 
+            //            #if !DEBUG
+            //            }
+            //            #endif
+        }
+
+        public void LoginSuccess(object sender, EventArgs e)
+        {
+            adapter.PopulateLocksListAsync (OnListPopulated, OpenErrorDialog);
+        }
     }
 }
 

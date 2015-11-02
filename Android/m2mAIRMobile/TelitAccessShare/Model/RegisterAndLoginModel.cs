@@ -63,9 +63,8 @@ namespace Shared.Model
         private void AuthenticationSuccess(string username, string password, string sessionId)
         {
             Logger.Debug("LoginSuccess(), SessionId: " + sessionId);
-            Settings.Instance.SetSessionId(sessionId);
+            Settings.Instance[Settings.SessionId] = sessionId;
             this.LoginSuccess(this, new EventArgs());
-
         }
 
         private bool ValidateCredentials(string username, string password)

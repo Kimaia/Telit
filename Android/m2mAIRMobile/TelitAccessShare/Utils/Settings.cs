@@ -5,7 +5,11 @@ namespace Shared.Utils
 {
 	public class Settings
 	{
-		private const string SessionId = "SessioId";
+        public static readonly string SessionId = "SessioId";
+        public static readonly string UserId    = "UserId";
+        public static readonly string UserPw    = "UserPw";
+        
+        
 
 		private static readonly Settings instance = new Settings();
 		public static Settings Instance { get { return instance; } }
@@ -16,18 +20,18 @@ namespace Shared.Utils
 		}
 
 
-		public void SetSessionId(string value)
-		{
-			settings[SessionId] = value;
-			settings.Save();
-		}
-
-		public string GetSessionId()
-		{
-			string result = null;
-			settings.TryGetValue (SessionId, out result);
-			return result;
-		}
+//		public void SetSessionId(string value)
+//		{
+//			settings[SessionId] = value;
+//			settings.Save();
+//		}
+//
+//		public string GetSessionId()
+//		{
+//			string result = null;
+//			settings.TryGetValue (SessionId, out result);
+//			return result;
+//		}
 
 		public object this[string key]
 		{
@@ -36,6 +40,7 @@ namespace Shared.Utils
 			}
 			set {
 				settings[key] = value;
+                settings.Save();
 			}
 		}
 	}

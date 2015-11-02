@@ -51,7 +51,7 @@ namespace Shared.Network.DataTransfer.TR50
 		private TR50RequestBlock prepareAuthBlock ()
 		{
 			Dictionary<string, object> dict = new Dictionary<string, object> ();
-			dict.Add ("sessionId", Settings.Instance.GetSessionId());
+            dict.Add ("sessionId", Settings.Instance[Settings.SessionId]);
 			return new TR50RequestBlock(dict);
 		}
 

@@ -29,8 +29,8 @@ namespace com.telit.lock_and_safe
         {
             base.OnCreate(bundle);
 
-            viewModel = new RegisterAndLoginModel();
-            viewModel.LoginSuccess += new EventHandler(LoginSuccess);
+//            viewModel = new RegisterAndLoginModel();
+//            viewModel.LoginSuccess += new EventHandler(LoginSuccess);
 
             SetContentView(Resource.Layout.LoginLayout);
 
@@ -62,21 +62,18 @@ namespace com.telit.lock_and_safe
             if (!user.Equals("") && !pw.Equals(""))
             {
             #endif
-            StartLoadingSpinner("Authenticating user credentials.");
-            viewModel.StartLogin(username.Text, password.Text, OpenErrorDialog); 
+            Settings.Instance[Settings.UserId] = user ;
+            Settings.Instance[Settings.UserPw] = pw ;
+            var intent = new Intent(this, typeof(LocksListActivity));
+            StartActivity(intent);
+            Finish();
+            
             #if !DEBUG
             }
             #endif
         }
 
-        public void LoginSuccess(object sender, EventArgs e)
-        {
-            Logger.Debug("LoginSuccess");
-            var intent = new Intent(this, typeof(LocksListActivity));
-            StartActivity(intent);
-            Finish();
-        }
-
+        
         #endregion
     }
 }

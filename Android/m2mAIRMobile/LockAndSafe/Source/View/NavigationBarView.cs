@@ -60,7 +60,7 @@ namespace com.telit.lock_and_safe
         public void OnLogoutClicked()
         {
             Logger.Debug("OnLogoutClicked()");
-            Settings.Instance.SetSessionId(null);
+//            Settings.Instance[Settings.SessionId] = null;
             var intent = new Intent(this.Context, typeof(RegisterAndLoginActivity));
             this.Context.StartActivity(intent);
 //			Finish ();

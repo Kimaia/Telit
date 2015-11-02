@@ -2268,7 +2268,7 @@ containing a value of this type.
         public static int abc_simple_dropdown_hint=0x7f030016;
         public static int activity_things_list=0x7f030017;
         public static int listcell_lock=0x7f030018;
-        public static int lock_activiry_layout=0x7f030019;
+        public static int lock_activity_layout=0x7f030019;
         public static int lock_progress_dialog=0x7f03001a;
         public static int loginlayout=0x7f03001b;
         public static int map_fragment=0x7f03001c;

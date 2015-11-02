@@ -56,8 +56,9 @@ namespace Android.Source.Views
 		public void OnLogoutClicked()
 		{
 			Logger.Debug ("OnLogoutClicked()");
-			Settings.Instance.SetSessionId (null);
-			var intent = new Intent(this.Context, typeof(RegisterAndLoginActivity));
+            Settings.Instance[Settings.UserId] = null;
+            Settings.Instance[Settings.UserPw] = null;
+            var intent = new Intent(this.Context, typeof(RegisterAndLoginActivity));
 			this.Context.StartActivity(intent);
 //			Finish ();
 		}
