@@ -33,9 +33,9 @@ namespace Shared.Model
             #if DEBUG
 //            username = "demo@devicewise.com";
 //            password = "demo123";
+            #endif
             username = "haggaish@kimaia.com";
             password = "#$%0DeVi";
-            #endif
 
             Logger.Debug("StartLoginAsync(),  User: " + username + ", password: " + password);
             if (!ValidateCredentials(username, password))
