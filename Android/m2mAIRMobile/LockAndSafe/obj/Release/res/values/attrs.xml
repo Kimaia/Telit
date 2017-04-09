@@ -1,1 +1,0 @@
-<resources><declare-styleable name="com.telit.lock_and_safe.SpriteView"><attr name="atlas_image" format="integer" /><attr name="atlas_width" format="integer" /><attr name="atlas_height" format="integer" /></declare-styleable></resources>
